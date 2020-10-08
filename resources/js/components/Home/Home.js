@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 const HomePage = ({ history }) => {
     return (
         <div className="home-page">
-            <p>Hello world 2</p>
+            <p>Hello world</p>
         </div>
     );
 };

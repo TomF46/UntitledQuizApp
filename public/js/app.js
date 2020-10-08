@@ -72663,7 +72663,7 @@ var HomePage = function HomePage(_ref) {
   var history = _ref.history;
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "home-page"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Hello world 2"));
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Hello world"));
 };
 
 HomePage.propTypes = {
