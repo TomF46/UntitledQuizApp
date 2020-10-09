@@ -2,8 +2,11 @@ import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import RegisterForm from "./RegisterForm";
 import { Register } from "../../../api/authenticationApi";
+import CenterFormCard from "../../DisplayComponents/CenterFormCard";
+import { connect } from "react-redux";
+import { Redirect } from "react-router-dom";
 
-const RegisterPage = ({ history }) => {
+const RegisterPage = ({ userIsAuthenticated, history }) => {
     const [user, setUser] = useState({
         username: "",
         email: "",
@@ -53,22 +56,32 @@ const RegisterPage = ({ history }) => {
     }
 
     return (
-        <div className="mx-auto flex justify-center mt-24">
-            <div className="max-w-sm flex p-6 rounded overflow-hidden shadow-lg">
-                <RegisterForm
-                    user={user}
-                    errors={errors}
-                    onChange={handleChange}
-                    onSave={handleSave}
-                    saving={saving}
-                />
-            </div>
-        </div>
+        <>
+            {userIsAuthenticated && <Redirect to="/dashboard" />}
+            <CenterFormCard
+                content={
+                    <RegisterForm
+                        user={user}
+                        errors={errors}
+                        onChange={handleChange}
+                        onSave={handleSave}
+                        saving={saving}
+                    />
+                }
+            />
+        </>
     );
 };
 
 RegisterPage.propTypes = {
+    userIsAuthenticated: PropTypes.bool.isRequired,
     history: PropTypes.object.isRequired
 };
 
-export default RegisterPage;
+const mapStateToProps = (state, ownProps) => {
+    return {
+        userIsAuthenticated: state.user != null
+    };
+};
+
+export default connect(mapStateToProps)(RegisterPage);

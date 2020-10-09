@@ -9,3 +9,14 @@
 @import "tailwindcss/components";
 
 @import "tailwindcss/utilities";
+
+nav {
+    z-index: 999;
+}
+
+.centerFormCardContainer {
+    width: 100%;
+    .centerFormCard {
+        margin: 0 auto;
+    }
+}

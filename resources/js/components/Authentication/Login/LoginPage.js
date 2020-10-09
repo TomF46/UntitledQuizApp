@@ -3,8 +3,10 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import LoginForm from "./LoginForm";
 import { login } from "../../../redux/actions/authenticationActions";
+import CenterFormCard from "../../DisplayComponents/CenterFormCard";
+import { Redirect } from "react-router-dom";
 
-const LoginPage = ({ login, history }) => {
+const LoginPage = ({ login, userIsAuthenticated, history }) => {
     const [user, setUser] = useState({
         email: "",
         password: "",
@@ -47,27 +49,33 @@ const LoginPage = ({ login, history }) => {
     }
 
     return (
-        <div className="mx-auto flex justify-center mt-24">
-            <div className="max-w-sm flex p-6 rounded overflow-hidden shadow-lg">
-                <LoginForm
-                    user={user}
-                    errors={errors}
-                    onChange={handleChange}
-                    onSave={handleSave}
-                    saving={saving}
-                />
-            </div>
-        </div>
+        <>
+            {userIsAuthenticated && <Redirect to="/dashboard" />}
+            <CenterFormCard
+                content={
+                    <LoginForm
+                        user={user}
+                        errors={errors}
+                        onChange={handleChange}
+                        onSave={handleSave}
+                        saving={saving}
+                    />
+                }
+            />
+        </>
     );
 };
 
 LoginPage.propTypes = {
+    userIsAuthenticated: PropTypes.bool.isRequired,
     history: PropTypes.object.isRequired,
     login: PropTypes.func.isRequired
 };
 
-const mapStateToProps = () => {
-    return {};
+const mapStateToProps = (state, ownProps) => {
+    return {
+        userIsAuthenticated: state.user != null
+    };
 };
 
 const mapDispatchToProps = {

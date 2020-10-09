@@ -21234,6 +21234,18 @@ video {
           animation: bounce 1s infinite;
 }
 
+nav {
+  z-index: 999;
+}
+
+.centerFormCardContainer {
+  width: 100%;
+}
+
+.centerFormCardContainer .centerFormCard {
+  margin: 0 auto;
+}
+
 @media (min-width: 640px){
   .sm\:container{
     width: 100%;

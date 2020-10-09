@@ -14,7 +14,7 @@ const RegisterForm = ({
 }) => {
     return (
         <form className="" onSubmit={onSave}>
-            <h2 className="text-lg">Register</h2>
+            <h2 className="font-bold text-lg mb-4 text-center">Register</h2>
             {errors.onSave && (
                 <div className="text-red-500 text-xs" role="alert">
                     {errors.onSave}
@@ -58,19 +58,21 @@ const RegisterForm = ({
                 />
             </div>
 
-            <button
-                type="submit"
-                disabled={saving}
-                className="bg-blue-400 text-white rounded py-2 px-4 hover:bg-blue-500"
-            >
-                {saving ? "Registering..." : "Register"}
-            </button>
-            <Link
-                to={`/login`}
-                class="bg-blue-400 text-white rounded py-2 px-4 hover:bg-blue-500 ml-4"
-            >
-                Login
-            </Link>
+            <div className="flex justify-center">
+                <button
+                    type="submit"
+                    disabled={saving}
+                    className="bg-blue-400 text-white rounded py-2 px-4 hover:bg-blue-500"
+                >
+                    {saving ? "Registering..." : "Register"}
+                </button>
+                <Link
+                    to={`/login`}
+                    className="bg-blue-400 text-white rounded py-2 px-4 hover:bg-blue-500 ml-4"
+                >
+                    To Login
+                </Link>
+            </div>
         </form>
     );
 };
