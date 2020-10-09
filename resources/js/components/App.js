@@ -7,6 +7,7 @@ import Register from "./Authentication/Register/RegisterPage";
 import Dashboard from "./Dashboard/Dashboard";
 import NotFound from "./NotFound/NotFoundPage";
 import Header from "./DisplayComponents/Header";
+import ProfilePage from "./Profile/Profile";
 
 const Main = props => (
     <>
@@ -17,6 +18,10 @@ const Main = props => (
                     <Route exact path="/" component={Home} />
                     <Route path="/login" component={Login} />
                     <Route path="/register" component={Register} />
+                    <AuthenticatedRoute
+                        path="/profile"
+                        component={ProfilePage}
+                    />
                     <AuthenticatedRoute
                         path="/dashboard"
                         component={Dashboard}

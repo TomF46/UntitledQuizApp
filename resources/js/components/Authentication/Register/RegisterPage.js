@@ -80,7 +80,7 @@ RegisterPage.propTypes = {
 
 const mapStateToProps = (state, ownProps) => {
     return {
-        userIsAuthenticated: state.user != null
+        userIsAuthenticated: state.tokens != null
     };
 };
 

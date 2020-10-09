@@ -1,5 +1,7 @@
+import axiosClient from "../tools/axiosClient";
+
 export function Login(userLoginDetails) {
-    return axios
+    return axiosClient
         .post("/api/auth/login", userLoginDetails)
         .then(response => {
             return response.data;
@@ -10,7 +12,7 @@ export function Login(userLoginDetails) {
 }
 
 export function Register(userRegistrationDetails) {
-    return axios
+    return axiosClient
         .post("/api/auth/register", userRegistrationDetails)
         .then(response => {
             return response;
