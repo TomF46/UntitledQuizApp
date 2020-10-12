@@ -30,6 +30,11 @@ class Quiz extends Model
         return $this->hasMany(Score::class);
     }
 
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class)->withTimestamps();
+    }
+
     public static function boot()
     {
         parent::boot();

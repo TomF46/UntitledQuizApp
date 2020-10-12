@@ -57,6 +57,9 @@ class QuizController extends Controller
 
         $quiz = $quiz->fresh();
 
+        $quiz->tags()->attach($attributes['tags']);
+
+
         return response()->json($quiz, 201);
     }
 
@@ -173,6 +176,7 @@ class QuizController extends Controller
         return $request->validate([
             'title' => 'required|max:255',
             'description' => 'required|max:255',
+            'tags' => 'exists:tags,id',
             'questions.*.text' => 'required|max:255',
             'questions.*.answers.*.text' => 'required',
             'questions.*.answers.*.is_correct' => 'required',
