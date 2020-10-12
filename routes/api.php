@@ -27,3 +27,11 @@ Route::group([
         Route::get('user', [App\Http\Controllers\AuthController::class, 'user']);
     });
 });
+
+Route::middleware('auth:api')->group(function () {
+    Route::get('/quiz', [App\Http\Controllers\QuizController::class, 'index']);
+    Route::post('/quiz', [App\Http\Controllers\QuizController::class, 'store']);
+    Route::get('/quiz/{quiz}', [App\Http\Controllers\QuizController::class, 'show']);
+    Route::put('/quiz/{quiz}', [App\Http\Controllers\QuizController::class, 'update']);
+    Route::delete('/quiz/{quiz}', [App\Http\Controllers\QuizController::class, 'destroy']);
+});

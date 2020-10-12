@@ -37,13 +37,13 @@ const Header = ({ userIsAuthenticated }) => {
                                 href="#responsive-header"
                                 className="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-white mr-4"
                             >
-                                Example 1
+                                Create
                             </a>
                             <a
                                 href="#responsive-header"
                                 className="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-white"
                             >
-                                Example 2
+                                Explore
                             </a>
                         </>
                     )}
