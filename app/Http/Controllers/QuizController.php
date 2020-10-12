@@ -97,7 +97,21 @@ class QuizController extends Controller
      */
     public function update(Request $request, Quiz $quiz)
     {
-        $quiz->update($this->validateQuiz($request));
+        $attributes = $this->validateQuiz($request);
+
+        $questions = $this->createQuestions($attributes['questions']);
+
+        $quiz->update($attributes);
+
+        $quiz->questions()->delete();
+
+        $quiz->questions()->saveMany($questions);
+
+        $quiz = $quiz->fresh();
+
+        $this->saveAnswers($quiz, $attributes['questions']);
+
+        $quiz = $quiz->fresh();
         return response()->json($quiz);
     }
 

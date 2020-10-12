@@ -23,4 +23,14 @@ class Question extends Model
     {
         return $this->hasMany(Answer::class);
     }
+
+    public static function boot()
+    {
+        parent::boot();
+
+        static::deleting(function ($question) { // before delete() method call this
+            $question->answers()->delete();
+            // do the rest of the cleanup...
+        });
+    }
 }
