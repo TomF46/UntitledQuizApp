@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Answer;
 use App\Models\Question;
 use App\Models\Quiz;
 use Illuminate\Http\Request;
@@ -41,6 +42,7 @@ class QuizController extends Controller
 
         $questions = $this->createQuestions($attributes['questions']);
 
+
         $quiz = Quiz::create([
             'user_id' => $request->user()->id,
             'title' => $attributes['title'],
@@ -48,6 +50,10 @@ class QuizController extends Controller
         ]);
 
         $quiz->questions()->saveMany($questions);
+
+        $quiz = $quiz->fresh();
+
+        $this->saveAnswers($quiz, $attributes['questions']);
 
         $quiz = $quiz->fresh();
 
@@ -66,7 +72,7 @@ class QuizController extends Controller
             'id' => $quiz->id,
             'title' => $quiz->title,
             'description' => $quiz->description,
-            'questions' => $quiz->questions,
+            'questions' => $quiz->questions()->with('answers')->get(),
             'creator' => $quiz->user->username
         ]);
     }
@@ -107,16 +113,42 @@ class QuizController extends Controller
         return response()->noContent();
     }
 
+    protected function saveAnswers($quiz, $requestQuestions)
+    {
+        $quizQuestions = $quiz->questions;
+        $ordinal = 0;
+        foreach ($quizQuestions as $question) {
+            $answers = $this->createAnswers($requestQuestions[$ordinal]);
+            $question->answers()->saveMany($answers);
+            $ordinal++;
+        }
+    }
+
+    protected function createAnswers($question)
+    {
+        $formattedAnswers = array();
+        $answers = $question['answers'];
+
+        foreach ($answers as $answer) {
+            $formattedAnswers[] = new Answer([
+                'text' => $answer['text'],
+                'is_correct' => $answer['is_correct']
+            ]);
+        }
+
+        return $formattedAnswers;
+    }
+
     protected function createQuestions($questions)
     {
         $formattedQuestions = array();
         $ordinal = 0;
         foreach ($questions as $question) {
-            $formattedQuestions[] = new Question([
+            $formattedQuestion = new Question([
                 'text' => $question['text'],
-                'ordinal' => $ordinal,
-                'answer_id' => $question['answer_id']
+                'ordinal' => $ordinal
             ]);
+            $formattedQuestions[] = $formattedQuestion;
             $ordinal++;
         }
         return $formattedQuestions;
@@ -128,7 +160,8 @@ class QuizController extends Controller
             'title' => 'required|max:255',
             'description' => 'required|max:255',
             'questions.*.text' => 'required|max:255',
-            'questions.*.answer_id' => 'required',
+            'questions.*.answers.*.text' => 'required',
+            'questions.*.answers.*.is_correct' => 'required',
         ]);
     }
 }
