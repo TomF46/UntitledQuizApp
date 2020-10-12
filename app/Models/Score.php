@@ -8,7 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Score extends Model
 {
     use HasFactory;
-    protected $guarded = [];
+    protected $fillable = [
+        'user_id',
+        'quiz_id',
+        'score',
+        'score_percent'
+    ];
 
     public function user()
     {
