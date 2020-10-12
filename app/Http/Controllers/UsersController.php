@@ -48,7 +48,7 @@ class UsersController extends Controller
     {
         return response()->json([
             'profile' => $user,
-            'quizzes' => $user->quizzes()->get()
+            'quizzes' => $user->quizzes
         ]);
     }
 

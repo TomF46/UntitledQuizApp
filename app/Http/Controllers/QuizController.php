@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Question;
 use App\Models\Quiz;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class QuizController extends Controller
 {
@@ -37,11 +39,15 @@ class QuizController extends Controller
     {
         $attributes = $this->validateQuiz($request);
 
+        $questions = $this->createQuestions($attributes['questions']);
+
         $quiz = Quiz::create([
             'user_id' => $request->user()->id,
             'title' => $attributes['title'],
             'description' => $attributes['description'],
         ]);
+
+        $quiz->questions()->saveMany($questions);
 
         $quiz = $quiz->fresh();
 
@@ -56,7 +62,13 @@ class QuizController extends Controller
      */
     public function show(Quiz $quiz)
     {
-        return response()->json($quiz);
+        return response()->json([
+            'id' => $quiz->id,
+            'title' => $quiz->title,
+            'description' => $quiz->description,
+            'questions' => $quiz->questions,
+            'creator' => $quiz->user->username
+        ]);
     }
 
     /**
@@ -95,11 +107,28 @@ class QuizController extends Controller
         return response()->noContent();
     }
 
+    protected function createQuestions($questions)
+    {
+        $formattedQuestions = array();
+        $ordinal = 0;
+        foreach ($questions as $question) {
+            $formattedQuestions[] = new Question([
+                'text' => $question['text'],
+                'ordinal' => $ordinal,
+                'answer_id' => $question['answer_id']
+            ]);
+            $ordinal++;
+        }
+        return $formattedQuestions;
+    }
+
     protected function validateQuiz(Request $request)
     {
         return $request->validate([
             'title' => 'required|max:255',
             'description' => 'required|max:255',
+            'questions.*.text' => 'required|max:255',
+            'questions.*.answer_id' => 'required',
         ]);
     }
 }
