@@ -34,4 +34,7 @@ Route::middleware('auth:api')->group(function () {
     Route::get('/quiz/{quiz}', [App\Http\Controllers\QuizController::class, 'show']);
     Route::put('/quiz/{quiz}', [App\Http\Controllers\QuizController::class, 'update']);
     Route::delete('/quiz/{quiz}', [App\Http\Controllers\QuizController::class, 'destroy']);
+
+    Route::get('/users', [App\Http\Controllers\UsersController::class, 'index']);
+    Route::get('/users/{user}', [App\Http\Controllers\UsersController::class, 'show']);
 });

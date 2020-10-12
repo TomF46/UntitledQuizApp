@@ -9,7 +9,11 @@ class Quiz extends Model
 {
     use HasFactory;
 
-    protected $guarded = [];
+    protected $fillable = [
+        'user_id',
+        'title',
+        'body',
+    ];
 
     public function user()
     {
