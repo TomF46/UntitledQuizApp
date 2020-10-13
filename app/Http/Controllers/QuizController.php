@@ -17,7 +17,7 @@ class QuizController extends Controller
      */
     public function index()
     {
-        return response()->json(Quiz::all());
+        return response()->json(Quiz::latest()->get());
     }
 
     /**

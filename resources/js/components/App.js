@@ -11,6 +11,7 @@ import ProfilePage from "./Profile/Profile";
 import QuizManagementPage from "./Quiz/Manage/Manage";
 import QuizDetailPage from "./Quiz/Detail";
 import QuizPlayPage from "./Quiz/Play";
+import ExplorePage from "./Explore/ExplorePage";
 
 const Main = props => (
     <>
@@ -28,6 +29,10 @@ const Main = props => (
                     <AuthenticatedRoute
                         path="/dashboard"
                         component={Dashboard}
+                    />
+                    <AuthenticatedRoute
+                        path="/explore"
+                        component={ExplorePage}
                     />
                     <AuthenticatedRoute
                         path="/quiz/:quizId/edit"

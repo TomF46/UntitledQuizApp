@@ -6,7 +6,7 @@ import CheckboxInput from "../../FormComponents/CheckboxInput";
 const QuizForm = ({ quiz, onAddQuestion, onAddAnswer , onSave, onChange, onQuestionChange, onAnswerChange, onAnswerCheckboxChange ,saving = false, errors = {} }) => {
     return (
         <form className="" onSubmit={onSave}>
-            <h2 className="font-bold text-lg mb-4 text-center">{quiz.id ? "Edit" : "Add"} Quiz</h2>
+            <h2 className="font-bold text-4xl my-4 text-center">{quiz.id ? "Edit" : "Add"} Quiz</h2>
             {errors.onSave && (
                 <div className="text-red-500 text-xs" role="alert">
                     {errors.onSave}
@@ -31,17 +31,16 @@ const QuizForm = ({ quiz, onAddQuestion, onAddAnswer , onSave, onChange, onQuest
                 />
             </div>
             <p>Questions</p>
-
+            {/* Todo sort out error handling for nested items */}
             {quiz.questions.map((row, index) => {
               return (
-                  <div key={index}>
+                  <div className="border-solid border-2 border-gray-600 mb-6 p-2" key={index}>
                     <div className="mb-6">
                         <TextInput
                             name={`questions[${index}].text`}
                             label="Text"
                             value={quiz.questions[index].text}
                             onChange={(e) => onQuestionChange(index, e)}
-                            error={quiz.questions[index].text}
                         />
                     </div>
                     <p>Answers:</p>
@@ -53,14 +52,12 @@ const QuizForm = ({ quiz, onAddQuestion, onAddAnswer , onSave, onChange, onQuest
                         label="Text"
                         value={quiz.questions[index].answers[qIndex].text}
                         onChange={(e) => onAnswerChange(index, qIndex ,e)}
-                        error={quiz.questions[index].text}
                     />
                     <CheckboxInput
                         name={`questions[${index}].answers[${qIndex}].is_correct`}
                         label="Is correct answer?"
                         value={quiz.questions[index].answers[qIndex].is_correct}
                         onChange={(e) => onAnswerCheckboxChange(index, qIndex ,e)}
-                        error={errors.active}
                     />
                 </div>
               )

@@ -21,3 +21,14 @@ export function getQuiz(id) {
             throw error;
         });
 }
+
+export function getQuizzes() {
+    return axiosClient
+        .get(`/api/quiz`)
+        .then(response => {
+            return response.data;
+        })
+        .catch(error => {
+            throw error;
+        });
+}

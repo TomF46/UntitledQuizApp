@@ -33,18 +33,18 @@ const Header = ({ userIsAuthenticated }) => {
                             >
                                 Dashboard
                             </Link>
-                            <a
-                                href="#responsive-header"
+                            <Link
+                                to="/quiz"
                                 className="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-white mr-4"
                             >
                                 Create
-                            </a>
-                            <a
-                                href="#responsive-header"
+                            </Link>
+                            <Link
+                                to="/explore"
                                 className="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-white"
                             >
                                 Explore
-                            </a>
+                            </Link>
                         </>
                     )}
                 </div>
