@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
+import ScoresTable from "../../DisplayComponents/ScoresTable";
 
 const QuizDetail = ({ quiz, scores }) => {
     return (
@@ -15,13 +16,17 @@ const QuizDetail = ({ quiz, scores }) => {
                     Play
                 </Link>
             </div>
+            <div>
+                <h2 className="font-bold text-2xl mb-4 text-center">Scores</h2>
+                <ScoresTable scores={scores} />
+            </div>
         </div>
     );
 };
 
 QuizDetail.propTypes = {
     quiz: PropTypes.object.isRequired,
-    scores: PropTypes.object.isRequired
+    scores: PropTypes.array.isRequired
 };
 
 export default QuizDetail;

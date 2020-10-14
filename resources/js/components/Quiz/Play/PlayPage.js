@@ -4,12 +4,14 @@ import { connect } from "react-redux";
 import { getQuiz, submitScore } from "../../../api/quizApi";
 import QuizPlayForm from "./QuizPlayForm";
 import ScoreDetail from "./ScoreDetail";
+import { error } from "jquery";
 
 const QuizPlayPage = ({quizId ,history }) => {
     const [quiz, setQuiz] = useState(null);
     const [submission, setSubmission] = useState(null);
     const [submitted, setSubmitted] = useState(false);
     const [score, setScore] = useState(null)
+    const [errors, setErrors] = useState({});
 
 
 
@@ -46,12 +48,26 @@ const QuizPlayPage = ({quizId ,history }) => {
     
     }
 
+    function submissionIsValid() {
+        const errors = {};
+
+        var emptyAnswers = submission.questions.filter(question => question.answer_id == null);
+        if(emptyAnswers.length > 0) errors.incomplete = "Submission is incomplete not all questions have an answer set."
+        if(submission.questions.length != quiz.questions.length) errors.onSubmit = "Error collating quiz submission."
+
+        setErrors(errors);
+        return Object.keys(errors).length === 0;
+    }
+
     function handleSubmit(){
+        if (!submissionIsValid()) return;
+
         submitScore(quiz.id, submission).then(response => {
             setSubmitted(true);
             setScore({ ...response});
         }).catch(error => {
             console.log("Unable to submit " + error);
+            setErrors({ onSubmit: error.message });
         })
     }
 
@@ -66,7 +82,7 @@ const QuizPlayPage = ({quizId ,history }) => {
     ) : (
         !score ? (
             <div className="mt-6">
-                <QuizPlayForm quiz={quiz} submission={submission} onAnswerChange={handleAnswerChange} onSubmit={handleSubmit}/>
+                <QuizPlayForm quiz={quiz} submission={submission} onAnswerChange={handleAnswerChange} onSubmit={handleSubmit} errors={errors}/>
             </div>
         ) : (
             <div className="mt-6">

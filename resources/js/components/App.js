@@ -23,6 +23,10 @@ const Main = props => (
                     <Route path="/login" component={Login} />
                     <Route path="/register" component={Register} />
                     <AuthenticatedRoute
+                        path="/profile/:userId"
+                        component={ProfilePage}
+                    />
+                    <AuthenticatedRoute
                         path="/profile"
                         component={ProfilePage}
                     />

@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { getQuiz } from "../../../api/quizApi";
+import { getQuiz, getScoresForQuiz } from "../../../api/quizApi";
 import QuizDetail from "./QuizDetail";
+import { error } from "jquery";
 
 const QuizDetailPage = ({quizId ,history }) => {
     const [quiz, setQuiz] = useState(null);
@@ -13,11 +14,22 @@ const QuizDetailPage = ({quizId ,history }) => {
         if(!quiz) {
             getQuiz(quizId).then(quizData => {
                 setQuiz(quizData);
+                getScores(quizData.id);
             }).catch(error => {
                 console.log("Error getting quiz " + error);
             });
         }
     }, [quizId, quiz])
+
+    function getScores(id){
+        getScoresForQuiz(id).then(scores => {
+            console.log(scores);
+            setScores(scores);
+        }).catch(error => {
+            console.log("Error getting scores " + error);
+        });
+    }
+    
 
     return !quiz ? (
         <p className="mt-6">... Loading quiz</p>

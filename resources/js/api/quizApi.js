@@ -43,3 +43,14 @@ export function submitScore(quizId, submission){
             throw error;
         });
 }
+
+export function getScoresForQuiz(quizId){
+    return axiosClient
+    .get(`/api/quiz/${quizId}/scores`)
+    .then(response => {
+        return response.data;
+    })
+    .catch(error => {
+        throw error;
+    });
+}
