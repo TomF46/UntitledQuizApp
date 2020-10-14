@@ -35,13 +35,13 @@ const LoginForm = ({ user, onSave, onChange, saving = false, errors = {} }) => {
                 <button
                     type="submit"
                     disabled={saving}
-                    className="bg-blue-400 text-white rounded py-2 px-4 hover:bg-blue-500"
+                    className="bg-purple-400 text-white rounded py-2 px-4 hover:bg-purple-500"
                 >
                     {saving ? "Logging in..." : "Log in"}
                 </button>
                 <Link
                     to={`/register`}
-                    className="bg-blue-400 text-white rounded py-2 px-4 hover:bg-blue-500 ml-4"
+                    className="bg-purple-400 text-white rounded py-2 px-4 hover:bg-purple-500 ml-4"
                 >
                     To Register
                 </Link>

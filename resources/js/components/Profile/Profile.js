@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { getScoresForUser, getUserById } from "../../api/userApi";
 import ScoresTable from "../DisplayComponents/ScoresTable";
+import QuizList from "../DisplayComponents/QuizList";
 
 const ProfilePage = ({ userId,history, ...props }) => {
     const [user, setUser] = useState(null);
@@ -39,6 +40,16 @@ const ProfilePage = ({ userId,history, ...props }) => {
                         {user.profile.username}
                     </h2>
                     <p className="text-center">{user.profile.email}</p>
+                </div>
+                <div>
+                    <h3 className="font-bold text-xl text-center">
+                        Created quizzes
+                    </h3>
+                    {user.quizzes.length > 0 ? (
+                        <QuizList quizzes={user.quizzes} />
+                    ) : (
+                        <p className="text-center">Use has not created any quizzes</p>
+                    )}
                 </div>
                 <div className="my-4">
                     <h3 className="font-bold text-xl text-center">

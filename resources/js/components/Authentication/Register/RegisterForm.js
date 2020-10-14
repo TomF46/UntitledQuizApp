@@ -62,13 +62,13 @@ const RegisterForm = ({
                 <button
                     type="submit"
                     disabled={saving}
-                    className="bg-blue-400 text-white rounded py-2 px-4 hover:bg-blue-500"
+                    className="bg-purple-400 text-white rounded py-2 px-4 hover:bg-purple-500"
                 >
                     {saving ? "Registering..." : "Register"}
                 </button>
                 <Link
                     to={`/login`}
-                    className="bg-blue-400 text-white rounded py-2 px-4 hover:bg-blue-500 ml-4"
+                    className="bg-purple-400 text-white rounded py-2 px-4 hover:bg-purple-500 ml-4"
                 >
                     To Login
                 </Link>

@@ -7,19 +7,21 @@ const QuizList = ({ quizzes }) => {
         <div>
             {quizzes.map((quiz) => {
                 return (
-                    <div key={quiz.id} className="p-4 rounded overflow-hidden shadow-lg mb-6">
-                        <h3 className="font-bold text-lg">{quiz.title}</h3>
-                        <p>{quiz.description}</p>
-                        <div className="flex mb-2">
+                    <div key={quiz.id} className="p-4 rounded overflow-hidden shadow-lg mb-4 flex justify-between items-center">
+                        <div>
+                            <h3 className="font-bold text-lg items-center">{quiz.title}</h3>
+                            <p>{quiz.description}</p>
+                        </div>
+                        <div className="flex justify-right mb-2">
                             <Link
                                 to={`/quiz/${quiz.id}`}
-                                className="bg-blue-800 text-white rounded py-2 px-4 hover:bg-blue-500"
+                                className="bg-purple-400 text-white rounded py-2 px-4 hover:bg-purple-500 inline-block align-middle"
                             >
                                 Details
                             </Link>
                             <Link
                                 to={`/quiz/${quiz.id}/play`}
-                                className="bg-blue-800 text-white rounded py-2 px-4 hover:bg-blue-500 ml-2"
+                                className="bg-purple-400 text-white rounded py-2 px-4 hover:bg-purple-500 ml-2 inline-block align-middle"
                             >
                                 Play
                             </Link>

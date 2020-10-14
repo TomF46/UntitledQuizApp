@@ -66,12 +66,12 @@ const QuizForm = ({ quiz, onAddQuestion, onAddAnswer , onSave, onChange, onQuest
                         <button
                         type="button"
                         onClick={() => onAddAnswer(index)}
-                        className="bg-green-600 text-white rounded py-2 px-4 hover:bg-blue-500"
+                        className="bg-purple-400 text-white rounded py-2 px-4 hover:bg-purple-500"
                     >
                         Add Answer
                     </button>
                     </div>
-                    {errors.questions[index].error && (
+                    {errors.questions[index] && errors.questions[index].error && (
                         <div className="text-red-500 text-xs" role="alert">
                             {errors.questions[index].error}
                         </div>
@@ -88,7 +88,7 @@ const QuizForm = ({ quiz, onAddQuestion, onAddAnswer , onSave, onChange, onQuest
                 <button
                     type="button"
                     onClick={onAddQuestion}
-                    className="bg-blue-800 text-white rounded py-2 px-4 hover:bg-blue-500"
+                    className="bg-purple-400 text-white rounded py-2 px-4 hover:bg-purple-500"
                 >
                     Add question
                 </button>
@@ -97,7 +97,7 @@ const QuizForm = ({ quiz, onAddQuestion, onAddAnswer , onSave, onChange, onQuest
                 <button
                     type="submit"
                     disabled={saving}
-                    className="bg-blue-400 text-white rounded py-2 px-4 hover:bg-blue-500"
+                    className="bg-purple-400 text-white rounded py-2 px-4 hover:bg-purple-500"
                 >
                     {saving ? "Saving..." : "Save"}
                 </button>

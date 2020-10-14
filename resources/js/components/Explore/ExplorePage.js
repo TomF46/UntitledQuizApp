@@ -22,7 +22,10 @@ const ExplorePage = ({ history }) => {
             {!quizzes ? (
                 <p>... loading quizzes to explore</p>
             ) : (
-            <QuizList quizzes={quizzes} />
+            <div className="mt-6">
+                <h1 className="font-bold text-2xl mb-4 text-center">Explore</h1>
+                <QuizList quizzes={quizzes} />
+            </div>
             )}
         </div>
     );

@@ -18,7 +18,7 @@ const QuizPlayForm = ({ quiz, submission, onAnswerChange, onSubmit, errors }) =>
                                     type="button"
                                     onClick={(e) => onAnswerChange(question.id, answer.id ,e)}
                                     className={`text-white py-2 px-4 hover:bg-green-500 mr-2 
-                                    ${submission.questions[question.ordinal].answer_id == answer.id  ? "bg-green-400" : "bg-blue-400"}`}
+                                    ${submission.questions[question.ordinal].answer_id == answer.id  ? "bg-green-400" : "bg-purple-400"}`}
                                 >
                                     {answer.text}
                                 </button>

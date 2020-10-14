@@ -10,13 +10,13 @@ const ScoreDetail = ({score, onReplay }) => {
            <div className="flex justify-center my-4">
                 <button
                     onClick={onReplay}
-                    className="bg-blue-400 text-white rounded py-2 px-4 hover:bg-blue-500 ml-4"
+                    className="bg-purple-400 text-white rounded py-2 px-4 hover:bg-purple-500 ml-4"
                 >
                   Replay
                 </button>
                 <Link
                     to={`/quiz/${score.quiz_id}`}
-                    className="bg-blue-400 text-white rounded py-2 px-4 hover:bg-blue-500 ml-4"
+                    className="bg-purple-400 text-white rounded py-2 px-4 hover:bg-purple-500 ml-4"
                 >
                   Go back to detail page
                 </Link>

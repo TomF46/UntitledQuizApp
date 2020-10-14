@@ -11,7 +11,7 @@ const QuizDetail = ({ quiz, scores }) => {
             <div className="flex justify-center my-4">
                 <Link
                     to={`/quiz/${quiz.id}/play`}
-                    className="bg-blue-400 text-white rounded py-2 px-4 hover:bg-blue-500 ml-4"
+                    className="bg-purple-400 text-white rounded py-2 px-4 hover:bg-purple-500 ml-4"
                 >
                     Play
                 </Link>
