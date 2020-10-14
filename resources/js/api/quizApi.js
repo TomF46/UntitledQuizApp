@@ -32,3 +32,14 @@ export function getQuizzes() {
             throw error;
         });
 }
+
+export function submitScore(quizId, submission){
+    return axiosClient
+        .post(`/api/quiz/${quizId}/scores`, submission)
+        .then(response => {
+            return response.data;
+        })
+        .catch(error => {
+            throw error;
+        });
+}

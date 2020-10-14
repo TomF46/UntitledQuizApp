@@ -9,8 +9,8 @@ import NotFound from "./NotFound/NotFoundPage";
 import Header from "./DisplayComponents/Header";
 import ProfilePage from "./Profile/Profile";
 import QuizManagementPage from "./Quiz/Manage/Manage";
-import QuizDetailPage from "./Quiz/Detail";
-import QuizPlayPage from "./Quiz/Play";
+import QuizDetailPage from "./Quiz/Detail/DetailPage";
+import QuizPlayPage from "./Quiz/Play/PlayPage";
 import ExplorePage from "./Explore/ExplorePage";
 
 const Main = props => (
