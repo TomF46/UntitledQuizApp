@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
 const ScoresTable = ({ scores }) => {
-    return (
+    return scores.length > 0 ? (
         <div className="flex justify-center">
             <table class="table-auto">
                 <thead>
@@ -28,7 +28,9 @@ const ScoresTable = ({ scores }) => {
                 </tbody>
                 </table>
         </div>
-    );
+    ) : (
+        <p className="text-center">There is currently no score data to show.</p>
+    )
 };
 
 ScoresTable.propTypes = {

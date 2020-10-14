@@ -71,10 +71,19 @@ const QuizForm = ({ quiz, onAddQuestion, onAddAnswer , onSave, onChange, onQuest
                         Add Answer
                     </button>
                     </div>
+                    {errors.questions[index].error && (
+                        <div className="text-red-500 text-xs" role="alert">
+                            {errors.questions[index].error}
+                        </div>
+                    )}
                   </div>
               )
             })}
-
+            {errors.onSave && (
+                <div className="text-red-500 text-xs" role="alert">
+                    {errors.onSave}
+                </div>
+            )}
             <div className="flex justify-center mb-6">
                 <button
                     type="button"
