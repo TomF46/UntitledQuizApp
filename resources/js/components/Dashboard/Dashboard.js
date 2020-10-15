@@ -1,16 +1,44 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { getUserById } from "../../api/userApi";
 
-const DashboardPage = ({ history }) => {
+const DashboardPage = ({userId, history }) => {
+    const [user, setUser] = useState(null);
+
+    useEffect(() => {
+        if(!user) {
+            getUserById(userId).then(userData => {
+                setUser(userData);
+                getUserScores(userData.profile.id);
+            }).catch(error => {
+                console.log("Error getting user " + error);
+            });
+        }
+    }, [userId, user])
+
     return (
         <div className="dashboard-page">
-            <p>Dashboard</p>
+            {user == null ? (
+                <p>...Loading Dashboard</p>
+            ) : (
+            <h1 className="font-bold text-4xl my-4">Welcome {user.profile.username}</h1>
+            //Plan whats going here
+            )}
         </div>
     );
 };
 
 DashboardPage.propTypes = {
+    userId: PropTypes.any.isRequired,
     history: PropTypes.object.isRequired
 };
 
-export default DashboardPage;
+const mapStateToProps = (state) => {
+    const userId = state.tokens.user_id;
+    return {
+        userId
+    };
+};
+
+export default connect(mapStateToProps)(DashboardPage);

@@ -4,8 +4,9 @@ import PropTypes from "prop-types";
 import { newAnswer, newQuestion, newQuiz } from "../../../tools/objectShapes";
 import QuizForm from "./QuizForm";
 import { getQuiz, saveQuiz } from "../../../api/quizApi";
+import { Redirect } from "react-router-dom";
 
-const QuizManagementPage = ({ quizId ,history }) => {
+const QuizManagementPage = ({ quizId, userId ,history }) => {
     const [quiz, setQuiz] = useState(newQuiz);
     const [errors, setErrors] = useState({questions: []});
     const [saving, setSaving] = useState(false);
@@ -18,7 +19,6 @@ const QuizManagementPage = ({ quizId ,history }) => {
               console.log(error);
           })
         } else {
-          console.log("Use default");
           setQuiz({ ...newQuiz})
         }
       }, [quizId]);
@@ -106,7 +106,9 @@ const QuizManagementPage = ({ quizId ,history }) => {
         .catch(err => {
             console.log(err);
             setSaving(false);
-            setErrors({ onSave: err.message });
+            let tempErrors = { ...errors};
+            tempErrors.onSave = err.message;
+            setErrors({... tempErrors});
         });
     }
 
@@ -148,6 +150,7 @@ const QuizManagementPage = ({ quizId ,history }) => {
 
     return (
         <div className="quiz-management-page">
+            {quiz.creator_id && quiz.creator_id != userId &&  <Redirect to="/" />}
             <QuizForm  quiz={quiz}
             errors={errors}
             onAddQuestion={handleAddQuestion}
@@ -167,13 +170,16 @@ const QuizManagementPage = ({ quizId ,history }) => {
 
 QuizManagementPage.propTypes = {
     quizId: PropTypes.any,
+    userId: PropTypes.any,
     history: PropTypes.object.isRequired
 };
 
 const mapStateToProps = (state, ownProps) => {
     const quizId = ownProps.match.params.quizId;
+    const userId = state.tokens.user_id;
     return {
-      quizId
+      quizId,
+      userId
     };
   };
   

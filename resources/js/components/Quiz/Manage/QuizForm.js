@@ -95,11 +95,6 @@ const QuizForm = ({ quiz, onAddQuestion, onAddAnswer , onSave, onChange, onQuest
                   </div>
               )
             })}
-            {errors.onSave && (
-                <div className="text-red-500 text-xs" role="alert">
-                    {errors.onSave}
-                </div>
-            )}
             <div id="manage-quiz-toolbar" className="p-4 rounded overflow-hidden shadow-lg card my-4 flex justify-between items-center">
                 <div className="flex">
                     <button
@@ -109,6 +104,13 @@ const QuizForm = ({ quiz, onAddQuestion, onAddAnswer , onSave, onChange, onQuest
                     >
                         Add question
                     </button>
+                </div>
+                <div className="flex">
+                    {errors.onSave && (
+                        <div className="text-red-500 text-xs" role="alert">
+                            {errors.onSave}
+                        </div>
+                    )}
                 </div>
                 <div className="flex justify-right">
                     <button

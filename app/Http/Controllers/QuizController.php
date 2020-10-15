@@ -76,7 +76,8 @@ class QuizController extends Controller
             'title' => $quiz->title,
             'description' => $quiz->description,
             'questions' => $quiz->questions()->with('answers')->get(),
-            'creator' => $quiz->user->username
+            'creator' => $quiz->user->username,
+            'creator_id' => $quiz->user->id
         ]);
     }
 
@@ -100,6 +101,7 @@ class QuizController extends Controller
      */
     public function update(Request $request, Quiz $quiz)
     {
+        if ($quiz->user->id != $request->user()->id) return response()->json(['error' => 'Unauthenticated.'], 401);
         $attributes = $this->validateQuiz($request);
 
         $questions = $this->createQuestions($attributes['questions']);

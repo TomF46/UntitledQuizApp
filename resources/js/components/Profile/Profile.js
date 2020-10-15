@@ -34,14 +34,17 @@ const ProfilePage = ({ userId,history, ...props }) => {
                 <p>...Loading profile</p>
             ) : (
                 <>
-                <div>
-                    <h2 className="font-bold text-4xl my-4 text-center pageHeader">
+                <h2 className="font-bold text-4xl my-4 text-center pageHeader">
                         {user.profile.username}
                     </h2>
-                    <p className="text-center">{user.profile.email}</p>
+                <div className="p-4 rounded overflow-hidden shadow-lg card card mb-4">
+                    <p>Username: {user.profile.username}</p>
+                    <p>Email: {user.profile.email}</p>
+                    <p>Quizzes created: {user.quizzes.length}</p>
+                    {scores && <p>Quiz Attempts: {scores.length}</p> }
                 </div>
                 <div>
-                    <h3 className="font-bold text-xl text-center">
+                    <h3 className="font-bold text-3xl text-center mb-2">
                         Created quizzes
                     </h3>
                     {user.quizzes.length > 0 ? (
@@ -51,13 +54,15 @@ const ProfilePage = ({ userId,history, ...props }) => {
                     )}
                 </div>
                 <div className="my-4">
-                    <h3 className="font-bold text-xl text-center">
+                    <h3 className="font-bold text-3xl text-center">
                         Scores
                     </h3>
                     {!scores ? (
                         <p>... Loading scores</p>
                     ) : (
-                        <ScoresTable scores={scores} />
+                        <div className="p-4 rounded overflow-hidden shadow-lg card card mb-4">
+                            <ScoresTable scores={scores} />
+                        </div>
                     )}
                 </div>
                 </>
@@ -67,7 +72,7 @@ const ProfilePage = ({ userId,history, ...props }) => {
 };
 
 ProfilePage.propTypes = {
-    userId: PropTypes.any,
+    userId: PropTypes.any.isRequired,
     history: PropTypes.object.isRequired
 };
 

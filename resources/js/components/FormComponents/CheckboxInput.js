@@ -28,8 +28,8 @@ CheckboxInput.propTypes = {
   name: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
-  value: PropTypes.bool,
-  checked: PropTypes.bool,
+  value: PropTypes.any,
+  checked: PropTypes.any,
   error: PropTypes.string,
 };
 
