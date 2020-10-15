@@ -34,6 +34,7 @@ Route::middleware('auth:api')->group(function () {
     Route::get('/quiz/{quiz}', [App\Http\Controllers\QuizController::class, 'show']);
     Route::put('/quiz/{quiz}', [App\Http\Controllers\QuizController::class, 'update']);
     Route::delete('/quiz/{quiz}', [App\Http\Controllers\QuizController::class, 'destroy']);
+    Route::get('/quiz/{quiz}/edit', [App\Http\Controllers\QuizController::class, 'edit']);
     Route::get('/quiz/{quiz}/scores', [App\Http\Controllers\QuizScoresController::class, 'show']);
     Route::post('/quiz/{quiz}/scores', [App\Http\Controllers\QuizScoresController::class, 'store']);
 

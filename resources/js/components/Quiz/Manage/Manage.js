@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { newAnswer, newQuestion, newQuiz } from "../../../tools/objectShapes";
 import QuizForm from "./QuizForm";
-import { getQuiz, saveQuiz } from "../../../api/quizApi";
+import { getQuizForEdit, saveQuiz } from "../../../api/quizApi";
 import { Redirect } from "react-router-dom";
 
 const QuizManagementPage = ({ quizId, userId ,history }) => {
@@ -13,7 +13,7 @@ const QuizManagementPage = ({ quizId, userId ,history }) => {
 
     useEffect(() => {
         if (quizId) {
-          getQuiz(quizId).then(data => {
+          getQuizForEdit(quizId).then(data => {
             setQuiz({ ...data})
           }).catch(error => {
               console.log(error);

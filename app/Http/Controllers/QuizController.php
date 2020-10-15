@@ -71,11 +71,13 @@ class QuizController extends Controller
      */
     public function show(Quiz $quiz)
     {
+        $questionsWithoutKnownAnswer = $this->removeAnswersFromQuestion($quiz->questions()->with('answers')->get());
+
         return response()->json([
             'id' => $quiz->id,
             'title' => $quiz->title,
             'description' => $quiz->description,
-            'questions' => $quiz->questions()->with('answers')->get(),
+            'questions' => $questionsWithoutKnownAnswer,
             'creator' => $quiz->user->username,
             'creator_id' => $quiz->user->id
         ]);
@@ -87,9 +89,18 @@ class QuizController extends Controller
      * @param  \App\Models\Quiz  $quiz
      * @return \Illuminate\Http\Response
      */
-    public function edit(Quiz $quiz)
+    public function edit(Request $request, Quiz $quiz)
     {
-        //
+        if ($quiz->user->id != $request->user()->id) return response()->json(['error' => 'Unauthenticated.'], 401);
+
+        return response()->json([
+            'id' => $quiz->id,
+            'title' => $quiz->title,
+            'description' => $quiz->description,
+            'questions' => $quiz->questions()->with('answers')->get(),
+            'creator' => $quiz->user->username,
+            'creator_id' => $quiz->user->id
+        ]);
     }
 
     /**
@@ -102,6 +113,7 @@ class QuizController extends Controller
     public function update(Request $request, Quiz $quiz)
     {
         if ($quiz->user->id != $request->user()->id) return response()->json(['error' => 'Unauthenticated.'], 401);
+
         $attributes = $this->validateQuiz($request);
 
         $questions = $this->createQuestions($attributes['questions']);
@@ -126,10 +138,27 @@ class QuizController extends Controller
      * @param  \App\Models\Quiz  $quiz
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Quiz $quiz)
+    public function destroy(Request $request, Quiz $quiz)
     {
+        if ($quiz->user->id != $request->user()->id) return response()->json(['error' => 'Unauthenticated.'], 401);
+
         $quiz->delete();
         return response()->noContent();
+    }
+
+    protected function removeAnswersFromQuestion($questions)
+    {
+        foreach ($questions as $question) {
+            $this->removeAnswers($question);
+        }
+        return $questions;
+    }
+
+    protected function removeAnswers($question)
+    {
+        foreach ($question->answers as $answer) {
+            unset($answer->is_correct);
+        }
     }
 
     protected function saveAnswers($quiz, $requestQuestions)
