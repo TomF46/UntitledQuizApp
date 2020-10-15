@@ -6,35 +6,38 @@ import CheckboxInput from "../../FormComponents/CheckboxInput";
 const QuizForm = ({ quiz, onAddQuestion, onAddAnswer , onSave, onChange, onQuestionChange, onAnswerChange, onAnswerCheckboxChange, onReset, onRemoveQuestion, onRemoveAnswer ,saving = false, errors = {} }) => {
     return (
         <form className="" onSubmit={onSave}>
-            <h2 className="font-bold text-4xl my-4 text-center pageHeader">{quiz.id ? "Edit" : "Add"} Quiz</h2>
+            <h2 className="font-bold text-4xl my-4 text-center">{quiz.id ? "Edit" : "Add"} Quiz</h2>
             {errors.onSave && (
                 <div className="text-red-500 text-xs" role="alert">
                     {errors.onSave}
                 </div>
             )}
-            <div className="mb-6">
-                <TextInput
-                    name="title"
-                    label="Title"
-                    value={quiz.title}
-                    onChange={onChange}
-                    error={errors.title}
-                />
+            <div className="p-4 rounded overflow-hidden shadow-lg card card">
+                <div className="mb-6">
+                    <TextInput
+                        name="title"
+                        label="Title"
+                        value={quiz.title}
+                        onChange={onChange}
+                        error={errors.title}
+                    />
+                </div>
+                <div className="mb-6">
+                    <TextInput
+                        name="description"
+                        label="Description"
+                        value={quiz.description}
+                        onChange={onChange}
+                        error={errors.description}
+                    />
+                </div>
             </div>
-            <div className="mb-6">
-                <TextInput
-                    name="description"
-                    label="Description"
-                    value={quiz.description}
-                    onChange={onChange}
-                    error={errors.description}
-                />
-            </div>
-            {quiz.questions.length > 0 &&  <h2 className="font-bold text-3xl my-4 text-center pageHeader">Questions</h2>}
+            {quiz.questions.length > 0 &&  <h2 className="font-bold text-3xl my-4 text-center">Questions</h2>}
             {/* Todo sort out error handling for nested items */}
             {quiz.questions.map((row, index) => {
               return (
-                  <div className="border-solid border-2 border-gray-600 mb-6 p-2" key={index}>
+                  <div className="p-4 rounded overflow-hidden shadow-lg card card mb-6" key={index}>
+                    <h3 className="font-bold text-xl">Question {index + 1}</h3>
                     <div className="mb-6">
                         <TextInput
                             name={`questions[${index}].text`}
@@ -69,7 +72,7 @@ const QuizForm = ({ quiz, onAddQuestion, onAddAnswer , onSave, onChange, onQuest
                             {errors.questions[index].error}
                         </div>
                     )}
-                    <div id="manage-quiz-toolbar" className="p-4 rounded overflow-hidden shadow-lg mb-4 flex justify-between items-center">
+                    <div id="manage-question-toolbar" className="flex justify-between items-center">
                         <div className="flex">
                             <button
                                 type="button"
@@ -97,7 +100,7 @@ const QuizForm = ({ quiz, onAddQuestion, onAddAnswer , onSave, onChange, onQuest
                     {errors.onSave}
                 </div>
             )}
-            <div id="manage-quiz-toolbar" className="p-4 rounded overflow-hidden shadow-lg mb-4 flex justify-between items-center">
+            <div id="manage-quiz-toolbar" className="p-4 rounded overflow-hidden shadow-lg card my-4 flex justify-between items-center">
                 <div className="flex">
                     <button
                         type="button"

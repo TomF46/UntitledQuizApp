@@ -21259,6 +21259,10 @@ nav {
   margin: 0 auto;
 }
 
+.card {
+  background-color: #fff;
+}
+
 @media (min-width: 640px){
   .sm\:container{
     width: 100%;

@@ -82,7 +82,7 @@ const QuizPlayPage = ({quizId ,history }) => {
     ) : (
         !score ? (
             <div className="mt-6">
-                <QuizPlayForm quiz={quiz} submission={submission} onAnswerChange={handleAnswerChange} onSubmit={handleSubmit} errors={errors}/>
+                <QuizPlayForm quiz={quiz} submission={submission} onAnswerChange={handleAnswerChange} onSubmit={handleSubmit} onReset={handleReplay} errors={errors}/>
             </div>
         ) : (
             <div className="mt-6">
