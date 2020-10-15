@@ -91,7 +91,7 @@ class QuizController extends Controller
      */
     public function edit(Request $request, Quiz $quiz)
     {
-        if ($quiz->user->id != $request->user()->id) return response()->json(['error' => 'Unauthenticated.'], 401);
+        if ($quiz->user->id != $request->user()->id) return response()->json(['error' => 'unauthorized.'], 401);
 
         return response()->json([
             'id' => $quiz->id,
@@ -112,7 +112,7 @@ class QuizController extends Controller
      */
     public function update(Request $request, Quiz $quiz)
     {
-        if ($quiz->user->id != $request->user()->id) return response()->json(['error' => 'Unauthenticated.'], 401);
+        if ($quiz->user->id != $request->user()->id) return response()->json(['error' => 'Unauthorized.'], 401);
 
         $attributes = $this->validateQuiz($request);
 
@@ -140,7 +140,7 @@ class QuizController extends Controller
      */
     public function destroy(Request $request, Quiz $quiz)
     {
-        if ($quiz->user->id != $request->user()->id) return response()->json(['error' => 'Unauthenticated.'], 401);
+        if ($quiz->user->id != $request->user()->id) return response()->json(['error' => 'unauthorized.'], 401);
 
         $quiz->delete();
         return response()->noContent();

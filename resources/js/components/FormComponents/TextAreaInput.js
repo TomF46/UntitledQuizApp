@@ -1,0 +1,38 @@
+import React from "react";
+import PropTypes from "prop-types";
+
+const TextAreaInput = ({ name, label, onChange, placeholder, value, error }) => {
+    return (
+        <div className="field">
+            <label
+                className="block mb-2 uppercase font-bold text-xs text-gray-700"
+                htmlFor={name}
+            >
+                {label}
+            </label>
+            <div className="control">
+                <textarea 
+                name={name} 
+                className="resize-y border min-w-full rounded focus:outline-none focus:shadow-outline"
+                value={value}
+                onChange={onChange}
+                required
+                ></textarea>
+                {error && (
+                    <div className="text-red-500 text-xs mt-2">{error}</div>
+                )}
+            </div>
+        </div>
+    );
+};
+
+TextAreaInput.propTypes = {
+    name: PropTypes.string.isRequired,
+    label: PropTypes.string.isRequired,
+    onChange: PropTypes.func.isRequired,
+    placeholder: PropTypes.string,
+    value: PropTypes.string,
+    error: PropTypes.string
+};
+
+export default TextAreaInput;

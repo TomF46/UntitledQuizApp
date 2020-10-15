@@ -23,6 +23,17 @@ export function getUserById(id) {
         });
 }
 
+export function getUserForEditing(id) {
+    return axiosClient
+        .get(`/api/users/${id}/edit`)
+        .then(response => {
+            return response.data;
+        })
+        .catch(error => {
+            throw error;
+        });
+}
+
 export function getScoresForUser(id) {
     return axiosClient
         .get(`/api/users/${id}/scores`)
@@ -33,3 +44,15 @@ export function getScoresForUser(id) {
             throw error;
         });
 }
+
+export function editUserProfile(userId, profile){
+    return axiosClient
+        .put(`/api/users/${userId}`, profile)
+        .then(response => {
+            return response.data;
+        })
+        .catch(error => {
+            throw error;
+        });
+}
+

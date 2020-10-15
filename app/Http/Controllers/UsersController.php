@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
 
 class UsersController extends Controller
@@ -58,9 +59,14 @@ class UsersController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $user)
+    public function edit(Request $request, User $user)
     {
-        //
+        if ($user->id != $request->user()->id) return response()->json(['error' => 'Unauthorized.'], 401);
+
+        return response()->json([
+            'username' => $user->username,
+            'bio' => $user->bio
+        ]);
     }
 
     /**
@@ -72,7 +78,12 @@ class UsersController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        //
+        if ($user->id != $request->user()->id) return response()->json(['error' => 'Unauthorized.'], 401);
+
+        $attributes = $this->validateUser($request, $user);
+        $user->update($attributes);
+        $user = $user->fresh();
+        return response()->json($user);
     }
 
     /**
@@ -84,5 +95,13 @@ class UsersController extends Controller
     public function destroy(User $user)
     {
         //
+    }
+
+    protected function validateUser(Request $request, User $user)
+    {
+        return $request->validate([
+            'username' => ['required', 'string', 'max:255', Rule::unique('users')->ignore($user), 'alpha_dash'],
+            'bio' => 'required|string',
+        ]);
     }
 }

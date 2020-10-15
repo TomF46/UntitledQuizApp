@@ -12,6 +12,7 @@ import QuizManagementPage from "./Quiz/Manage/Manage";
 import QuizDetailPage from "./Quiz/Detail/DetailPage";
 import QuizPlayPage from "./Quiz/Play/PlayPage";
 import ExplorePage from "./Explore/ExplorePage";
+import EditProfilePage from "./Profile/Edit/EditProfilePage";
 
 const Main = props => (
     <>
@@ -22,6 +23,10 @@ const Main = props => (
                     <Route exact path="/" component={Home} />
                     <Route path="/login" component={Login} />
                     <Route path="/register" component={Register} />
+                    <AuthenticatedRoute
+                        path="/profile/:userId/edit"
+                        component={EditProfilePage}
+                    />
                     <AuthenticatedRoute
                         path="/profile/:userId"
                         component={ProfilePage}

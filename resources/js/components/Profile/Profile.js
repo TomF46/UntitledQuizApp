@@ -5,7 +5,7 @@ import { getScoresForUser, getUserById } from "../../api/userApi";
 import ScoresTable from "../DisplayComponents/ScoresTable";
 import QuizList from "../DisplayComponents/QuizList";
 
-const ProfilePage = ({ userId,history, ...props }) => {
+const ProfilePage = ({ userId, currentUser, history, ...props }) => {
     const [user, setUser] = useState(null);
     const [scores, setScores] = useState(null);
 
@@ -40,8 +40,24 @@ const ProfilePage = ({ userId,history, ...props }) => {
                 <div className="p-4 rounded overflow-hidden shadow-lg card card mb-4">
                     <p>Username: {user.profile.username}</p>
                     <p>Email: {user.profile.email}</p>
+                    {user.profile.bio && <p>Bio: {user.profile.bio}</p> }
                     <p>Quizzes created: {user.quizzes.length}</p>
                     {scores && <p>Quiz Attempts: {scores.length}</p> }
+                    {userId == currentUser && (
+                        <div className="flex justify-between items-center">
+                            <div className="flex">
+                            </div>
+                            <div className="flex justify-right">
+                                <button
+                                    type="button"
+                                    onClick={() => history.push(`/profile/${userId}/edit`)}
+                                    className="bg-purple-400 text-white rounded py-2 px-4 hover:bg-purple-500 mr-2"
+                                >
+                                    Edit Profile
+                                </button>
+                            </div>
+                        </div>
+                    )}
                 </div>
                 <div>
                     <h3 className="font-bold text-3xl text-center mb-2">
@@ -73,14 +89,17 @@ const ProfilePage = ({ userId,history, ...props }) => {
 
 ProfilePage.propTypes = {
     userId: PropTypes.any.isRequired,
+    currentUser: PropTypes.any.isRequired,
     history: PropTypes.object.isRequired
 };
 
 const mapStateToProps = (state, ownProps) => {
+    const currentUser = state.tokens.user_id
     const userId = ownProps.match.params.userId ? ownProps.match.params.userId : state.tokens.user_id;
     return {
         userIsAuthenticated: state.tokens != null,
-        userId
+        userId,
+        currentUser
     };
 };
 
