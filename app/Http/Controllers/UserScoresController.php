@@ -48,7 +48,7 @@ class UserScoresController extends Controller
      */
     public function show(User $user)
     {
-        return response()->json($user->scores->map(function ($score) {
+        return response()->json($user->scores()->orderBy('score_percent', 'desc')->get()->map(function ($score) {
             return [
                 'id' => $score->id,
                 'username' => $score->user->username,

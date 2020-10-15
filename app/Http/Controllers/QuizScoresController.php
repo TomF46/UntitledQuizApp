@@ -46,7 +46,7 @@ class QuizScoresController extends Controller
 
     public function show(Quiz $quiz)
     {
-        return response()->json($quiz->scores->map(function ($score) {
+        return response()->json($quiz->scores()->orderBy('score_percent', 'desc')->get()->map(function ($score) {
             return [
                 'id' => $score->id,
                 'username' => $score->user->username,
