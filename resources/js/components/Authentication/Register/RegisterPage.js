@@ -46,7 +46,6 @@ const RegisterPage = ({ userIsAuthenticated, history }) => {
         setSaving(true);
         Register(user)
             .then(response => {
-                console.log(response);
                 history.push("/login");
             })
             .catch(err => {

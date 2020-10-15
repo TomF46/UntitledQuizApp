@@ -22,7 +22,6 @@ const ProfilePage = ({ userId,history, ...props }) => {
 
     function getUserScores(id){
         getScoresForUser(id).then(scoreData => {
-            console.log(scoreData);
             setScores(scoreData);
         }).catch(error => {
             console.log("Error getting user " + error);

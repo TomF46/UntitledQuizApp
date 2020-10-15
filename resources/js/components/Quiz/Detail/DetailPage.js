@@ -23,7 +23,6 @@ const QuizDetailPage = ({quizId ,history }) => {
 
     function getScores(id){
         getScoresForQuiz(id).then(scores => {
-            console.log(scores);
             setScores(scores);
         }).catch(error => {
             console.log("Error getting scores " + error);
