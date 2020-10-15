@@ -13,6 +13,7 @@ const QuizDetailPage = ({quizId ,history }) => {
     useEffect(() => {
         if(!quiz) {
             getQuiz(quizId).then(quizData => {
+                console.log(quizData);
                 setQuiz(quizData);
                 getScores(quizData.id);
             }).catch(error => {

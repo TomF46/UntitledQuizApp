@@ -2,8 +2,10 @@ import React from "react";
 import PropTypes from "prop-types";
 import TextInput from "../../FormComponents/TextInput";
 import CheckboxInput from "../../FormComponents/CheckboxInput";
+import SelectInput from "../../FormComponents/SelectInput";
+import MultiSelectInput from "../../FormComponents/MultiSelectInput";
 
-const QuizForm = ({ quiz, onAddQuestion, onAddAnswer , onSave, onChange, onQuestionChange, onAnswerChange, onAnswerCheckboxChange, onReset, onRemoveQuestion, onRemoveAnswer ,saving = false, errors = {} }) => {
+const QuizForm = ({ quiz, tags, onAddQuestion, onAddAnswer , onSave, onChange, onTagChange , onQuestionChange, onAnswerChange, onAnswerCheckboxChange, onReset, onRemoveQuestion, onRemoveAnswer ,saving = false, errors = {} }) => {
     return (
         <form className="" onSubmit={onSave}>
             <h2 className="font-bold text-4xl my-4 text-center">{quiz.id ? "Edit" : "Add"} Quiz</h2>
@@ -31,6 +33,18 @@ const QuizForm = ({ quiz, onAddQuestion, onAddAnswer , onSave, onChange, onQuest
                         error={errors.description}
                     />
                 </div>
+                {tags && tags.length > 0 && (
+                <div className="mb-6">
+                <MultiSelectInput
+                              name="tags"
+                              label="Tags"
+                              value={quiz.tags}
+                              options={tags}
+                              onChange={onTagChange}
+                              error={errors.tags}
+                            />
+                </div>
+            )}
             </div>
             {quiz.questions.length > 0 &&  <h2 className="font-bold text-3xl my-4 text-center">Questions</h2>}
             {/* Todo sort out error handling for nested items */}
@@ -135,11 +149,13 @@ const QuizForm = ({ quiz, onAddQuestion, onAddAnswer , onSave, onChange, onQuest
 
 QuizForm.propTypes = {
     quiz: PropTypes.object.isRequired,
+    tags: PropTypes.array,
     errors: PropTypes.object,
     onAddQuestion: PropTypes.func.isRequired,
     onAddAnswer: PropTypes.func.isRequired,
     onSave: PropTypes.func.isRequired,
     onChange: PropTypes.func.isRequired,
+    onTagChange: PropTypes.func.isRequired,
     onQuestionChange: PropTypes.func.isRequired,
     onAnswerChange: PropTypes.func.isRequired,
     onAnswerCheckboxChange: PropTypes.func.isRequired,

@@ -48,4 +48,6 @@ Route::middleware('auth:api')->group(function () {
     Route::get('/users/{user}/edit', [App\Http\Controllers\UsersController::class, 'edit']);
     Route::put('/users/{user}', [App\Http\Controllers\UsersController::class, 'update']);
     Route::get('/users/{user}/scores', [App\Http\Controllers\UserScoresController::class, 'show']);
+
+    Route::get('/tags', [App\Http\Controllers\TagsController::class, 'index']);
 });

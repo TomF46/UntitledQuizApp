@@ -78,6 +78,12 @@ class QuizController extends Controller
             'title' => $quiz->title,
             'description' => $quiz->description,
             'questions' => $questionsWithoutKnownAnswer,
+            'tags' => $quiz->tags()->get()->map(function ($tag) {
+                return [
+                    'id' => $tag->id,
+                    'name' => $tag->name
+                ];
+            }),
             'creator' => $quiz->user->username,
             'creator_id' => $quiz->user->id
         ]);
@@ -98,6 +104,12 @@ class QuizController extends Controller
             'title' => $quiz->title,
             'description' => $quiz->description,
             'questions' => $quiz->questions()->with('answers')->get(),
+            'tags' => $quiz->tags()->get()->map(function ($tag) {
+                return [
+                    'id' => $tag->id,
+                    'name' => $tag->name
+                ];
+            }),
             'creator' => $quiz->user->username,
             'creator_id' => $quiz->user->id
         ]);

@@ -5,15 +5,21 @@ import { newAnswer, newQuestion, newQuiz } from "../../../tools/objectShapes";
 import QuizForm from "./QuizForm";
 import { getQuizForEdit, saveQuiz } from "../../../api/quizApi";
 import { Redirect } from "react-router-dom";
+import { values } from "lodash";
+import { getTags } from "../../../api/tagsApi";
 
 const QuizManagementPage = ({ quizId, userId ,history }) => {
     const [quiz, setQuiz] = useState(newQuiz);
+    const [tags, setTags] = useState(null);
     const [errors, setErrors] = useState({questions: []});
     const [saving, setSaving] = useState(false);
 
     useEffect(() => {
         if (quizId) {
           getQuizForEdit(quizId).then(data => {
+            data.tags = data.tags.map(tag => {
+                return {value: tag.id, text: tag.name}
+            });
             setQuiz({ ...data})
           }).catch(error => {
               console.log(error);
@@ -23,12 +29,39 @@ const QuizManagementPage = ({ quizId, userId ,history }) => {
         }
       }, [quizId]);
 
+      useEffect(() => {
+        if (!tags) {
+          getTags().then(data => {
+              setTags(data.map(tag => {
+                  return {value: tag.id, text: tag.name}
+              }));
+          }).catch(error => {
+              console.log(error);
+          })
+        }
+      }, tags);
+
     function handleChange(event) {
         const { name, value } = event.target;
 
         setQuiz(prevQuiz => ({
             ...prevQuiz,
             [name]: value
+        }));
+    }
+
+    function handleTagChange(event){
+        var options = event.target.options;
+        var value = [];
+        for (var i = 0, l = options.length; i < l; i++) {
+            if (options[i].selected) {
+            value.push(Number(options[i].value));
+            }
+        }
+
+        setQuiz(prevQuiz => ({
+            ...prevQuiz,
+            'tags': value
         }));
     }
 
@@ -151,11 +184,14 @@ const QuizManagementPage = ({ quizId, userId ,history }) => {
     return (
         <div className="quiz-management-page">
             {quiz.creator_id && quiz.creator_id != userId &&  <Redirect to="/" />}
-            <QuizForm  quiz={quiz}
+            <QuizForm  
+            quiz={quiz}
+            tags={tags}
             errors={errors}
             onAddQuestion={handleAddQuestion}
             onAddAnswer={handleAddAnswer}
             onChange={handleChange}
+            onTagChange={handleTagChange}
             onQuestionChange={handleQuestionChange}
             onAnswerChange={handleAnswerChange}
             onAnswerCheckboxChange={handleAnswerCheckboxChange}
