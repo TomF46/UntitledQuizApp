@@ -10,6 +10,18 @@
 
 @import "tailwindcss/utilities";
 
+body {
+    background-color: #f9f9f9;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+.pageHeader {
+    padding-bottom: 0.6rem;
+    border-bottom: 1px solid #dedede;
+}
 nav {
     z-index: 999;
 }

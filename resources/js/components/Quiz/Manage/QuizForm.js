@@ -3,10 +3,10 @@ import PropTypes from "prop-types";
 import TextInput from "../../FormComponents/TextInput";
 import CheckboxInput from "../../FormComponents/CheckboxInput";
 
-const QuizForm = ({ quiz, onAddQuestion, onAddAnswer , onSave, onChange, onQuestionChange, onAnswerChange, onAnswerCheckboxChange ,saving = false, errors = {} }) => {
+const QuizForm = ({ quiz, onAddQuestion, onAddAnswer , onSave, onChange, onQuestionChange, onAnswerChange, onAnswerCheckboxChange, onReset, onRemoveQuestion, onRemoveAnswer ,saving = false, errors = {} }) => {
     return (
         <form className="" onSubmit={onSave}>
-            <h2 className="font-bold text-4xl my-4 text-center">{quiz.id ? "Edit" : "Add"} Quiz</h2>
+            <h2 className="font-bold text-4xl my-4 text-center pageHeader">{quiz.id ? "Edit" : "Add"} Quiz</h2>
             {errors.onSave && (
                 <div className="text-red-500 text-xs" role="alert">
                     {errors.onSave}
@@ -30,7 +30,7 @@ const QuizForm = ({ quiz, onAddQuestion, onAddAnswer , onSave, onChange, onQuest
                     error={errors.description}
                 />
             </div>
-            <p>Questions</p>
+            {quiz.questions.length > 0 &&  <h2 className="font-bold text-3xl my-4 text-center pageHeader">Questions</h2>}
             {/* Todo sort out error handling for nested items */}
             {quiz.questions.map((row, index) => {
               return (
@@ -43,7 +43,7 @@ const QuizForm = ({ quiz, onAddQuestion, onAddAnswer , onSave, onChange, onQuest
                             onChange={(e) => onQuestionChange(index, e)}
                         />
                     </div>
-                    <p>Answers:</p>
+                    {quiz.questions[index].answers.length > 0 &&  <h2 className="font-bold text-lg my-2">Answers:</h2>}
                     {quiz.questions[index].answers.map((row, qIndex) => {
               return (
                 <div className="mb-6">
@@ -53,29 +53,42 @@ const QuizForm = ({ quiz, onAddQuestion, onAddAnswer , onSave, onChange, onQuest
                         value={quiz.questions[index].answers[qIndex].text}
                         onChange={(e) => onAnswerChange(index, qIndex ,e)}
                     />
-                    <CheckboxInput
-                        name={`questions[${index}].answers[${qIndex}].is_correct`}
-                        label="Is correct answer?"
-                        value={quiz.questions[index].answers[qIndex].is_correct}
-                        onChange={(e) => onAnswerCheckboxChange(index, qIndex ,e)}
-                    />
+                        <CheckboxInput
+                            name={`questions[${index}].answers[${qIndex}].is_correct`}
+                            label="Is correct answer?"
+                            value={quiz.questions[index].answers[qIndex].is_correct}
+                            checked={quiz.questions[index].answers[qIndex].is_correct}
+                            onChange={(e) => onAnswerCheckboxChange(index, qIndex ,e)}
+                        />
+                        <p className="block text-red-400 font-bold pointer" onClick={() => onRemoveAnswer(index, qIndex)}>Remove Answer</p>
                 </div>
               )
                     })}
-                    <div>
-                        <button
-                        type="button"
-                        onClick={() => onAddAnswer(index)}
-                        className="bg-purple-400 text-white rounded py-2 px-4 hover:bg-purple-500"
-                    >
-                        Add Answer
-                    </button>
-                    </div>
                     {errors.questions[index] && errors.questions[index].error && (
                         <div className="text-red-500 text-xs" role="alert">
                             {errors.questions[index].error}
                         </div>
                     )}
+                    <div id="manage-quiz-toolbar" className="p-4 rounded overflow-hidden shadow-lg mb-4 flex justify-between items-center">
+                        <div className="flex">
+                            <button
+                                type="button"
+                                onClick={() => onAddAnswer(index)}
+                                className="bg-purple-400 text-white rounded py-2 px-4 hover:bg-purple-500"
+                            >
+                                Add Answer
+                            </button>
+                        </div>
+                        <div className="flex justify-right">
+                        <button
+                            type="button"
+                            onClick={() => onRemoveQuestion(index)}
+                            className="bg-red-400 text-white rounded py-2 px-4 hover:bg-red-500"
+                        >
+                            Remove question
+                        </button>
+                        </div>
+                    </div>
                   </div>
               )
             })}
@@ -84,23 +97,32 @@ const QuizForm = ({ quiz, onAddQuestion, onAddAnswer , onSave, onChange, onQuest
                     {errors.onSave}
                 </div>
             )}
-            <div className="flex justify-center mb-6">
-                <button
-                    type="button"
-                    onClick={onAddQuestion}
-                    className="bg-purple-400 text-white rounded py-2 px-4 hover:bg-purple-500"
-                >
-                    Add question
-                </button>
-            </div>
-            <div className="flex justify-center">
-                <button
-                    type="submit"
-                    disabled={saving}
-                    className="bg-purple-400 text-white rounded py-2 px-4 hover:bg-purple-500"
-                >
-                    {saving ? "Saving..." : "Save"}
-                </button>
+            <div id="manage-quiz-toolbar" className="p-4 rounded overflow-hidden shadow-lg mb-4 flex justify-between items-center">
+                <div className="flex">
+                    <button
+                        type="button"
+                        onClick={onAddQuestion}
+                        className="bg-purple-400 text-white rounded py-2 px-4 hover:bg-purple-500"
+                    >
+                        Add question
+                    </button>
+                </div>
+                <div className="flex justify-right">
+                    <button
+                        type="button"
+                        onClick={onReset}
+                        className="bg-red-400 text-white rounded py-2 px-4 hover:bg-red-500 mr-2"
+                    >
+                        Reset
+                    </button>
+                    <button
+                        type="submit"
+                        disabled={saving}
+                        className="bg-purple-400 text-white rounded py-2 px-4 hover:bg-purple-500"
+                    >
+                        {saving ? "Saving..." : "Save"}
+                    </button>
+                </div>
             </div>
         </form>
     );
@@ -116,6 +138,9 @@ QuizForm.propTypes = {
     onQuestionChange: PropTypes.func.isRequired,
     onAnswerChange: PropTypes.func.isRequired,
     onAnswerCheckboxChange: PropTypes.func.isRequired,
+    onReset: PropTypes.func.isRequired,
+    onRemoveQuestion: PropTypes.func.isRequired,
+    onRemoveAnswer: PropTypes.func.isRequired,
     saving: PropTypes.bool
 };
 

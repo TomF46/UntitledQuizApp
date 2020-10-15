@@ -51,7 +51,7 @@ const RegisterForm = ({
             <div className="mb-6">
                 <PasswordInput
                     name="password_confirmation"
-                    label="Email"
+                    label="Password confirmation"
                     value={user.password_confirmation}
                     onChange={onChange}
                     error={errors.password_confirmation}

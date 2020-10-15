@@ -39,6 +39,9 @@ const QuizManagementPage = ({ history }) => {
         const { name, checked } = event.target;
 
         let tempQuiz = { ...quiz};
+        tempQuiz.questions[index].answers.forEach(answer => {
+            answer.is_correct = false;
+        });
         tempQuiz.questions[index].answers[answerIndex].is_correct = Boolean(checked);
         setQuiz({ ...tempQuiz});
     }
@@ -48,8 +51,6 @@ const QuizManagementPage = ({ history }) => {
         const errors = {questions: []};
         let isValid = true;
 
-
-
         if (!title){
             errors.title = "Title is required";
             isValid = false;
@@ -58,8 +59,6 @@ const QuizManagementPage = ({ history }) => {
             errors.title = "Title is required";
             isValid = false;
         }
-
-        console.log(quiz);
 
         quiz.questions.forEach((question, index) => {
             let questionErrorMessage = "";
@@ -104,13 +103,33 @@ const QuizManagementPage = ({ history }) => {
         setQuiz({ ...tempQuiz});
         let tempErrors = { ...errors};
         tempErrors.questions.push({});
-        console.log(tempErrors);
         setErrors({ ...tempErrors});
     }
 
     function handleAddAnswer(questionIndex){
         let tempQuiz = { ...quiz};
         tempQuiz.questions[questionIndex].answers.push(JSON.parse(JSON.stringify(newAnswer)));
+        setQuiz({ ...tempQuiz});
+    }
+
+    function handleReset(){
+        //confirm
+        let replacementQuiz = { ...newQuiz};
+        replacementQuiz.questions = [];
+        setQuiz({ ...replacementQuiz});
+    }
+
+    function handleRemoveQuestion(questionIndex){
+        //confirm
+        let tempQuiz = { ...quiz};
+        tempQuiz.questions.splice(questionIndex, 1);
+        setQuiz({ ...tempQuiz});
+    }
+
+    function handleRemoveAnswer(questionIndex, answerIndex)
+    {
+        let tempQuiz = { ...quiz};
+        tempQuiz.questions[questionIndex].answers.splice(answerIndex, 1);
         setQuiz({ ...tempQuiz});
     }
 
@@ -124,7 +143,10 @@ const QuizManagementPage = ({ history }) => {
             onQuestionChange={handleQuestionChange}
             onAnswerChange={handleAnswerChange}
             onAnswerCheckboxChange={handleAnswerCheckboxChange}
+            onReset={handleReset}
             onSave={handleSave}
+            onRemoveQuestion={handleRemoveQuestion}
+            onRemoveAnswer={handleRemoveAnswer}
             saving={saving} />
         </div>
     );

@@ -36,7 +36,7 @@ const ProfilePage = ({ userId,history, ...props }) => {
             ) : (
                 <>
                 <div>
-                    <h2 className="font-bold text-3xl text-center">
+                    <h2 className="font-bold text-4xl my-4 text-center pageHeader">
                         {user.profile.username}
                     </h2>
                     <p className="text-center">{user.profile.email}</p>

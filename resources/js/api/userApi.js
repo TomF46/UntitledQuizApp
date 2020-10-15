@@ -1,12 +1,15 @@
 import axiosClient from "../tools/axiosClient";
 
 export function getCurrentUser() {
+    console.log("In get current user");
     return axiosClient
         .get("/api/auth/user")
         .then(response => {
+            console.log(response);
             return response.data;
         })
         .catch(error => {
+            console.log(error);
             throw error;
         });
 }

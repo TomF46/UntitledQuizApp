@@ -10,7 +10,6 @@ const ExplorePage = ({ history }) => {
         if(!quizzes) {
             getQuizzes().then(quizzesData => {
                 setQuizzes(quizzesData);
-                console.log(quizzesData);
             }).catch(error => {
                 console.log("Error getting quizzes " + error);
             });
@@ -23,7 +22,7 @@ const ExplorePage = ({ history }) => {
                 <p>... loading quizzes to explore</p>
             ) : (
             <div className="mt-6">
-                <h1 className="font-bold text-2xl mb-4 text-center">Explore</h1>
+                <h1 className="font-bold text-4xl my-4 text-center pageHeader">Explore</h1>
                 <QuizList quizzes={quizzes} />
             </div>
             )}
