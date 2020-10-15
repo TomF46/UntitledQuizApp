@@ -1,8 +1,23 @@
 import axiosClient from "../tools/axiosClient";
 
 export function saveQuiz(quiz) {
+    return quiz.id ? editQuiz(quiz) : createQuiz(quiz);
+}
+
+function editQuiz(quiz){
     return axiosClient
-        .post("/api/quiz", quiz)
+        .put(`/api/quiz/${quiz.id}`, quiz)
+        .then(response => {
+            return response.data;
+        })
+        .catch(error => {
+            throw error;
+        });
+}
+
+function createQuiz(quiz){
+    return axiosClient
+        .post('/api/quiz', quiz)
         .then(response => {
             return response.data;
         })

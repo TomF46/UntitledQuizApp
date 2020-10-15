@@ -1,14 +1,27 @@
 import React, { useEffect, useState } from "react";
+import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { newAnswer, newQuestion, newQuiz } from "../../../tools/objectShapes";
 import QuizForm from "./QuizForm";
-import { saveQuiz } from "../../../api/quizApi";
-import { error } from "jquery";
+import { getQuiz, saveQuiz } from "../../../api/quizApi";
 
-const QuizManagementPage = ({ history }) => {
+const QuizManagementPage = ({ quizId ,history }) => {
     const [quiz, setQuiz] = useState(newQuiz);
     const [errors, setErrors] = useState({questions: []});
     const [saving, setSaving] = useState(false);
+
+    useEffect(() => {
+        if (quizId) {
+          getQuiz(quizId).then(data => {
+            setQuiz({ ...data})
+          }).catch(error => {
+              console.log(error);
+          })
+        } else {
+          console.log("Use default");
+          setQuiz({ ...newQuiz})
+        }
+      }, [quizId]);
 
     function handleChange(event) {
         const { name, value } = event.target;
@@ -153,7 +166,16 @@ const QuizManagementPage = ({ history }) => {
 };
 
 QuizManagementPage.propTypes = {
+    quizId: PropTypes.any,
     history: PropTypes.object.isRequired
 };
 
-export default QuizManagementPage;
+const mapStateToProps = (state, ownProps) => {
+    const quizId = ownProps.match.params.quizId;
+    return {
+      quizId
+    };
+  };
+  
+  export default connect(mapStateToProps)(QuizManagementPage);
+  
