@@ -18,6 +18,22 @@ body {
     cursor: pointer;
 }
 
+.home-page {
+    background-color: #9f7aea;
+    position: fixed;
+    top: 0;
+    left: 0;
+    min-width: 100vw;
+    min-height: 100vh;
+    z-index: -999;
+    .logo {
+        position: absolute;
+        top: 50%;
+        right: 50%;
+        transform: translate(50%, -50%);
+    }
+}
+
 .pageHeader {
     padding-bottom: 0.6rem;
     border-bottom: 1px solid #dedede;

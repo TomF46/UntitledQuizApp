@@ -1,10 +1,15 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 
 const HomePage = ({ history }) => {
     return (
         <div className="home-page">
-            <p>Hello world</p>
+            <h1 className="font-bold text-6xl text-white logo">
+                <Link to="login">
+                  Untitled Quiz App.... Enter
+                </Link>
+            </h1>
         </div>
     );
 };
