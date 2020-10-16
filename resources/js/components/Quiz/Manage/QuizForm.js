@@ -14,7 +14,7 @@ const QuizForm = ({ quiz, tags, onAddQuestion, onAddAnswer , onSave, onChange, o
                     {errors.onSave}
                 </div>
             )}
-            <div className="p-4 rounded overflow-hidden shadow-lg card card">
+            <div className="p-4 rounded overflow-hidden shadow-lg card overflow-visible">
                 <div className="mb-6">
                     <TextInput
                         name="title"

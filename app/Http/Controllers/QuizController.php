@@ -132,6 +132,8 @@ class QuizController extends Controller
 
         $quiz->update($attributes);
 
+        $quiz->tags()->sync($attributes['tags']);
+
         $quiz->questions()->delete();
 
         $quiz->questions()->saveMany($questions);

@@ -36,3 +36,23 @@ nav {
 .card {
     background-color: #fff;
 }
+
+.overflow-visible {
+    overflow: visible;
+}
+
+#multiselectContainerReact {
+    min-width: 40%;
+    max-height: 100%;
+    .chip {
+        background: #b794f4;
+    }
+    .optionListContainer {
+        .optionContainer {
+            overflow-y: visible;
+            .option {
+                padding: 2px;
+            }
+        }
+    }
+}

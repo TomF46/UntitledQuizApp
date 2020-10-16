@@ -21263,6 +21263,27 @@ nav {
   background-color: #fff;
 }
 
+.overflow-visible {
+  overflow: visible;
+}
+
+#multiselectContainerReact {
+  min-width: 40%;
+  max-height: 100%;
+}
+
+#multiselectContainerReact .chip {
+  background: #b794f4;
+}
+
+#multiselectContainerReact .optionListContainer .optionContainer {
+  overflow-y: visible;
+}
+
+#multiselectContainerReact .optionListContainer .optionContainer .option {
+  padding: 2px;
+}
+
 @media (min-width: 640px){
   .sm\:container{
     width: 100%;

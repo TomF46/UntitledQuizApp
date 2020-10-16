@@ -30,6 +30,7 @@
         "sass-loader": "^8.0.0"
     },
     "dependencies": {
+        "multiselect-react-dropdown": "^1.6.1",
         "tailwindcss": "^1.8.10"
     }
 }

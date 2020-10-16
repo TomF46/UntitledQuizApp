@@ -13,6 +13,8 @@ const QuizManagementPage = ({ quizId, userId ,history }) => {
     const [tags, setTags] = useState(null);
     const [errors, setErrors] = useState({questions: []});
     const [saving, setSaving] = useState(false);
+    const [loaded, setLoaded] = useState(false);
+
 
     useEffect(() => {
         if (quizId) {
@@ -21,11 +23,14 @@ const QuizManagementPage = ({ quizId, userId ,history }) => {
                 return {value: tag.id, text: tag.name}
             });
             setQuiz({ ...data})
+            setLoaded(true);
           }).catch(error => {
               console.log(error);
+
           })
         } else {
           setQuiz({ ...newQuiz})
+          setLoaded(true);
         }
       }, [quizId]);
 
@@ -50,18 +55,10 @@ const QuizManagementPage = ({ quizId, userId ,history }) => {
         }));
     }
 
-    function handleTagChange(event){
-        var options = event.target.options;
-        var value = [];
-        for (var i = 0, l = options.length; i < l; i++) {
-            if (options[i].selected) {
-            value.push(Number(options[i].value));
-            }
-        }
-
+    function handleTagChange(selected){
         setQuiz(prevQuiz => ({
             ...prevQuiz,
-            'tags': value
+            'tags': selected
         }));
     }
 
@@ -133,7 +130,11 @@ const QuizManagementPage = ({ quizId, userId ,history }) => {
         if (!formIsValid()) return;
         setSaving(true);
 
-        saveQuiz(quiz).then(response => {
+        let quizToPost = { ...quiz};
+
+        quizToPost.tags = quizToPost.tags.map(tag => tag.value);
+
+        saveQuiz(quizToPost).then(response => {
             history.push(`/quiz/${response.id}`);
         })
         .catch(err => {
@@ -184,6 +185,7 @@ const QuizManagementPage = ({ quizId, userId ,history }) => {
     return (
         <div className="quiz-management-page">
             {quiz.creator_id && quiz.creator_id != userId &&  <Redirect to="/" />}
+            {loaded && (
             <QuizForm  
             quiz={quiz}
             tags={tags}
@@ -200,6 +202,7 @@ const QuizManagementPage = ({ quizId, userId ,history }) => {
             onRemoveQuestion={handleRemoveQuestion}
             onRemoveAnswer={handleRemoveAnswer}
             saving={saving} />
+            )}
         </div>
     );
 };
