@@ -53,6 +53,11 @@ class UsersController extends Controller
         ]);
     }
 
+    public function quizzes(User $user)
+    {
+        return response()->json($user->quizzes()->latest()->get());
+    }
+
     /**
      * Show the form for editing the specified resource.
      *

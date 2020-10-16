@@ -91,3 +91,14 @@ export function deleteQuiz(quizId){
         throw error;
     });
 }
+
+export function getQuizzesByUser(userId){
+    return axiosClient
+    .get(`/api/users/${userId}/quizzes`)
+    .then(response => {
+        return response.data;
+    })
+    .catch(error => {
+        throw error;
+    });
+}

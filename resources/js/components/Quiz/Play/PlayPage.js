@@ -9,7 +9,6 @@ import { toast } from "react-toastify";
 const QuizPlayPage = ({quizId ,history }) => {
     const [quiz, setQuiz] = useState(null);
     const [submission, setSubmission] = useState(null);
-    const [submitted, setSubmitted] = useState(false);
     const [score, setScore] = useState(null)
     const [errors, setErrors] = useState({});
 
@@ -66,7 +65,6 @@ const QuizPlayPage = ({quizId ,history }) => {
         if (!submissionIsValid()) return;
 
         submitScore(quiz.id, submission).then(response => {
-            setSubmitted(true);
             setScore({ ...response});
         }).catch(error => {
             console.log("Unable to submit " + error);
@@ -79,7 +77,6 @@ const QuizPlayPage = ({quizId ,history }) => {
 
     function handleReplay(){
         createBlankSubmission(quiz);
-        setSubmitted(false);
         setScore(null);
     }
 

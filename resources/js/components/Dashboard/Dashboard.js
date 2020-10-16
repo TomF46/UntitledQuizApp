@@ -3,6 +3,8 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { getUserById } from "../../api/userApi";
 import { toast } from "react-toastify";
+import QuizDashboard from "./Components/QuizDashboard";
+import ScoreDashboard from "./Components/ScoreDashboard";
 
 const DashboardPage = ({userId, history }) => {
     const [user, setUser] = useState(null);
@@ -11,7 +13,7 @@ const DashboardPage = ({userId, history }) => {
         if(!user) {
             getUserById(userId).then(userData => {
                 setUser(userData);
-                getUserScores(userData.profile.id);
+                // getUserScores(userData.profile.id);
             }).catch(error => {
                 console.log("Error getting user " + error);
                 toast.error("Error getting user " + error.message,{
@@ -26,8 +28,15 @@ const DashboardPage = ({userId, history }) => {
             {user == null ? (
                 <p>...Loading Dashboard</p>
             ) : (
-            <h1 className="font-bold text-4xl my-4">Welcome {user.profile.username}</h1>
-            //Plan whats going here
+            <div>
+                <h1 className="font-bold text-4xl my-4">Welcome {user.profile.username}</h1>
+                <div className="p-4 rounded overflow-hidden shadow-lg card card mb-4">
+                    <QuizDashboard user={user} />
+                </div>
+                <div className="p-4 rounded overflow-hidden shadow-lg card card mb-4">
+                    <ScoreDashboard user={user} />
+                </div>
+            </div>
             )}
         </div>
     );
