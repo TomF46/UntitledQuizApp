@@ -5,8 +5,9 @@ import { newAnswer, newQuestion, newQuiz } from "../../../tools/objectShapes";
 import QuizForm from "./QuizForm";
 import { getQuizForEdit, saveQuiz } from "../../../api/quizApi";
 import { Redirect } from "react-router-dom";
-import { values } from "lodash";
 import { getTags } from "../../../api/tagsApi";
+import { confirmAlert } from "react-confirm-alert";
+import { toast } from "react-toastify";
 
 const QuizManagementPage = ({ quizId, userId ,history }) => {
     const [quiz, setQuiz] = useState(newQuiz);
@@ -26,7 +27,9 @@ const QuizManagementPage = ({ quizId, userId ,history }) => {
             setLoaded(true);
           }).catch(error => {
               console.log(error);
-
+              toast.error("Error fetching quiz to edit " + error.message,{
+                    autoClose: false,
+                });
           })
         } else {
           setQuiz({ ...newQuiz})
@@ -135,11 +138,15 @@ const QuizManagementPage = ({ quizId, userId ,history }) => {
         quizToPost.tags = quizToPost.tags.map(tag => tag.value);
 
         saveQuiz(quizToPost).then(response => {
+            toast.success("Quiz saved");
             history.push(`/quiz/${response.id}`);
         })
         .catch(err => {
             console.log(err);
             setSaving(false);
+            toast.error("Error saving quiz",{
+                autoClose: false,
+            });
             let tempErrors = { ...errors};
             tempErrors.onSave = err.message;
             setErrors({... tempErrors});
@@ -162,24 +169,67 @@ const QuizManagementPage = ({ quizId, userId ,history }) => {
     }
 
     function handleReset(){
-        //confirm
-        let replacementQuiz = { ...newQuiz};
-        replacementQuiz.questions = [];
-        setQuiz({ ...replacementQuiz});
+        confirmAlert({
+            title: "Confirm reset",
+            message: `Are you sure you want to rest?`,
+            buttons: [
+              {
+                label: "Yes",
+                onClick: () => {
+                    let replacementQuiz = { ...newQuiz};
+                    replacementQuiz.questions = [];
+                    setQuiz({ ...replacementQuiz});
+                },
+              },
+              {
+                label: "No",
+                onClick: () => {},
+              },
+            ],
+          });
     }
 
     function handleRemoveQuestion(questionIndex){
-        //confirm
-        let tempQuiz = { ...quiz};
-        tempQuiz.questions.splice(questionIndex, 1);
-        setQuiz({ ...tempQuiz});
+        confirmAlert({
+            title: "Confirm removal",
+            message: `Are you sure you want to remove this question?`,
+            buttons: [
+              {
+                label: "Yes",
+                onClick: () => {
+                    let tempQuiz = { ...quiz};
+                    tempQuiz.questions.splice(questionIndex, 1);
+                    setQuiz({ ...tempQuiz});
+                },
+              },
+              {
+                label: "No",
+                onClick: () => {},
+              },
+            ],
+          });
     }
 
     function handleRemoveAnswer(questionIndex, answerIndex)
     {
-        let tempQuiz = { ...quiz};
-        tempQuiz.questions[questionIndex].answers.splice(answerIndex, 1);
-        setQuiz({ ...tempQuiz});
+        confirmAlert({
+            title: "Confirm removal",
+            message: `Are you sure you want to remove this answer?`,
+            buttons: [
+              {
+                label: "Yes",
+                onClick: () => {
+                    let tempQuiz = { ...quiz};
+                    tempQuiz.questions[questionIndex].answers.splice(answerIndex, 1);
+                    setQuiz({ ...tempQuiz});
+                },
+              },
+              {
+                label: "No",
+                onClick: () => {},
+              },
+            ],
+        });
     }
 
     return (

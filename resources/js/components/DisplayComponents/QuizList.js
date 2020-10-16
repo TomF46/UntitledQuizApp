@@ -11,6 +11,16 @@ const QuizList = ({ quizzes }) => {
                         <div>
                             <h3 className="font-bold text-lg items-center">{quiz.title}</h3>
                             <p>{quiz.description}</p>
+                            {quiz.tags && quiz.tags.length > 0 && (
+                                <ul className="tagList">
+                                    <li>Tags:</li>
+                                    {quiz.tags.map((tag) => {
+                                        return (
+                                            <li key={tag.id}>{tag.name}</li>
+                                        )
+                                    })}
+                                </ul>
+                            )}
                         </div>
                         <div className="flex justify-right mb-2">
                             <Link

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { getUserById } from "../../api/userApi";
+import { toast } from "react-toastify";
 
 const DashboardPage = ({userId, history }) => {
     const [user, setUser] = useState(null);
@@ -13,6 +14,9 @@ const DashboardPage = ({userId, history }) => {
                 getUserScores(userData.profile.id);
             }).catch(error => {
                 console.log("Error getting user " + error);
+                toast.error("Error getting user " + error.message,{
+                    autoClose: false,
+                });
             });
         }
     }, [userId, user])

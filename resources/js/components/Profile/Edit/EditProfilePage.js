@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import {getUserForEditing, editUserProfile } from "../../../api/userApi"
 import EditProfileForm from "./EditProfileForm";
+import { toast } from "react-toastify";
 
 const EditProfilePage = ({userId, history }) => {
     const [user, setUser] = useState(null);
@@ -16,6 +17,9 @@ const EditProfilePage = ({userId, history }) => {
                 setUser(userData);
             }).catch(error => {
                 console.log("Error getting user " + error);
+                toast.error("Error getting user " + error.message,{
+                    autoClose: false,
+                });
             });
         }
     }, [userId, user])
@@ -43,9 +47,13 @@ const EditProfilePage = ({userId, history }) => {
         setSaving(true);
         
         editUserProfile(userId, user).then(response => {
+            toast.success("Profile updated!")
             history.push("/profile")
         }).catch(error => {
             console.log(error);
+            toast.error("Error updating profile " + error.message,{
+                autoClose: false,
+            });
         })
     }
 

@@ -5,6 +5,7 @@ import Main from "./components/App";
 import configureStore from "./redux/configureStore";
 import { Provider as ReduxProvider } from "react-redux";
 import { render } from "react-dom";
+import "react-confirm-alert/src/react-confirm-alert.css";
 
 const store = configureStore();
 

@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { getScoresForUser, getUserById } from "../../api/userApi";
 import ScoresTable from "../DisplayComponents/ScoresTable";
 import QuizList from "../DisplayComponents/QuizList";
+import { toast } from "react-toastify";
 
 const ProfilePage = ({ userId, currentUser, history, ...props }) => {
     const [user, setUser] = useState(null);
@@ -16,6 +17,9 @@ const ProfilePage = ({ userId, currentUser, history, ...props }) => {
                 getUserScores(userData.profile.id);
             }).catch(error => {
                 console.log("Error getting user " + error);
+                toast.error("Error getting user " + error.message,{
+                    autoClose: false,
+                });
             });
         }
     }, [userId, user])
@@ -24,7 +28,10 @@ const ProfilePage = ({ userId, currentUser, history, ...props }) => {
         getScoresForUser(id).then(scoreData => {
             setScores(scoreData);
         }).catch(error => {
-            console.log("Error getting user " + error);
+            console.log("Error getting user scores" + error);
+            toast.error("Error getting user scores " + error.message,{
+                autoClose: false,
+            });
         });
     }
 

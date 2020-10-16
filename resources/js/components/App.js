@@ -1,5 +1,8 @@
 import React from "react";
-import { BrowserRouter, Link, Route, Switch } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 import AuthenticatedRoute from "../AuthenticatedRoute";
 import Home from "./Home/Home";
 import Login from "./Authentication/Login/LoginPage";
@@ -63,6 +66,7 @@ const Main = props => (
                 </Switch>
             </div>
         </div>
+        <ToastContainer autoClose={3000} hideProgressBar />
     </>
 );
 export default Main;

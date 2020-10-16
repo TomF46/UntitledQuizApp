@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { getQuizzes } from "../../api/quizApi";
 import QuizList from "../DisplayComponents/QuizList";
+import { toast } from "react-toastify";
 
 const ExplorePage = ({ history }) => {
     const [quizzes, setQuizzes] = useState(null);
@@ -12,6 +13,9 @@ const ExplorePage = ({ history }) => {
                 setQuizzes(quizzesData);
             }).catch(error => {
                 console.log("Error getting quizzes " + error);
+                toast.error("Error getting quizzes " + error.message,{
+                    autoClose: false,
+                });
             });
         }
     }, [quizzes])

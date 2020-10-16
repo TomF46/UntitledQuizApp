@@ -80,3 +80,14 @@ export function getScoresForQuiz(quizId){
         throw error;
     });
 }
+
+export function deleteQuiz(quizId){
+    return axiosClient
+    .delete(`/api/quiz/${quizId}`)
+    .then(response => {
+        return response.data;
+    })
+    .catch(error => {
+        throw error;
+    });
+}

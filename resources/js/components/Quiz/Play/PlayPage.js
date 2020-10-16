@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { getQuiz, submitScore } from "../../../api/quizApi";
 import QuizPlayForm from "./QuizPlayForm";
 import ScoreDetail from "./ScoreDetail";
-import { error } from "jquery";
+import { toast } from "react-toastify";
 
 const QuizPlayPage = ({quizId ,history }) => {
     const [quiz, setQuiz] = useState(null);
@@ -22,6 +22,9 @@ const QuizPlayPage = ({quizId ,history }) => {
                 createBlankSubmission(quizData);
             }).catch(error => {
                 console.log("Error getting quiz " + error);
+                toast.error("Error getting quiz " + error.message,{
+                    autoClose: false,
+                });
             });
         }
     }, [quizId, quiz])
@@ -67,6 +70,9 @@ const QuizPlayPage = ({quizId ,history }) => {
             setScore({ ...response});
         }).catch(error => {
             console.log("Unable to submit " + error);
+            toast.error("Unable to submit " + error.message,{
+                autoClose: false,
+            });
             setErrors({ onSubmit: error.message });
         })
     }

@@ -18,7 +18,9 @@ const QuizDetail = ({ quiz, scores }) => {
             </div>
             <div>
                 <h2 className="font-bold text-2xl mb-4 text-center">Scores</h2>
-                <ScoresTable scores={scores} />
+                <div className="p-4 rounded overflow-hidden shadow-lg card card mb-4">
+                    <ScoresTable scores={scores} />
+                </div>
             </div>
         </div>
     );

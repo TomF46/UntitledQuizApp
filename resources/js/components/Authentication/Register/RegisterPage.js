@@ -5,6 +5,7 @@ import { Register } from "../../../api/authenticationApi";
 import CenterFormCard from "../../DisplayComponents/CenterFormCard";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const RegisterPage = ({ userIsAuthenticated, history }) => {
     const [user, setUser] = useState({
@@ -46,6 +47,7 @@ const RegisterPage = ({ userIsAuthenticated, history }) => {
         setSaving(true);
         Register(user)
             .then(response => {
+                toast.success("Successfully registered");
                 history.push("/login");
             })
             .catch(err => {

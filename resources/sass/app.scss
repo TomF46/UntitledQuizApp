@@ -56,3 +56,24 @@ nav {
         }
     }
 }
+
+.tagList {
+    li {
+        display: inline-block;
+    }
+    li:not(:first-child) {
+        margin-left: 10px;
+    }
+}
+
+#react-confirm-alert {
+    .react-confirm-alert-overlay {
+        background-color: #b794f4;
+        .react-confirm-alert-button-group {
+            button {
+                background-color: #b794f4;
+                color: #fff;
+            }
+        }
+    }
+}
