@@ -8,7 +8,7 @@ const QuizList = ({ quizzes }) => {
         <div className="rounded overflow-hidden shadow-lg card mb-4">
             {quizzes.map((quiz) => {
                 return (
-                    <div key={quiz.id} className="grid grid-cols-5 p-4 border-b overflow-hidden flex justify-between items-center">
+                    <div key={quiz.id} className="grid grid-cols-5 p-4 border-b overflow-hidden">
                         <div>
                             <p className="text-small text-gray-600">Name:</p>
                             <h3 className="font-bold text-lg items-center">{quiz.title}</h3>

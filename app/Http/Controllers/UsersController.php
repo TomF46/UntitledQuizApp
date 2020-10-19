@@ -77,7 +77,23 @@ class UsersController extends Controller
 
     public function quizzes(User $user)
     {
-        return response()->json($user->quizzes()->latest()->get());
+        return response()->json($user->quizzes()->with('tags')->latest()->get()->map(function ($quiz) {
+            return [
+                'id' => $quiz->id,
+                'title' => $quiz->title,
+                'description' => $quiz->description,
+                'questionsCount' => count($quiz->questions),
+                'totalPlays' => count($quiz->scores),
+                'tags' => $quiz->tags()->get()->map(function ($tag) {
+                    return [
+                        'id' => $tag->id,
+                        'name' => $tag->name
+                    ];
+                }),
+                'creator' => $quiz->user->username,
+                'creator_id' => $quiz->user->id
+            ];
+        }));
     }
 
     /**

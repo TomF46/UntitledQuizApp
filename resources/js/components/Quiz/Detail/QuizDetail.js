@@ -7,7 +7,7 @@ const QuizDetail = ({ quiz, scores }) => {
     return (
         <div className="mt-6">
             <h1 className="font-bold text-2xl mb-4 text-center">{quiz.title}</h1>
-            <div className="rounded overflow-hidden shadow-lg card mb-4">
+            <div className="rounded overflow-hidden shadow-lg card mb-4 p-4">
                 <h3 className="text-lg font-bold text-center">Description</h3>
                 <p className="text-center">{quiz.description}</p>
                 {quiz.tags && quiz.tags.length > 0 && (

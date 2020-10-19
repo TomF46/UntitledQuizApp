@@ -27,45 +27,58 @@ const QuizDashboard = ({ user }) => {
                 <p>...Loading quiz dashboard</p>
             ) : (
             <div>
-                <div className="flex justify-center">
-            <table className="table-auto">
-                <thead>
-                    <tr>
-                    <th className="px-4 py-2">Title</th>
-                    <th className="px-4 py-2">Description</th>
-                    <th className="px-4 py-2"></th>
-                    <th className="px-4 py-2"></th>
-                    </tr>
-                </thead>
-                <tbody>
-                {quizzes.map((quiz, index) => {
-                    return (
-                        <tr key={quiz.index}>
-                        <td className="border px-4 py-2">{quiz.title}</td>
-                        <td className="border px-4 py-2">{quiz.description}</td>
-                        <td className="border px-4 py-2">
-                            <button
-                                type="button"
-                                className="bg-purple-400 text-white rounded py-2 px-4 hover:bg-purple-500"
+                {quizzes.map((quiz) => {
+                return (
+                    <div key={quiz.id} className="grid grid-cols-5 px-4 py-2 border-b overflow-hidden">
+                        <div>
+                            <p className="text-small text-gray-600">Name:</p>
+                            <h3 className="font-bold text-lg items-center">{quiz.title}</h3>
+                        </div>
+                        <div>
+                            <p className="text-small text-gray-600">Total Questions:</p>
+                            <p>{quiz.questionsCount} questions</p>
+                        </div>
+                        <div>
+                            <p className="text-small text-gray-600">Plays:</p>
+                            <p>{quiz.totalPlays}</p>
+                        </div>
+                        <div>
+                            <p className="text-small text-gray-600">Likes:</p>
+                            <p>120</p>
+                        </div>
+                        <div>
+                            <p className="text-small text-gray-600">Actions:</p>
+                            <Link
+                                to={`/quiz/${quiz.id}/play`}
+                                className="text-center hover:text-purple-500 hover:underline"
+                            >
+                                Play
+                            </Link>
+                            <span> | </span>
+                            <Link
+                                to={`/quiz/${quiz.id}`}
+                                className="text-center hover:text-purple-500 hover:underline"
+                            >
+                                Details
+                            </Link>
+                            <span> | </span>
+                            <Link
+                                to={`/quiz/${quiz.id}/edit`}
+                                className="text-center hover:text-purple-500 hover:underline"
                             >
                                 Edit
-                            </button>
-                        </td>
-                        <td className="border px-4 py-2">
-                            <button
-                                type="button"
-                                
-                                className="bg-red-400 text-white rounded py-2 px-4 hover:bg-red-500"
+                            </Link>
+                            <span> | </span>
+                            <Link
+                                to={'/'}
+                                className="text-center hover:text-red-500 hover:underline"
                             >
                                 Delete
-                            </button>
-                        </td>
-                        </tr>
-                    )
-                })}
-                </tbody>
-                </table>
-        </div>
+                            </Link>
+                        </div>
+                    </div>
+                )
+            })}
             </div>
             )}
         </div>

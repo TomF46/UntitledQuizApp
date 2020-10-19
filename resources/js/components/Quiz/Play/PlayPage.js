@@ -11,6 +11,7 @@ const QuizPlayPage = ({quizId ,history }) => {
     const [submission, setSubmission] = useState(null);
     const [score, setScore] = useState(null)
     const [errors, setErrors] = useState({});
+    const [currentQuestionNumber, setcurrentQuestionNumber] = useState(1);
 
 
 
@@ -80,12 +81,22 @@ const QuizPlayPage = ({quizId ,history }) => {
         setScore(null);
     }
 
+    function handleNext(){
+        let nextQuestionNumber = currentQuestionNumber + 1;
+        setcurrentQuestionNumber(nextQuestionNumber);
+    }
+
+    function handlePrevious(){
+        let previousQuestionNumber = currentQuestionNumber - 1;
+        setcurrentQuestionNumber(previousQuestionNumber);
+    }
+
     return !submission ? (
         <p className="mt-6">... Loading quiz</p>
     ) : (
         !score ? (
             <div className="mt-6">
-                <QuizPlayForm quiz={quiz} submission={submission} onAnswerChange={handleAnswerChange} onSubmit={handleSubmit} onReset={handleReplay} errors={errors}/>
+                <QuizPlayForm quiz={quiz} submission={submission} onAnswerChange={handleAnswerChange} onSubmit={handleSubmit} onReset={handleReplay} currentQuestionNumber={currentQuestionNumber} onNext={handleNext} onPrevious={handlePrevious} errors={errors}/>
             </div>
         ) : (
             <div className="mt-6">

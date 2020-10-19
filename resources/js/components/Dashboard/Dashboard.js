@@ -30,10 +30,10 @@ const DashboardPage = ({userId, history }) => {
             ) : (
             <div>
                 <h1 className="font-bold text-4xl my-4">Welcome {user.profile.username}</h1>
-                <div className="p-4 rounded overflow-hidden shadow-lg card card mb-4">
+                <div className="rounded overflow-hidden shadow-lg card mb-4">
                     <QuizDashboard user={user} />
                 </div>
-                <div className="p-4 rounded overflow-hidden shadow-lg card card mb-4">
+                <div className="p-4 rounded overflow-hidden shadow-lg card mb-4">
                     <ScoreDashboard user={user} />
                 </div>
             </div>
