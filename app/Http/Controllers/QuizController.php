@@ -17,23 +17,23 @@ class QuizController extends Controller
      */
     public function index()
     {
-        return response()->json(Quiz::latest()->get()->map(function ($quiz) {
-            return [
-                'id' => $quiz->id,
-                'title' => $quiz->title,
-                'description' => $quiz->description,
-                'questionsCount' => count($quiz->questions),
-                'totalPlays' => count($quiz->scores),
-                'tags' => $quiz->tags()->get()->map(function ($tag) {
-                    return [
-                        'id' => $tag->id,
-                        'name' => $tag->name
-                    ];
-                }),
-                'creator' => $quiz->user->username,
-                'creator_id' => $quiz->user->id
-            ];
-        }));
+
+        $paginator = Quiz::latest()->paginate(10);
+        $paginator->getCollection()->transform(function ($quiz) {
+            $quiz->questionsCount = count($quiz->questions);
+            $quiz->totalPlays = count($quiz->scores);
+            $quiz->tags = $quiz->tags()->get()->map(function ($tag) {
+                return [
+                    'id' => $tag->id,
+                    'name' => $tag->name
+                ];
+            });
+            $quiz->creator = $quiz->user->username;
+            $quiz->creator_id = $quiz->user->id;
+            return $quiz;
+        });
+
+        return response()->json($paginator);
     }
 
     /**

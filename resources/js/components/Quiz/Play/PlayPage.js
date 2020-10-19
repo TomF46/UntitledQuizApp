@@ -92,14 +92,14 @@ const QuizPlayPage = ({quizId ,history }) => {
     }
 
     return !submission ? (
-        <p className="mt-6">... Loading quiz</p>
+        <p className="pt-6 overflow-hidden shadow-lg page">... Loading quiz</p>
     ) : (
         !score ? (
-            <div className="mt-6">
+            <div className="pt-6 overflow-hidden shadow-lg page">
                 <QuizPlayForm quiz={quiz} submission={submission} onAnswerChange={handleAnswerChange} onSubmit={handleSubmit} onReset={handleReplay} currentQuestionNumber={currentQuestionNumber} onNext={handleNext} onPrevious={handlePrevious} errors={errors}/>
             </div>
         ) : (
-            <div className="mt-6">
+            <div className="pt-6 overflow-hidden shadow-lg page">
                 <ScoreDetail score={score} onReplay={handleReplay}/>
             </div>
         )

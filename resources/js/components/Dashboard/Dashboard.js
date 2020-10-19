@@ -24,16 +24,16 @@ const DashboardPage = ({userId, history }) => {
     }, [userId, user])
 
     return (
-        <div className="dashboard-page">
+        <div className="dashboard-page overflow-hidden shadow-lg page">
             {user == null ? (
-                <p>...Loading Dashboard</p>
+                <p className="text-center">...Loading Dashboard</p>
             ) : (
             <div>
-                <h1 className="font-bold text-4xl my-4">Welcome {user.profile.username}</h1>
-                <div className="rounded overflow-hidden shadow-lg card mb-4">
+                <h1 className="font-bold text-4xl my-4 text-center">Welcome {user.profile.username}</h1>
+                <div className="mb-4">
                     <QuizDashboard user={user} />
                 </div>
-                <div className="p-4 rounded overflow-hidden shadow-lg card mb-4">
+                <div className="p-4  mb-4">
                     <ScoreDashboard user={user} />
                 </div>
             </div>

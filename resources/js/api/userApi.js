@@ -44,6 +44,17 @@ export function getScoresForUser(id) {
             throw error;
         });
 }
+export function getScoresWithPaginator(url) {
+    return axiosClient
+        .get(url)
+        .then(response => {
+            return response.data;
+        })
+        .catch(error => {
+            throw error;
+        });
+}
+
 
 export function editUserProfile(userId, profile){
     return axiosClient

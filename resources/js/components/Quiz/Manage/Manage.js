@@ -233,7 +233,7 @@ const QuizManagementPage = ({ quizId, userId ,history }) => {
     }
 
     return (
-        <div className="quiz-management-page">
+        <div className="quiz-management-page overflow-hidden shadow-lg page">
             {quiz.creator_id && quiz.creator_id != userId &&  <Redirect to="/" />}
             {loaded && (
             <QuizForm  

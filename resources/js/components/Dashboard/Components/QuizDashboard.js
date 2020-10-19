@@ -1,17 +1,18 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import { getQuizzesByUser } from "../../../api/quizApi";
+import { getQuizzesByUser, getQuizzesWithPagination } from "../../../api/quizApi";
 import { toast } from "react-toastify";
+import PaginationControls from "../../DisplayComponents/PaginationControls";
 
 const QuizDashboard = ({ user }) => {
-    const [quizzes, setQuizzes] = useState(null);
+    const [quizzesPaginator, setQuizzesPaginator] = useState(null);
+    
 
     useEffect(() => {
-        if(!quizzes) {
+        if(!quizzesPaginator) {
             getQuizzesByUser(user.profile.id).then(quizzesData => {
-                console.log(quizzesData);
-                setQuizzes(quizzesData);
+                setQuizzesPaginator(quizzesData);
             }).catch(error => {
                 console.log("Error getting quizzes " + error);
                 toast.error("Error getting quizzes " + error.message,{
@@ -19,35 +20,58 @@ const QuizDashboard = ({ user }) => {
                 });
             });
         }
-    }, [quizzes])
+    }, [quizzesPaginator])
+
+    function handleNext(){
+        getQuizzesWithPagination(quizzesPaginator.next_page_url).then(quizzesData => {
+            console.log(quizzesData);
+            setQuizzesPaginator(quizzesData);
+        }).catch(error => {
+            console.log("Error getting quizzes " + error);
+            toast.error("Error getting quizzes " + error.message,{
+                autoClose: false,
+            });
+        });
+    }
+
+    function handlePrevious(){
+        getQuizzesWithPagination(quizzesPaginator.prev_page_url).then(quizzesData => {
+            setQuizzesPaginator(quizzesData);
+        }).catch(error => {
+            console.log("Error getting quizzes " + error);
+            toast.error("Error getting quizzes " + error.message,{
+                autoClose: false,
+            });
+        });
+    }
 
     return (
-        <div className="quiz-dashboard">
-            {quizzes == null ? (
+        <div className="quiz-dashboard border-t">
+            {quizzesPaginator == null ? (
                 <p>...Loading quiz dashboard</p>
             ) : (
             <div>
-                {quizzes.map((quiz) => {
+                {quizzesPaginator.data.map((quiz) => {
                 return (
-                    <div key={quiz.id} className="grid grid-cols-5 px-4 py-2 border-b overflow-hidden">
-                        <div>
-                            <p className="text-small text-gray-600">Name:</p>
+                    <div key={quiz.id} className="grid grid-cols-12 px-4 py-2 border-b overflow-hidden">
+                        <div className="col-span-4">
+                            <p className="text-sm text-gray-600">Name:</p>
                             <h3 className="font-bold text-lg items-center">{quiz.title}</h3>
                         </div>
-                        <div>
-                            <p className="text-small text-gray-600">Total Questions:</p>
+                        <div className="col-span-2 text-center">
+                            <p className="text-sm text-gray-600">Total Questions:</p>
                             <p>{quiz.questionsCount} questions</p>
                         </div>
-                        <div>
-                            <p className="text-small text-gray-600">Plays:</p>
+                        <div className="col-span-1 text-center">
+                            <p className="text-sm text-gray-600">Plays:</p>
                             <p>{quiz.totalPlays}</p>
                         </div>
-                        <div>
-                            <p className="text-small text-gray-600">Likes:</p>
+                        <div className="col-span-1 text-center">
+                            <p className="text-sm text-gray-600">Likes:</p>
                             <p>120</p>
                         </div>
-                        <div>
-                            <p className="text-small text-gray-600">Actions:</p>
+                        <div className="col-span-4 text-center">
+                            <p className="text-sm text-gray-600">Actions:</p>
                             <Link
                                 to={`/quiz/${quiz.id}/play`}
                                 className="text-center hover:text-purple-500 hover:underline"
@@ -79,6 +103,7 @@ const QuizDashboard = ({ user }) => {
                     </div>
                 )
             })}
+                <PaginationControls to={quizzesPaginator.to} from={quizzesPaginator.from} of={quizzesPaginator.total} onNext={handleNext} onPrevious={handlePrevious} currentPage={quizzesPaginator.current_page} lastPage={quizzesPaginator.last_page} />
             </div>
             )}
         </div>

@@ -14,7 +14,7 @@ const QuizForm = ({ quiz, tags, onAddQuestion, onAddAnswer , onSave, onChange, o
                     {errors.onSave}
                 </div>
             )}
-            <div className="p-4 rounded shadow-lg card overflow-visible">
+            <div className="p-4">
                 <div className="mb-6">
                     <TextInput
                         name="title"
@@ -46,11 +46,11 @@ const QuizForm = ({ quiz, tags, onAddQuestion, onAddAnswer , onSave, onChange, o
                 </div>
             )}
             </div>
-            {quiz.questions.length > 0 &&  <h2 className="font-bold text-3xl my-4 text-center">Questions</h2>}
+            {quiz.questions.length > 0 &&  <h2 className="font-bold border-t text-3xl py-4 text-center">Questions</h2>}
             {/* Todo sort out error handling for nested items */}
             {quiz.questions.map((row, index) => {
               return (
-                  <div className="p-4 rounded overflow-hidden shadow-lg card card mb-6" key={index}>
+                  <div className="p-4 mb-6 border-t" key={index}>
                     <h3 className="font-bold text-xl">Question {index + 1}</h3>
                     <div className="mb-6">
                         <TextInput
@@ -86,12 +86,12 @@ const QuizForm = ({ quiz, tags, onAddQuestion, onAddAnswer , onSave, onChange, o
                             {errors.questions[index].error}
                         </div>
                     )}
-                    <div id="manage-question-toolbar" className="flex justify-between items-center">
+                    <div id="manage-question-toolbar" className="flex justify-between  items-center">
                         <div className="flex">
                             <button
                                 type="button"
                                 onClick={() => onAddAnswer(index)}
-                                className="bg-purple-400 text-white rounded py-2 px-4 hover:bg-purple-500"
+                                className="bg-purple-400 text-white rounded py-2 px-4 hover:bg-purple-500 shadow"
                             >
                                 Add Answer
                             </button>
@@ -100,7 +100,7 @@ const QuizForm = ({ quiz, tags, onAddQuestion, onAddAnswer , onSave, onChange, o
                         <button
                             type="button"
                             onClick={() => onRemoveQuestion(index)}
-                            className="bg-red-400 text-white rounded py-2 px-4 hover:bg-red-500"
+                            className="bg-red-400 text-white rounded py-2 px-4 hover:bg-red-500 shadow"
                         >
                             Remove question
                         </button>
@@ -109,12 +109,12 @@ const QuizForm = ({ quiz, tags, onAddQuestion, onAddAnswer , onSave, onChange, o
                   </div>
               )
             })}
-            <div id="manage-quiz-toolbar" className="p-4 rounded overflow-hidden shadow-lg card my-4 flex justify-between items-center">
+            <div id="manage-quiz-toolbar" className="p-4 flex border-t justify-between items-center">
                 <div className="flex">
                     <button
                         type="button"
                         onClick={onAddQuestion}
-                        className="bg-purple-400 text-white rounded py-2 px-4 hover:bg-purple-500"
+                        className="bg-purple-400 text-white rounded py-2 px-4 hover:bg-purple-500 shadow"
                     >
                         Add question
                     </button>
@@ -130,14 +130,14 @@ const QuizForm = ({ quiz, tags, onAddQuestion, onAddAnswer , onSave, onChange, o
                     <button
                         type="button"
                         onClick={onReset}
-                        className="bg-red-400 text-white rounded py-2 px-4 hover:bg-red-500 mr-2"
+                        className="bg-red-400 text-white rounded py-2 px-4 hover:bg-red-500 mr-2 shadow"
                     >
                         Reset
                     </button>
                     <button
                         type="submit"
                         disabled={saving}
-                        className="bg-purple-400 text-white rounded py-2 px-4 hover:bg-purple-500"
+                        className="bg-purple-400 text-white rounded py-2 px-4 hover:bg-purple-500 shadow"
                     >
                         {saving ? "Saving..." : "Save"}
                     </button>

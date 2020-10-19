@@ -69,17 +69,17 @@ const QuizDetailPage = ({quizId, currentUser ,history }) => {
     
 
     return !quiz ? (
-        <p className="mt-6">... Loading quiz</p>
+        <p className="pt-6 overflow-hidden shadow-lg page">... Loading quiz</p>
     ) : (
-        <div className="mt-6">
+        <div className="pt-6 overflow-hidden shadow-lg page">
             <QuizDetail quiz={quiz} scores={scores} />
             {quiz.creator_id == currentUser && (
-                <div className="p-4 my-4 rounded overflow-hidden shadow-lg card flex justify-between items-center">
+                <div className="p-4 mt-4 flex justify-between items-center border-t">
                     <div className="flex">
                         <button
                             type="button"
                             onClick={() => history.push(`/quiz/${quiz.id}/edit`)}
-                            className="bg-purple-400 text-white rounded py-2 px-4 hover:bg-purple-500"
+                            className="bg-purple-400 text-white rounded py-2 px-4 hover:bg-purple-500 shadow"
                         >
                             Edit
                         </button>
@@ -88,7 +88,7 @@ const QuizDetailPage = ({quizId, currentUser ,history }) => {
                         <button
                             type="button"
                             onClick={handleDeleteQuiz}
-                            className="bg-red-400 text-white rounded py-2 px-4 hover:bg-red-500"
+                            className="bg-red-400 text-white rounded py-2 px-4 hover:bg-red-500 shadow"
                         >
                             Delete
                         </button>

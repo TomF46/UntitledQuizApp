@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 const ScoresTable = ({ scores }) => {
     return scores.length > 0 ? (
         <div className="flex justify-center">
-            <table className="table-auto">
+            <table className="table-fixed w-full">
                 <thead>
                     <tr>
                     <th className="px-4 py-2">Position</th>
@@ -18,7 +18,7 @@ const ScoresTable = ({ scores }) => {
                 <tbody>
                 {scores.map((score, index) => {
                     return (
-                        <tr key={score.id}>
+                        <tr className="border-t" key={score.id}>
                         <td className="px-4 py-2">{index + 1}</td>
                         <td className="px-4 py-2"><Link to={`/profile/${score.user_id}`}>{score.username}</Link></td>
                         <td className="px-4 py-2"><Link to={`/quiz/${score.quiz_id}`}>{score.quiz_name}</Link></td>

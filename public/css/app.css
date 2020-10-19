@@ -21260,7 +21260,6 @@ body {
 }
 
 .pageHeader {
-  padding-bottom: 0.6rem;
   border-bottom: 1px solid #dedede;
 }
 
@@ -21276,7 +21275,8 @@ nav {
   margin: 0 auto;
 }
 
-.card {
+.card,
+.page {
   background-color: #fff;
 }
 

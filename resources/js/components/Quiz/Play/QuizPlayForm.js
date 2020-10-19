@@ -33,12 +33,12 @@ const QuizPlayForm = ({ quiz, submission, onAnswerChange, currentQuestionNumber,
                     )
                 })}
             </div>
-            <div id="play-quiz-toolbar" className="p-4 rounded overflow-hidden shadow-lg card my-4 flex justify-between items-center">
+            <div id="play-quiz-toolbar" className="p-4 flex justify-between items-center">
                 <div className="flex">
                      <button
                         type="button"
                         onClick={onReset}
-                        className="bg-red-400 text-white rounded py-2 px-4 hover:bg-red-500 mr-2"
+                        className="bg-red-400 text-white rounded py-2 px-4 hover:bg-red-500 mr-2 shadow"
                     >
                         Reset
                     </button>
@@ -60,7 +60,7 @@ const QuizPlayForm = ({ quiz, submission, onAnswerChange, currentQuestionNumber,
                         <button
                         type="button"
                         onClick={onPrevious}
-                        className="bg-purple-400 text-white rounded py-2 px-4 mr-2 hover:bg-purple-500"
+                        className="bg-purple-400 text-white rounded py-2 px-4 mr-2 hover:bg-purple-500 shadow"
                         >
                             Previous
                         </button>
@@ -69,14 +69,14 @@ const QuizPlayForm = ({ quiz, submission, onAnswerChange, currentQuestionNumber,
                         <button
                             type="button"
                             onClick={onNext}
-                            className="bg-purple-400 text-white rounded py-2 px-4 mr-2 hover:bg-purple-500"
+                            className="bg-purple-400 text-white rounded py-2 px-4 mr-2 hover:bg-purple-500 shadow"
                         >
                             Next
                         </button>
                         ) : (
                             <button
                                 onClick={onSubmit}
-                                className="bg-purple-400 text-white rounded py-2 px-4 hover:bg-purple-500"
+                                className="bg-purple-400 text-white rounded py-2 px-4 hover:bg-purple-500 shadow"
                             >
                                 Submit
                             </button>

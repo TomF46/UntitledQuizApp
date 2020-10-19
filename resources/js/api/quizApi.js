@@ -59,6 +59,17 @@ export function getQuizzes() {
         });
 }
 
+export function getQuizzesWithPagination(url) {
+    return axiosClient
+        .get(url)
+        .then(response => {
+            return response.data;
+        })
+        .catch(error => {
+            throw error;
+        });
+}
+
 export function submitScore(quizId, submission){
     return axiosClient
         .post(`/api/quiz/${quizId}/scores`, submission)
