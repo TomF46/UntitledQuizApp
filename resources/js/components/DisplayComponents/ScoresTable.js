@@ -19,11 +19,11 @@ const ScoresTable = ({ scores }) => {
                 {scores.map((score, index) => {
                     return (
                         <tr key={score.id}>
-                        <td className="border px-4 py-2">{index + 1}</td>
-                        <td className="border px-4 py-2"><Link to={`/profile/${score.user_id}`}>{score.username}</Link></td>
-                        <td className="border px-4 py-2"><Link to={`/quiz/${score.quiz_id}`}>{score.quiz_name}</Link></td>
-                        <td className="border px-4 py-2">{score.score}</td>
-                        <td className="border px-4 py-2">{score.score_percent}</td>
+                        <td className="px-4 py-2">{index + 1}</td>
+                        <td className="px-4 py-2"><Link to={`/profile/${score.user_id}`}>{score.username}</Link></td>
+                        <td className="px-4 py-2"><Link to={`/quiz/${score.quiz_id}`}>{score.quiz_name}</Link></td>
+                        <td className="px-4 py-2">{score.score}</td>
+                        <td className="px-4 py-2">{score.score_percent}</td>
                         </tr>
                     )
                 })}

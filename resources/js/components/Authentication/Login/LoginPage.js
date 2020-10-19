@@ -4,22 +4,22 @@ import { connect } from "react-redux";
 import LoginForm from "./LoginForm";
 import { login } from "../../../redux/actions/authenticationActions";
 import CenterFormCard from "../../DisplayComponents/CenterFormCard";
-import { Redirect } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 
 const LoginPage = ({ login, userIsAuthenticated, history }) => {
     const [user, setUser] = useState({
         email: "",
         password: "",
-        remember_me: true //hard code for now will make checkbox eventually
+        remember_me: true
     });
     const [errors, setErrors] = useState({});
     const [saving, setSaving] = useState(false);
 
     function handleChange(event) {
-        const { name, value } = event.target;
+        const { name, value, checked } = event.target;
         setUser(prevUser => ({
             ...prevUser,
-            [name]: value
+            [name]: name == "remember_me" ? Boolean(checked) : value 
         }));
     }
 
@@ -37,6 +37,7 @@ const LoginPage = ({ login, userIsAuthenticated, history }) => {
         event.preventDefault();
         if (!formIsValid()) return;
         setSaving(true);
+        console.log(user);
         login(user)
             .then(response => {
                 history.push("/dashboard");
@@ -53,6 +54,7 @@ const LoginPage = ({ login, userIsAuthenticated, history }) => {
             {userIsAuthenticated && <Redirect to="/dashboard" />}
             <CenterFormCard
                 content={
+                    <>
                     <LoginForm
                         user={user}
                         errors={errors}
@@ -60,6 +62,15 @@ const LoginPage = ({ login, userIsAuthenticated, history }) => {
                         onSave={handleSave}
                         saving={saving}
                     />
+                    <div className="flex justify-center mt-4">
+                    <Link
+                        to={`/register`}
+                        className="text-center hover:text-purple-500 hover:underline"
+                    >
+                        No account? Click here to register
+                    </Link>
+                    </div>
+                    </>
                 }
             />
         </>

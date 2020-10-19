@@ -12,7 +12,7 @@ const CheckboxInput = ({ name, label, onChange, value, checked, error }) => {
             value={value}
             checked={value}
             onChange={onChange}
-            className="mr-2 leading-tight"
+            className="mr-2 leading-tight bg-purple-400"
           />
           <span className="text-sm">
           {label}

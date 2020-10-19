@@ -4,7 +4,7 @@ import RegisterForm from "./RegisterForm";
 import { Register } from "../../../api/authenticationApi";
 import CenterFormCard from "../../DisplayComponents/CenterFormCard";
 import { connect } from "react-redux";
-import { Redirect } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { toast } from "react-toastify";
 
 const RegisterPage = ({ userIsAuthenticated, history }) => {
@@ -61,6 +61,7 @@ const RegisterPage = ({ userIsAuthenticated, history }) => {
             {userIsAuthenticated && <Redirect to="/dashboard" />}
             <CenterFormCard
                 content={
+                    <>
                     <RegisterForm
                         user={user}
                         errors={errors}
@@ -68,6 +69,15 @@ const RegisterPage = ({ userIsAuthenticated, history }) => {
                         onSave={handleSave}
                         saving={saving}
                     />
+                    <div className="flex justify-center mt-4">
+                        <Link
+                            to={`/login`}
+                            className="text-center hover:text-purple-500 hover:underline"
+                        >
+                            Already registered? Login now!
+                        </Link>
+                    </div>
+                    </>
                 }
             />
         </>

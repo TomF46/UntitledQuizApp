@@ -23,6 +23,7 @@ class QuizController extends Controller
                 'title' => $quiz->title,
                 'description' => $quiz->description,
                 'questionsCount' => count($quiz->questions),
+                'totalPlays' => count($quiz->scores),
                 'tags' => $quiz->tags()->get()->map(function ($tag) {
                     return [
                         'id' => $tag->id,
@@ -91,6 +92,7 @@ class QuizController extends Controller
             'title' => $quiz->title,
             'description' => $quiz->description,
             'questions' => $this->removeAnswersFromQuestion($quiz->questions()->with('answers')->get()),
+            'totalPlays' => count($quiz->scores),
             'tags' => $quiz->tags()->get()->map(function ($tag) {
                 return [
                     'id' => $tag->id,

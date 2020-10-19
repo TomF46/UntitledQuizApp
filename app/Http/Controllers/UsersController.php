@@ -48,8 +48,30 @@ class UsersController extends Controller
     public function show(User $user)
     {
         return response()->json([
-            'profile' => $user,
-            'quizzes' => $user->quizzes()->latest()->get()
+            'profile' =>  [
+                'id' => $user->id,
+                'username' => $user->username,
+                'email' => $user->email,
+                'bio' => $user->bio,
+                'profile_image' => 'https://picsum.photos/200' //Hardcode random for now
+            ],
+            'quizzes' => $user->quizzes()->with('tags')->latest()->get()->map(function ($quiz) {
+                return [
+                    'id' => $quiz->id,
+                    'title' => $quiz->title,
+                    'description' => $quiz->description,
+                    'questionsCount' => count($quiz->questions),
+                    'totalPlays' => count($quiz->scores),
+                    'tags' => $quiz->tags()->get()->map(function ($tag) {
+                        return [
+                            'id' => $tag->id,
+                            'name' => $tag->name
+                        ];
+                    }),
+                    'creator' => $quiz->user->username,
+                    'creator_id' => $quiz->user->id
+                ];
+            })
         ]);
     }
 

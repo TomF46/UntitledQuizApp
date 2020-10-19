@@ -1,28 +1,31 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
+import { unzip } from "lodash";
 
 const QuizList = ({ quizzes }) => {
     return (
-        <div>
+        <div className="rounded overflow-hidden shadow-lg card mb-4">
             {quizzes.map((quiz) => {
                 return (
-                    <div key={quiz.id} className="p-4 rounded overflow-hidden shadow-lg card mb-4 flex justify-between items-center">
+                    <div key={quiz.id} className="grid grid-cols-5 p-4 border-b overflow-hidden flex justify-between items-center">
                         <div>
+                            <p className="text-small text-gray-600">Name:</p>
                             <h3 className="font-bold text-lg items-center">{quiz.title}</h3>
-                            <p>{quiz.description}</p>
-                            {quiz.tags && quiz.tags.length > 0 && (
-                                <ul className="tagList">
-                                    <li>Tags:</li>
-                                    {quiz.tags.map((tag) => {
-                                        return (
-                                            <li key={tag.id}>{tag.name}</li>
-                                        )
-                                    })}
-                                </ul>
-                            )}
                         </div>
-                        <div className="flex justify-right mb-2">
+                        <div>
+                            <p className="text-small text-gray-600">Total Questions:</p>
+                            <p>{quiz.questionsCount} questions</p>
+                        </div>
+                        <div>
+                            <p className="text-small text-gray-600">Plays:</p>
+                            <p>{quiz.totalPlays}</p>
+                        </div>
+                        <div>
+                            <p className="text-small text-gray-600">Likes:</p>
+                            <p>120</p>
+                        </div>
+                        <div className="flex justify-center mb-2">
                             <Link
                                 to={`/quiz/${quiz.id}`}
                                 className="bg-purple-400 text-white rounded py-2 px-4 hover:bg-purple-500 inline-block align-middle"

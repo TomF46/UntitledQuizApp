@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import EmailInput from "../../FormComponents/EmailInput";
 import PasswordInput from "../../FormComponents/PasswordInput";
 import { Link } from "react-router-dom";
+import CheckboxInput from "../../FormComponents/CheckboxInput";
 
 const LoginForm = ({ user, onSave, onChange, saving = false, errors = {} }) => {
     return (
@@ -31,6 +32,17 @@ const LoginForm = ({ user, onSave, onChange, saving = false, errors = {} }) => {
                     error={errors.password}
                 />
             </div>
+            <div className="mb-6">
+                <CheckboxInput
+                    name="remember_me"
+                    label="Remember me?"
+                    value={user.remember_me}
+                    checked={user.remember_me}
+                    onChange={onChange}
+                    error={errors.password}
+
+                />
+            </div>
             <div className="flex justify-center">
                 <button
                     type="submit"
@@ -39,12 +51,6 @@ const LoginForm = ({ user, onSave, onChange, saving = false, errors = {} }) => {
                 >
                     {saving ? "Logging in..." : "Log in"}
                 </button>
-                <Link
-                    to={`/register`}
-                    className="bg-purple-400 text-white rounded py-2 px-4 hover:bg-purple-500 ml-4"
-                >
-                    To Register
-                </Link>
             </div>
         </form>
     );
