@@ -78,3 +78,25 @@ export function followUser(userId){
         });
 }
 
+export function getFollowedUsers(){
+    return axiosClient
+        .get('/api/dashboard/users/followed')
+        .then(response => {
+            return response.data;
+        })
+        .catch(error => {
+            throw error;
+        });
+}
+
+export function getUsersWithPaginator(url) {
+    return axiosClient
+        .get(url)
+        .then(response => {
+            return response.data;
+        })
+        .catch(error => {
+            throw error;
+        });
+}
+

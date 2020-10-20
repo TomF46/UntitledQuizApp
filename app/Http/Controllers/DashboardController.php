@@ -32,4 +32,18 @@ class DashboardController extends Controller
 
         return response()->json($response);
     }
+
+    public function getFollowedUsers(Request $request)
+    {
+        $currentUser = $request->User();
+        $following = $currentUser->follows()->paginate(10);
+        $following->getCollection()->transform(function ($user) {
+            $user->profile_image =  'https://picsum.photos/200';
+            $user->followerCount = $user->followerCount();
+            $user->totalQuizzesCreated = Count($user->quizzes);
+            return $user;
+        });
+
+        return response()->json($following);
+    }
 }

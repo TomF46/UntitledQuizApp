@@ -43,6 +43,8 @@ Route::middleware('auth:api')->group(function () {
     Route::delete('/quiz/{quiz}/like/remove', [App\Http\Controllers\QuizLikesController::class, 'remove']);
 
     Route::get('/dashboard/quizzes/followed', [App\Http\Controllers\DashboardController::class, 'getQuizzesByFollowedUser']);
+    Route::get('/dashboard/users/followed', [App\Http\Controllers\DashboardController::class, 'getFollowedUsers']);
+
 
     Route::delete('/scores/{score}', [App\Http\Controllers\ScoresController::class, 'destroy']);
 

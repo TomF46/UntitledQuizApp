@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Models\User;
+use Illuminate\Support\Facades\DB;
 
 trait Followable
 {
@@ -25,6 +26,13 @@ trait Followable
     public function following(User $user)
     {
         return $this->follows()->where('following_user_id', $user->id)->exists();
+    }
+
+    public function followerCount()
+    {
+        return DB::table('follows')
+            ->where('following_user_id', $this->id)
+            ->count();
     }
 
     public function follows()
