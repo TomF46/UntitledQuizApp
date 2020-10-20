@@ -78,7 +78,7 @@ class UsersController extends Controller
 
     public function quizzes(User $user)
     {
-        $paginator = $user->quizzes()->with('tags')->latest()->paginate(4);
+        $paginator = $user->quizzes()->with('tags')->latest()->paginate(10);
         $paginator->getCollection()->transform(function ($quiz) {
             $quiz->questionsCount = count($quiz->questions);
             $quiz->totalPlays = count($quiz->scores);

@@ -99,17 +99,27 @@ const ProfilePage = ({ userId, currentUser, history, ...props }) => {
                         <button
                             type="button"
                             onClick={() => history.push(`/profile/${userId}/edit`)}
-                            className="bg-purple-400 text-white text-sm rounded py-2 px-4 hover:bg-purple-500"
+                            className="bg-purple-400 text-white text-sm rounded py-2 px-4 hover:bg-purple-500 inline-flex items-center"
                         >
-                            Edit Profile
+                            <svg className="text-white h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                            </svg>
+                            <span className="ml-1">Edit Profile</span>
                         </button>
                     ) : (
                         <button
                             type="button"
                             onClick={toggleFollow}
-                            className="bg-purple-400 text-white text-sm rounded py-2 px-4 hover:bg-purple-500"
+                            className="bg-purple-400 text-white text-sm rounded py-2 px-4 hover:bg-purple-500 inline-flex items-center"
                         >
-                            {user.following ? "Unfollow" : "Follow"}
+                            <svg className="text-white h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            {user.following ? (
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7a4 4 0 11-8 0 4 4 0 018 0zM9 14a6 6 0 00-6 6v1h12v-1a6 6 0 00-6-6zM21 12h-6" />
+                            ) : (
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />  
+                            )}
+                            </svg>
+                            <span className="ml-1">{user.following ? "Unfollow" : "Follow"}</span>
                         </button>
                     )}
                 </div>

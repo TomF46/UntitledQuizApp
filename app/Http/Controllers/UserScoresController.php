@@ -48,7 +48,7 @@ class UserScoresController extends Controller
      */
     public function show(User $user)
     {
-        $paginator = $user->scores()->orderBy('score_percent', 'desc')->paginate(15);
+        $paginator = $user->scores()->orderBy('score_percent', 'desc')->paginate(10);
         $paginator->getCollection()->transform(function ($score) {
             $score->username = $score->user->username;
             $score->user_id = $score->user->id;

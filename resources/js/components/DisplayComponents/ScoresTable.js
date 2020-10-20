@@ -18,7 +18,7 @@ const ScoresTable = ({ scores }) => {
                 <tbody>
                 {scores.map((score, index) => {
                     return (
-                        <tr className="border-t" key={score.id}>
+                        <tr className="border-t text-center" key={score.id}>
                         <td className="px-4 py-2">{index + 1}</td>
                         <td className="px-4 py-2"><Link to={`/profile/${score.user_id}`}>{score.username}</Link></td>
                         <td className="px-4 py-2"><Link to={`/quiz/${score.quiz_id}`}>{score.quiz_name}</Link></td>

@@ -5,6 +5,7 @@ import { getQuiz, submitScore } from "../../../api/quizApi";
 import QuizPlayForm from "./QuizPlayForm";
 import ScoreDetail from "./ScoreDetail";
 import { toast } from "react-toastify";
+import { confirmAlert } from "react-confirm-alert";
 
 const QuizPlayPage = ({quizId ,history }) => {
     const [quiz, setQuiz] = useState(null);
@@ -63,6 +64,25 @@ const QuizPlayPage = ({quizId ,history }) => {
     }
 
     function handleSubmit(){
+        confirmAlert({
+            title: "Confirm submit",
+            message: `Are you sure you're ready want to submit?`,
+            buttons: [
+              {
+                label: "Yes",
+                onClick: () => {
+                    submit();
+                },
+              },
+              {
+                label: "No",
+                onClick: () => {},
+              },
+            ],
+          });
+    }
+
+    function submit(){
         if (!submissionIsValid()) return;
 
         submitScore(quiz.id, submission).then(response => {
