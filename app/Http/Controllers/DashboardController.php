@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Quiz;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
 class DashboardController extends Controller
@@ -45,5 +46,31 @@ class DashboardController extends Controller
         });
 
         return response()->json($following);
+    }
+
+    public function getPopularQuizzes()
+    {
+        $quizzes = Quiz::with('likes')->get()->sortByDesc(function ($quiz) {
+            return $quiz->totalNetLikes();
+        })->take(10)->values()->map(function ($quiz) {
+            return [
+                'id' => $quiz->id,
+                'title' => $quiz->title,
+                'description' => $quiz->description,
+                'totalPlays' => count($quiz->scores),
+                'totalLikes' => $quiz->totalLikes(),
+                'totalDislikes' => $quiz->totalDislikes(),
+                'tags' => $quiz->tags()->get()->map(function ($tag) {
+                    return [
+                        'id' => $tag->id,
+                        'name' => $tag->name
+                    ];
+                }),
+                'creator' => $quiz->user->username,
+                'creator_id' => $quiz->user->id
+            ];
+        });
+
+        return response()->json($quizzes);
     }
 }

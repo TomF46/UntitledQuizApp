@@ -48,6 +48,11 @@ trait Likeable
             ->count();
     }
 
+    public function totalNetLikes()
+    {
+        return $this->totalLikes() - $this->totalDislikes();
+    }
+
     public function likes()
     {
         return $this->hasMany(Like::class);

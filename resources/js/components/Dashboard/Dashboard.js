@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 import FollowingQuizDashboard from "./Components/FollowingQuizDashboard";
 import FollowingUsersDashboard from "./Components/FollowingUsersDashboard";
 import ScoreDashboard from "./Components/ScoreDashboard";
+import PopularQuizzesDashboard from "./Components/PopularQuizzesDashboard";
 
 const DashboardPage = ({userId, history }) => {
     const [user, setUser] = useState(null);
@@ -32,10 +33,13 @@ const DashboardPage = ({userId, history }) => {
             <div>
                 <h1 className="font-bold text-4xl my-4 text-center">Welcome {user.profile.username}</h1>
                 <div className="mb-4">
-                    <FollowingQuizDashboard user={user} />
+                    <PopularQuizzesDashboard />
                 </div>
                 <div className="mb-4">
                     <FollowingUsersDashboard user={user} />
+                </div>
+                <div className="mb-4">
+                    <FollowingQuizDashboard user={user} />
                 </div>
                 <div className="mb-4">
                     <ScoreDashboard user={user} />

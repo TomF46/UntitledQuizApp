@@ -92,6 +92,18 @@ export function getQuizzesByUserFollowing(){
         });
 }
 
+export function getMostPopularQuizzes(){
+    return axiosClient
+        .get('/api/dashboard/quizzes/popular')
+        .then(response => {
+            return response.data;
+        })
+        .catch(error => {
+            throw error;
+        });
+}
+
+
 export function submitScore(quizId, submission){
     return axiosClient
         .post(`/api/quiz/${quizId}/scores`, submission)
