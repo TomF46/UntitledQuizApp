@@ -81,6 +81,17 @@ export function searchQuizzesWithPagination(url, filters) {
         });
 }
 
+export function getQuizzesByUserFollowing(){
+    return axiosClient
+        .get('/api/dashboard/quizzes/followed')
+        .then(response => {
+            return response.data;
+        })
+        .catch(error => {
+            throw error;
+        });
+}
+
 export function submitScore(quizId, submission){
     return axiosClient
         .post(`/api/quiz/${quizId}/scores`, submission)

@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { getUserById } from "../../api/userApi";
 import { toast } from "react-toastify";
-import QuizDashboard from "./Components/QuizDashboard";
+import FollowingQuizDashboard from "./Components/FollowingQuizDashboard";
 import ScoreDashboard from "./Components/ScoreDashboard";
 
 const DashboardPage = ({userId, history }) => {
@@ -31,7 +31,7 @@ const DashboardPage = ({userId, history }) => {
             <div>
                 <h1 className="font-bold text-4xl my-4 text-center">Welcome {user.profile.username}</h1>
                 <div className="mb-4">
-                    <QuizDashboard user={user} />
+                    <FollowingQuizDashboard user={user} />
                 </div>
                 <div className="mb-4">
                     <ScoreDashboard user={user} />
