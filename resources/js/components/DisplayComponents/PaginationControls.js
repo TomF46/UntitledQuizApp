@@ -6,7 +6,7 @@ const PaginationControls = ({ from, to, of, onNext, onPrevious, currentPage, las
         <div className="pagination-controls p-4">
             <div className="flex justify-between">
                 <div>
-                    <p>{`Showing ${from} to ${to} of ${of}`}</p>
+                    <p>{`Showing ${from ? from : 0} to ${to ? to : 0} of ${of}`}</p>
                 </div>
                 <div>
                         {currentPage > 1 &&
@@ -34,8 +34,8 @@ const PaginationControls = ({ from, to, of, onNext, onPrevious, currentPage, las
 };
 
 PaginationControls.propTypes = {
-    from: PropTypes.number.isRequired,
-    to: PropTypes.number.isRequired,
+    from: PropTypes.number,
+    to: PropTypes.number,
     of: PropTypes.number.isRequired,
     onNext: PropTypes.func.isRequired,
     onPrevious: PropTypes.func.isRequired,

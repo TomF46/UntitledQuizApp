@@ -70,6 +70,17 @@ export function getQuizzesWithPagination(url) {
         });
 }
 
+export function searchQuizzesWithPagination(url, filters) {
+    return axiosClient
+        .post(url, filters)
+        .then(response => {
+            return response.data;
+        })
+        .catch(error => {
+            throw error;
+        });
+}
+
 export function submitScore(quizId, submission){
     return axiosClient
         .post(`/api/quiz/${quizId}/scores`, submission)
@@ -112,4 +123,15 @@ export function getQuizzesByUser(userId){
     .catch(error => {
         throw error;
     });
+}
+
+export function searchQuizzes(filters){
+    return axiosClient
+        .post(`/api/quiz/search`, filters)
+        .then(response => {
+            return response.data;
+        })
+        .catch(error => {
+            throw error;
+        });
 }

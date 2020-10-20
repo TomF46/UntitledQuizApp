@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 const Header = ({ userIsAuthenticated }) => {
     return (
-        <nav className="flex items-center justify-between flex-wrap bg-purple-500 p-6 shadow-lg">
+        <nav className="flex items-center justify-between flex-wrap bg-purple-400 p-6 shadow-lg">
             <div className="flex items-center flex-shrink-0 text-white mr-6">
                 <Link to="/" className="font-semibold text-xl tracking-tight">
                     Untitled Quiz App
