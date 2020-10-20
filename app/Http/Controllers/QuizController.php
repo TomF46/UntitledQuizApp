@@ -22,6 +22,8 @@ class QuizController extends Controller
         $paginator->getCollection()->transform(function ($quiz) {
             $quiz->questionsCount = count($quiz->questions);
             $quiz->totalPlays = count($quiz->scores);
+            $quiz->totalLikes = $quiz->totalLikes();
+            $quiz->totalDislikes = $quiz->totalDislikes();
             $quiz->tags = $quiz->tags()->get()->map(function ($tag) {
                 return [
                     'id' => $tag->id,
@@ -85,7 +87,7 @@ class QuizController extends Controller
      * @param  \App\Models\Quiz  $quiz
      * @return \Illuminate\Http\Response
      */
-    public function show(Quiz $quiz)
+    public function show(Request $request, Quiz $quiz)
     {
         return response()->json([
             'id' => $quiz->id,
@@ -93,6 +95,8 @@ class QuizController extends Controller
             'description' => $quiz->description,
             'questions' => $this->removeAnswersFromQuestion($quiz->questions()->with('answers')->get()),
             'totalPlays' => count($quiz->scores),
+            'totalLikes' => $quiz->totalLikes(),
+            'totalDislikes' => $quiz->totalDislikes(),
             'tags' => $quiz->tags()->get()->map(function ($tag) {
                 return [
                     'id' => $tag->id,
@@ -100,7 +104,9 @@ class QuizController extends Controller
                 ];
             }),
             'creator' => $quiz->user->username,
-            'creator_id' => $quiz->user->id
+            'creator_id' => $quiz->user->id,
+            'likedByUser' => $quiz->isLikedBy($request->user()),
+            'dislikedByUser' => $quiz->isDislikedBy($request->user()),
         ]);
     }
 

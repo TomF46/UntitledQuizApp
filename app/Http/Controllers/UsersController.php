@@ -82,6 +82,8 @@ class UsersController extends Controller
         $paginator->getCollection()->transform(function ($quiz) {
             $quiz->questionsCount = count($quiz->questions);
             $quiz->totalPlays = count($quiz->scores);
+            $quiz->totalLikes = $quiz->totalLikes();
+            $quiz->totalDislikes = $quiz->totalDislikes();
             $quiz->tags = $quiz->tags()->get()->map(function ($tag) {
                 return [
                     'id' => $tag->id,

@@ -38,6 +38,10 @@ Route::middleware('auth:api')->group(function () {
     Route::get('/quiz/{quiz}/scores', [App\Http\Controllers\QuizScoresController::class, 'show']);
     Route::post('/quiz/{quiz}/scores', [App\Http\Controllers\QuizScoresController::class, 'store']);
     Route::post('/quiz/search', [App\Http\Controllers\QuizSearchController::class, 'filter']);
+    Route::post('/quiz/{quiz}/like', [App\Http\Controllers\QuizLikesController::class, 'like']);
+    Route::post('/quiz/{quiz}/dislike', [App\Http\Controllers\QuizLikesController::class, 'dislike']);
+    Route::delete('/quiz/{quiz}/like/remove', [App\Http\Controllers\QuizLikesController::class, 'remove']);
+
 
 
     Route::delete('/scores/{score}', [App\Http\Controllers\ScoresController::class, 'destroy']);

@@ -135,3 +135,36 @@ export function searchQuizzes(filters){
             throw error;
         });
 }
+
+export function likeQuiz(quizId){
+    return axiosClient
+        .post(`/api/quiz/${quizId}/like`)
+        .then(response => {
+            return response.data;
+        })
+        .catch(error => {
+            throw error;
+        });
+}
+
+export function dislikeQuiz(quizId){
+    return axiosClient
+        .post(`/api/quiz/${quizId}/dislike`)
+        .then(response => {
+            return response.data;
+        })
+        .catch(error => {
+            throw error;
+        });
+}
+
+export function removeLikeOrDislike(quizId){
+    return axiosClient
+        .delete(`/api/quiz/${quizId}/like/remove`)
+        .then(response => {
+            return response.data;
+        })
+        .catch(error => {
+            throw error;
+        });
+}

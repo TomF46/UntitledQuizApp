@@ -14,18 +14,22 @@ const QuizDetailPage = ({quizId, currentUser ,history }) => {
 
     useEffect(() => {
         if(!quiz) {
-            getQuiz(quizId).then(quizData => {
-                console.log(quizData);
-                setQuiz(quizData);
-                getScores(quizData.id);
-            }).catch(error => {
-                console.log("Error getting quiz " + error);
-                toast.error("Error getting quiz " + error.message,{
-                    autoClose: false,
-                });
-            });
+            getQuizData();
         }
     }, [quizId, quiz])
+
+    function getQuizData(){
+        getQuiz(quizId).then(quizData => {
+            console.log(quizData);
+            setQuiz(quizData);
+            getScores(quizData.id);
+        }).catch(error => {
+            console.log("Error getting quiz " + error);
+            toast.error("Error getting quiz " + error.message,{
+                autoClose: false,
+            });
+        });
+    }
 
     function getScores(id){
         getScoresForQuiz(id).then(scores => {
@@ -66,13 +70,56 @@ const QuizDetailPage = ({quizId, currentUser ,history }) => {
             });
         })
     }
+
+    function like(){
+        if(quiz.likedByUser){
+            removeLikeOrDislike();
+            return;
+        }
+
+        QuizApi.likeQuiz(quiz.id).then(() => {
+            toast.success("Quiz Liked.")
+            getQuizData();
+        }).catch(error => {
+            console.log(error);
+            toast.error("Unable to like quiz " + error.message,{
+                autoClose: false,
+            });
+        })
+    }
+
+    function dislike(){
+        if(quiz.dislikedByUser){
+            removeLikeOrDislike();
+            return;
+        }
+        QuizApi.dislikeQuiz(quiz.id).then(() => {
+            toast.success("Quiz disliked.")
+            getQuizData();
+        }).catch(error => {
+            console.log(error);
+            toast.error("Unable to dislike quiz " + error.message,{
+                autoClose: false,
+            });
+        })
+    }
+
+    function removeLikeOrDislike(){
+        QuizApi.removeLikeOrDislike(quiz.id).then(() =>{
+            getQuizData();
+        }).catch(error => {
+            toast.error("Error performing action " + error.message,{
+                autoClose: false,
+            });
+        });
+    }
     
 
     return !quiz ? (
         <p className="pt-6 overflow-hidden shadow-lg page">... Loading quiz</p>
     ) : (
         <div className="pt-6 overflow-hidden shadow-lg page">
-            <QuizDetail quiz={quiz} scores={scores} />
+            <QuizDetail quiz={quiz} scores={scores} onLike={like} onDislike={dislike}/>
             {quiz.creator_id == currentUser && (
                 <div className="p-4 mt-4 flex justify-between items-center border-t">
                     <div className="flex">
