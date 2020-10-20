@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { toast } from "react-toastify";
-import { getScoresForUser } from "../../../api/userApi";
+import { getScoresForUser, getScoresWithPaginator } from "../../../api/userApi";
 import ScoresTable from "../../DisplayComponents/ScoresTable";
+import PaginationControls from "../../DisplayComponents/PaginationControls";
 
 const ScoreDashboard = ({ user }) => {
-    const [scores, setScores] = useState(null);
+    const [scoresPaginator, setScores] = useState(null);
 
     useEffect(() => {
-        if(!scores) {
+        if(!scoresPaginator) {
             getScoresForUser(user.profile.id).then(scoreData => {
                 setScores(scoreData);
             }).catch(error => {
@@ -18,14 +19,28 @@ const ScoreDashboard = ({ user }) => {
                 });
             });
         }
-    }, [scores])
+    }, [scoresPaginator])
+
+    function getScoresPage(url){
+        getScoresWithPaginator(url).then(scoreData => {
+            setScores(scoreData);
+        }).catch(error => {
+            console.log("Error getting user scores" + error);
+            toast.error("Error getting user scores " + error.message,{
+                autoClose: false,
+            });
+        });
+    }
 
     return (
         <div className="score-dashboard">
-            {scores == null ? (
+            {scoresPaginator == null ? (
                 <p>...Loading score dashboard</p>
             ) : (
-                <ScoresTable scores={scores} />
+                <>
+                    <ScoresTable scores={scoresPaginator.data} />
+                    <PaginationControls to={scoresPaginator.to} from={scoresPaginator.from} of={scoresPaginator.total} onNext={() => getScoresPage(scoresPaginator.next_page_url)} onPrevious={() => getScoresPage(scoresPaginator.prev_page_url)} currentPage={scoresPaginator.current_page} lastPage={scoresPaginator.last_page} />
+                </>
             )}
         </div>
     );

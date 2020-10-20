@@ -33,7 +33,7 @@ const DashboardPage = ({userId, history }) => {
                 <div className="mb-4">
                     <QuizDashboard user={user} />
                 </div>
-                <div className="p-4  mb-4">
+                <div className="mb-4">
                     <ScoreDashboard user={user} />
                 </div>
             </div>
