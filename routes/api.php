@@ -51,6 +51,16 @@ Route::middleware('auth:api')->group(function () {
     Route::get('/users/{user}/quizzes', [App\Http\Controllers\UsersController::class, 'quizzes']);
     Route::put('/users/{user}', [App\Http\Controllers\UsersController::class, 'update']);
     Route::get('/users/{user}/scores', [App\Http\Controllers\UserScoresController::class, 'show']);
+    Route::post('/users/{user}/follow', [App\Http\Controllers\UserFollowsController::class, 'index']);
+    Route::get('/users/{user}/following', [App\Http\Controllers\UserFollowsController::class, 'following']);
+
+
+
+
+
+
+
+
 
     Route::get('/tags', [App\Http\Controllers\TagsController::class, 'index']);
 });

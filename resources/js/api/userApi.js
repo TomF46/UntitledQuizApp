@@ -67,3 +67,14 @@ export function editUserProfile(userId, profile){
         });
 }
 
+export function followUser(userId){
+    return axiosClient
+        .post(`/api/users/${userId}/follow`)
+        .then(response => {
+            return response.data;
+        })
+        .catch(error => {
+            throw error;
+        });
+}
+

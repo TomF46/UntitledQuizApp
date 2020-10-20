@@ -45,7 +45,7 @@ class UsersController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function show(User $user)
+    public function show(Request $request, User $user)
     {
         return response()->json([
             'profile' =>  [
@@ -71,7 +71,8 @@ class UsersController extends Controller
                     'creator' => $quiz->user->username,
                     'creator_id' => $quiz->user->id
                 ];
-            })
+            }),
+            'following' => $request->User()->following($user)
         ]);
     }
 

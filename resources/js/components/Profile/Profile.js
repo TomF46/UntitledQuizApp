@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { getScoresForUser, getUserById } from "../../api/userApi";
+import { followUser, getScoresForUser, getScoresWithPaginator, getUserById } from "../../api/userApi";
 import ScoresTable from "../DisplayComponents/ScoresTable";
 import QuizList from "../DisplayComponents/QuizList";
 import { toast } from "react-toastify";
@@ -50,9 +50,8 @@ const ProfilePage = ({ userId, currentUser, history, ...props }) => {
         });
     }
 
-    function handleNext(){
-        getQuizzesWithPagination(quizzesPaginator.next_page_url).then(quizzesData => {
-            console.log(quizzesData);
+    function getQuizzesPage(url){
+        getQuizzesWithPagination(url).then(quizzesData => {
             setQuizzesPaginator(quizzesData);
         }).catch(error => {
             console.log("Error getting quizzes " + error);
@@ -62,37 +61,28 @@ const ProfilePage = ({ userId, currentUser, history, ...props }) => {
         });
     }
 
-    function handlePrevious(){
-        getQuizzesWithPagination(quizzesPaginator.prev_page_url).then(quizzesData => {
-            setQuizzesPaginator(quizzesData);
+    function getScoresPage(url){
+        getScoresWithPaginator(url).then(scoreData => {
+            setScoresPaginator(scoreData);
         }).catch(error => {
-            console.log("Error getting quizzes " + error);
-            toast.error("Error getting quizzes " + error.message,{
+            console.log("Error getting user scores" + error);
+            toast.error("Error getting user scores " + error.message,{
                 autoClose: false,
             });
         });
     }
 
-    function handleNextScores(){
-        getQuizzesWithPagination(scoresPaginator.next_page_url).then(scoresData => {
-            setScoresPaginator(scoresData);
-        }).catch(error => {
-            console.log("Error getting scores " + error);
-            toast.error("Error getting scores " + error.message,{
-                autoClose: false,
-            });
-        });
-    }
+    function toggleFollow(){
+        let action = user.following ? "Unfollow" : "Follow";
 
-    function handlePreviousScores(){
-        getQuizzesWithPagination(scoresPaginator.prev_page_url).then(scoresData => {
-            setScoresPaginator(scoresData);
-        }).catch(error => {
-            console.log("Error getting scores " + error);
-            toast.error("Error getting scores " + error.message,{
-                autoClose: false,
-            });
-        });
+        followUser(user.profile.id).then(res => {
+            toast.success(`User ${action}ed`);
+            let tempUser = {...user};
+            tempUser.following = !tempUser.following;
+            setUser({...tempUser});
+        }).catch(err => {
+            toast.error(`Failed to ${action} ${err.message}`);
+        })
     }
 
     return (
@@ -103,18 +93,26 @@ const ProfilePage = ({ userId, currentUser, history, ...props }) => {
                 <>
                 <h2 className="font-bold text-4xl py-4 text-center pageHeader">
                         {user.profile.username} 
-                        {/* <span>
-                        {userId == currentUser && (
-                            <button
-                                type="button"
-                                onClick={() => history.push(`/profile/${userId}/edit`)}
-                                className="bg-purple-400 text-white text-sm rounded py-2 px-4 hover:bg-purple-500 mb-2"
-                            >
-                                Edit Profile
-                            </button>
-                        )}
-                        </span> */}
                     </h2>
+                <div className="border-b p-2">
+                {userId == currentUser ? (
+                        <button
+                            type="button"
+                            onClick={() => history.push(`/profile/${userId}/edit`)}
+                            className="bg-purple-400 text-white text-sm rounded py-2 px-4 hover:bg-purple-500"
+                        >
+                            Edit Profile
+                        </button>
+                    ) : (
+                        <button
+                            type="button"
+                            onClick={toggleFollow}
+                            className="bg-purple-400 text-white text-sm rounded py-2 px-4 hover:bg-purple-500"
+                        >
+                            {user.following ? "Unfollow" : "Follow"}
+                        </button>
+                    )}
+                </div>
                 <div className="grid grid-cols-3 p-4 border-b mb-4">
                     <div>
                         <img src={user.profile.profile_image} alt="profile-picture" className="rounded-full profile-photo" />
@@ -138,7 +136,7 @@ const ProfilePage = ({ userId, currentUser, history, ...props }) => {
                     {quizzesPaginator ? (
                         <div className="border-t">
                             <QuizList quizzes={quizzesPaginator.data} />
-                            <PaginationControls to={quizzesPaginator.to} from={quizzesPaginator.from} of={quizzesPaginator.total} onNext={handleNext} onPrevious={handlePrevious} currentPage={quizzesPaginator.current_page} lastPage={quizzesPaginator.last_page} />
+                            <PaginationControls to={quizzesPaginator.to} from={quizzesPaginator.from} of={quizzesPaginator.total} onNext={() => getQuizzesPage(quizzesPaginator.next_page_url)} onPrevious={() => getQuizzesPage(quizzesPaginator.prev_page_url)} currentPage={quizzesPaginator.current_page} lastPage={quizzesPaginator.last_page} />
                         </div>
                     ) : (
                         <p className="text-center">Use has not created any quizzes</p>
@@ -155,7 +153,7 @@ const ProfilePage = ({ userId, currentUser, history, ...props }) => {
                                 ) : (
                                     <>
                                     <ScoresTable scores={scoresPaginator.data} />
-                                    <PaginationControls to={scoresPaginator.to} from={scoresPaginator.from} of={scoresPaginator.total} onNext={handleNextScores} onPrevious={handlePreviousScores} currentPage={scoresPaginator.current_page} lastPage={scoresPaginator.last_page} />
+                                    <PaginationControls to={scoresPaginator.to} from={scoresPaginator.from} of={scoresPaginator.total} onNext={() => getScoresPage(scoresPaginator.next_page_url)} onPrevious={() => getScoresPage(scoresPaginator.prev_page_url)} currentPage={scoresPaginator.current_page} lastPage={scoresPaginator.last_page} />
                                     </>
                                 )}
                             </div>
