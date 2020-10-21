@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { getQuizzesByUserFollowing, getQuizzesWithPagination } from "../../../api/quizApi";
 import { toast } from "react-toastify";
 import QuizListWithPagination from "../../DisplayComponents/QuizListWithPagination";
+import LoadingMessage from "../../DisplayComponents/LoadingMessage";
 
 const FollowingQuizDashboard = ({ user }) => {
     const [quizzesPaginator, setQuizzesPaginator] = useState(null);
@@ -35,7 +36,7 @@ const FollowingQuizDashboard = ({ user }) => {
     return (
         <div className="quiz-dashboard border-t">
             {quizzesPaginator == null ? (
-                <p>...Loading quiz dashboard</p>
+                <LoadingMessage message={"Loading quizzes by people you follow"} />
             ) : (
             <div>
                 <h1 className="font-bold text-xl p-4 border-b">Latest quizzes by people you follow</h1>

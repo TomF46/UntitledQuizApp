@@ -7,6 +7,7 @@ import FollowingQuizDashboard from "./Components/FollowingQuizDashboard";
 import FollowingUsersDashboard from "./Components/FollowingUsersDashboard";
 import ScoreDashboard from "./Components/ScoreDashboard";
 import PopularQuizzesDashboard from "./Components/PopularQuizzesDashboard";
+import LoadingMessage from "../DisplayComponents/LoadingMessage";
 
 const DashboardPage = ({userId, history }) => {
     const [user, setUser] = useState(null);
@@ -14,8 +15,8 @@ const DashboardPage = ({userId, history }) => {
     useEffect(() => {
         if(!user) {
             getUserById(userId).then(userData => {
+                console.log(userData);
                 setUser(userData);
-                // getUserScores(userData.profile.id);
             }).catch(error => {
                 console.log("Error getting user " + error);
                 toast.error("Error getting user " + error.message,{
@@ -28,7 +29,7 @@ const DashboardPage = ({userId, history }) => {
     return (
         <div className="dashboard-page overflow-hidden shadow-lg page">
             {user == null ? (
-                <p className="text-center">...Loading Dashboard</p>
+                <LoadingMessage message={'Loading Dashboard'} />
             ) : (
             <div>
                 <h1 className="font-bold text-4xl my-4 text-center">Welcome {user.username}</h1>

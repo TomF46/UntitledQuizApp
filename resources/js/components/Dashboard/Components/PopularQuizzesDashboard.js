@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { getMostPopularQuizzes } from "../../../api/quizApi";
 import { toast } from "react-toastify";
 import QuizList from "../../DisplayComponents/QuizList";
+import LoadingMessage from "../../DisplayComponents/LoadingMessage";
 
 const PopularQuizzesDashboard = () => {
     const [quizzes, setquizzes] = useState(null);
@@ -25,7 +26,7 @@ const PopularQuizzesDashboard = () => {
     return (
         <div className="quiz-dashboard border-t">
             {quizzes == null ? (
-                <p>...Loading most popular quizzes dashboard</p>
+                <LoadingMessage message={'Loading popular quizzes dashboard'} />
             ) : (
             <div>
                 <h1 className="font-bold text-xl p-4 border-b">Most popular quizzes</h1>

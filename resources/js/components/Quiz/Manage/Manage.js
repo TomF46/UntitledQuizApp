@@ -8,6 +8,7 @@ import { Redirect } from "react-router-dom";
 import { getTags } from "../../../api/tagsApi";
 import { confirmAlert } from "react-confirm-alert";
 import { toast } from "react-toastify";
+import LoadingMessage from "../../DisplayComponents/LoadingMessage";
 
 const QuizManagementPage = ({ quizId, userId ,history }) => {
     const [quiz, setQuiz] = useState(newQuiz);
@@ -235,23 +236,25 @@ const QuizManagementPage = ({ quizId, userId ,history }) => {
     return (
         <div className="quiz-management-page overflow-hidden shadow-lg page">
             {quiz.creator_id && quiz.creator_id != userId &&  <Redirect to="/" />}
-            {loaded && (
-            <QuizForm  
-            quiz={quiz}
-            tags={tags}
-            errors={errors}
-            onAddQuestion={handleAddQuestion}
-            onAddAnswer={handleAddAnswer}
-            onChange={handleChange}
-            onTagChange={handleTagChange}
-            onQuestionChange={handleQuestionChange}
-            onAnswerChange={handleAnswerChange}
-            onAnswerCheckboxChange={handleAnswerCheckboxChange}
-            onReset={handleReset}
-            onSave={handleSave}
-            onRemoveQuestion={handleRemoveQuestion}
-            onRemoveAnswer={handleRemoveAnswer}
-            saving={saving} />
+            {!loaded ? (
+                <LoadingMessage message={'Loading form'} />
+            ) : (
+                <QuizForm  
+                quiz={quiz}
+                tags={tags}
+                errors={errors}
+                onAddQuestion={handleAddQuestion}
+                onAddAnswer={handleAddAnswer}
+                onChange={handleChange}
+                onTagChange={handleTagChange}
+                onQuestionChange={handleQuestionChange}
+                onAnswerChange={handleAnswerChange}
+                onAnswerCheckboxChange={handleAnswerCheckboxChange}
+                onReset={handleReset}
+                onSave={handleSave}
+                onRemoveQuestion={handleRemoveQuestion}
+                onRemoveAnswer={handleRemoveAnswer}
+                saving={saving} />
             )}
         </div>
     );

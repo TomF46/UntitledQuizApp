@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 import { getQuizzesByUser, getQuizzesWithPagination } from "../../api/quizApi";
 import QuizListWithPagination from "../DisplayComponents/QuizListWithPagination";
 import ScoresTableWithPagination from "../DisplayComponents/ScoresTableWithPagination";
+import LoadingMessage from "../DisplayComponents/LoadingMessage";
 
 const ProfilePage = ({ userId, currentUser, history, ...props }) => {
     const [user, setUser] = useState(null);
@@ -87,7 +88,7 @@ const ProfilePage = ({ userId, currentUser, history, ...props }) => {
     return (
         <div className="profile-page overflow-hidden shadow-lg page">
             {user == null ? (
-                <p>...Loading profile</p>
+                <LoadingMessage message={'Loading profile'} />
             ) : (
                 <>
                 <h2 className="font-bold text-4xl py-4 text-center pageHeader">
@@ -147,7 +148,7 @@ const ProfilePage = ({ userId, currentUser, history, ...props }) => {
                             <QuizListWithPagination paginationData={quizzesPaginator} onPageChange={getQuizzesPage} />
                         </div>
                     ) : (
-                        <p className="text-center">Use has not created any quizzes</p>
+                        <LoadingMessage message={'Loading users quizzes'} />
                     )}
                 </div>
                 <div className="my-4">
@@ -157,7 +158,7 @@ const ProfilePage = ({ userId, currentUser, history, ...props }) => {
                                     Scores
                                 </h3>
                                 {!scoresPaginator ? (
-                                    <p>... Loading scores</p>
+                                    <LoadingMessage message={'Loading scores'} />
                                 ) : (
                                     <ScoresTableWithPagination paginationData={scoresPaginator} onPageChange={getScoresPage} />
                                 )}

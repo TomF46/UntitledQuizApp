@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { toast } from "react-toastify";
 import { getScoresForUser, getScoresWithPaginator } from "../../../api/userApi";
 import ScoresTableWithPagination from "../../DisplayComponents/ScoresTableWithPagination";
+import LoadingMessage from "../../DisplayComponents/LoadingMessage";
 
 const ScoreDashboard = ({ user }) => {
     const [scoresPaginator, setScores] = useState(null);
@@ -34,7 +35,7 @@ const ScoreDashboard = ({ user }) => {
     return (
         <div className="score-dashboard">
             {scoresPaginator == null ? (
-                <p>...Loading score dashboard</p>
+                <LoadingMessage message={'Loading scores dashboard'} />
             ) : (
                 <>
                     <h1 className="font-bold text-xl p-4 border-b">Your highest scores</h1>

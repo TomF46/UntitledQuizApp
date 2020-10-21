@@ -6,6 +6,7 @@ import QuizPlayForm from "./QuizPlayForm";
 import ScoreDetail from "./ScoreDetail";
 import { toast } from "react-toastify";
 import { confirmAlert } from "react-confirm-alert";
+import LoadingMessage from "../../DisplayComponents/LoadingMessage";
 
 const QuizPlayPage = ({quizId ,history }) => {
     const [quiz, setQuiz] = useState(null);
@@ -111,18 +112,21 @@ const QuizPlayPage = ({quizId ,history }) => {
         setcurrentQuestionNumber(previousQuestionNumber);
     }
 
-    return !submission ? (
-        <p className="pt-6 overflow-hidden shadow-lg page">... Loading quiz</p>
-    ) : (
-        !score ? (
-            <div className="pt-6 overflow-hidden shadow-lg page">
-                <QuizPlayForm quiz={quiz} submission={submission} onAnswerChange={handleAnswerChange} onSubmit={handleSubmit} onReset={handleReplay} currentQuestionNumber={currentQuestionNumber} onNext={handleNext} onPrevious={handlePrevious} errors={errors}/>
-            </div>
-        ) : (
-            <div className="pt-6 overflow-hidden shadow-lg page">
-                <ScoreDetail score={score} onReplay={handleReplay}/>
-            </div>
-        )
+    return(
+        <div className="pt-6 overflow-hidden shadow-lg page">
+            {!submission ? (
+                <LoadingMessage message={'Loading quiz'} />
+            ) : (
+            !score ? (
+                <div>
+                    <QuizPlayForm quiz={quiz} submission={submission} onAnswerChange={handleAnswerChange} onSubmit={handleSubmit} onReset={handleReplay} currentQuestionNumber={currentQuestionNumber} onNext={handleNext} onPrevious={handlePrevious} errors={errors}/>
+                </div>
+            ) : (
+                <div>
+                    <ScoreDetail score={score} onReplay={handleReplay}/>
+                </div>
+            ))}
+        </div>
     )
 };
 

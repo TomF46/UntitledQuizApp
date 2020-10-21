@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 import PaginationControls from "../../DisplayComponents/PaginationControls";
 import {getUsersWithPaginator, getFollowedUsers} from "../../../api/userApi"
 import UsersList from "../../DisplayComponents/UsersList";
+import LoadingMessage from "../../DisplayComponents/LoadingMessage";
 
 const FollowingUsersDashboard = ({ user }) => {
     const [usersPaginator, setUsers] = useState(null);
@@ -36,7 +37,7 @@ const FollowingUsersDashboard = ({ user }) => {
     return (
         <div className="users-following-dashboard border-t">
             {usersPaginator == null ? (
-                <p>...Loading followed users</p>
+                <LoadingMessage message={'Loading followed users dashboard'} />
             ) : (
             <div>
                 <h1 className="font-bold text-xl p-4 border-b">People you follow</h1>

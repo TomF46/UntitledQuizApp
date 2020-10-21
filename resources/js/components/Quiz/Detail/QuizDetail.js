@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import ScoresTableWithPagination from "../../DisplayComponents/ScoresTableWithPagination";
+import LoadingMessage from "../../DisplayComponents/LoadingMessage";
 
 const QuizDetail = ({ quiz, scoresPaginator, onScoresPageChange , onLike, onDislike }) => {
     return (
@@ -76,7 +77,7 @@ const QuizDetail = ({ quiz, scoresPaginator, onScoresPageChange , onLike, onDisl
                 <div className="inline-block p-4 mb-4">
                     <h2 className="font-bold text-2xl mb-4 text-center">Scores</h2>
                     {!scoresPaginator ? (
-                        <p>... Loading scores</p>
+                        <LoadingMessage message={'Loading scores'} />
                     ) : (
                         <ScoresTableWithPagination paginationData={scoresPaginator} onPageChange={onScoresPageChange} />
                     )}

@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import {getUserForEditing, editUserProfile } from "../../../api/userApi"
 import EditProfileForm from "./EditProfileForm";
 import { toast } from "react-toastify";
+import LoadingMessage from "../../DisplayComponents/LoadingMessage";
 
 const EditProfilePage = ({userId, history }) => {
     const [user, setUser] = useState(null);
@@ -60,7 +61,7 @@ const EditProfilePage = ({userId, history }) => {
     return (
         <div className="pt-6 overflow-hidden shadow-lg page">
             {user == null ? (
-                <p>...Loading user</p>
+                <LoadingMessage message={'Loading user'} />
             ) : ( 
                 <EditProfileForm user={user} onChange={handleChange} errors={errors} saving={saving} onSave={handleSave} />
             )}

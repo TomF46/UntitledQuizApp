@@ -7,6 +7,7 @@ import _, {debounce} from 'lodash';
 import { getTags } from "../../api/tagsApi";
 import SelectInput from "../FormComponents/SelectInput";
 import QuizListWithPagination from "../DisplayComponents/QuizListWithPagination";
+import LoadingMessage from "../DisplayComponents/LoadingMessage";
 
 const ExplorePage = ({ history }) => {
     const [quizzesPaginator, setQuizzesPaginator] = useState(null);
@@ -24,6 +25,7 @@ const ExplorePage = ({ history }) => {
         if (!tags) {
           getTags().then(data => {
             let tags = data.map(tag => {
+                //TODO if this happens eveywhere we get tags just do it on server 
                 return {value: tag.id, text: tag.name}
             });
             setTags(tags);
@@ -69,22 +71,14 @@ const ExplorePage = ({ history }) => {
 
         setFilters(prevFilters => ({
             ...prevFilters,
-            [name]: value
-        }));
-    }
-
-    function handleTagChange(event){
-        const { value } = event.target;
-        setFilters(prevFilters => ({
-            ...prevFilters,
-            'tag': Number(value)
+            [name]: name == "tag" ? Number(value) : value
         }));
     }
 
     return (
         <div className="explore-page overflow-hidden shadow-lg page mb-2">
             {!quizzesPaginator ? (
-                <p>... loading quizzes to explore</p>
+                <LoadingMessage message={'Loading quizzes to explore'} />
             ) : (
             <div>
                 <h1 className="font-bold text-4xl py-4 text-center pageHeader">Explore</h1>
@@ -104,7 +98,7 @@ const ExplorePage = ({ history }) => {
                             label="Tag"
                             value={filters.tag}
                             options={tags}
-                            onChange={handleTagChange}
+                            onChange={handleFilterChange}
                         />
                     </div>
                 </div>
