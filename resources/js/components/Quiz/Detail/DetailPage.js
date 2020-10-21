@@ -6,10 +6,11 @@ import QuizDetail from "./QuizDetail";
 import * as QuizApi from '../../../api/quizApi';
 import { confirmAlert } from "react-confirm-alert";
 import { toast } from "react-toastify";
+import { getScoresWithPaginator } from "../../../api/userApi";
 
 const QuizDetailPage = ({quizId, currentUser ,history }) => {
     const [quiz, setQuiz] = useState(null);
-    const [scores, setScores] = useState([]);
+    const [scoresPaginator, setScores] = useState(null);
 
 
     useEffect(() => {
@@ -37,6 +38,17 @@ const QuizDetailPage = ({quizId, currentUser ,history }) => {
         }).catch(error => {
             console.log("Error getting scores " + error);
             toast.error("Error getting scores " + error.message,{
+                autoClose: false,
+            });
+        });
+    }
+
+    function getScoresPage(url){
+        getScoresWithPaginator(url).then(scoreData => {
+            setScores(scoreData);
+        }).catch(error => {
+            console.log("Error getting user scores" + error);
+            toast.error("Error getting user scores " + error.message,{
                 autoClose: false,
             });
         });
@@ -119,7 +131,7 @@ const QuizDetailPage = ({quizId, currentUser ,history }) => {
         <p className="pt-6 overflow-hidden shadow-lg page">... Loading quiz</p>
     ) : (
         <div className="pt-6 overflow-hidden shadow-lg page">
-            <QuizDetail quiz={quiz} scores={scores} onLike={like} onDislike={dislike}/>
+            <QuizDetail quiz={quiz} scoresPaginator={scoresPaginator} onScoresPageChange={getScoresPage} onLike={like} onDislike={dislike}/>
             {quiz.creator_id == currentUser && (
                 <div className="p-4 mt-4 flex justify-between items-center border-t">
                     <div className="flex">

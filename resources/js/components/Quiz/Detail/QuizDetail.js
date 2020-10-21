@@ -1,9 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import ScoresTable from "../../DisplayComponents/ScoresTable";
+import ScoresTableWithPagination from "../../DisplayComponents/ScoresTableWithPagination";
 
-const QuizDetail = ({ quiz, scores, onLike, onDislike }) => {
+const QuizDetail = ({ quiz, scoresPaginator, onScoresPageChange , onLike, onDislike }) => {
     return (
         <div className="mt-6">
             <h1 className="font-bold text-2xl mb-4 text-center">{quiz.title}</h1>
@@ -75,7 +75,11 @@ const QuizDetail = ({ quiz, scores, onLike, onDislike }) => {
                 <div className="flex justify-center">
                 <div className="inline-block p-4 mb-4">
                     <h2 className="font-bold text-2xl mb-4 text-center">Scores</h2>
-                    <ScoresTable scores={scores} />
+                    {!scoresPaginator ? (
+                        <p>... Loading scores</p>
+                    ) : (
+                        <ScoresTableWithPagination paginationData={scoresPaginator} onPageChange={onScoresPageChange} />
+                    )}
                 </div>
                 </div>
             </div>
@@ -85,9 +89,10 @@ const QuizDetail = ({ quiz, scores, onLike, onDislike }) => {
 
 QuizDetail.propTypes = {
     quiz: PropTypes.object.isRequired,
-    scores: PropTypes.array.isRequired,
+    scoresPaginator: PropTypes.array.isRequired,
     onLike: PropTypes.func.isRequired,
-    onDislike: PropTypes.func.isRequired
+    onDislike: PropTypes.func.isRequired,
+    onScoresPageChange: PropTypes.func.isRequired
 };
 
 export default QuizDetail;

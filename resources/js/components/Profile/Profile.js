@@ -2,11 +2,10 @@ import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { followUser, getScoresForUser, getScoresWithPaginator, getUserById } from "../../api/userApi";
-import ScoresTable from "../DisplayComponents/ScoresTable";
 import { toast } from "react-toastify";
 import { getQuizzesByUser, getQuizzesWithPagination } from "../../api/quizApi";
-import PaginationControls from "../DisplayComponents/PaginationControls";
 import QuizListWithPagination from "../DisplayComponents/QuizListWithPagination";
+import ScoresTableWithPagination from "../DisplayComponents/ScoresTableWithPagination";
 
 const ProfilePage = ({ userId, currentUser, history, ...props }) => {
     const [user, setUser] = useState(null);
@@ -160,10 +159,7 @@ const ProfilePage = ({ userId, currentUser, history, ...props }) => {
                                 {!scoresPaginator ? (
                                     <p>... Loading scores</p>
                                 ) : (
-                                    <>
-                                    <ScoresTable scores={scoresPaginator.data} />
-                                    <PaginationControls to={scoresPaginator.to} from={scoresPaginator.from} of={scoresPaginator.total} onNext={() => getScoresPage(scoresPaginator.next_page_url)} onPrevious={() => getScoresPage(scoresPaginator.prev_page_url)} currentPage={scoresPaginator.current_page} lastPage={scoresPaginator.last_page} />
-                                    </>
+                                    <ScoresTableWithPagination paginationData={scoresPaginator} onPageChange={getScoresPage} />
                                 )}
                             </div>
                         </div>

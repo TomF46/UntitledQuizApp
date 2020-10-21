@@ -37,9 +37,12 @@ class QuizScoresController extends Controller
 
     public function show(Quiz $quiz)
     {
-        return response()->json($quiz->scores()->orderBy('score_percent', 'desc')->get()->map(function ($score) {
-            return $score->map();
-        }));
+        $paginator = $quiz->scores()->orderBy('score_percent', 'desc')->paginate(10);
+        $paginator->getCollection()->transform(function ($score) {
+            return $score->transform();
+        });
+
+        return response()->json($paginator);
     }
 
     protected function validateAnswers(Request $request)
