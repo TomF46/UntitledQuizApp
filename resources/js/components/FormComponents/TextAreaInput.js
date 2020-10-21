@@ -11,15 +11,15 @@ const TextAreaInput = ({ name, label, onChange, placeholder, value, error }) => 
                 {label}
             </label>
             <div className="control">
-                <textarea 
-                name={name} 
-                className="resize-y border min-w-full rounded focus:outline-none focus:shadow-outline"
-                value={value}
-                onChange={onChange}
-                required
+                <textarea
+                    name={name}
+                    className="resize-y border min-w-full rounded focus:outline-none focus:shadow-outline"
+                    value={value}
+                    onChange={onChange}
+                    required
                 ></textarea>
                 {error && (
-                    <div className="text-red-500 text-xs mt-2">{error}</div>
+                    <div className="text-red-500 text-xs p-1 mt-2">{error}</div>
                 )}
             </div>
         </div>

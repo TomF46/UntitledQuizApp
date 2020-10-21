@@ -21,7 +21,7 @@ const EmailInput = ({ name, label, onChange, placeholder, value, error }) => {
                     required
                 />
                 {error && (
-                    <div className="text-red-500 text-xs mt-2">{error}</div>
+                    <div className="text-red-500 text-xs p-1 mt-2">{error}</div>
                 )}
             </div>
         </div>

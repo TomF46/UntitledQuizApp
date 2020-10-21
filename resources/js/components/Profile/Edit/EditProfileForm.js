@@ -8,7 +8,7 @@ const EditProfileForm = ({ user, onChange, onSave, errors = {}, saving = false }
         <form className="" onSubmit={onSave}>
             <h2 className="font-bold text-4xl my-4 text-center">Edit your profile</h2>
             {errors.onSave && (
-                <div className="text-red-500 text-xs" role="alert">
+                <div className="text-red-500 text-xs p-1" role="alert">
                     {errors.onSave}
                 </div>
             )}
@@ -37,7 +37,7 @@ const EditProfileForm = ({ user, onChange, onSave, errors = {}, saving = false }
                 </div>
                 <div className="flex">
                     {errors.onSave && (
-                        <div className="text-red-500 text-xs" role="alert">
+                        <div className="text-red-500 text-xs p-1" role="alert">
                             {errors.onSave}
                         </div>
                     )}

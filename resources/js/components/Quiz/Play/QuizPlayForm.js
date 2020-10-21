@@ -8,34 +8,34 @@ const QuizPlayForm = ({ quiz, submission, onAnswerChange, currentQuestionNumber,
             <div>
                 {quiz.questions.map((question) => {
                     return (
-                    <div key={question.id}>
-                        {question.ordinal + 1 == currentQuestionNumber && 
-                        <div className="p-4">
-                            <p className="text-center font-bold text-2xl">{question.ordinal + 1}: {question.text}</p>
-                            <div className="flex">
-                            {quiz.questions[question.ordinal].answers.map((answer) => {
-                                return (
-                                    <button
-                                        key={answer.id}
-                                        type="button"
-                                        onClick={(e) => onAnswerChange(question.id, answer.id ,e)}
-                                        className={`text-white py-2 px-4 hover:bg-green-500 mr-2 my-12 flex-1 shadow 
-                                        ${submission.questions[question.ordinal].answer_id == answer.id  ? "bg-green-400" : "bg-purple-400"}`}
-                                    >
-                                        {answer.text}
-                                    </button>
-                                )
-                            })}
-                            </div>
+                        <div key={question.id}>
+                            {question.ordinal + 1 == currentQuestionNumber &&
+                                <div className="p-4">
+                                    <p className="text-center font-bold text-2xl">{question.ordinal + 1}: {question.text}</p>
+                                    <div className="flex">
+                                        {quiz.questions[question.ordinal].answers.map((answer) => {
+                                            return (
+                                                <button
+                                                    key={answer.id}
+                                                    type="button"
+                                                    onClick={(e) => onAnswerChange(question.id, answer.id, e)}
+                                                    className={`text-white py-2 px-4 hover:bg-green-500 mr-2 my-12 flex-1 shadow 
+                                        ${submission.questions[question.ordinal].answer_id == answer.id ? "bg-green-400" : "bg-purple-400"}`}
+                                                >
+                                                    {answer.text}
+                                                </button>
+                                            )
+                                        })}
+                                    </div>
+                                </div>
+                            }
                         </div>
-                        }
-                    </div>
                     )
                 })}
             </div>
             <div id="play-quiz-toolbar" className="p-4 flex justify-between items-center">
                 <div className="flex">
-                     <button
+                    <button
                         type="button"
                         onClick={onReset}
                         className="bg-red-400 text-white rounded py-2 px-4 hover:bg-red-500 mr-2 shadow inline-flex items-center"
@@ -47,23 +47,23 @@ const QuizPlayForm = ({ quiz, submission, onAnswerChange, currentQuestionNumber,
                     </button>
                 </div>
                 <div className="flex">
-                {errors.incomplete && (
-                    <div className="text-red-500 text-xs" role="alert">
-                        {errors.incomplete}
-                    </div>
-                )}
-                {errors.onSubmit && (
-                    <div className="text-red-500 text-xs" role="alert">
-                        {errors.onSubmit}
-                    </div>
-                )}
+                    {errors.incomplete && (
+                        <div className="text-red-500 text-xs p-1" role="alert">
+                            {errors.incomplete}
+                        </div>
+                    )}
+                    {errors.onSubmit && (
+                        <div className="text-red-500 text-xs p-1" role="alert">
+                            {errors.onSubmit}
+                        </div>
+                    )}
                 </div>
                 <div className="flex justify-right">
-                    {currentQuestionNumber > 1 && 
+                    {currentQuestionNumber > 1 &&
                         <button
-                        type="button"
-                        onClick={onPrevious}
-                        className="bg-purple-400 text-white rounded py-2 px-4 mr-2 hover:bg-purple-500 shadow inline-flex items-center"
+                            type="button"
+                            onClick={onPrevious}
+                            className="bg-purple-400 text-white rounded py-2 px-4 mr-2 hover:bg-purple-500 shadow inline-flex items-center"
                         >
                             <svg className="text-white h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 15l-3-3m0 0l3-3m-3 3h8M3 12a9 9 0 1118 0 9 9 0 01-18 0z" />
@@ -71,7 +71,7 @@ const QuizPlayForm = ({ quiz, submission, onAnswerChange, currentQuestionNumber,
                             <span className="ml-1">Previous</span>
                         </button>
                     }
-                    {currentQuestionNumber != quiz.questions.length ? ( 
+                    {currentQuestionNumber != quiz.questions.length ? (
                         <button
                             type="button"
                             onClick={onNext}
@@ -82,7 +82,7 @@ const QuizPlayForm = ({ quiz, submission, onAnswerChange, currentQuestionNumber,
                             </svg>
                             <span className="ml-1">Next</span>
                         </button>
-                        ) : (
+                    ) : (
                             <button
                                 onClick={onSubmit}
                                 className="bg-purple-400 text-white rounded py-2 px-4 hover:bg-purple-500 shadow"

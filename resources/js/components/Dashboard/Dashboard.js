@@ -9,15 +9,15 @@ import ScoreDashboard from "./Components/ScoreDashboard";
 import PopularQuizzesDashboard from "./Components/PopularQuizzesDashboard";
 import LoadingMessage from "../DisplayComponents/LoadingMessage";
 
-const DashboardPage = ({userId, history }) => {
+const DashboardPage = ({ userId, history }) => {
     const [user, setUser] = useState(null);
 
     useEffect(() => {
-        if(!user) {
+        if (!user) {
             getUserById(userId).then(userData => {
                 setUser(userData);
             }).catch(error => {
-                toast.error("Error getting user " + error.message,{
+                toast.error("Error getting user " + error.message, {
                     autoClose: false,
                 });
             });
@@ -29,22 +29,22 @@ const DashboardPage = ({userId, history }) => {
             {user == null ? (
                 <LoadingMessage message={'Loading Dashboard'} />
             ) : (
-            <div>
-                <h1 className="font-bold text-4xl my-4 text-center">Welcome {user.username}</h1>
-                <div className="mb-4">
-                    <PopularQuizzesDashboard />
-                </div>
-                <div className="mb-4">
-                    <FollowingUsersDashboard user={user} />
-                </div>
-                <div className="mb-4">
-                    <FollowingQuizDashboard user={user} />
-                </div>
-                <div className="mb-4">
-                    <ScoreDashboard user={user} />
-                </div>
-            </div>
-            )}
+                    <div>
+                        <h1 className="font-bold text-4xl my-4 text-center">Welcome {user.username}</h1>
+                        <div className="mb-4">
+                            <PopularQuizzesDashboard />
+                        </div>
+                        <div className="mb-4">
+                            <FollowingUsersDashboard user={user} />
+                        </div>
+                        <div className="mb-4">
+                            <FollowingQuizDashboard user={user} />
+                        </div>
+                        <div className="mb-4">
+                            <ScoreDashboard user={user} />
+                        </div>
+                    </div>
+                )}
         </div>
     );
 };
@@ -55,9 +55,8 @@ DashboardPage.propTypes = {
 };
 
 const mapStateToProps = (state) => {
-    const userId = state.tokens.user_id;
     return {
-        userId
+        userId: state.tokens.user_id
     };
 };
 

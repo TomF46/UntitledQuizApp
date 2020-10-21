@@ -76,7 +76,7 @@ class Quiz extends Model
             'totalLikes' => $this->totalLikes(),
             'totalDislikes' => $this->totalDislikes(),
             'tags' => $this->tags()->get()->map(function ($tag) {
-                return $tag->map();
+                return $tag->mapForSelect();
             }),
             'creator' => $this->user->username,
             'creator_id' => $this->user->id
