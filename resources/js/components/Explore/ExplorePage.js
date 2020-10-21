@@ -26,7 +26,7 @@ const ExplorePage = ({ history }) => {
             setTags(tags);
           });
         }
-      }, tags);
+      }, [tags]);
 
     useEffect(() => {
         let debounced = debounce(

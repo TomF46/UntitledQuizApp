@@ -14,7 +14,7 @@ const QuizListWithPagination = ({ paginationData, onPageChange }) => {
 };
 
 QuizListWithPagination.propTypes = {
-    paginationData: PropTypes.array.isRequired,
+    paginationData: PropTypes.object.isRequired,
     onPageChange: PropTypes.func.isRequired
 };
 

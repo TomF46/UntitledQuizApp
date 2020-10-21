@@ -90,7 +90,7 @@ const QuizDetail = ({ quiz, scoresPaginator, onScoresPageChange , onLike, onDisl
 
 QuizDetail.propTypes = {
     quiz: PropTypes.object.isRequired,
-    scoresPaginator: PropTypes.array.isRequired,
+    scoresPaginator: PropTypes.object,
     onLike: PropTypes.func.isRequired,
     onDislike: PropTypes.func.isRequired,
     onScoresPageChange: PropTypes.func.isRequired

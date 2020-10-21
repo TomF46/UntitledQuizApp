@@ -8,7 +8,7 @@ import MultiSelectInput from "../../FormComponents/MultiSelectInput";
 const QuizForm = ({ quiz, tags, onAddQuestion, onAddAnswer , onSave, onChange, onTagChange , onQuestionChange, onAnswerChange, onAnswerCheckboxChange, onReset, onRemoveQuestion, onRemoveAnswer ,saving = false, errors = {} }) => {
     return (
         <form className="" onSubmit={onSave}>
-            <h2 className="font-bold text-4xl my-4 text-center">{quiz.id ? "Edit" : "Add"} Quiz</h2>
+            <h2 className="font-bold text-4xl py-4 text-center">{quiz.id ? "Edit" : "Add"} Quiz</h2>
             {errors.onSave && (
                 <div className="text-red-500 text-xs" role="alert">
                     {errors.onSave}
@@ -48,9 +48,9 @@ const QuizForm = ({ quiz, tags, onAddQuestion, onAddAnswer , onSave, onChange, o
             </div>
             {quiz.questions.length > 0 &&  <h2 className="font-bold border-t text-3xl py-4 text-center">Questions</h2>}
             {/* Todo sort out error handling for nested items */}
-            {quiz.questions.map((row, index) => {
+            {quiz.questions.map((question, index) => {
               return (
-                  <div className="p-4 mb-6 border-t" key={index}>
+                  <div className="p-4 mb-6 border-t" key={question.id ? question.id : index}>
                     <h3 className="font-bold text-xl">Question {index + 1}</h3>
                     <div className="mb-6">
                         <TextInput
@@ -61,9 +61,9 @@ const QuizForm = ({ quiz, tags, onAddQuestion, onAddAnswer , onSave, onChange, o
                         />
                     </div>
                     {quiz.questions[index].answers.length > 0 &&  <h2 className="font-bold text-lg my-2">Answers:</h2>}
-                    {quiz.questions[index].answers.map((row, qIndex) => {
+                    {quiz.questions[index].answers.map((answer, qIndex) => {
               return (
-                <div className="mb-6">
+                <div className="mb-6" key={answer.id ? answer.id : qIndex}>
                     <TextInput
                         name={`questions[${index}].answers[${qIndex}].text`}
                         label="Text"

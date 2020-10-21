@@ -13,7 +13,7 @@ const SelectInput = ({ name, label, onChange, value, options, error }) => {
             <div className="relative">
                 <select
                     name={name}
-                    value={value}
+                    value={value ? value : ''}
                     onChange={onChange}
                     className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 leading-tight focus:outline-none focus:outline"
                 >

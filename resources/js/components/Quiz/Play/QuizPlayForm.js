@@ -8,9 +8,9 @@ const QuizPlayForm = ({ quiz, submission, onAnswerChange, currentQuestionNumber,
             <div>
                 {quiz.questions.map((question) => {
                     return (
-                    <>
+                    <div key={question.id}>
                         {question.ordinal + 1 == currentQuestionNumber && 
-                        <div className="p-4" key={question.id}>
+                        <div className="p-4">
                             <p className="text-center font-bold text-2xl">{question.ordinal + 1}: {question.text}</p>
                             <div className="flex">
                             {quiz.questions[question.ordinal].answers.map((answer) => {
@@ -29,7 +29,7 @@ const QuizPlayForm = ({ quiz, submission, onAnswerChange, currentQuestionNumber,
                             </div>
                         </div>
                         }
-                    </>
+                    </div>
                     )
                 })}
             </div>

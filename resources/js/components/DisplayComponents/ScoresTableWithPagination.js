@@ -15,7 +15,7 @@ const ScoresTableWithPagination = ({ paginationData, onPageChange }) => {
 };
 
 ScoresTableWithPagination.propTypes = {
-    paginationData: PropTypes.array.isRequired,
+    paginationData: PropTypes.object.isRequired,
     onPageChange: PropTypes.func.isRequired
 };
 

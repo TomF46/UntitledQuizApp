@@ -43,7 +43,7 @@ const QuizManagementPage = ({ quizId, userId ,history }) => {
               setTags(tags)
           });
         }
-      }, tags);
+      }, [tags]);
 
     function handleChange(event) {
         const { name, value } = event.target;
@@ -228,7 +228,7 @@ const QuizManagementPage = ({ quizId, userId ,history }) => {
     }
 
     return (
-        <div className="quiz-management-page overflow-hidden shadow-lg page">
+        <div className="quiz-management-page shadow-lg page">
             {quiz.creator_id && quiz.creator_id != userId &&  <Redirect to="/" />}
             {!loaded ? (
                 <LoadingMessage message={'Loading form'} />
