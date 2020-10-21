@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import { getQuiz, getQuizzes, getQuizzesWithPagination, searchQuizzes, searchQuizzesWithPagination } from "../../api/quizApi";
-import QuizList from "../DisplayComponents/QuizList";
+import { searchQuizzes, searchQuizzesWithPagination } from "../../api/quizApi";
 import { toast } from "react-toastify";
-import PaginationControls from "../DisplayComponents/PaginationControls";
 import TextInput from "../FormComponents/TextInput";
 import _, {debounce} from 'lodash';
 import { getTags } from "../../api/tagsApi";
 import SelectInput from "../FormComponents/SelectInput";
+import QuizListWithPagination from "../DisplayComponents/QuizListWithPagination";
 
 const ExplorePage = ({ history }) => {
     const [quizzesPaginator, setQuizzesPaginator] = useState(null);
@@ -75,7 +74,7 @@ const ExplorePage = ({ history }) => {
     }
 
     function handleTagChange(event){
-        const { name, value } = event.target;
+        const { value } = event.target;
         setFilters(prevFilters => ({
             ...prevFilters,
             'tag': Number(value)
@@ -109,8 +108,7 @@ const ExplorePage = ({ history }) => {
                         />
                     </div>
                 </div>
-                <QuizList quizzes={quizzesPaginator.data} />
-                <PaginationControls to={quizzesPaginator.to} from={quizzesPaginator.from} of={quizzesPaginator.total} onNext={() => getQuizPage(quizzesPaginator.next_page_url)} onPrevious={() => getQuizPage(quizzesPaginator.prev_page_url)} currentPage={quizzesPaginator.current_page} lastPage={quizzesPaginator.last_page} />
+                <QuizListWithPagination paginationData={quizzesPaginator} onPageChange={getQuizPage} />
             </div>
             )}
         </div>

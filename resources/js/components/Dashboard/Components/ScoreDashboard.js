@@ -10,7 +10,7 @@ const ScoreDashboard = ({ user }) => {
 
     useEffect(() => {
         if(!scoresPaginator) {
-            getScoresForUser(user.profile.id).then(scoreData => {
+            getScoresForUser(user.id).then(scoreData => {
                 setScores(scoreData);
             }).catch(error => {
                 console.log("Error getting user scores" + error);

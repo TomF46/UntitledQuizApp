@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
 import { getQuizzesByUserFollowing, getQuizzesWithPagination } from "../../../api/quizApi";
 import { toast } from "react-toastify";
-import PaginationControls from "../../DisplayComponents/PaginationControls";
-import QuizList from "../../DisplayComponents/QuizList";
+import QuizListWithPagination from "../../DisplayComponents/QuizListWithPagination";
 
 const FollowingQuizDashboard = ({ user }) => {
     const [quizzesPaginator, setQuizzesPaginator] = useState(null);
@@ -42,8 +40,7 @@ const FollowingQuizDashboard = ({ user }) => {
             <div>
                 <h1 className="font-bold text-xl p-4 border-b">Latest quizzes by people you follow</h1>
                 <div className="border-b">
-                <QuizList quizzes={quizzesPaginator.data} />
-                <PaginationControls to={quizzesPaginator.to} from={quizzesPaginator.from} of={quizzesPaginator.total} onNext={() => getQuizzesPage(quizzesPaginator.next_page_url)} onPrevious={() => getQuizzesPage(quizzesPaginator.prev_page_url)} currentPage={quizzesPaginator.current_page} lastPage={quizzesPaginator.last_page} />
+                <QuizListWithPagination paginationData={quizzesPaginator} onPageChange={getQuizzesPage} />
                 </div>
             </div>
             )}

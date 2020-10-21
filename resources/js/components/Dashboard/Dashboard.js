@@ -31,7 +31,7 @@ const DashboardPage = ({userId, history }) => {
                 <p className="text-center">...Loading Dashboard</p>
             ) : (
             <div>
-                <h1 className="font-bold text-4xl my-4 text-center">Welcome {user.profile.username}</h1>
+                <h1 className="font-bold text-4xl my-4 text-center">Welcome {user.username}</h1>
                 <div className="mb-4">
                     <PopularQuizzesDashboard />
                 </div>

@@ -11,7 +11,7 @@ const QuizDashboard = ({ user }) => {
 
     useEffect(() => {
         if(!quizzesPaginator) {
-            getQuizzesByUser(user.profile.id).then(quizzesData => {
+            getQuizzesByUser(user.id).then(quizzesData => {
                 setQuizzesPaginator(quizzesData);
             }).catch(error => {
                 console.log("Error getting quizzes " + error);

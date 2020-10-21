@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from "react";
-import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
-import { getQuizzesByUserFollowing, getMostPopularQuizzes } from "../../../api/quizApi";
+import { getMostPopularQuizzes } from "../../../api/quizApi";
 import { toast } from "react-toastify";
-import PaginationControls from "../../DisplayComponents/PaginationControls";
 import QuizList from "../../DisplayComponents/QuizList";
 
 const PopularQuizzesDashboard = () => {
