@@ -6,7 +6,7 @@ export function saveQuiz(quiz) {
 
 function editQuiz(quiz){
     return axiosClient
-        .put(`/api/quiz/${quiz.id}`, quiz)
+        .put(`/api/quizzes/${quiz.id}`, quiz)
         .then(response => {
             return response.data;
         })
@@ -17,7 +17,7 @@ function editQuiz(quiz){
 
 function createQuiz(quiz){
     return axiosClient
-        .post('/api/quiz', quiz)
+        .post('/api/quizzes', quiz)
         .then(response => {
             return response.data;
         })
@@ -28,7 +28,7 @@ function createQuiz(quiz){
 
 export function getQuiz(id) {
     return axiosClient
-        .get(`/api/quiz/${id}`)
+        .get(`/api/quizzes/${id}`)
         .then(response => {
             return response.data;
         })
@@ -39,7 +39,7 @@ export function getQuiz(id) {
 
 export function getQuizForEdit(id) {
     return axiosClient
-        .get(`/api/quiz/${id}/edit`)
+        .get(`/api/quizzes/${id}/edit`)
         .then(response => {
             return response.data;
         })
@@ -50,7 +50,7 @@ export function getQuizForEdit(id) {
 
 export function getQuizzes() {
     return axiosClient
-        .get(`/api/quiz`)
+        .get(`/api/quizzes`)
         .then(response => {
             return response.data;
         })
@@ -106,7 +106,7 @@ export function getMostPopularQuizzes(){
 
 export function submitScore(quizId, submission){
     return axiosClient
-        .post(`/api/quiz/${quizId}/scores`, submission)
+        .post(`/api/quizzes/${quizId}/scores`, submission)
         .then(response => {
             return response.data;
         })
@@ -117,7 +117,7 @@ export function submitScore(quizId, submission){
 
 export function getScoresForQuiz(quizId){
     return axiosClient
-    .get(`/api/quiz/${quizId}/scores`)
+    .get(`/api/quizzes/${quizId}/scores`)
     .then(response => {
         return response.data;
     })
@@ -128,7 +128,7 @@ export function getScoresForQuiz(quizId){
 
 export function deleteQuiz(quizId){
     return axiosClient
-    .delete(`/api/quiz/${quizId}`)
+    .delete(`/api/quizzes/${quizId}`)
     .then(response => {
         return response.data;
     })
@@ -150,7 +150,7 @@ export function getQuizzesByUser(userId){
 
 export function searchQuizzes(filters){
     return axiosClient
-        .post(`/api/quiz/search`, filters)
+        .post(`/api/quizzes/search`, filters)
         .then(response => {
             return response.data;
         })
@@ -161,7 +161,7 @@ export function searchQuizzes(filters){
 
 export function likeQuiz(quizId){
     return axiosClient
-        .post(`/api/quiz/${quizId}/like`)
+        .post(`/api/quizzes/${quizId}/like`)
         .then(response => {
             return response.data;
         })
@@ -172,7 +172,7 @@ export function likeQuiz(quizId){
 
 export function dislikeQuiz(quizId){
     return axiosClient
-        .post(`/api/quiz/${quizId}/dislike`)
+        .post(`/api/quizzes/${quizId}/dislike`)
         .then(response => {
             return response.data;
         })
@@ -183,7 +183,7 @@ export function dislikeQuiz(quizId){
 
 export function removeLikeOrDislike(quizId){
     return axiosClient
-        .delete(`/api/quiz/${quizId}/like/remove`)
+        .delete(`/api/quizzes/${quizId}/like`)
         .then(response => {
             return response.data;
         })

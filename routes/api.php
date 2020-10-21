@@ -29,28 +29,18 @@ Route::group([
 });
 
 Route::middleware('auth:api')->group(function () {
-    Route::get('/quiz', [App\Http\Controllers\QuizController::class, 'index']);
-    Route::post('/quiz', [App\Http\Controllers\QuizController::class, 'store']);
-    Route::get('/quiz/{quiz}', [App\Http\Controllers\QuizController::class, 'show']);
-    Route::put('/quiz/{quiz}', [App\Http\Controllers\QuizController::class, 'update']);
-    Route::delete('/quiz/{quiz}', [App\Http\Controllers\QuizController::class, 'destroy']);
-    Route::get('/quiz/{quiz}/edit', [App\Http\Controllers\QuizController::class, 'edit']);
-    Route::get('/quiz/{quiz}/scores', [App\Http\Controllers\QuizScoresController::class, 'show']);
-    Route::post('/quiz/{quiz}/scores', [App\Http\Controllers\QuizScoresController::class, 'store']);
-    Route::post('/quiz/search', [App\Http\Controllers\QuizSearchController::class, 'filter']);
-    Route::post('/quiz/{quiz}/like', [App\Http\Controllers\QuizLikesController::class, 'like']);
-    Route::post('/quiz/{quiz}/dislike', [App\Http\Controllers\QuizLikesController::class, 'dislike']);
-    Route::delete('/quiz/{quiz}/like/remove', [App\Http\Controllers\QuizLikesController::class, 'remove']);
-
-    Route::get('/dashboard/quizzes/followed', [App\Http\Controllers\DashboardController::class, 'getQuizzesByFollowedUser']);
-    Route::get('/dashboard/quizzes/popular', [App\Http\Controllers\DashboardController::class, 'getPopularQuizzes']);
-    Route::get('/dashboard/users/followed', [App\Http\Controllers\DashboardController::class, 'getFollowedUsers']);
-
-
-    Route::delete('/scores/{score}', [App\Http\Controllers\ScoresController::class, 'destroy']);
-
-
-
+    Route::get('/quizzes', [App\Http\Controllers\QuizController::class, 'index']);
+    Route::post('/quizzes', [App\Http\Controllers\QuizController::class, 'store']);
+    Route::get('/quizzes/{quiz}', [App\Http\Controllers\QuizController::class, 'show']);
+    Route::put('/quizzes/{quiz}', [App\Http\Controllers\QuizController::class, 'update']);
+    Route::delete('/quizzes/{quiz}', [App\Http\Controllers\QuizController::class, 'destroy']);
+    Route::get('/quizzes/{quiz}/edit', [App\Http\Controllers\QuizController::class, 'edit']);
+    Route::get('/quizzes/{quiz}/scores', [App\Http\Controllers\QuizScoresController::class, 'show']);
+    Route::post('/quizzes/{quiz}/scores', [App\Http\Controllers\QuizScoresController::class, 'store']);
+    Route::post('/quizzes/search', [App\Http\Controllers\QuizSearchController::class, 'filter']);
+    Route::post('/quizzes/{quiz}/like', [App\Http\Controllers\QuizLikesController::class, 'like']);
+    Route::post('/quizzes/{quiz}/dislike', [App\Http\Controllers\QuizLikesController::class, 'dislike']);
+    Route::delete('/quizzes/{quiz}/like', [App\Http\Controllers\QuizLikesController::class, 'remove']);
 
     Route::get('/users', [App\Http\Controllers\UsersController::class, 'index']);
     Route::get('/users/{user}', [App\Http\Controllers\UsersController::class, 'show']);
@@ -61,13 +51,11 @@ Route::middleware('auth:api')->group(function () {
     Route::post('/users/{user}/follow', [App\Http\Controllers\UserFollowsController::class, 'index']);
     Route::get('/users/{user}/following', [App\Http\Controllers\UserFollowsController::class, 'following']);
 
-
-
-
-
-
-
-
+    Route::delete('/scores/{score}', [App\Http\Controllers\ScoresController::class, 'destroy']);
 
     Route::get('/tags', [App\Http\Controllers\TagsController::class, 'index']);
+
+    Route::get('/dashboard/quizzes/followed', [App\Http\Controllers\DashboardController::class, 'getQuizzesByFollowedUser']);
+    Route::get('/dashboard/quizzes/popular', [App\Http\Controllers\DashboardController::class, 'getPopularQuizzes']);
+    Route::get('/dashboard/users/followed', [App\Http\Controllers\DashboardController::class, 'getFollowedUsers']);
 });
