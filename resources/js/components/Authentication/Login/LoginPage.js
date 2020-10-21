@@ -37,13 +37,11 @@ const LoginPage = ({ login, userIsAuthenticated, history }) => {
         event.preventDefault();
         if (!formIsValid()) return;
         setSaving(true);
-        console.log(user);
         login(user)
             .then(response => {
                 history.push("/dashboard");
             })
             .catch(err => {
-                console.log(err);
                 setSaving(false);
                 setErrors({ onSave: err.message });
             });

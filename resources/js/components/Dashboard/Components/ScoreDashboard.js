@@ -13,7 +13,6 @@ const ScoreDashboard = ({ user }) => {
             getScoresForUser(user.id).then(scoreData => {
                 setScores(scoreData);
             }).catch(error => {
-                console.log("Error getting user scores" + error);
                 toast.error("Error getting user scores " + error.message,{
                     autoClose: false,
                 });
@@ -25,7 +24,6 @@ const ScoreDashboard = ({ user }) => {
         getScoresWithPaginator(url).then(scoreData => {
             setScores(scoreData);
         }).catch(error => {
-            console.log("Error getting user scores" + error);
             toast.error("Error getting user scores " + error.message,{
                 autoClose: false,
             });

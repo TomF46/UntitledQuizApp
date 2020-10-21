@@ -11,10 +11,8 @@ const PopularQuizzesDashboard = () => {
     useEffect(() => {
         if(!quizzes) {
             getMostPopularQuizzes().then(quizzesData => {
-                console.log(quizzesData);
                 setquizzes(quizzesData);
             }).catch(error => {
-                console.log("Error getting quizzes " + error);
                 toast.error("Error getting quizzes " + error.message,{
                     autoClose: false,
                 });

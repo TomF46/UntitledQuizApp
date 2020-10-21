@@ -14,7 +14,6 @@ const FollowingQuizDashboard = ({ user }) => {
             getQuizzesByUserFollowing().then(quizzesData => {
                 setQuizzesPaginator(quizzesData);
             }).catch(error => {
-                console.log("Error getting quizzes " + error);
                 toast.error("Error getting quizzes " + error.message,{
                     autoClose: false,
                 });
@@ -26,7 +25,6 @@ const FollowingQuizDashboard = ({ user }) => {
         getQuizzesWithPagination(url).then(quizzesData => {
             setQuizzesPaginator(quizzesData);
         }).catch(error => {
-            console.log("Error getting quizzes " + error);
             toast.error("Error getting quizzes " + error.message,{
                 autoClose: false,
             });

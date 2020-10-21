@@ -20,7 +20,6 @@ const ProfilePage = ({ userId, currentUser, history, ...props }) => {
                 getUserScores(userData.id);
                 getUserQuizzes(userData.id);
             }).catch(error => {
-                console.log("Error getting user " + error);
                 toast.error("Error getting user " + error.message,{
                     autoClose: false,
                 });
@@ -32,7 +31,6 @@ const ProfilePage = ({ userId, currentUser, history, ...props }) => {
         getScoresForUser(id).then(scoreData => {
             setScoresPaginator(scoreData);
         }).catch(error => {
-            console.log("Error getting user scores" + error);
             toast.error("Error getting user scores " + error.message,{
                 autoClose: false,
             });
@@ -43,7 +41,6 @@ const ProfilePage = ({ userId, currentUser, history, ...props }) => {
         getQuizzesByUser(id).then(quizzesData => {
             setQuizzesPaginator(quizzesData);
         }).catch(error => {
-            console.log("Error getting quizzes " + error);
             toast.error("Error getting quizzes " + error.message,{
                 autoClose: false,
             });
@@ -54,7 +51,6 @@ const ProfilePage = ({ userId, currentUser, history, ...props }) => {
         getQuizzesWithPagination(url).then(quizzesData => {
             setQuizzesPaginator(quizzesData);
         }).catch(error => {
-            console.log("Error getting quizzes " + error);
             toast.error("Error getting quizzes " + error.message,{
                 autoClose: false,
             });
@@ -65,7 +61,6 @@ const ProfilePage = ({ userId, currentUser, history, ...props }) => {
         getScoresWithPaginator(url).then(scoreData => {
             setScoresPaginator(scoreData);
         }).catch(error => {
-            console.log("Error getting user scores" + error);
             toast.error("Error getting user scores " + error.message,{
                 autoClose: false,
             });

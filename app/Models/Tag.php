@@ -21,4 +21,12 @@ class Tag extends Model
             'name' => $this->name
         ];
     }
+
+    public function mapForSelect()
+    {
+        return [
+            'value' => $this->id,
+            'text' => $this->name
+        ];
+    }
 }

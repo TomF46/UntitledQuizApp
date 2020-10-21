@@ -27,7 +27,6 @@ const QuizManagementPage = ({ quizId, userId ,history }) => {
             setQuiz({ ...data})
             setLoaded(true);
           }).catch(error => {
-              console.log(error);
               toast.error("Error fetching quiz to edit " + error.message,{
                     autoClose: false,
                 });
@@ -40,13 +39,9 @@ const QuizManagementPage = ({ quizId, userId ,history }) => {
 
       useEffect(() => {
         if (!tags) {
-          getTags().then(data => {
-              setTags(data.map(tag => {
-                  return {value: tag.id, text: tag.name}
-              }));
-          }).catch(error => {
-              console.log(error);
-          })
+          getTags().then(tags => {
+              setTags(tags)
+          });
         }
       }, tags);
 
@@ -143,7 +138,6 @@ const QuizManagementPage = ({ quizId, userId ,history }) => {
             history.push(`/quiz/${response.id}`);
         })
         .catch(err => {
-            console.log(err);
             setSaving(false);
             toast.error("Error saving quiz",{
                 autoClose: false,

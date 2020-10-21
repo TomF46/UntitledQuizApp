@@ -22,11 +22,9 @@ const QuizDetailPage = ({quizId, currentUser ,history }) => {
 
     function getQuizData(){
         getQuiz(quizId).then(quizData => {
-            console.log(quizData);
             setQuiz(quizData);
             getScores(quizData.id);
         }).catch(error => {
-            console.log("Error getting quiz " + error);
             toast.error("Error getting quiz " + error.message,{
                 autoClose: false,
             });
@@ -37,7 +35,6 @@ const QuizDetailPage = ({quizId, currentUser ,history }) => {
         getScoresForQuiz(id).then(scores => {
             setScores(scores);
         }).catch(error => {
-            console.log("Error getting scores " + error);
             toast.error("Error getting scores " + error.message,{
                 autoClose: false,
             });
@@ -48,7 +45,6 @@ const QuizDetailPage = ({quizId, currentUser ,history }) => {
         getScoresWithPaginator(url).then(scoreData => {
             setScores(scoreData);
         }).catch(error => {
-            console.log("Error getting user scores" + error);
             toast.error("Error getting user scores " + error.message,{
                 autoClose: false,
             });
@@ -77,7 +73,6 @@ const QuizDetailPage = ({quizId, currentUser ,history }) => {
             toast.success("Quiz deleted.")
             history.push('/explore');
         }).catch(error => {
-            console.log(error);
             toast.error("Unable to delete quiz " + error.message,{
                 autoClose: false,
             });
@@ -94,7 +89,6 @@ const QuizDetailPage = ({quizId, currentUser ,history }) => {
             toast.success("Quiz Liked.")
             getQuizData();
         }).catch(error => {
-            console.log(error);
             toast.error("Unable to like quiz " + error.message,{
                 autoClose: false,
             });
@@ -110,7 +104,6 @@ const QuizDetailPage = ({quizId, currentUser ,history }) => {
             toast.success("Quiz disliked.")
             getQuizData();
         }).catch(error => {
-            console.log(error);
             toast.error("Unable to dislike quiz " + error.message,{
                 autoClose: false,
             });

@@ -17,7 +17,6 @@ const EditProfilePage = ({userId, history }) => {
             getUserForEditing(userId).then(userData => {
                 setUser(userData);
             }).catch(error => {
-                console.log("Error getting user " + error);
                 toast.error("Error getting user " + error.message,{
                     autoClose: false,
                 });
@@ -51,7 +50,6 @@ const EditProfilePage = ({userId, history }) => {
             toast.success("Profile updated!")
             history.push("/profile")
         }).catch(error => {
-            console.log(error);
             toast.error("Error updating profile " + error.message,{
                 autoClose: false,
             });

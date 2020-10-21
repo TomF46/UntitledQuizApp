@@ -23,7 +23,6 @@ const QuizPlayPage = ({quizId ,history }) => {
                 setQuiz(quizData);
                 createBlankSubmission(quizData);
             }).catch(error => {
-                console.log("Error getting quiz " + error);
                 toast.error("Error getting quiz " + error.message,{
                     autoClose: false,
                 });
@@ -89,7 +88,6 @@ const QuizPlayPage = ({quizId ,history }) => {
         submitScore(quiz.id, submission).then(response => {
             setScore({ ...response});
         }).catch(error => {
-            console.log("Unable to submit " + error);
             toast.error("Unable to submit " + error.message,{
                 autoClose: false,
             });
