@@ -10,50 +10,17 @@ use Illuminate\Support\Facades\Validator;
 
 class QuizController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
 
         $paginator = Quiz::latest()->paginate(10);
         $paginator->getCollection()->transform(function ($quiz) {
-            $quiz->questionsCount = count($quiz->questions);
-            $quiz->totalPlays = count($quiz->scores);
-            $quiz->totalLikes = $quiz->totalLikes();
-            $quiz->totalDislikes = $quiz->totalDislikes();
-            $quiz->tags = $quiz->tags()->get()->map(function ($tag) {
-                return [
-                    'id' => $tag->id,
-                    'name' => $tag->name
-                ];
-            });
-            $quiz->creator = $quiz->user->username;
-            $quiz->creator_id = $quiz->user->id;
-            return $quiz;
+            return $quiz->transformWithoutQuestions();
         });
 
         return response()->json($paginator);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $attributes = $this->validateQuiz($request);
@@ -81,68 +48,19 @@ class QuizController extends Controller
         return response()->json($quiz, 201);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Quiz  $quiz
-     * @return \Illuminate\Http\Response
-     */
     public function show(Request $request, Quiz $quiz)
     {
-        return response()->json([
-            'id' => $quiz->id,
-            'title' => $quiz->title,
-            'description' => $quiz->description,
-            'questions' => $this->removeAnswersFromQuestion($quiz->questions()->with('answers')->get()),
-            'totalPlays' => count($quiz->scores),
-            'totalLikes' => $quiz->totalLikes(),
-            'totalDislikes' => $quiz->totalDislikes(),
-            'tags' => $quiz->tags()->get()->map(function ($tag) {
-                return [
-                    'id' => $tag->id,
-                    'name' => $tag->name
-                ];
-            }),
-            'creator' => $quiz->user->username,
-            'creator_id' => $quiz->user->id,
-            'likedByUser' => $quiz->isLikedBy($request->user()),
-            'dislikedByUser' => $quiz->isDislikedBy($request->user()),
-        ]);
+        $mappedQuiz = $quiz->mapDetailWithoutQuestions($request->User());
+        return response()->json($mappedQuiz);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Quiz  $quiz
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Request $request, Quiz $quiz)
     {
         if ($quiz->user->id != $request->user()->id) return response()->json(['error' => 'unauthorized.'], 401);
 
-        return response()->json([
-            'id' => $quiz->id,
-            'title' => $quiz->title,
-            'description' => $quiz->description,
-            'questions' => $quiz->questions()->with('answers')->get(),
-            'tags' => $quiz->tags()->get()->map(function ($tag) {
-                return [
-                    'id' => $tag->id,
-                    'name' => $tag->name
-                ];
-            }),
-            'creator' => $quiz->user->username,
-            'creator_id' => $quiz->user->id
-        ]);
+        return response()->json($quiz->mapOverviewWithQuestions());
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Quiz  $quiz
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, Quiz $quiz)
     {
         if ($quiz->user->id != $request->user()->id) return response()->json(['error' => 'Unauthorized.'], 401);
@@ -167,33 +85,12 @@ class QuizController extends Controller
         return response()->json($quiz);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Quiz  $quiz
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Request $request, Quiz $quiz)
     {
         if ($quiz->user->id != $request->user()->id) return response()->json(['error' => 'unauthorized.'], 401);
 
         $quiz->delete();
         return response()->noContent();
-    }
-
-    protected function removeAnswersFromQuestion($questions)
-    {
-        foreach ($questions as $question) {
-            $this->removeAnswers($question);
-        }
-        return $questions;
-    }
-
-    protected function removeAnswers($question)
-    {
-        foreach ($question->answers as $answer) {
-            unset($answer->is_correct);
-        }
     }
 
     protected function saveAnswers($quiz, $requestQuestions)

@@ -9,15 +9,6 @@ use Illuminate\Http\Request;
 
 class QuizScoresController extends Controller
 {
-    public function index()
-    {
-    }
-
-    public function create()
-    {
-        //
-    }
-
     public function store(Quiz $quiz, Request $request)
     {
         $attributes = $this->validateAnswers($request);
@@ -47,30 +38,8 @@ class QuizScoresController extends Controller
     public function show(Quiz $quiz)
     {
         return response()->json($quiz->scores()->orderBy('score_percent', 'desc')->get()->map(function ($score) {
-            return [
-                'id' => $score->id,
-                'username' => $score->user->username,
-                'user_id' => $score->user->id,
-                'quiz_name' => $score->quiz->title,
-                'quiz_id' => $score->quiz->id,
-                'score' => $score->score,
-                'score_percent' => $score->score_percent
-            ];
+            return $score->map();
         }));
-    }
-
-    public function edit(Score $Score)
-    {
-    }
-
-    public function update(Request $request, Score $Score)
-    {
-        //
-    }
-
-    public function destroy(Score $Score)
-    {
-        //
     }
 
     protected function validateAnswers(Request $request)

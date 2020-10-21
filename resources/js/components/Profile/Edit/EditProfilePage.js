@@ -58,7 +58,7 @@ const EditProfilePage = ({userId, history }) => {
     }
 
     return (
-        <div className="edit-profile-page">
+        <div className="pt-6 overflow-hidden shadow-lg page">
             {user == null ? (
                 <p>...Loading user</p>
             ) : ( 

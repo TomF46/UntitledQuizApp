@@ -17,8 +17,8 @@ const ProfilePage = ({ userId, currentUser, history, ...props }) => {
         if(!user) {
             getUserById(userId).then(userData => {
                 setUser(userData);
-                getUserScores(userData.profile.id);
-                getUserQuizzes(userData.profile.id);
+                getUserScores(userData.id);
+                getUserQuizzes(userData.id);
             }).catch(error => {
                 console.log("Error getting user " + error);
                 toast.error("Error getting user " + error.message,{
@@ -75,7 +75,7 @@ const ProfilePage = ({ userId, currentUser, history, ...props }) => {
     function toggleFollow(){
         let action = user.following ? "Unfollow" : "Follow";
 
-        followUser(user.profile.id).then(res => {
+        followUser(user.id).then(res => {
             toast.success(`User ${action}ed`);
             let tempUser = {...user};
             tempUser.following = !tempUser.following;
@@ -92,14 +92,14 @@ const ProfilePage = ({ userId, currentUser, history, ...props }) => {
             ) : (
                 <>
                 <h2 className="font-bold text-4xl py-4 text-center pageHeader">
-                        {user.profile.username} 
+                        {user.username} 
                     </h2>
                 <div className="border-b p-2">
                 {userId == currentUser ? (
                         <button
                             type="button"
                             onClick={() => history.push(`/profile/${userId}/edit`)}
-                            className="bg-purple-400 text-white text-sm rounded py-2 px-4 hover:bg-purple-500 inline-flex items-center"
+                            className="bg-purple-400 text-white text-sm rounded py-2 px-4 hover:bg-purple-500 inline-flex items-center shadow"
                         >
                             <svg className="text-white h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
@@ -125,18 +125,18 @@ const ProfilePage = ({ userId, currentUser, history, ...props }) => {
                 </div>
                 <div className="grid grid-cols-3 p-4 border-b mb-4">
                     <div>
-                        <img src={user.profile.profile_image} alt="profile-picture" className="rounded-full profile-photo" />
+                        <img src={user.profile_image} alt="profile-picture" className="rounded-full profile-photo" />
                     </div>
                     <div>
                         <h3 className="text-lg font-bold">User Info:</h3>
-                        <p>Username: {user.profile.username}</p>
-                        <p>Email: {user.profile.email}</p>
-                        <p>Quizzes created: {user.quizzes.length}</p>
+                        <p>Username: {user.username}</p>
+                        <p>Email: {user.email}</p>
+                        <p>Quizzes created: {user.totalQuizzesCreated}</p>
                         {scoresPaginator && <p>Quiz Attempts: {scoresPaginator.total}</p> }
                     </div>
                     <div>
                         <h3 className="text-lg font-bold">User Bio:</h3>  
-                        {user.profile.bio ? (<p>Bio: {user.profile.bio}</p>) : (<p>No user biography set, please add one so we can get to know you better</p>) }
+                        {user.bio ? (<p>Bio: {user.bio}</p>) : (<p>No user biography set, please add one so we can get to know you better</p>) }
                     </div>
                 </div>
                 <div>

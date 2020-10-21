@@ -12,7 +12,7 @@ const EditProfileForm = ({ user, onChange, onSave, errors = {}, saving = false }
                     {errors.onSave}
                 </div>
             )}
-            <div className="p-4 rounded overflow-hidden shadow-lg card card">
+            <div className="p-4">
                 <div className="mb-6">
                     <TextInput
                         name="username"
@@ -32,7 +32,7 @@ const EditProfileForm = ({ user, onChange, onSave, errors = {}, saving = false }
                     />
                 </div>
             </div>
-            <div id="manage-profile-toolbar" className="p-4 rounded overflow-hidden shadow-lg card my-4 flex justify-between items-center">
+            <div id="manage-profile-toolbar" className="p-4 my-4 flex justify-between items-center">
                 <div className="flex">
                 </div>
                 <div className="flex">
@@ -46,7 +46,7 @@ const EditProfileForm = ({ user, onChange, onSave, errors = {}, saving = false }
                     <button
                         type="submit"
                         disabled={saving}
-                        className="bg-purple-400 text-white rounded py-2 px-4 hover:bg-purple-500"
+                        className="bg-purple-400 text-white rounded py-2 px-4 hover:bg-purple-500 shadow"
                     >
                         {saving ? "Saving..." : "Save"}
                     </button>

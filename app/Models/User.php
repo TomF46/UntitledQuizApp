@@ -58,4 +58,26 @@ class User extends Authenticatable
     {
         return $this->hasMany(Like::class);
     }
+
+    public function map(User $user)
+    {
+        return [
+            'id' => $this->id,
+            'username' => $this->username,
+            'email' => $this->email,
+            'bio' => $this->bio,
+            'profile_image' => 'https://picsum.photos/200', //Hardcode random for now
+            'totalQuizzesCreated' => Count($this->quizzes),
+            'followerCount' => $this->followerCount(),
+            'following' => $this->following($user)
+        ];
+    }
+
+    public function transform()
+    {
+        $this->profile_image =  'https://picsum.photos/200';
+        $this->followerCount = $this->followerCount();
+        $this->totalQuizzesCreated = Count($this->quizzes);
+        return $this;
+    }
 }

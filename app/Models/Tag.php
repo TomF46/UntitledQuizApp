@@ -13,4 +13,12 @@ class Tag extends Model
     {
         return $this->belongsToMany(Quiz::class);
     }
+
+    public function map()
+    {
+        return [
+            'id' => $this->id,
+            'name' => $this->name
+        ];
+    }
 }
