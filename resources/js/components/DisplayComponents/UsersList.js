@@ -9,7 +9,7 @@ const UsersList = ({ users }) => {
                 return (
                     <div key={user.id} className="grid grid-cols-12 px-4 py-2 border-b overflow-hidden">
                         <div className="col-span-1 inline-flex items-center">
-                            <img src="https://picsum.photos/200" alt="profile-picture" className="rounded-full h-12 w-12" />
+                            <img src={user.profile_image} alt="profile-picture" className="rounded-full h-12 w-12" />
                         </div>
                         <div className="col-span-4">
                             <p className="text-sm text-gray-600">Name:</p>
@@ -21,7 +21,7 @@ const UsersList = ({ users }) => {
                         </div>
                         <div className="col-span-2 inline-flex items-center">
                             <svg className={`text-gray-600 h-6 w-6" xmlns="http://www.w3.org/2000/svg`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                             </svg>
                             <p className="ml-1">{user.followerCount} followers</p>
                         </div>

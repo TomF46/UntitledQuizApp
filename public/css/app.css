@@ -21318,6 +21318,20 @@ nav {
   color: #fff;
 }
 
+.profile-photo {
+  -o-object-fit: cover;
+     object-fit: cover;
+  width: 200px;
+  height: 200px;
+}
+
+.profile-photo.profile-photo-preview {
+  -o-object-fit: cover;
+     object-fit: cover;
+  width: 100px;
+  height: 100px;
+}
+
 @media (min-width: 640px){
   .sm\:container{
     width: 100%;

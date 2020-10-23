@@ -2,8 +2,9 @@ import React from "react";
 import PropTypes from "prop-types";
 import TextAreaInput from "../../FormComponents/TextAreaInput";
 import TextInput from "../../FormComponents/TextInput";
+import FileInput from "../../FormComponents/FileInput";
 
-const EditProfileForm = ({ user, onChange, onSave, errors = {}, saving = false }) => {
+const EditProfileForm = ({ user, onChange, onFileChange, onSave, errors = {}, saving = false }) => {
     return (
         <form className="" onSubmit={onSave}>
             <h2 className="font-bold text-4xl my-4 text-center">Edit your profile</h2>
@@ -30,6 +31,17 @@ const EditProfileForm = ({ user, onChange, onSave, errors = {}, saving = false }
                         onChange={onChange}
                         error={errors.bio}
                     />
+                </div>
+                <div className="mb-6 flex">
+                    <FileInput
+                        label="Profile Image"
+                        name="profile_image"
+                        onChange={onFileChange}
+                        error={errors.profile_image}
+                    />
+                    <div>
+                        <img src={user.profile_image} alt="profile-picture-preview" className="rounded-full profile-photo profile-photo-preview ml-12" />
+                    </div>
                 </div>
             </div>
             <div id="manage-profile-toolbar" className="p-4 my-4 flex justify-between items-center">
@@ -60,6 +72,7 @@ EditProfileForm.propTypes = {
     user: PropTypes.object.isRequired,
     errors: PropTypes.object,
     onChange: PropTypes.func.isRequired,
+    onFileChange: PropTypes.func.isRequired,
     onSave: PropTypes.func.isRequired,
     saving: PropTypes.bool
 };

@@ -5,6 +5,7 @@ import { getUserForEditing, editUserProfile } from "../../../api/userApi"
 import EditProfileForm from "./EditProfileForm";
 import { toast } from "react-toastify";
 import LoadingMessage from "../../DisplayComponents/LoadingMessage";
+import { storeImage } from "../../../api/imagesApi";
 
 const EditProfilePage = ({ userId, history }) => {
     const [user, setUser] = useState(null);
@@ -15,6 +16,7 @@ const EditProfilePage = ({ userId, history }) => {
     useEffect(() => {
         if (!user) {
             getUserForEditing(userId).then(userData => {
+                console.log(userData);
                 setUser(userData);
             }).catch(error => {
                 toast.error("Error getting user " + error.message, {
@@ -31,6 +33,18 @@ const EditProfilePage = ({ userId, history }) => {
             ...prevUser,
             [name]: value
         }));
+    }
+
+    function handleFileChange(event) {
+        let file = event.target.files[0];
+        storeImage(file).then(res => {
+            setUser(prevUser => ({
+                ...prevUser,
+                'profile_image': res.path
+            }));
+        }).catch(error => {
+            console.log(error);
+        });
     }
 
     function formIsValid() {
@@ -61,7 +75,7 @@ const EditProfilePage = ({ userId, history }) => {
             {user == null ? (
                 <LoadingMessage message={'Loading user'} />
             ) : (
-                    <EditProfileForm user={user} onChange={handleChange} errors={errors} saving={saving} onSave={handleSave} />
+                    <EditProfileForm user={user} onChange={handleChange} onFileChange={handleFileChange} errors={errors} saving={saving} onSave={handleSave} />
                 )}
         </div>
     );

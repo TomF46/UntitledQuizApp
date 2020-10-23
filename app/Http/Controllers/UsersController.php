@@ -34,7 +34,8 @@ class UsersController extends Controller
 
         return response()->json([
             'username' => $user->username,
-            'bio' => $user->bio
+            'bio' => $user->bio,
+            'profile_image' => $user->profile_image_url
         ]);
     }
 
@@ -42,7 +43,10 @@ class UsersController extends Controller
     {
         if ($user->id != $request->user()->id) return response()->json(['error' => 'Unauthorized.'], 401);
 
+
+
         $attributes = $this->validateUser($request, $user);
+        $user->profile_image_url = $attributes['profile_image'];
         $user->update($attributes);
         $user = $user->fresh();
         return response()->json($user);
@@ -53,6 +57,8 @@ class UsersController extends Controller
         return $request->validate([
             'username' => ['required', 'string', 'max:255', Rule::unique('users')->ignore($user), 'alpha_dash'],
             'bio' => 'required|string',
+            'profile_image' => 'required|string',
+
         ]);
     }
 }

@@ -93,3 +93,15 @@ nav {
         }
     }
 }
+
+.profile-photo {
+    object-fit: cover;
+    width: 200px;
+    height: 200px;
+}
+
+.profile-photo.profile-photo-preview {
+    object-fit: cover;
+    width: 100px;
+    height: 100px;
+}

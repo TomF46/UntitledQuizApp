@@ -51,6 +51,8 @@ Route::middleware('auth:api')->group(function () {
     Route::post('/users/{user}/follow', [App\Http\Controllers\UserFollowsController::class, 'index']);
     Route::get('/users/{user}/following', [App\Http\Controllers\UserFollowsController::class, 'following']);
 
+    Route::post('/images', [App\Http\Controllers\ImagesController::class, 'store']);
+
     Route::delete('/scores/{score}', [App\Http\Controllers\ScoresController::class, 'destroy']);
 
     Route::get('/tags', [App\Http\Controllers\TagsController::class, 'index']);

@@ -66,7 +66,7 @@ class User extends Authenticatable
             'username' => $this->username,
             'email' => $this->email,
             'bio' => $this->bio,
-            'profile_image' => 'https://picsum.photos/200', //Hardcode random for now
+            'profile_image' => $this->profile_image_url ? $this->profile_image_url : 'https://picsum.photos/200', //Hardcode random for now
             'totalQuizzesCreated' => Count($this->quizzes),
             'followerCount' => $this->followerCount(),
             'following' => $this->following($user)
@@ -75,7 +75,7 @@ class User extends Authenticatable
 
     public function transform()
     {
-        $this->profile_image =  'https://picsum.photos/200';
+        $this->profile_image =  $this->profile_image_url ? $this->profile_image_url : 'https://picsum.photos/200';
         $this->followerCount = $this->followerCount();
         $this->totalQuizzesCreated = Count($this->quizzes);
         return $this;
