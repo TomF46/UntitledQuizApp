@@ -40,7 +40,7 @@ export function validateQuiz(quiz) {
 }
 
 export function addBlankQuestion(quiz) {
-    quiz.questions.push({ ...newQuestion });
+    quiz.questions.push(JSON.parse(JSON.stringify(newQuestion)));
     return quiz;
 }
 
@@ -50,7 +50,7 @@ export function addBlankErrorsForQuestion(errors) {
 }
 
 export function addBlankAnswerToQuestion(quiz, questionIndex) {
-    quiz.questions[questionIndex].answers.push({ ...newAnswer });
+    quiz.questions[questionIndex].answers.push(JSON.parse(JSON.stringify(newAnswer)));
     return quiz;
 }
 

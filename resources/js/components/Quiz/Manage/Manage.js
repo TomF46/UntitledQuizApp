@@ -46,30 +46,6 @@ const QuizManagementPage = ({ quizId, userId, history }) => {
         }
     }, [tags]);
 
-    function handleChange(event) {
-        const { name, value } = event.target;
-        setQuiz({ ...QuizManagementService.updateQuiz(quiz, name, value) });
-    }
-
-    function handleTagChange(selected) {
-        setQuiz({ ...QuizManagementService.updateTags(quiz, selected) });
-    }
-
-    function handleQuestionChange(questionIndex, event) {
-        const { value } = event.target;
-        setQuiz({ ...QuizManagementService.changeQuestionText(quiz, questionIndex, value) });
-    }
-
-    function handleAnswerChange(questionIndex, answerIndex, event) {
-        const { value } = event.target;
-        setQuiz({ ...QuizManagementService.changeAnswerText(quiz, questionIndex, answerIndex, value) });
-    }
-
-    function handleAnswerCheckboxChange(questionIndex, answerIndex, event) {
-        const { checked } = event.target;
-        setQuiz({ ...QuizManagementService.setIsCorrectForAnswer(quiz, questionIndex, answerIndex, checked) });
-    }
-
     function formIsValid() {
         var validated = QuizManagementService.validateQuiz(quiz);
         setErrors({ ...validated.errors });
@@ -101,13 +77,12 @@ const QuizManagementPage = ({ quizId, userId, history }) => {
             });
     }
 
-    function handleAddQuestion() {
-        setQuiz({ ...QuizManagementService.addBlankQuestion(quiz) });
-        setErrors({ ...QuizManagementService.addBlankErrorsForQuestion(errors) });
+    function updateQuiz(quiz) {
+        setQuiz({ ...quiz });
     }
 
-    function handleAddAnswer(questionIndex) {
-        setQuiz({ ...QuizManagementService.addBlankAnswerToQuestion(quiz, questionIndex) });
+    function updateErrors(errors) {
+        setErrors({ ...errors });
     }
 
     function handleReset() {
@@ -119,44 +94,6 @@ const QuizManagementPage = ({ quizId, userId, history }) => {
                     label: "Yes",
                     onClick: () => {
                         setQuiz({ ...QuizManagementService.resetQuiz(quiz) });
-                    }
-                },
-                {
-                    label: "No",
-                    onClick: () => { }
-                }
-            ]
-        });
-    }
-
-    function handleRemoveQuestion(questionIndex) {
-        confirmAlert({
-            title: "Confirm removal",
-            message: `Are you sure you want to remove this question?`,
-            buttons: [
-                {
-                    label: "Yes",
-                    onClick: () => {
-                        setQuiz({ ...QuizManagementService.removeQuestion(quiz, questionIndex) });
-                    }
-                },
-                {
-                    label: "No",
-                    onClick: () => { }
-                }
-            ]
-        });
-    }
-
-    function handleRemoveAnswer(questionIndex, answerIndex) {
-        confirmAlert({
-            title: "Confirm removal",
-            message: `Are you sure you want to remove this answer?`,
-            buttons: [
-                {
-                    label: "Yes",
-                    onClick: () => {
-                        setQuiz({ ...QuizManagementService.removeAnswer(quiz, questionIndex, answerIndex) });
                     }
                 },
                 {
@@ -179,17 +116,10 @@ const QuizManagementPage = ({ quizId, userId, history }) => {
                         quiz={quiz}
                         tags={tags}
                         errors={errors}
-                        onAddQuestion={handleAddQuestion}
-                        onAddAnswer={handleAddAnswer}
-                        onChange={handleChange}
-                        onTagChange={handleTagChange}
-                        onQuestionChange={handleQuestionChange}
-                        onAnswerChange={handleAnswerChange}
-                        onAnswerCheckboxChange={handleAnswerCheckboxChange}
+                        updateQuiz={updateQuiz}
+                        updateErrors={updateErrors}
                         onReset={handleReset}
                         onSave={handleSave}
-                        onRemoveQuestion={handleRemoveQuestion}
-                        onRemoveAnswer={handleRemoveAnswer}
                         saving={saving}
                     />
                 )}

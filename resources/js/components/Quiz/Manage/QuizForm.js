@@ -3,8 +3,83 @@ import PropTypes from "prop-types";
 import TextInput from "../../FormComponents/TextInput";
 import CheckboxInput from "../../FormComponents/CheckboxInput";
 import MultiSelectInput from "../../FormComponents/MultiSelectInput";
+import * as QuizManagementService from "../../../tools/QuizManagementService";
+import { confirmAlert } from "react-confirm-alert";
 
-const QuizForm = ({ quiz, tags, onAddQuestion, onAddAnswer, onSave, onChange, onTagChange, onQuestionChange, onAnswerChange, onAnswerCheckboxChange, onReset, onRemoveQuestion, onRemoveAnswer, saving = false, errors = {} }) => {
+const QuizForm = ({ quiz, tags, updateQuiz, updateErrors, onSave, onReset, saving = false, errors = {} }) => {
+
+    function onAddQuestion() {
+        updateQuiz(QuizManagementService.addBlankQuestion(quiz));
+        updateErrors(QuizManagementService.addBlankErrorsForQuestion(errors));
+    }
+
+    function onAddAnswer(questionIndex) {
+        updateQuiz(QuizManagementService.addBlankAnswerToQuestion(quiz, questionIndex));
+    }
+
+    function onChange(event) {
+        const { name, value } = event.target;
+        updateQuiz(QuizManagementService.updateQuiz(quiz, name, value));
+    }
+
+    function onTagChange(selected) {
+        updateQuiz(QuizManagementService.updateTags(quiz, selected));
+    }
+
+    function onQuestionChange(questionIndex, event) {
+        const { value } = event.target;
+        updateQuiz(QuizManagementService.changeQuestionText(quiz, questionIndex, value));
+    }
+
+    function onAnswerChange(questionIndex, answerIndex, event) {
+        const { value } = event.target;
+        updateQuiz(QuizManagementService.changeAnswerText(quiz, questionIndex, answerIndex, value));
+    }
+
+    function onAnswerCheckboxChange(questionIndex, answerIndex, event) {
+        const { checked } = event.target;
+        updateQuiz(QuizManagementService.setIsCorrectForAnswer(quiz, questionIndex, answerIndex, checked));
+    }
+
+    function onRemoveQuestion(questionIndex) {
+        confirmAlert({
+            title: "Confirm removal",
+            message: `Are you sure you want to remove this question?`,
+            buttons: [
+                {
+                    label: "Yes",
+                    onClick: () => {
+                        updateQuiz(QuizManagementService.removeQuestion(quiz, questionIndex));
+                    }
+                },
+                {
+                    label: "No",
+                    onClick: () => { }
+                }
+            ]
+        });
+    }
+
+    function onRemoveAnswer(questionIndex, answerIndex) {
+        confirmAlert({
+            title: "Confirm removal",
+            message: `Are you sure you want to remove this answer?`,
+            buttons: [
+                {
+                    label: "Yes",
+                    onClick: () => {
+                        updateQuiz(QuizManagementService.removeAnswer(quiz, questionIndex, answerIndex));
+                    }
+                },
+                {
+                    label: "No",
+                    onClick: () => { }
+                }
+            ]
+        });
+    }
+
+
     return (
         <form onSubmit={onSave}>
             <h2 className="font-bold text-4xl py-4 text-center">{quiz.id ? "Edit" : "Add"} Quiz</h2>
@@ -159,17 +234,10 @@ QuizForm.propTypes = {
     quiz: PropTypes.object.isRequired,
     tags: PropTypes.array,
     errors: PropTypes.object,
-    onAddQuestion: PropTypes.func.isRequired,
-    onAddAnswer: PropTypes.func.isRequired,
     onSave: PropTypes.func.isRequired,
-    onChange: PropTypes.func.isRequired,
-    onTagChange: PropTypes.func.isRequired,
-    onQuestionChange: PropTypes.func.isRequired,
-    onAnswerChange: PropTypes.func.isRequired,
-    onAnswerCheckboxChange: PropTypes.func.isRequired,
     onReset: PropTypes.func.isRequired,
-    onRemoveQuestion: PropTypes.func.isRequired,
-    onRemoveAnswer: PropTypes.func.isRequired,
+    updateQuiz: PropTypes.func.isRequired,
+    updateErrors: PropTypes.func.isRequired,
     saving: PropTypes.bool
 };
 
