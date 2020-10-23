@@ -56,8 +56,8 @@ class UsersController extends Controller
     {
         return $request->validate([
             'username' => ['required', 'string', 'max:255', Rule::unique('users')->ignore($user), 'alpha_dash'],
-            'bio' => 'required|string',
-            'profile_image' => 'required|string',
+            'bio' => 'string|nullable',
+            'profile_image' => 'string|nullable',
 
         ]);
     }

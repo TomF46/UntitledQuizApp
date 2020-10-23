@@ -2,13 +2,14 @@ const newQuiz = {
     id: null,
     title: "",
     description: "",
-    tags : [],
+    tags: [],
     questions: []
 };
 
 const newQuestion = {
     text: "",
-    answers: []
+    answers: [],
+    image_url: null
 }
 
 const newAnswer = {
@@ -20,5 +21,4 @@ module.exports = {
     newQuiz,
     newQuestion,
     newAnswer
-  };
-  
+};

@@ -12,6 +12,11 @@ const QuizPlayForm = ({ quiz, submission, onAnswerChange, currentQuestionNumber,
                             {question.ordinal + 1 == currentQuestionNumber &&
                                 <div className="p-4">
                                     <p className="text-center font-bold text-2xl">{question.ordinal + 1}: {question.text}</p>
+                                    {question.image_url &&
+                                        <div>
+                                            <img src={question.image_url} alt="question-image" className="question-image p-16" />
+                                        </div>
+                                    }
                                     <div className="flex">
                                         {quiz.questions[question.ordinal].answers.map((answer) => {
                                             return (
@@ -20,7 +25,7 @@ const QuizPlayForm = ({ quiz, submission, onAnswerChange, currentQuestionNumber,
                                                     type="button"
                                                     onClick={(e) => onAnswerChange(question.id, answer.id, e)}
                                                     className={`text-white py-2 px-4 hover:bg-green-500 mr-2 my-12 flex-1 shadow 
-                                        ${submission.questions[question.ordinal].answer_id == answer.id ? "bg-green-400" : "bg-purple-400"}`}
+                                                     ${submission.questions[question.ordinal].answer_id == answer.id ? "bg-green-400" : "bg-purple-400"}`}
                                                 >
                                                     {answer.text}
                                                 </button>

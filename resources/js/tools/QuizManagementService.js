@@ -69,6 +69,11 @@ export function changeQuestionText(quiz, questionIndex, value) {
     return quiz;
 }
 
+export function changeQuestionImage(quiz, questionIndex, path) {
+    quiz.questions[questionIndex].image_url = path;
+    return quiz;
+}
+
 export function changeAnswerText(quiz, questionIndex, answerIndex, value) {
     quiz.questions[questionIndex].answers[answerIndex].text = value;
     return quiz;

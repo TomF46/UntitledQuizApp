@@ -11,7 +11,8 @@ class Question extends Model
 
     protected $fillable = [
         'text',
-        'ordinal'
+        'ordinal',
+        'image_url'
     ];
 
     public function quiz()
