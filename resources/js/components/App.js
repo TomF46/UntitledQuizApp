@@ -23,7 +23,11 @@ const Main = props => (
         <div className="relative">
             <div className="container mx-auto">
                 <Switch>
-                    <Route exact path="/" component={Home} />
+                    <AuthenticatedRoute
+                        exact
+                        path="/"
+                        component={Dashboard}
+                    />
                     <Route path="/login" component={Login} />
                     <Route path="/register" component={Register} />
                     <AuthenticatedRoute
@@ -37,10 +41,6 @@ const Main = props => (
                     <AuthenticatedRoute
                         path="/profile"
                         component={ProfilePage}
-                    />
-                    <AuthenticatedRoute
-                        path="/dashboard"
-                        component={Dashboard}
                     />
                     <AuthenticatedRoute
                         path="/explore"

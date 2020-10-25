@@ -58,25 +58,25 @@ const RegisterPage = ({ userIsAuthenticated, history }) => {
 
     return (
         <>
-            {userIsAuthenticated && <Redirect to="/dashboard" />}
+            {userIsAuthenticated && <Redirect to="/" />}
             <CenterFormCard
                 content={
                     <>
-                    <RegisterForm
-                        user={user}
-                        errors={errors}
-                        onChange={handleChange}
-                        onSave={handleSave}
-                        saving={saving}
-                    />
-                    <div className="flex justify-center mt-4">
-                        <Link
-                            to={`/login`}
-                            className="text-center hover:text-purple-500 hover:underline"
-                        >
-                            Already registered? Login now!
+                        <RegisterForm
+                            user={user}
+                            errors={errors}
+                            onChange={handleChange}
+                            onSave={handleSave}
+                            saving={saving}
+                        />
+                        <div className="flex justify-center mt-4">
+                            <Link
+                                to={`/login`}
+                                className="text-center hover:text-purple-500 hover:underline"
+                            >
+                                Already registered? Login now!
                         </Link>
-                    </div>
+                        </div>
                     </>
                 }
             />

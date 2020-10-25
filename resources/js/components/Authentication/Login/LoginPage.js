@@ -19,7 +19,7 @@ const LoginPage = ({ login, userIsAuthenticated, history }) => {
         const { name, value, checked } = event.target;
         setUser(prevUser => ({
             ...prevUser,
-            [name]: name == "remember_me" ? Boolean(checked) : value 
+            [name]: name == "remember_me" ? Boolean(checked) : value
         }));
     }
 
@@ -39,7 +39,7 @@ const LoginPage = ({ login, userIsAuthenticated, history }) => {
         setSaving(true);
         login(user)
             .then(response => {
-                history.push("/dashboard");
+                history.push("/");
             })
             .catch(err => {
                 setSaving(false);
@@ -49,25 +49,25 @@ const LoginPage = ({ login, userIsAuthenticated, history }) => {
 
     return (
         <>
-            {userIsAuthenticated && <Redirect to="/dashboard" />}
+            {userIsAuthenticated && <Redirect to="/" />}
             <CenterFormCard
                 content={
                     <>
-                    <LoginForm
-                        user={user}
-                        errors={errors}
-                        onChange={handleChange}
-                        onSave={handleSave}
-                        saving={saving}
-                    />
-                    <div className="flex justify-center mt-4">
-                    <Link
-                        to={`/register`}
-                        className="text-center hover:text-purple-500 hover:underline"
-                    >
-                        No account? Click here to register
+                        <LoginForm
+                            user={user}
+                            errors={errors}
+                            onChange={handleChange}
+                            onSave={handleSave}
+                            saving={saving}
+                        />
+                        <div className="flex justify-center mt-4">
+                            <Link
+                                to={`/register`}
+                                className="text-center hover:text-purple-500 hover:underline"
+                            >
+                                No account? Click here to register
                     </Link>
-                    </div>
+                        </div>
                     </>
                 }
             />

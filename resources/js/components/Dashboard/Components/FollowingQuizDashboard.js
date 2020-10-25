@@ -7,42 +7,42 @@ import LoadingMessage from "../../DisplayComponents/LoadingMessage";
 
 const FollowingQuizDashboard = ({ user }) => {
     const [quizzesPaginator, setQuizzesPaginator] = useState(null);
-    
+
 
     useEffect(() => {
-        if(!quizzesPaginator) {
+        if (!quizzesPaginator) {
             getQuizzesByUserFollowing().then(quizzesData => {
                 setQuizzesPaginator(quizzesData);
             }).catch(error => {
-                toast.error("Error getting quizzes " + error.message,{
+                toast.error("Error getting quizzes " + error.message, {
                     autoClose: false,
                 });
             });
         }
     }, [quizzesPaginator])
 
-    function getQuizzesPage(url){
+    function getQuizzesPage(url) {
         getQuizzesWithPagination(url).then(quizzesData => {
             setQuizzesPaginator(quizzesData);
         }).catch(error => {
-            toast.error("Error getting quizzes " + error.message,{
+            toast.error("Error getting quizzes " + error.message, {
                 autoClose: false,
             });
         });
     }
 
     return (
-        <div className="quiz-dashboard border-t">
+        <div className="quiz-dashboard px-4">
             {quizzesPaginator == null ? (
                 <LoadingMessage message={"Loading quizzes by people you follow"} />
             ) : (
-            <div>
-                <h1 className="font-bold text-xl p-4 border-b">Latest quizzes by people you follow</h1>
-                <div className="border-b">
-                <QuizListWithPagination paginationData={quizzesPaginator} onPageChange={getQuizzesPage} />
-                </div>
-            </div>
-            )}
+                    <div>
+                        <h1 className="font-bold text-2xl mb-2">Latest quizzes by followed users</h1>
+                        <div>
+                            <QuizListWithPagination paginationData={quizzesPaginator} onPageChange={getQuizzesPage} />
+                        </div>
+                    </div>
+                )}
         </div>
     );
 };

@@ -7,13 +7,13 @@ const UsersList = ({ users }) => {
         <div>
             {users.map((user) => {
                 return (
-                    <div key={user.id} className="grid grid-cols-12 px-4 py-2 border-b overflow-hidden">
+                    <div key={user.id} className="grid grid-cols-12 px-2 py-1 border-b border-gray-200 overflow-hidden">
                         <div className="col-span-1 inline-flex items-center">
                             <img src={user.profile_image} alt="profile-picture" className="rounded-full h-12 w-12" />
                         </div>
                         <div className="col-span-4">
                             <p className="text-sm text-gray-600">Name:</p>
-                            <h3 className="font-bold text-lg items-center">{user.username}</h3>
+                            <h3 className="font-medium text-lg items-center">{user.username}</h3>
                         </div>
                         <div className="col-span-2">
                             <p className="text-sm text-gray-600">Quizzes created:</p>

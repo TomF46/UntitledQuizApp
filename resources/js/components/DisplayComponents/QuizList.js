@@ -7,10 +7,10 @@ const QuizList = ({ quizzes }) => {
         <div>
             {quizzes.map((quiz) => {
                 return (
-                    <div key={quiz.id} className="grid grid-cols-12 px-4 py-2 border-b overflow-hidden">
+                    <div key={quiz.id} className="grid grid-cols-12 px-2 py-1 border-b border-gray-200 overflow-hidden">
                         <div className="col-span-4">
                             <p className="text-sm text-gray-600">Name:</p>
-                            <h3 className="font-bold text-lg items-center">{quiz.title}</h3>
+                            <p className="font-medium items-center">{quiz.title}</p>
                         </div>
                         <div className="col-span-2">
                             <p className="text-sm text-gray-600">Total Questions:</p>
@@ -44,7 +44,7 @@ const QuizList = ({ quizzes }) => {
                                 className="bg-purple-400 text-white rounded py-2 px-4 hover:bg-purple-500 ml-2 shadow inline-flex items-center"
                             >
                                 <svg className="text-white h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" /> <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /> 
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" /> <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                                 </svg>
                                 <p className="ml-1">Play</p>
                             </Link>

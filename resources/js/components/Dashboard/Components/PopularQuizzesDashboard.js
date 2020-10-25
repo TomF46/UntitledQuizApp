@@ -6,14 +6,14 @@ import LoadingMessage from "../../DisplayComponents/LoadingMessage";
 
 const PopularQuizzesDashboard = () => {
     const [quizzes, setquizzes] = useState(null);
-    
+
 
     useEffect(() => {
-        if(!quizzes) {
+        if (!quizzes) {
             getMostPopularQuizzes().then(quizzesData => {
                 setquizzes(quizzesData);
             }).catch(error => {
-                toast.error("Error getting quizzes " + error.message,{
+                toast.error("Error getting quizzes " + error.message, {
                     autoClose: false,
                 });
             });
@@ -22,17 +22,17 @@ const PopularQuizzesDashboard = () => {
 
 
     return (
-        <div className="quiz-dashboard border-t">
+        <div className="quiz-dashboard px-4">
             {quizzes == null ? (
                 <LoadingMessage message={'Loading popular quizzes dashboard'} />
             ) : (
-            <div>
-                <h1 className="font-bold text-xl p-4 border-b">Most popular quizzes</h1>
-                <div className="border-b">
-                <QuizList quizzes={quizzes} />
-                </div>
-            </div>
-            )}
+                    <div>
+                        <h1 className="font-bold text-2xl mb-2">Most popular quizzes</h1>
+                        <div>
+                            <QuizList quizzes={quizzes} />
+                        </div>
+                    </div>
+                )}
         </div>
     );
 };

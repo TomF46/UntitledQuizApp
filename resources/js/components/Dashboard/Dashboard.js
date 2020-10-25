@@ -8,6 +8,7 @@ import FollowingUsersDashboard from "./Components/FollowingUsersDashboard";
 import ScoreDashboard from "./Components/ScoreDashboard";
 import PopularQuizzesDashboard from "./Components/PopularQuizzesDashboard";
 import LoadingMessage from "../DisplayComponents/LoadingMessage";
+import { Link } from "react-router-dom";
 
 const DashboardPage = ({ userId, history }) => {
     const [user, setUser] = useState(null);
@@ -15,6 +16,7 @@ const DashboardPage = ({ userId, history }) => {
     useEffect(() => {
         if (!user) {
             getUserById(userId).then(userData => {
+                console.log(userData);
                 setUser(userData);
             }).catch(error => {
                 toast.error("Error getting user " + error.message, {
@@ -29,19 +31,32 @@ const DashboardPage = ({ userId, history }) => {
             {user == null ? (
                 <LoadingMessage message={'Loading Dashboard'} />
             ) : (
-                    <div>
-                        <h1 className="font-bold text-4xl my-4 text-center">Welcome {user.username}</h1>
-                        <div className="mb-4">
-                            <PopularQuizzesDashboard />
+                    <div className="grid grid-cols-12 pb-4">
+                        <div className="col-span-3 px-4">
+                            <h1 className="font-bold text-4xl my-4 text-center">Welcome {user.username}</h1>
+                            <div className="mb-4">
+                                <img src={user.profile_image} alt="profile-picture" className="rounded-full profile-photo shadow" />
+                            </div>
+                            <p className="text-center my-4 font-bold">Actions</p>
+                            <div className="flex flex-col justify-center">
+                                <Link to="/profile" className="border border-purple-400 text-purple-400 text-center rounded py-2 px-4 hover:bg-purple-500 hover:text-white shadow">View profile</Link>
+                                <Link to="/explore" className="border border-purple-400 text-purple-400 text-center rounded py-2 px-4 hover:bg-purple-500 hover:text-white shadow my-4">Explore</Link>
+                                <Link to="/quiz" className="border border-purple-400 text-purple-400 text-center rounded py-2 px-4 hover:bg-purple-500 hover:text-white shadow">Create</Link>
+                            </div>
                         </div>
-                        <div className="mb-4">
-                            <FollowingUsersDashboard user={user} />
-                        </div>
-                        <div className="mb-4">
-                            <FollowingQuizDashboard user={user} />
-                        </div>
-                        <div className="mb-4">
-                            <ScoreDashboard user={user} />
+                        <div className="col-span-9">
+                            <div className="my-4">
+                                <PopularQuizzesDashboard />
+                            </div>
+                            <div className="mb-4">
+                                <FollowingUsersDashboard user={user} />
+                            </div>
+                            <div className="mb-4">
+                                <FollowingQuizDashboard user={user} />
+                            </div>
+                            {/* <div>
+                                <ScoreDashboard user={user} />
+                            </div> */}
                         </div>
                     </div>
                 )}

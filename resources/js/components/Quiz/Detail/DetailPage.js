@@ -129,7 +129,7 @@ const QuizDetailPage = ({ quizId, currentUser, history }) => {
                     <div>
                         <QuizDetail quiz={quiz} scoresPaginator={scoresPaginator} onScoresPageChange={getScoresPage} onLike={like} onDislike={dislike} />
                         {quiz.creator_id == currentUser && (
-                            <div className="p-4 mt-4 flex justify-between items-center border-t">
+                            <div className="p-4 flex justify-between items-center border-t">
                                 <div className="flex">
                                     <button
                                         type="button"
