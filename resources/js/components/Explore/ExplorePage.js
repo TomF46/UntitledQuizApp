@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { searchQuizzes, searchQuizzesWithPagination } from "../../api/quizApi";
 import { toast } from "react-toastify";
-import _, {debounce} from 'lodash';
+import _, { debounce } from 'lodash';
 import { getTags } from "../../api/tagsApi";
 import QuizListWithPagination from "../DisplayComponents/QuizListWithPagination";
 import LoadingMessage from "../DisplayComponents/LoadingMessage";
@@ -10,53 +10,53 @@ import FiltersForm from "./Filters/FiltersForm";
 
 const ExplorePage = ({ history }) => {
     const [quizzesPaginator, setQuizzesPaginator] = useState(null);
-    const [filters, setFilters] = useState({searchTerm: "", tag: null});
+    const [filters, setFilters] = useState({ searchTerm: "", tag: null });
     const [tags, setTags] = useState(null);
 
 
     useEffect(() => {
-        if(!quizzesPaginator) {
+        if (!quizzesPaginator) {
             search();
         }
     }, [quizzesPaginator])
 
     useEffect(() => {
         if (!tags) {
-          getTags().then(tags => {
-            setTags(tags);
-          });
+            getTags().then(tags => {
+                setTags(tags);
+            });
         }
-      }, [tags]);
+    }, [tags]);
 
     useEffect(() => {
         let debounced = debounce(
-            () => {search();}, 50
+            () => { search(); }, 50
         );
-        
-        debounced(); 
+
+        debounced();
     }, [filters])
 
-    function search(){
+    function search() {
         searchQuizzes(filters).then(quizzesData => {
             setQuizzesPaginator(quizzesData);
         }).catch(error => {
-            toast.error("Error getting quizzes " + error.message,{
+            toast.error("Error getting quizzes " + error.message, {
                 autoClose: false,
             });
         });
     }
 
-    function getQuizPage(pageUrl){
+    function getQuizPage(pageUrl) {
         searchQuizzesWithPagination(pageUrl, filters).then(quizzesData => {
             setQuizzesPaginator(quizzesData);
         }).catch(error => {
-            toast.error("Error getting quizzes " + error.message,{
+            toast.error("Error getting quizzes " + error.message, {
                 autoClose: false,
             });
         });
     }
 
-    function handleFilterChange(event){
+    function handleFilterChange(event) {
         const { name, value } = event.target;
 
         setFilters(prevFilters => ({
@@ -70,12 +70,17 @@ const ExplorePage = ({ history }) => {
             {!quizzesPaginator ? (
                 <LoadingMessage message={'Loading quizzes to explore'} />
             ) : (
-            <div>
-                <h1 className="font-bold text-4xl py-4 text-center pageHeader">Explore</h1>
-                <FiltersForm filters={filters} tags={tags} onFilterChange={handleFilterChange} />
-                <QuizListWithPagination paginationData={quizzesPaginator} onPageChange={getQuizPage} />
-            </div>
-            )}
+                    <div className="grid grid-cols-12">
+                        <div className="col-span-3 px-4 pb-4">
+                            <h1 className="font-bold text-4xl my-4 text-center">Search</h1>
+                            <FiltersForm filters={filters} tags={tags} onFilterChange={handleFilterChange} />
+                        </div>
+                        <div className="col-span-9 px-4">
+                            <h1 className="font-bold text-4xl my-4 text-center">Explore</h1>
+                            <QuizListWithPagination paginationData={quizzesPaginator} onPageChange={getQuizPage} />
+                        </div>
+                    </div>
+                )}
         </div>
     );
 };

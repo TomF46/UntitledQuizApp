@@ -59,8 +59,11 @@ class Quiz extends Model
             'tags' => $this->tags()->get()->map(function ($tag) {
                 return $tag->map();
             }),
-            'creator' => $this->user->username,
-            'creator_id' => $this->user->id
+            'creator' => [
+                "username" => $this->user->username,
+                'id' => $this->user->id,
+                'profile_image' => $this->user->profile_image_url ? $this->user->profile_image_url : 'https://picsum.photos/200'
+            ],
         ];
     }
 
@@ -78,8 +81,11 @@ class Quiz extends Model
             'tags' => $this->tags()->get()->map(function ($tag) {
                 return $tag->mapForSelect();
             }),
-            'creator' => $this->user->username,
-            'creator_id' => $this->user->id
+            'creator' => [
+                "username" => $this->user->username,
+                'id' => $this->user->id,
+                'profile_image' => $this->user->profile_image_url ? $this->user->profile_image_url : 'https://picsum.photos/200'
+            ],
         ];
     }
 
@@ -96,8 +102,11 @@ class Quiz extends Model
             'tags' => $this->tags()->get()->map(function ($tag) {
                 return $tag->map();
             }),
-            'creator' => $this->user->username,
-            'creator_id' => $this->user->id,
+            'creator' => [
+                "username" => $this->user->username,
+                'id' => $this->user->id,
+                'profile_image' => $this->user->profile_image_url ? $this->user->profile_image_url : 'https://picsum.photos/200'
+            ],
             'likedByUser' => $this->isLikedBy($user),
             'dislikedByUser' => $this->isDislikedBy($user),
         ];

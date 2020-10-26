@@ -21242,23 +21242,6 @@ body {
   cursor: pointer;
 }
 
-.home-page {
-  background-color: #b794f4;
-  position: fixed;
-  top: 0;
-  left: 0;
-  min-width: 100vw;
-  min-height: 100vh;
-  z-index: -999;
-}
-
-.home-page .logo {
-  position: absolute;
-  top: 50%;
-  right: 50%;
-  transform: translate(50%, -50%);
-}
-
 .pageHeader {
   border-bottom: 1px solid #dedede;
 }
@@ -21290,7 +21273,7 @@ nav {
 }
 
 #multiselectContainerReact .chip {
-  background: #b794f4;
+  background: #2d3748;
 }
 
 #multiselectContainerReact .optionListContainer .optionContainer {
@@ -21301,20 +21284,27 @@ nav {
   padding: 2px;
 }
 
+.tagList {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
 .tagList li {
   display: inline-block;
 }
 
-.tagList li:not(:first-child) {
-  margin-left: 10px;
+#react-confirm-alert .react-confirm-alert-overlay {
+  background-color: #2d3748;
 }
 
-#react-confirm-alert .react-confirm-alert-overlay {
-  background-color: #b794f4;
+#react-confirm-alert .react-confirm-alert-overlay .react-confirm-alert-button-group {
+  justify-content: center;
 }
 
 #react-confirm-alert .react-confirm-alert-overlay .react-confirm-alert-button-group button {
-  background-color: #b794f4;
+  background-color: #2d3748;
   color: #fff;
 }
 
@@ -21340,6 +21330,10 @@ nav {
 
 .question-image-preview {
   max-width: 40%;
+}
+
+.centered {
+  margin: 0 auto;
 }
 
 @media (min-width: 640px){

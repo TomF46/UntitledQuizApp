@@ -23,41 +23,44 @@ const QuizForm = ({ quiz, tags, updateQuiz, updateErrors, onSave, onReset, savin
 
     return (
         <form onSubmit={onSave}>
-            <h2 className="font-bold text-4xl py-4 text-center">{quiz.id ? "Edit" : "Add"} Quiz</h2>
-            <div className="p-4">
-                <div className="mb-6">
-                    <TextInput
-                        name="title"
-                        label="Title"
-                        value={quiz.title}
-                        onChange={onChange}
-                        error={errors.title}
-                    />
-                </div>
-                <div className="mb-6">
-                    <TextInput
-                        name="description"
-                        label="Description"
-                        value={quiz.description}
-                        onChange={onChange}
-                        error={errors.description}
-                    />
-                </div>
-                {tags && tags.length > 0 && (
+            <div className="shadow page">
+
+                <h2 className="font-bold text-4xl py-4 text-center">{quiz.id ? "Edit" : "Add"} Quiz</h2>
+                <div className="p-4">
                     <div className="mb-6">
-                        <MultiSelectInput
-                            name="tags"
-                            label="Tags"
-                            value={quiz.tags}
-                            options={tags}
-                            onChange={onTagChange}
-                            error={errors.tags}
+                        <TextInput
+                            name="title"
+                            label="Title"
+                            value={quiz.title}
+                            onChange={onChange}
+                            error={errors.title}
                         />
                     </div>
-                )}
+                    <div className="mb-6">
+                        <TextInput
+                            name="description"
+                            label="Description"
+                            value={quiz.description}
+                            onChange={onChange}
+                            error={errors.description}
+                        />
+                    </div>
+                    {tags && tags.length > 0 && (
+                        <div className="mb-6">
+                            <MultiSelectInput
+                                name="tags"
+                                label="Tags"
+                                value={quiz.tags}
+                                options={tags}
+                                onChange={onTagChange}
+                                error={errors.tags}
+                            />
+                        </div>
+                    )}
+                </div>
             </div>
             <QuestionManagement quiz={quiz} updateQuiz={updateQuiz} updateErrors={updateErrors} errors={errors} />
-            <div id="manage-quiz-toolbar" className="p-4 flex border-t justify-between items-center">
+            <div id="manage-quiz-toolbar" className="p-4 flex border-t justify-between items-center shadow card">
                 <div className="flex">
                     <button
                         type="button"

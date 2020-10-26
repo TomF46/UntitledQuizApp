@@ -81,10 +81,10 @@ const QuestionManagement = ({ quiz, updateQuiz, errors = {} }) => {
 
     return (
         <>
-            {quiz.questions.length > 0 && <h2 className="font-bold border-t text-3xl py-4 text-center">Questions</h2>}
+            {/* {quiz.questions.length > 0 && <h2 className="font-bold text-3xl py-4 text-center">Questions</h2>} */}
             {quiz.questions.map((question, questionIndex) => {
                 return (
-                    <div className="p-4 border-t" key={question.id ? question.id : questionIndex}>
+                    <div className="p-4 shadow card mt-4" key={question.id ? question.id : questionIndex}>
                         <h3 className="font-bold text-xl">Question {questionIndex + 1}</h3>
                         <div>
                             <TextInput
@@ -161,7 +161,6 @@ const QuestionManagement = ({ quiz, updateQuiz, errors = {} }) => {
                                     <svg className="text-white h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
                                     </svg>
-                                    <span className="ml-1">Remove Question</span>
                                 </button>
                             </div>
                         </div>

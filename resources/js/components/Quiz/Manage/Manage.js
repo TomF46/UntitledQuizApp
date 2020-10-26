@@ -21,6 +21,7 @@ const QuizManagementPage = ({ quizId, userId, history }) => {
         if (quizId) {
             getQuizForEdit(quizId)
                 .then(data => {
+                    console.log(data);
                     setQuiz({ ...data });
                     setLoaded(true);
                 })
@@ -105,12 +106,14 @@ const QuizManagementPage = ({ quizId, userId, history }) => {
     }
 
     return (
-        <div className="quiz-management-page shadow-lg page">
-            {quiz.creator_id && quiz.creator_id != userId && (
+        <div className="quiz-management-page">
+            {quiz.creator && quiz.creator.id != userId && (
                 <Redirect to="/" />
             )}
             {!loaded ? (
-                <LoadingMessage message={"Loading form"} />
+                <div className="shadow-lg page">
+                    <LoadingMessage message={"Loading form"} />
+                </div>
             ) : (
                     <QuizForm
                         quiz={quiz}

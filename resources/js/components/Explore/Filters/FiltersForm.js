@@ -5,17 +5,16 @@ import SelectInput from "../../FormComponents/SelectInput";
 
 const FiltersForm = ({ filters, tags, onFilterChange }) => {
     return (
-        <div className="border-b p-4 grid grid-cols-3">
-            <div className="p-1">
+        <div>
+            <div className="mb-4">
                 <TextInput
                     name="searchTerm"
-                    label="Search"
+                    label="Title"
                     value={filters.searchTerm}
                     onChange={onFilterChange}
                 />
             </div>
-            <div></div>
-            <div className="p-1">
+            <div>
                 <SelectInput
                     name="tag"
                     label="Tag"

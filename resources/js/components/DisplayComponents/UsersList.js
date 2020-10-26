@@ -13,7 +13,7 @@ const UsersList = ({ users }) => {
                         </div>
                         <div className="col-span-4">
                             <p className="text-sm text-gray-600">Name:</p>
-                            <h3 className="font-medium text-lg items-center">{user.username}</h3>
+                            <Link to={`/profile/${user.id}`} className="font-medium text-lg items-center pointer">{user.username}</Link>
                         </div>
                         <div className="col-span-2">
                             <p className="text-sm text-gray-600">Quizzes created:</p>
@@ -27,7 +27,7 @@ const UsersList = ({ users }) => {
                         </div>
                         <div className="col-span-3 flex justify-end mb-2">
                             <Link
-                                to={`/profiles/${user.id}`}
+                                to={`/profile/${user.id}`}
                                 className="bg-gray-800 text-white rounded py-2 px-4 hover:bg-gray-600 inline-block align-middle shadow"
                             >
                                 View Profile

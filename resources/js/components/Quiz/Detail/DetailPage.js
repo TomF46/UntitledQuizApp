@@ -22,6 +22,7 @@ const QuizDetailPage = ({ quizId, currentUser, history }) => {
 
     function getQuizData() {
         getQuiz(quizId).then(quizData => {
+            console.log(quizData);
             setQuiz(quizData);
             getScores(quizData.id);
         }).catch(error => {
@@ -128,7 +129,7 @@ const QuizDetailPage = ({ quizId, currentUser, history }) => {
             ) : (
                     <div>
                         <QuizDetail quiz={quiz} scoresPaginator={scoresPaginator} onScoresPageChange={getScoresPage} onLike={like} onDislike={dislike} />
-                        {quiz.creator_id == currentUser && (
+                        {quiz.creator.id == currentUser && (
                             <div className="p-4 flex justify-between items-center border-t">
                                 <div className="flex">
                                     <button
