@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { functionsIn } from "lodash";
 
 const Header = ({ userIsAuthenticated }) => {
     const [mobileIsOpen, setMobileIsOpen] = useState(null);
@@ -14,9 +13,10 @@ const Header = ({ userIsAuthenticated }) => {
     return (
         <nav className="flex items-center justify-between flex-wrap bg-gray-800 p-4 shadow-lg">
             <div className="flex items-center flex-shrink-0 text-white mr-6">
-                <Link to="/" className="font-semibold text-xl tracking-tight">
+                <img src="https://untitled-quiz-app-images.s3-eu-west-1.amazonaws.com/QApp.png" className="w-16" />
+                {/* <Link to="/" className="font-semibold text-xl tracking-tight">
                     Untitled Quiz App
-                </Link>
+                </Link> */}
             </div>
             <div className="block md:hidden">
                 <button className="flex items-center px-3 py-2 border rounded text-white border-teal-400 hover:text-white hover:border-white pointer" onClick={toggleMobileNavigation}>
