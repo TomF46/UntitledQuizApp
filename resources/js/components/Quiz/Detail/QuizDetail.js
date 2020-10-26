@@ -12,6 +12,9 @@ const QuizDetail = ({ quiz, scoresPaginator, onScoresPageChange, onLikesUpdated 
                 <h2 className="lg:hidden font-bold text-4xl py-4 border-b lg:border-none text-center">
                     {quiz.title}
                 </h2>
+                <h2 className="hidden lg:block font-bold text-4xl py-4 border-b lg:border-none text-center">
+                    Details
+                </h2>
                 <div className="p-4 flex justify-center items-center">
                     <LikeControls quiz={quiz} onLikesUpdated={onLikesUpdated} />
                 </div>

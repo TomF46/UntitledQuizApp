@@ -86,7 +86,7 @@ const QuizDetailPage = ({ quizId, currentUser, history }) => {
 
 
     return (
-        <div className="pt-6 overflow-hidden shadow-lg page">
+        <div className="overflow-hidden shadow-lg page">
             {!quiz ? (
                 <LoadingMessage message={"Loading quiz"} />
             ) : (

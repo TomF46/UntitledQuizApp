@@ -18,7 +18,7 @@ const Header = ({ userIsAuthenticated }) => {
                     Untitled Quiz App
                 </Link>
             </div>
-            <div className="block lg:hidden">
+            <div className="block md:hidden">
                 <button className="flex items-center px-3 py-2 border rounded text-white border-teal-400 hover:text-white hover:border-white pointer" onClick={toggleMobileNavigation}>
                     <svg
                         className="fill-current h-3 w-3"
@@ -30,25 +30,25 @@ const Header = ({ userIsAuthenticated }) => {
                     </svg>
                 </button>
             </div>
-            <div className={`${mobileIsOpen ? "block" : "hidden"} w-full flex-grow lg:flex lg:items-center lg:w-auto`}>
-                <div className="text-sm lg:flex-grow">
+            <div className={`${mobileIsOpen ? "block" : "hidden"} w-full flex-grow md:flex md:items-center md:w-auto`}>
+                <div className="text-sm md:flex-grow">
                     {userIsAuthenticated && (
                         <>
                             <Link
                                 to="/"
-                                className="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-white mr-4"
+                                className="block mt-4 md:inline-block md:mt-0 text-white hover:text-white mr-4"
                             >
                                 Dashboard
                             </Link>
                             <Link
                                 to="/quiz"
-                                className="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-white mr-4"
+                                className="block mt-4 md:inline-block md:mt-0 text-white hover:text-white mr-4"
                             >
                                 Create
                             </Link>
                             <Link
                                 to="/explore"
-                                className="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-white"
+                                className="block mt-4 md:inline-block md:mt-0 text-white hover:text-white"
                             >
                                 Explore
                             </Link>
@@ -60,7 +60,7 @@ const Header = ({ userIsAuthenticated }) => {
                         <>
                             <Link
                                 to="/login"
-                                className="text-sm lg:px-4 lg:py-2 lg:leading-none lg:border rounded text-white lg:border-white lg:hover:border-transparent lg:hover:bg-white mt-4 lg:mt-0 inline-flex items-center lg:mr-2"
+                                className="text-sm md:px-4 md:py-2 md:leading-none md:border rounded text-white md:border-white md:hover:border-transparent md:hover:bg-white mt-4 md:mt-0 inline-flex items-center md:mr-2"
                             >
                                 <svg className="text-white h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" />
@@ -69,7 +69,7 @@ const Header = ({ userIsAuthenticated }) => {
                             </Link>
                             <Link
                                 to="/register"
-                                className="text-sm lg:px-4 lg:py-2 lg:leading-none lg:border rounded text-white lg:border-white lg:hover:border-transparent lg:hover:bg-white mt-4 lg:mt-0 inline-flex items-center"
+                                className="text-sm md:px-4 md:py-2 md:leading-none md:border rounded text-white md:border-white md:hover:border-transparent md:hover:bg-white mt-4 md:mt-0 inline-flex items-center"
                             >
                                 <svg className="text-white h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
@@ -82,7 +82,7 @@ const Header = ({ userIsAuthenticated }) => {
                         <>
                             <Link
                                 to="/profile"
-                                className="text-sm lg:px-4 lg:py-2 lg:leading-none lg:border rounded text-white lg:border-white lg:hover:shadow mt-4 lg:mt-0 inline-flex items-center"
+                                className="text-sm md:px-4 md:py-2 md:leading-none md:border rounded text-white md:border-white md:hover:shadow mt-4 md:mt-0 inline-flex items-center"
                             >
                                 <svg className="text-white h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />

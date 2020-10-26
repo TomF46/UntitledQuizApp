@@ -63,11 +63,11 @@ const QuizForm = ({ quiz, tags, updateQuiz, updateErrors, onSave, onReset, savin
             </div>
             <QuestionManagement quiz={quiz} updateQuiz={updateQuiz} updateErrors={updateErrors} errors={errors} setIsUpploadingImage={setUploadingImage} />
             <div id="manage-quiz-toolbar" className="p-4 grid grid-cols-12 shadow card">
-                <div className="col-span-12 lg:col-span-4 mb-2 lg:mb-0">
+                <div className="col-span-12 md:col-span-4 mb-2 md:mb-0">
                     <button
                         type="button"
                         onClick={onAddQuestion}
-                        className="bg-gray-800 text-white rounded py-2 px-4 hover:bg-gray-600 shadow inline-flex items-center justify-center w-full lg:w-auto"
+                        className="bg-gray-800 text-white rounded py-2 px-4 hover:bg-gray-600 shadow inline-flex items-center justify-center w-full md:w-auto"
                     >
                         <svg className="text-white h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -75,7 +75,7 @@ const QuizForm = ({ quiz, tags, updateQuiz, updateErrors, onSave, onReset, savin
                         <span className="ml-1">Add Question</span>
                     </button>
                 </div>
-                <div className="col-span-12 lg:col-span-4 mb-2 lg:mb-0">
+                <div className="col-span-12 md:col-span-4 mb-2 md:mb-0">
                     {errors.onSave && (
                         <div className="text-red-500 text-xs text-center p-1" role="alert">
                             {errors.onSave}
@@ -94,12 +94,12 @@ const QuizForm = ({ quiz, tags, updateQuiz, updateErrors, onSave, onReset, savin
                         </div>
                     )}
                 </div>
-                <div className="col-span-12 lg:col-span-4">
-                    <div className="flex flex-col lg:flex-row justify-end">
+                <div className="col-span-12 md:col-span-4">
+                    <div className="flex flex-col md:flex-row justify-end">
                         <button
                             type="button"
                             onClick={onReset}
-                            className="bg-red-400 text-white text-center rounded py-2 px-4 mb-2 lg:mb-0 hover:bg-red-500 lg:mr-2 shadow inline-flex items-center justify-center"
+                            className="bg-red-400 text-white text-center rounded py-2 px-4 mb-2 md:mb-0 hover:bg-red-500 md:mr-2 shadow inline-flex items-center justify-center"
                         >
                             <svg className="text-white h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />

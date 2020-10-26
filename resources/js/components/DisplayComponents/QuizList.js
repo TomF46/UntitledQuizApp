@@ -8,7 +8,7 @@ const QuizList = ({ quizzes }) => {
             {quizzes.map((quiz) => {
                 return (
                     <div key={quiz.id} className="grid grid-cols-12 px-2 py-1 border-b border-gray-200 overflow-hidden">
-                        <div className="col-span-6 lg:col-span-4">
+                        <div className="col-span-6 md:col-span-5 lg:col-span-4">
                             <p className="text-sm text-gray-600">Name:</p>
                             <Link className="font-medium items-center pointer" to={`/quiz/${quiz.id}`}>{quiz.title}</Link>
                         </div>
@@ -20,19 +20,19 @@ const QuizList = ({ quizzes }) => {
                             <p className="text-sm text-gray-600">Plays:</p>
                             <p>{quiz.totalPlays}</p>
                         </div>
-                        <div className="hidden lg:inline-flex col-span-1 items-center">
+                        <div className="hidden md:inline-flex col-span-1 items-center">
                             <svg className={`text-gray-600 h-6 w-6" xmlns="http://www.w3.org/2000/svg`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5" />
                             </svg>
                             <p className="ml-1">{quiz.totalLikes}</p>
                         </div>
-                        <div className="hidden lg:inline-flex col-span-1 items-center">
+                        <div className="hidden md:inline-flex col-span-1 items-center">
                             <svg className={`text-gray-600 h-6 w-6" xmlns="http://www.w3.org/2000/svg`} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 14H5.236a2 2 0 01-1.789-2.894l3.5-7A2 2 0 018.736 3h4.018a2 2 0 01.485.06l3.76.94m-7 10v5a2 2 0 002 2h.096c.5 0 .905-.405.905-.904 0-.715.211-1.413.608-2.008L17 13V4m-7 10h2m5-10h2a2 2 0 012 2v6a2 2 0 01-2 2h-2.5" />
                             </svg>
                             <p className="ml-1">{quiz.totalDislikes}</p>
                         </div>
-                        <div className="col-span-6 lg:col-span-3 flex justify-end mb-2">
+                        <div className="col-span-6 md:col-span-5 lg:col-span-3 flex justify-end mb-2">
                             <Link
                                 to={`/quiz/${quiz.id}`}
                                 className="bg-gray-800 text-white rounded py-2 px-4 hover:bg-gray-600 inline-block align-middle shadow"
