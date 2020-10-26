@@ -13,6 +13,7 @@ const FollowingUsersDashboard = ({ user }) => {
     useEffect(() => {
         if (!usersPaginator) {
             getFollowedUsers().then(usersData => {
+                console.log(usersData);
                 setUsers(usersData)
             }).catch(error => {
                 toast.error("Error getting users " + error.message, {
@@ -39,10 +40,14 @@ const FollowingUsersDashboard = ({ user }) => {
             ) : (
                     <div>
                         <h1 className="font-bold text-2xl mb-2">People you follow</h1>
-                        <div>
-                            <UsersList users={usersPaginator.data} />
-                            <PaginationControls to={usersPaginator.to} from={usersPaginator.from} of={usersPaginator.total} onNext={() => getUsersPage(usersPaginator.next_page_url)} onPrevious={() => getUsersPage(usersPaginator.prev_page_url)} currentPage={usersPaginator.current_page} lastPage={usersPaginator.last_page} />
-                        </div>
+                        {usersPaginator.total > 0 ? (
+                            <div>
+                                <UsersList users={usersPaginator.data} />
+                                <PaginationControls to={usersPaginator.to} from={usersPaginator.from} of={usersPaginator.total} onNext={() => getUsersPage(usersPaginator.next_page_url)} onPrevious={() => getUsersPage(usersPaginator.prev_page_url)} currentPage={usersPaginator.current_page} lastPage={usersPaginator.last_page} />
+                            </div>
+                        ) : (
+                                <p>You dont currently follow any users.</p>
+                            )}
                     </div>
                 )}
         </div>

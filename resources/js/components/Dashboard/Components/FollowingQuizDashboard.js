@@ -38,9 +38,14 @@ const FollowingQuizDashboard = ({ user }) => {
             ) : (
                     <div>
                         <h1 className="font-bold text-2xl mb-2">Latest quizzes by followed users</h1>
-                        <div>
-                            <QuizListWithPagination paginationData={quizzesPaginator} onPageChange={getQuizzesPage} />
-                        </div>
+                        {quizzesPaginator.total > 0 ? (
+                            <div>
+                                <QuizListWithPagination paginationData={quizzesPaginator} onPageChange={getQuizzesPage} />
+                            </div>
+                        ) : (
+                                <p>You currently dont follow any users, please follow some users to see their latest quizzes here.</p>
+                            )}
+
                     </div>
                 )}
         </div>

@@ -28,9 +28,13 @@ const PopularQuizzesDashboard = () => {
             ) : (
                     <div>
                         <h1 className="font-bold text-2xl mb-2">Most popular quizzes</h1>
-                        <div>
-                            <QuizList quizzes={quizzes} />
-                        </div>
+                        {quizzes.length > 0 ? (
+                            <div>
+                                <QuizList quizzes={quizzes} />
+                            </div>
+                        ) : (
+                                <p>No quizzes are available please create one</p>
+                            )}
                     </div>
                 )}
         </div>

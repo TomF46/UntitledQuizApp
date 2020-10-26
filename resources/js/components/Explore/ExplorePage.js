@@ -77,7 +77,11 @@ const ExplorePage = ({ history }) => {
                         </div>
                         <div className="col-span-12 lg:col-span-9 px-4">
                             <h1 className="font-bold text-4xl my-4 text-center">Explore</h1>
-                            <QuizListWithPagination paginationData={quizzesPaginator} onPageChange={getQuizPage} />
+                            {quizzesPaginator.total > 0 ? (
+                                <QuizListWithPagination paginationData={quizzesPaginator} onPageChange={getQuizPage} />
+                            ) : (
+                                    <p className="text-center">No quizzes match your search</p>
+                                )}
                         </div>
                     </div>
                 )}

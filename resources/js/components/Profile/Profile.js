@@ -142,20 +142,27 @@ const ProfilePage = ({ userId, currentUser, history, ...props }) => {
                                     </h3>
                                     {quizzesPaginator ? (
                                         <div>
-                                            <QuizListWithPagination paginationData={quizzesPaginator} onPageChange={getQuizzesPage} />
+                                            {quizzesPaginator.total > 0 ? (
+                                                <QuizListWithPagination paginationData={quizzesPaginator} onPageChange={getQuizzesPage} />
+                                            ) : (
+                                                    <p>User has not created any quizzes</p>
+                                                )}
+
                                         </div>
                                     ) : (
                                             <LoadingMessage message={'Loading users quizzes'} />
                                         )}
                                 </div>
                                 <div className="my-4">
-                                    <div className="flex justify-center">
+                                    <div className="flex">
                                         <div className="mb-4">
                                             <h3 className="font-bold text-3xl">
                                                 Scores
                                         </h3>
                                             {!scoresPaginator ? (
-                                                <LoadingMessage message={'Loading scores'} />
+                                                <div className="flex justify-center">
+                                                    <LoadingMessage message={'Loading scores'} />
+                                                </div>
                                             ) : (
                                                     <ScoresTableWithPagination paginationData={scoresPaginator} onPageChange={getScoresPage} showUser={false} />
                                                 )}
