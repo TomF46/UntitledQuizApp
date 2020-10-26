@@ -6,7 +6,8 @@ import * as QuizManagementService from "../../../tools/QuizManagementService";
 import { confirmAlert } from "react-confirm-alert";
 import { storeImage } from "../../../api/imagesApi";
 
-const QuestionManagement = ({ quiz, updateQuiz, errors = {} }) => {
+const QuestionManagement = ({ quiz, updateQuiz, errors = {}, setIsUpploadingImage }) => {
+
 
     function onAddAnswer(questionIndex) {
         updateQuiz(QuizManagementService.addBlankAnswerToQuestion(quiz, questionIndex));
@@ -29,9 +30,13 @@ const QuestionManagement = ({ quiz, updateQuiz, errors = {} }) => {
 
     function onQuestionImageChange(questionIndex, event) {
         let file = event.target.files[0];
+
+        setIsUpploadingImage(true);
         storeImage(file).then(res => {
+            setIsUpploadingImage(false);
             updateQuiz(QuizManagementService.changeQuestionImage(quiz, questionIndex, res.path));
         }).catch(error => {
+            setIsUpploadingImage(false);
             console.log(error);
         });
     }
@@ -176,6 +181,7 @@ QuestionManagement.propTypes = {
     errors: PropTypes.object,
     updateQuiz: PropTypes.func.isRequired,
     updateErrors: PropTypes.func.isRequired,
+    setIsUpploadingImage: PropTypes.func.isRequired
 };
 
 export default QuestionManagement;

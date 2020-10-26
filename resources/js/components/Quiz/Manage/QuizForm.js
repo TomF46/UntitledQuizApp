@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import TextInput from "../../FormComponents/TextInput";
 import MultiSelectInput from "../../FormComponents/MultiSelectInput";
@@ -6,6 +6,8 @@ import * as QuizManagementService from "../../../tools/QuizManagementService";
 import QuestionManagement from "./QuestionManagement";
 
 const QuizForm = ({ quiz, tags, updateQuiz, updateErrors, onSave, onReset, saving = false, errors = {} }) => {
+    const [uploadingImage, setUploadingImage] = useState(false);
+
 
     function onAddQuestion() {
         updateQuiz(QuizManagementService.addBlankQuestion(quiz));
@@ -59,7 +61,7 @@ const QuizForm = ({ quiz, tags, updateQuiz, updateErrors, onSave, onReset, savin
                     )}
                 </div>
             </div>
-            <QuestionManagement quiz={quiz} updateQuiz={updateQuiz} updateErrors={updateErrors} errors={errors} />
+            <QuestionManagement quiz={quiz} updateQuiz={updateQuiz} updateErrors={updateErrors} errors={errors} setIsUpploadingImage={setUploadingImage} />
             <div id="manage-quiz-toolbar" className="p-4 flex border-t justify-between items-center shadow card">
                 <div className="flex">
                     <button
@@ -77,6 +79,18 @@ const QuizForm = ({ quiz, tags, updateQuiz, updateErrors, onSave, onReset, savin
                     {errors.onSave && (
                         <div className="text-red-500 text-xs p-1" role="alert">
                             {errors.onSave}
+                        </div>
+                    )}
+                    {uploadingImage && (
+                        <div className="flex text-xs p-1">
+                            <div>
+                                <svg className="animate-spin text-center h-12 w-12 text-gray-800" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <p className="ml-2">.... Uploading image</p>
+                            </div>
                         </div>
                     )}
                 </div>
