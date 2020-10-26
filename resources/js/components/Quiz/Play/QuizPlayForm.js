@@ -14,7 +14,7 @@ const QuizPlayForm = ({ quiz, submission, onAnswerChange, currentQuestionNumber,
                                     <p className="text-center font-bold text-2xl">{question.ordinal + 1}: {question.text}</p>
                                     {question.image_url &&
                                         <div>
-                                            <img src={question.image_url} alt="question-image" className="question-image p-16" />
+                                            <img src={question.image_url} alt="question-image" className="question-image py-16 max-w-xs md:max-w-md lg:max-w-lg" />
                                         </div>
                                     }
                                     <div className="flex flex-col md:flex-row">
