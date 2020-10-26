@@ -11,7 +11,7 @@ import { toast } from "react-toastify";
 import LoadingMessage from "../../DisplayComponents/LoadingMessage";
 import * as QuizManagementService from "../../../tools/QuizManagementService";
 const QuizManagementPage = ({ quizId, userId, history }) => {
-    const [quiz, setQuiz] = useState(newQuiz);
+    const [quiz, setQuiz] = useState({ ...newQuiz });
     const [tags, setTags] = useState(null);
     const [errors, setErrors] = useState({ questions: [] });
     const [saving, setSaving] = useState(false);
@@ -34,7 +34,7 @@ const QuizManagementPage = ({ quizId, userId, history }) => {
                     );
                 });
         } else {
-            setQuiz({ ...newQuiz });
+            setQuiz(JSON.parse(JSON.stringify(newQuiz)));
             setLoaded(true);
         }
     }, [quizId]);
