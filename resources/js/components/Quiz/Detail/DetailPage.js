@@ -134,7 +134,7 @@ const QuizDetailPage = ({ quizId, currentUser, history }) => {
                                     <button
                                         type="button"
                                         onClick={() => history.push(`/quiz/${quiz.id}/edit`)}
-                                        className="bg-purple-400 text-white rounded py-2 px-4 hover:bg-purple-500 shadow inline-flex items-center"
+                                        className="bg-gray-800 text-white rounded py-2 px-4 hover:bg-gray-600 shadow inline-flex items-center"
                                     >
                                         <svg className="text-white h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />

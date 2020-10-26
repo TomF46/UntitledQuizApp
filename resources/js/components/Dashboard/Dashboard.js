@@ -39,9 +39,9 @@ const DashboardPage = ({ userId, history }) => {
                             </div>
                             <p className="text-center my-4 font-bold">Actions</p>
                             <div className="flex flex-col justify-center">
-                                <Link to="/profile" className="border border-purple-400 text-purple-400 text-center rounded py-2 px-4 hover:bg-purple-500 hover:text-white shadow">View profile</Link>
-                                <Link to="/explore" className="border border-purple-400 text-purple-400 text-center rounded py-2 px-4 hover:bg-purple-500 hover:text-white shadow my-4">Explore</Link>
-                                <Link to="/quiz" className="border border-purple-400 text-purple-400 text-center rounded py-2 px-4 hover:bg-purple-500 hover:text-white shadow">Create</Link>
+                                <Link to="/profile" className="border border-gray-800 text-gray-800 text-center rounded py-2 px-4 hover:bg-gray-600 hover:text-white shadow">View profile</Link>
+                                <Link to="/explore" className="border border-gray-800 text-gray-800 text-center rounded py-2 px-4 hover:bg-gray-600 hover:text-white shadow my-4">Explore</Link>
+                                <Link to="/quiz" className="border border-gray-800 text-gray-800 text-center rounded py-2 px-4 hover:bg-gray-600 hover:text-white shadow">Create</Link>
                             </div>
                         </div>
                         <div className="col-span-9">

@@ -63,7 +63,7 @@ const LoginPage = ({ login, userIsAuthenticated, history }) => {
                         <div className="flex justify-center mt-4">
                             <Link
                                 to={`/register`}
-                                className="text-center hover:text-purple-500 hover:underline"
+                                className="text-center hover:text-gray-600 hover:underline"
                             >
                                 No account? Click here to register
                     </Link>

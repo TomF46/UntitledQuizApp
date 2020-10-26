@@ -28,7 +28,7 @@ const UsersList = ({ users }) => {
                         <div className="col-span-3 flex justify-end mb-2">
                             <Link
                                 to={`/profiles/${user.id}`}
-                                className="bg-purple-400 text-white rounded py-2 px-4 hover:bg-purple-500 inline-block align-middle shadow"
+                                className="bg-gray-800 text-white rounded py-2 px-4 hover:bg-gray-600 inline-block align-middle shadow"
                             >
                                 View Profile
                             </Link>

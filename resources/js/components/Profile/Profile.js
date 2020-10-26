@@ -110,9 +110,9 @@ const ProfilePage = ({ userId, currentUser, history, ...props }) => {
                                         <button
                                             type="button"
                                             onClick={() => history.push(`/profile/${userId}/edit`)}
-                                            className="border border-purple-400 text-purple-400 text-center rounded py-2 px-4 hover:bg-purple-500 hover:text-white shadow inline-flex items-center justify-center"
+                                            className="border border-gray-800 text-gray-800 text-center rounded py-2 px-4 hover:bg-gray-600 hover:text-white shadow inline-flex items-center justify-center"
                                         >
-                                            <svg className="text-purple-400 h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <svg className="text-gray-800 h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                                             </svg>
                                             <span className="ml-1">Edit Profile</span>
@@ -121,9 +121,9 @@ const ProfilePage = ({ userId, currentUser, history, ...props }) => {
                                             <button
                                                 type="button"
                                                 onClick={toggleFollow}
-                                                className="border border-purple-400 text-purple-400 text-center rounded py-2 px-4 hover:bg-purple-500 hover:text-white shadow inline-flex items-center justify-center"
+                                                className="border border-gray-800 text-gray-800 text-center rounded py-2 px-4 hover:bg-gray-600 hover:text-white shadow inline-flex items-center justify-center"
                                             >
-                                                <svg className="text-purple-400 h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <svg className="text-gray-800 h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                     {user.following ? (
                                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7a4 4 0 11-8 0 4 4 0 018 0zM9 14a6 6 0 00-6 6v1h12v-1a6 6 0 00-6-6zM21 12h-6" />
                                                     ) : (
