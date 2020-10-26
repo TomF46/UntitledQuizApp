@@ -80,45 +80,8 @@ const QuizDetailPage = ({ quizId, currentUser, history }) => {
         })
     }
 
-    function like() {
-        if (quiz.likedByUser) {
-            removeLikeOrDislike();
-            return;
-        }
-
-        QuizApi.likeQuiz(quiz.id).then(() => {
-            toast.success("Quiz Liked.")
-            getQuizData();
-        }).catch(error => {
-            toast.error("Unable to like quiz " + error.message, {
-                autoClose: false,
-            });
-        })
-    }
-
-    function dislike() {
-        if (quiz.dislikedByUser) {
-            removeLikeOrDislike();
-            return;
-        }
-        QuizApi.dislikeQuiz(quiz.id).then(() => {
-            toast.success("Quiz disliked.")
-            getQuizData();
-        }).catch(error => {
-            toast.error("Unable to dislike quiz " + error.message, {
-                autoClose: false,
-            });
-        })
-    }
-
-    function removeLikeOrDislike() {
-        QuizApi.removeLikeOrDislike(quiz.id).then(() => {
-            getQuizData();
-        }).catch(error => {
-            toast.error("Error performing action " + error.message, {
-                autoClose: false,
-            });
-        });
+    function handleLikesUpdated() {
+        getQuizData();
     }
 
 
@@ -128,7 +91,7 @@ const QuizDetailPage = ({ quizId, currentUser, history }) => {
                 <LoadingMessage message={"Loading quiz"} />
             ) : (
                     <div>
-                        <QuizDetail quiz={quiz} scoresPaginator={scoresPaginator} onScoresPageChange={getScoresPage} onLike={like} onDislike={dislike} />
+                        <QuizDetail quiz={quiz} scoresPaginator={scoresPaginator} onScoresPageChange={getScoresPage} onLikesUpdated={handleLikesUpdated} />
                         {quiz.creator.id == currentUser && (
                             <div className="p-4 flex justify-between items-center border-t">
                                 <div className="flex">

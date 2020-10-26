@@ -98,6 +98,7 @@ const QuizPlayPage = ({ quizId, history }) => {
     function handleReplay() {
         createBlankSubmission(quiz);
         setScore(null);
+        setcurrentQuestionNumber(1);
     }
 
     function handleNext() {
@@ -108,6 +109,16 @@ const QuizPlayPage = ({ quizId, history }) => {
     function handlePrevious() {
         let previousQuestionNumber = currentQuestionNumber - 1;
         setcurrentQuestionNumber(previousQuestionNumber);
+    }
+
+    function handleLikesUpdated() {
+        getQuiz(quizId).then(quizData => {
+            setQuiz(quizData);
+        }).catch(error => {
+            toast.error("Error getting quiz " + error.message, {
+                autoClose: false,
+            });
+        });
     }
 
     return (
@@ -121,7 +132,7 @@ const QuizPlayPage = ({ quizId, history }) => {
                         </div>
                     ) : (
                             <div>
-                                <ScoreDetail score={score} onReplay={handleReplay} />
+                                <ScoreDetail quiz={quiz} score={score} onReplay={handleReplay} onLikesUpdated={handleLikesUpdated} />
                             </div>
                         ))}
         </div>
