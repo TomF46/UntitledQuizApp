@@ -17,14 +17,14 @@ const QuizPlayForm = ({ quiz, submission, onAnswerChange, currentQuestionNumber,
                                             <img src={question.image_url} alt="question-image" className="question-image p-16" />
                                         </div>
                                     }
-                                    <div className="flex">
+                                    <div className="flex flex-col lg:flex-row">
                                         {quiz.questions[question.ordinal].answers.map((answer) => {
                                             return (
                                                 <button
                                                     key={answer.id}
                                                     type="button"
                                                     onClick={(e) => onAnswerChange(question.id, answer.id, e)}
-                                                    className={`text-white py-2 px-4 hover:bg-green-500 mr-2 my-12 flex-1 shadow 
+                                                    className={`text-white py-2 px-4 hover:bg-green-500 mr-2 my-4 lg:my-12 flex-1 shadow 
                                                      ${submission.questions[question.ordinal].answer_id == answer.id ? "bg-green-400" : "bg-gray-800"}`}
                                                 >
                                                     {answer.text}
@@ -38,12 +38,12 @@ const QuizPlayForm = ({ quiz, submission, onAnswerChange, currentQuestionNumber,
                     )
                 })}
             </div>
-            <div id="play-quiz-toolbar" className="p-4 flex justify-between items-center">
-                <div className="flex">
+            <div id="play-quiz-toolbar" className="p-4 grid grid-cols-12">
+                <div className="col-span-12 lg:col-span-4 mb-2 lg:mb-0">
                     <button
                         type="button"
                         onClick={onReset}
-                        className="bg-red-400 text-white rounded py-2 px-4 hover:bg-red-500 mr-2 shadow inline-flex items-center"
+                        className="bg-red-400 text-white rounded py-2 px-4 hover:bg-red-500 lg:mr-2 shadow inline-flex items-center justify-center w-full lg:w-auto"
                     >
                         <svg className="text-white h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
@@ -51,51 +51,53 @@ const QuizPlayForm = ({ quiz, submission, onAnswerChange, currentQuestionNumber,
                         <span className="ml-1">Reset</span>
                     </button>
                 </div>
-                <div className="flex">
+                <div className="col-span-12 lg:col-span-4 mb-2 lg:mb-0">
                     {errors.incomplete && (
-                        <div className="text-red-500 text-xs p-1" role="alert">
+                        <div className="text-red-500 text-xs text-center p-1" role="alert">
                             {errors.incomplete}
                         </div>
                     )}
                     {errors.onSubmit && (
-                        <div className="text-red-500 text-xs p-1" role="alert">
+                        <div className="text-red-500 text-xs text-center p-1" role="alert">
                             {errors.onSubmit}
                         </div>
                     )}
                 </div>
-                <div className="flex justify-right">
-                    {currentQuestionNumber > 1 &&
-                        <button
-                            type="button"
-                            onClick={onPrevious}
-                            className="bg-gray-800 text-white rounded py-2 px-4 mr-2 hover:bg-gray-600 shadow inline-flex items-center"
-                        >
-                            <svg className="text-white h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 15l-3-3m0 0l3-3m-3 3h8M3 12a9 9 0 1118 0 9 9 0 01-18 0z" />
-                            </svg>
-                            <span className="ml-1">Previous</span>
-                        </button>
-                    }
-                    {currentQuestionNumber != quiz.questions.length ? (
-                        <button
-                            type="button"
-                            onClick={onNext}
-                            className="bg-gray-800 text-white rounded py-2 px-4 mr-2 hover:bg-gray-600 shadow inline-flex items-center"
-                        >
-                            <svg className="text-white h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 9l3 3m0 0l-3 3m3-3H8m13 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-                            </svg>
-                            <span className="ml-1">Next</span>
-                        </button>
-                    ) : (
+                <div className="col-span-12 lg:col-span-4">
+                    <div className="flex flex-col lg:flex-row justify-end">
+                        {currentQuestionNumber > 1 &&
                             <button
-                                onClick={onSubmit}
-                                className="bg-gray-800 text-white rounded py-2 px-4 hover:bg-gray-600 shadow"
+                                type="button"
+                                onClick={onPrevious}
+                                className="bg-gray-800 text-white rounded py-2 px-4 lg:mr-2 mb-2 lg:mb-0 hover:bg-gray-600 shadow inline-flex items-center justify-center"
                             >
-                                Submit
+                                <svg className="text-white h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 15l-3-3m0 0l3-3m-3 3h8M3 12a9 9 0 1118 0 9 9 0 01-18 0z" />
+                                </svg>
+                                <span className="ml-1">Previous</span>
                             </button>
-                        )
-                    }
+                        }
+                        {currentQuestionNumber != quiz.questions.length ? (
+                            <button
+                                type="button"
+                                onClick={onNext}
+                                className="bg-gray-800 text-white rounded py-2 px-4 lg:mr-2 mb-2 lg:mb-0 hover:bg-gray-600 shadow inline-flex items-center justify-center"
+                            >
+                                <svg className="text-white h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 9l3 3m0 0l-3 3m3-3H8m13 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                                <span className="ml-1">Next</span>
+                            </button>
+                        ) : (
+                                <button
+                                    onClick={onSubmit}
+                                    className="bg-gray-800 text-white rounded py-2 px-4 mb-2 lg:mb-0 hover:bg-gray-600 shadow justify-center"
+                                >
+                                    Submit
+                                </button>
+                            )
+                        }
+                    </div>
                 </div>
             </div>
         </div>

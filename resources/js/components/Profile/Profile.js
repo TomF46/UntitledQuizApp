@@ -87,7 +87,7 @@ const ProfilePage = ({ userId, currentUser, history, ...props }) => {
             ) : (
                     <>
                         <div className="grid grid-cols-12 pb-4">
-                            <div className="col-span-3 px-4">
+                            <div className="col-span-12 lg:col-span-3 px-4">
                                 <h2 className="font-bold text-4xl py-4 text-center">
                                     {user.username}
                                 </h2>
@@ -135,7 +135,7 @@ const ProfilePage = ({ userId, currentUser, history, ...props }) => {
                                         )}
                                 </div>
                             </div>
-                            <div className="col-span-9">
+                            <div className="col-span-12 lg:col-span-9">
                                 <div className="my-4">
                                     <h3 className="font-bold text-3xl mb-2">
                                         Created quizzes
@@ -157,7 +157,7 @@ const ProfilePage = ({ userId, currentUser, history, ...props }) => {
                                             {!scoresPaginator ? (
                                                 <LoadingMessage message={'Loading scores'} />
                                             ) : (
-                                                    <ScoresTableWithPagination paginationData={scoresPaginator} onPageChange={getScoresPage} />
+                                                    <ScoresTableWithPagination paginationData={scoresPaginator} onPageChange={getScoresPage} showUser={false} />
                                                 )}
                                         </div>
                                     </div>

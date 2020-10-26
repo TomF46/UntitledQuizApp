@@ -160,7 +160,7 @@ const QuestionManagement = ({ quiz, updateQuiz, errors = {}, setIsUpploadingImag
                                     <span className="ml-1">Add Answer</span>
                                 </button>
                             </div>
-                            <div className="flex justify-right">
+                            <div className="flex justify-end">
                                 <button
                                     type="button"
                                     onClick={() => onRemoveQuestion(questionIndex)}

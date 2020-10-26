@@ -106,7 +106,7 @@ const QuizDetailPage = ({ quizId, currentUser, history }) => {
                                         <span className="ml-1">Edit Quiz</span>
                                     </button>
                                 </div>
-                                <div className="flex justify-right">
+                                <div className="flex justify-end">
                                     <button
                                         type="button"
                                         onClick={handleDeleteQuiz}

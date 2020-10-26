@@ -8,7 +8,10 @@ import LikeControls from "../../DisplayComponents/LikeControls";
 const QuizDetail = ({ quiz, scoresPaginator, onScoresPageChange, onLikesUpdated }) => {
     return (
         <div className="grid grid-cols-12 pb-4">
-            <div className="col-span-3 px-4">
+            <div className="col-span-12 lg:col-span-3 px-4">
+                <h2 className="lg:hidden font-bold text-4xl py-4 border-b lg:border-none text-center">
+                    {quiz.title}
+                </h2>
                 <div className="p-4 flex justify-center items-center">
                     <LikeControls quiz={quiz} onLikesUpdated={onLikesUpdated} />
                 </div>
@@ -47,8 +50,8 @@ const QuizDetail = ({ quiz, scoresPaginator, onScoresPageChange, onLikesUpdated 
 
                 </div>
             </div>
-            <div className="col-span-9">
-                <h2 className="font-bold text-4xl py-4 text-center">
+            <div className="col-span-12 lg:col-span-9">
+                <h2 className="hidden lg:block font-bold text-4xl py-4 text-center">
                     {quiz.title}
                 </h2>
                 <div className="grid grid-cols-3 p-4 border-b border-t">
@@ -83,7 +86,7 @@ const QuizDetail = ({ quiz, scoresPaginator, onScoresPageChange, onLikesUpdated 
                             {!scoresPaginator ? (
                                 <LoadingMessage message={'Loading scores'} />
                             ) : (
-                                    <ScoresTableWithPagination paginationData={scoresPaginator} onPageChange={onScoresPageChange} />
+                                    <ScoresTableWithPagination paginationData={scoresPaginator} onPageChange={onScoresPageChange} showUser={true} />
                                 )}
                         </div>
                     </div>

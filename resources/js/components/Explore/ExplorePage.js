@@ -71,17 +71,18 @@ const ExplorePage = ({ history }) => {
                 <LoadingMessage message={'Loading quizzes to explore'} />
             ) : (
                     <div className="grid grid-cols-12">
-                        <div className="col-span-3 px-4 pb-4">
+                        <div className="col-span-12 lg:col-span-3 px-4 pb-4">
                             <h1 className="font-bold text-4xl my-4 text-center">Search</h1>
                             <FiltersForm filters={filters} tags={tags} onFilterChange={handleFilterChange} />
                         </div>
-                        <div className="col-span-9 px-4">
+                        <div className="col-span-12 lg:col-span-9 px-4">
                             <h1 className="font-bold text-4xl my-4 text-center">Explore</h1>
                             <QuizListWithPagination paginationData={quizzesPaginator} onPageChange={getQuizPage} />
                         </div>
                     </div>
                 )}
         </div>
+
     );
 };
 

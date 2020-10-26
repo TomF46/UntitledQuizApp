@@ -32,7 +32,7 @@ const EditProfileForm = ({ user, onChange, onFileChange, onSave, errors = {}, sa
                         error={errors.bio}
                     />
                 </div>
-                <div className="mb-6 flex justify-between">
+                <div className="mb-6 flex flex-col lg:flex-row justify-between">
                     <FileInput
                         label="Profile Image"
                         name="profile_image"
@@ -40,7 +40,7 @@ const EditProfileForm = ({ user, onChange, onFileChange, onSave, errors = {}, sa
                         error={errors.profile_image}
                     />
                     <div>
-                        <img src={user.profile_image} alt="profile-picture-preview" className="rounded-full profile-photo profile-photo-preview" />
+                        <img src={user.profile_image} alt="profile-picture-preview" className="rounded-full profile-photo profile-photo-preview mt-4 lg:mt-0" />
                     </div>
                 </div>
             </div>
@@ -54,7 +54,7 @@ const EditProfileForm = ({ user, onChange, onFileChange, onSave, errors = {}, sa
                         </div>
                     )}
                 </div>
-                <div className="flex justify-right">
+                <div className="flex justify-end">
                     <button
                         type="submit"
                         disabled={saving}
