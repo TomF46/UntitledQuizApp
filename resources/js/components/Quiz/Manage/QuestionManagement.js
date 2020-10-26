@@ -32,11 +32,14 @@ const QuestionManagement = ({ quiz, updateQuiz, errors = {}, setIsUpploadingImag
         let file = event.target.files[0];
 
         setIsUpploadingImage(true);
+        toast.info("Uploading image");
         storeImage(file).then(res => {
             setIsUpploadingImage(false);
+            toast.success("Sucessfully uploaded image");
             updateQuiz(QuizManagementService.changeQuestionImage(quiz, questionIndex, res.path));
         }).catch(error => {
             setIsUpploadingImage(false);
+            toast.error("Unable to uploaded image");
             console.log(error);
         });
     }

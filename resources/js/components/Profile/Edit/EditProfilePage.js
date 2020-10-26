@@ -37,12 +37,15 @@ const EditProfilePage = ({ userId, history }) => {
 
     function handleFileChange(event) {
         let file = event.target.files[0];
+        toast.info("Uploading image");
         storeImage(file).then(res => {
+            toast.success("Sucessfully uploaded image");
             setUser(prevUser => ({
                 ...prevUser,
                 'profile_image': res.path
             }));
         }).catch(error => {
+            toast.error("Unable to uploaded image");
             console.log(error);
         });
     }
