@@ -183,7 +183,7 @@ const ProfilePage = ({ userId, currentUser, history, logout, ...props }) => {
                                                     <LoadingMessage message={'Loading scores'} />
                                                 </div>
                                             ) : (
-                                                    <ScoresTableWithPagination paginationData={scoresPaginator} onPageChange={getScoresPage} showUser={false} />
+                                                    <ScoresTableWithPagination paginationData={scoresPaginator} onPageChange={getScoresPage} showUser={false} showQuiz={true} />
                                                 )}
                                         </div>
                                     </div>

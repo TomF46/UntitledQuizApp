@@ -13,8 +13,8 @@ Quiz app website using a Laravel API and React frontend.
     -   Followed users
     -   Followed users quizzes
 -   View Profile
--   Users quizzes
--   Users scores
+    -   Users quizzes
+    -   Users scores
 -   Update profile
 -   Follow user/profile
 

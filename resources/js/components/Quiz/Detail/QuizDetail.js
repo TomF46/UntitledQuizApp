@@ -89,7 +89,7 @@ const QuizDetail = ({ quiz, scoresPaginator, onScoresPageChange, onLikesUpdated 
                             {!scoresPaginator ? (
                                 <LoadingMessage message={'Loading scores'} />
                             ) : (
-                                    <ScoresTableWithPagination paginationData={scoresPaginator} onPageChange={onScoresPageChange} showUser={true} />
+                                    <ScoresTableWithPagination paginationData={scoresPaginator} onPageChange={onScoresPageChange} showUser={true} showQuiz={false} />
                                 )}
                         </div>
                     </div>
