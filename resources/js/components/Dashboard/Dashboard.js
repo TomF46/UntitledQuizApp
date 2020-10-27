@@ -16,7 +16,6 @@ const DashboardPage = ({ userId, history }) => {
     useEffect(() => {
         if (!user) {
             getUserById(userId).then(userData => {
-                console.log(userData);
                 setUser(userData);
             }).catch(error => {
                 toast.error("Error getting user " + error.message, {

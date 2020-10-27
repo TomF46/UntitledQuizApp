@@ -59,6 +59,16 @@ class User extends Authenticatable
         return $this->hasMany(Like::class);
     }
 
+    public function mapForEditing()
+    {
+        return [
+            'id' => $this->id,
+            'username' => $this->username,
+            'bio' => $this->bio,
+            'profile_image' => $this->profile_image_url ? $this->profile_image_url : 'https://picsum.photos/200', //Hardcode random for now
+        ];
+    }
+
     public function map(User $user)
     {
         return [

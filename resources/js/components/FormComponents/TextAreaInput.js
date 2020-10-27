@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const TextAreaInput = ({ name, label, onChange, placeholder, value, error }) => {
+const TextAreaInput = ({ name, label, onChange, placeholder, required, value, error }) => {
     return (
         <div className="field">
             <label
@@ -14,9 +14,9 @@ const TextAreaInput = ({ name, label, onChange, placeholder, value, error }) => 
                 <textarea
                     name={name}
                     className="resize-y border min-w-full rounded focus:outline-none focus:shadow-outline"
-                    value={value}
+                    value={value ? value : ""}
                     onChange={onChange}
-                    required
+                    required={required}
                 ></textarea>
                 {error && (
                     <div className="text-red-500 text-xs p-1 mt-2">{error}</div>
@@ -31,6 +31,7 @@ TextAreaInput.propTypes = {
     label: PropTypes.string.isRequired,
     onChange: PropTypes.func.isRequired,
     placeholder: PropTypes.string,
+    required: PropTypes.bool.isRequired,
     value: PropTypes.string,
     error: PropTypes.string
 };

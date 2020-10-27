@@ -33,7 +33,6 @@ export function validateQuiz(quiz) {
         }
     });
 
-    console.log(quiz.questions.length);
     if (quiz.questions.length == 0) {
         errors.onSave = "Quizzes must have at least 1 question";
         isValid = false;

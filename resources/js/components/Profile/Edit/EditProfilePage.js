@@ -46,7 +46,6 @@ const EditProfilePage = ({ userId, history }) => {
             }));
         }).catch(error => {
             toast.error("Unable to uploaded image");
-            console.log(error);
         });
     }
 
@@ -62,6 +61,7 @@ const EditProfilePage = ({ userId, history }) => {
         event.preventDefault();
         if (!formIsValid()) return;
         setSaving(true);
+        console.log(userId);
 
         editUserProfile(userId, user).then(response => {
             toast.success("Profile updated!")

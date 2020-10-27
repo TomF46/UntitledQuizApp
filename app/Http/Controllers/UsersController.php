@@ -32,11 +32,7 @@ class UsersController extends Controller
     {
         if ($user->id != $request->user()->id) return response()->json(['error' => 'Unauthorized.'], 401);
 
-        return response()->json([
-            'username' => $user->username,
-            'bio' => $user->bio,
-            'profile_image' => $user->profile_image_url
-        ]);
+        return response()->json($user->mapForEditing());
     }
 
     public function update(Request $request, User $user)
@@ -49,13 +45,14 @@ class UsersController extends Controller
         $user->profile_image_url = $attributes['profile_image'];
         $user->update($attributes);
         $user = $user->fresh();
+        dd($user);
         return response()->json($user);
     }
 
     protected function validateUser(Request $request, User $user)
     {
         return $request->validate([
-            'username' => ['required', 'string', 'max:255', Rule::unique('users')->ignore($user), 'alpha_dash'],
+            'username' => ['required', 'string', 'max:255', Rule::unique('users')->ignore($user)],
             'bio' => 'string|nullable',
             'profile_image' => 'string|nullable',
 

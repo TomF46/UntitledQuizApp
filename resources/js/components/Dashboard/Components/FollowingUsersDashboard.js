@@ -13,7 +13,6 @@ const FollowingUsersDashboard = ({ user }) => {
     useEffect(() => {
         if (!usersPaginator) {
             getFollowedUsers().then(usersData => {
-                console.log(usersData);
                 setUsers(usersData)
             }).catch(error => {
                 toast.error("Error getting users " + error.message, {

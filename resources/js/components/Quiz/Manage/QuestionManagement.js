@@ -40,7 +40,6 @@ const QuestionManagement = ({ quiz, updateQuiz, errors = {}, setIsUpploadingImag
         }).catch(error => {
             setIsUpploadingImage(false);
             toast.error("Unable to uploaded image");
-            console.log(error);
         });
     }
 

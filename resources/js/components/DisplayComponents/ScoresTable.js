@@ -39,7 +39,7 @@ ScoresTable.propTypes = {
     scores: PropTypes.array.isRequired,
     showUser: PropTypes.bool.isRequired,
     showQuiz: PropTypes.bool.isRequired,
-    startingPosition: PropTypes.number.isRequired
+    startingPosition: PropTypes.number
 };
 
 export default ScoresTable;

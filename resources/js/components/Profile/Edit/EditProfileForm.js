@@ -28,6 +28,7 @@ const EditProfileForm = ({ user, onChange, onFileChange, onSave, errors = {}, sa
                         name="bio"
                         label="Bio"
                         value={user.bio}
+                        required={false}
                         onChange={onChange}
                         error={errors.bio}
                     />

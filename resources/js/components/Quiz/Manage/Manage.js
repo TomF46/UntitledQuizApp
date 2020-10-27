@@ -21,7 +21,6 @@ const QuizManagementPage = ({ quizId, userId, history }) => {
         if (quizId) {
             getQuizForEdit(quizId)
                 .then(data => {
-                    console.log(data);
                     setQuiz({ ...data });
                     setLoaded(true);
                 })

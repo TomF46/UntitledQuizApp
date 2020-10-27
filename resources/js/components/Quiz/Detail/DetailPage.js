@@ -22,7 +22,6 @@ const QuizDetailPage = ({ quizId, currentUser, history }) => {
 
     function getQuizData() {
         getQuiz(quizId).then(quizData => {
-            console.log(quizData);
             setQuiz(quizData);
             getScores(quizData.id);
         }).catch(error => {
