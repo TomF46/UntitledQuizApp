@@ -14,7 +14,7 @@ class AddProfileImageForUser extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('profile_image_url');
+            $table->string('profile_image_url')->nullable();
         });
     }
 
