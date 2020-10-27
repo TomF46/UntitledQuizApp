@@ -13,10 +13,9 @@ const Header = ({ userIsAuthenticated }) => {
     return (
         <nav className="flex items-center justify-between flex-wrap bg-gray-800 p-4 shadow-lg">
             <div className="flex items-center flex-shrink-0 text-white mr-6">
-                <img src="https://untitled-quiz-app-images.s3-eu-west-1.amazonaws.com/QApp.png" className="w-16" />
-                {/* <Link to="/" className="font-semibold text-xl tracking-tight">
-                    Untitled Quiz App
-                </Link> */}
+                <Link to="/" className="tracking-tight">
+                    <img src="https://untitled-quiz-app-images.s3-eu-west-1.amazonaws.com/QApp.png" className="w-16" />
+                </Link>
             </div>
             <div className="block md:hidden">
                 <button className="flex items-center px-3 py-2 border rounded text-white border-teal-400 hover:text-white hover:border-white pointer" onClick={toggleMobileNavigation}>

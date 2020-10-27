@@ -5,6 +5,7 @@ import CheckboxInput from "../../FormComponents/CheckboxInput";
 import * as QuizManagementService from "../../../tools/QuizManagementService";
 import { confirmAlert } from "react-confirm-alert";
 import { storeImage } from "../../../api/imagesApi";
+import { toast } from "react-toastify";
 
 const QuestionManagement = ({ quiz, updateQuiz, errors = {}, setIsUpploadingImage }) => {
 
