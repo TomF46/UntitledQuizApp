@@ -68,7 +68,7 @@ const QuizDetail = ({ quiz, scoresPaginator, onScoresPageChange, onLikesUpdated 
                     </div>
                     <div>
                         <p className="text-small text-gray-600 text-center">Likes:</p>
-                        <p className="text-center">120</p>
+                        <p className="text-center">{quiz.totalLikes}</p>
                     </div>
                 </div>
                 {/* <div className="flex justify-center my-4">

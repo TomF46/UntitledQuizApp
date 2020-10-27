@@ -7,8 +7,9 @@ import { getQuizzesByUser, getQuizzesWithPagination } from "../../api/quizApi";
 import QuizListWithPagination from "../DisplayComponents/QuizListWithPagination";
 import ScoresTableWithPagination from "../DisplayComponents/ScoresTableWithPagination";
 import LoadingMessage from "../DisplayComponents/LoadingMessage";
+import { logout } from "../../redux/actions/authenticationActions";
 
-const ProfilePage = ({ userId, currentUser, history, ...props }) => {
+const ProfilePage = ({ userId, currentUser, history, logout, ...props }) => {
     const [user, setUser] = useState(null);
     const [quizzesPaginator, setQuizzesPaginator] = useState(null);
     const [scoresPaginator, setScoresPaginator] = useState(null);
@@ -80,6 +81,12 @@ const ProfilePage = ({ userId, currentUser, history, ...props }) => {
         })
     }
 
+    function handleLogout() {
+        logout().then(() => {
+            toast.info("Logged out.");
+        });
+    }
+
     return (
         <div className="profile-page overflow-hidden shadow-lg page">
             {user == null ? (
@@ -107,16 +114,28 @@ const ProfilePage = ({ userId, currentUser, history, ...props }) => {
                                 </div>
                                 <div className="flex flex-col justify-center text-center">
                                     {userId == currentUser ? (
-                                        <button
-                                            type="button"
-                                            onClick={() => history.push(`/profile/${userId}/edit`)}
-                                            className="border border-gray-800 text-gray-800 text-center rounded py-2 px-4 hover:bg-gray-600 shadow inline-flex items-center justify-center"
-                                        >
-                                            <svg className="text-gray-800 h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
-                                            </svg>
-                                            <span className="ml-1">Edit Profile</span>
-                                        </button>
+                                        <>
+                                            <button
+                                                type="button"
+                                                onClick={() => history.push(`/profile/${userId}/edit`)}
+                                                className="border border-gray-800 text-gray-800 text-center rounded py-2 px-4 hover:bg-gray-600 shadow inline-flex items-center justify-center"
+                                            >
+                                                <svg className="text-gray-800 h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                                                </svg>
+                                                <span className="ml-1">Edit Profile</span>
+                                            </button>
+                                            <button
+                                                type="button"
+                                                onClick={handleLogout}
+                                                className="border border-gray-800 text-gray-800 text-center rounded py-2 px-4 mt-4 hover:bg-gray-600 shadow inline-flex items-center justify-center"
+                                            >
+                                                <svg className="text-gray-800 h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                                                </svg>
+                                                <span className="ml-1">Logout</span>
+                                            </button>
+                                        </>
                                     ) : (
                                             <button
                                                 type="button"
@@ -135,7 +154,7 @@ const ProfilePage = ({ userId, currentUser, history, ...props }) => {
                                         )}
                                 </div>
                             </div>
-                            <div className="col-span-12 lg:col-span-9">
+                            <div className="col-span-12 lg:col-span-9 px-4">
                                 <div className="my-4">
                                     <h3 className="font-bold text-3xl mb-2">
                                         Created quizzes
@@ -180,7 +199,8 @@ const ProfilePage = ({ userId, currentUser, history, ...props }) => {
 ProfilePage.propTypes = {
     userId: PropTypes.any.isRequired,
     currentUser: PropTypes.any.isRequired,
-    history: PropTypes.object.isRequired
+    history: PropTypes.object.isRequired,
+    logout: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state, ownProps) => {
@@ -191,4 +211,9 @@ const mapStateToProps = (state, ownProps) => {
     };
 };
 
-export default connect(mapStateToProps)(ProfilePage);
+const mapDispatchToProps = {
+    logout
+};
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProfilePage);

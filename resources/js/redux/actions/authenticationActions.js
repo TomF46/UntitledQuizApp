@@ -8,12 +8,12 @@ export function userLoginSuccess(tokens) {
     return { type: types.USER_LOGIN_SUCCESS, tokens };
 }
 
-export function userLogoutSuccess(tokens) {
-    return { type: types.USER_LOGOUT_SUCCESS, tokens };
+export function userLogoutSuccess() {
+    return { type: types.USER_LOGOUT_SUCCESS };
 }
 
 export function login(userLoginDetails) {
-    return function(dispatch) {
+    return function (dispatch) {
         dispatch(beginApiCall());
         return authenticationApi
             .Login(userLoginDetails)
@@ -29,9 +29,9 @@ export function login(userLoginDetails) {
     };
 }
 
-export function logout(tokens) {
-    return function(dispatch) {
-        removeUser();
-        dispatch(userLogoutSuccess(tokens));
+export function logout() {
+    return function (dispatch) {
+        removeTokens();
+        dispatch(userLogoutSuccess());
     };
 }

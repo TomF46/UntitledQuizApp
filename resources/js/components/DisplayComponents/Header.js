@@ -35,21 +35,21 @@ const Header = ({ userIsAuthenticated }) => {
                         <>
                             <Link
                                 to="/"
-                                className="block mt-4 md:inline-block md:mt-0 text-white hover:text-white mr-4"
+                                className="block mt-4 md:inline-block md:mt-0 text-white hover:text-white"
                             >
                                 Dashboard
                             </Link>
                             <Link
-                                to="/quiz"
-                                className="block mt-4 md:inline-block md:mt-0 text-white hover:text-white mr-4"
-                            >
-                                Create
-                            </Link>
-                            <Link
                                 to="/explore"
-                                className="block mt-4 md:inline-block md:mt-0 text-white hover:text-white"
+                                className="block mt-4 md:inline-block md:mt-0 text-white hover:text-white md:mx-4"
                             >
                                 Explore
+                            </Link>
+                            <Link
+                                to="/quiz"
+                                className="block mt-4 md:inline-block md:mt-0 text-white hover:text-white"
+                            >
+                                Create
                             </Link>
                         </>
                     )}
