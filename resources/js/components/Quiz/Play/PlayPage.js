@@ -49,7 +49,7 @@ const QuizPlayPage = ({ quizId, history }) => {
         let question = submission.questions.find(question => question.id == questionId);
         question.answer_id = answerId;
         setSubmission({ ...submission });
-
+        if (currentQuestionNumber < quiz.questions.length) handleNext();
     }
 
     function submissionIsValid() {

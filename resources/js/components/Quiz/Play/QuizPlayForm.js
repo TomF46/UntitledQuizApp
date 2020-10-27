@@ -1,5 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { CSSTransition } from "react-transition-group";
+
+
 
 const QuizPlayForm = ({ quiz, submission, onAnswerChange, currentQuestionNumber, onSubmit, onReset, onNext, onPrevious, errors }) => {
     return (
@@ -8,34 +11,42 @@ const QuizPlayForm = ({ quiz, submission, onAnswerChange, currentQuestionNumber,
             <div>
                 {quiz.questions.map((question) => {
                     return (
-                        <div key={question.id}>
-                            {question.ordinal + 1 == currentQuestionNumber &&
-                                <div className="p-4">
-                                    <p className="text-center font-bold text-xl">Question {question.ordinal + 1} of {quiz.questions.length}</p>
-                                    <p className="text-center font-bold text-2xl">{question.text}</p>
-                                    {question.image_url &&
-                                        <div>
-                                            <img src={question.image_url} alt="question-image" className="question-image py-16 max-w-xs md:max-w-md lg:max-w-lg" />
-                                        </div>
-                                    }
-                                    <div className="flex flex-col md:flex-row">
-                                        {quiz.questions[question.ordinal].answers.map((answer) => {
-                                            return (
-                                                <button
-                                                    key={answer.id}
-                                                    type="button"
-                                                    onClick={(e) => onAnswerChange(question.id, answer.id, e)}
-                                                    className={`text-white py-2 px-4 hover:bg-green-500 mr-2 my-4 md:my-12 flex-1 shadow 
+                        <CSSTransition
+
+                            key={question.id}
+                            in={question.ordinal + 1 == currentQuestionNumber}
+                            timeout={{ enter: 150, exit: 150 }}
+                            classNames={'fade'}
+                        >
+                            <div>
+                                {question.ordinal + 1 == currentQuestionNumber &&
+                                    <div className="p-4">
+                                        <p className="text-center font-bold text-xl">Question {question.ordinal + 1} of {quiz.questions.length}</p>
+                                        <p className="text-center font-bold text-2xl">{question.text}</p>
+                                        {question.image_url &&
+                                            <div>
+                                                <img src={question.image_url} alt="question-image" className="question-image py-16 max-w-xs md:max-w-md lg:max-w-lg" />
+                                            </div>
+                                        }
+                                        <div className="flex flex-col md:flex-row">
+                                            {quiz.questions[question.ordinal].answers.map((answer) => {
+                                                return (
+                                                    <button
+                                                        key={answer.id}
+                                                        type="button"
+                                                        onClick={(e) => onAnswerChange(question.id, answer.id, e)}
+                                                        className={`text-white py-2 px-4 hover:bg-green-500 mr-2 my-4 md:my-12 flex-1 shadow 
                                                      ${submission.questions[question.ordinal].answer_id == answer.id ? "bg-green-400" : "bg-gray-800"}`}
-                                                >
-                                                    {answer.text}
-                                                </button>
-                                            )
-                                        })}
+                                                    >
+                                                        {answer.text}
+                                                    </button>
+                                                )
+                                            })}
+                                        </div>
                                     </div>
-                                </div>
-                            }
-                        </div>
+                                }
+                            </div>
+                        </CSSTransition>
                     )
                 })}
             </div>
