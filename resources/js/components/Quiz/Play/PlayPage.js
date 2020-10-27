@@ -122,7 +122,7 @@ const QuizPlayPage = ({ quizId, history }) => {
     }
 
     return (
-        <div className="pt-6 overflow-hidden shadow-lg page">
+        <div className="overflow-hidden shadow-lg page">
             {!submission ? (
                 <LoadingMessage message={'Loading quiz'} />
             ) : (

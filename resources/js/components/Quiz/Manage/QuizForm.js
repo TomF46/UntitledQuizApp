@@ -62,7 +62,7 @@ const QuizForm = ({ quiz, tags, updateQuiz, updateErrors, onSave, onReset, savin
                 </div>
             </div>
             <QuestionManagement quiz={quiz} updateQuiz={updateQuiz} updateErrors={updateErrors} errors={errors} setIsUpploadingImage={setUploadingImage} />
-            <div id="manage-quiz-toolbar" className="p-4 grid grid-cols-12 shadow card">
+            <div id="manage-quiz-toolbar" className="p-4 grid grid-cols-12 shadow card mt-4">
                 <div className="col-span-12 md:col-span-4 mb-2 md:mb-0">
                     <button
                         type="button"
@@ -72,7 +72,7 @@ const QuizForm = ({ quiz, tags, updateQuiz, updateErrors, onSave, onReset, savin
                         <svg className="text-white h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
-                        <span className="ml-1">Add Question</span>
+                        <span className="ml-1">Question</span>
                     </button>
                 </div>
                 <div className="col-span-12 md:col-span-4 mb-2 md:mb-0">

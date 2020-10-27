@@ -9,7 +9,6 @@ import { toast } from "react-toastify";
 
 const QuestionManagement = ({ quiz, updateQuiz, errors = {}, setIsUpploadingImage }) => {
 
-
     function onAddAnswer(questionIndex) {
         updateQuiz(QuizManagementService.addBlankAnswerToQuestion(quiz, questionIndex));
     }
@@ -132,14 +131,20 @@ const QuestionManagement = ({ quiz, updateQuiz, errors = {}, setIsUpploadingImag
                                         value={quiz.questions[questionIndex].answers[answerIndex].text}
                                         onChange={(e) => onAnswerChange(questionIndex, answerIndex, e)}
                                     />
-                                    <CheckboxInput
-                                        name={`questions[${questionIndex}].answers[${answerIndex}].is_correct`}
-                                        label="Is correct answer?"
-                                        value={quiz.questions[questionIndex].answers[answerIndex].is_correct}
-                                        checked={quiz.questions[questionIndex].answers[answerIndex].is_correct}
-                                        onChange={(e) => onAnswerCheckboxChange(questionIndex, answerIndex, e)}
-                                    />
-                                    <p className="inline text-red-400 font-bold pointer hover:text-red-500" onClick={() => onRemoveAnswer(questionIndex, answerIndex)}>Remove Answer</p>
+                                    <div className="flex justify-between">
+                                        <div>
+                                            <CheckboxInput
+                                                name={`questions[${questionIndex}].answers[${answerIndex}].is_correct`}
+                                                label="Is correct answer?"
+                                                value={quiz.questions[questionIndex].answers[answerIndex].is_correct}
+                                                checked={quiz.questions[questionIndex].answers[answerIndex].is_correct}
+                                                onChange={(e) => onAnswerCheckboxChange(questionIndex, answerIndex, e)}
+                                            />
+                                        </div>
+                                        <div>
+                                            <p className="inline text-red-400 font-bold pointer hover:text-red-500" onClick={() => onRemoveAnswer(questionIndex, answerIndex)}>Remove Answer</p>
+                                        </div>
+                                    </div>
                                 </div>
                             )
                         })}
@@ -158,10 +163,10 @@ const QuestionManagement = ({ quiz, updateQuiz, errors = {}, setIsUpploadingImag
                                     <svg className="text-white h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
                                     </svg>
-                                    <span className="ml-1">Add Answer</span>
+                                    <span className="ml-1">Answer</span>
                                 </button>
                             </div>
-                            <div className="flex justify-end">
+                            <div className="flex justify-end mt-auto">
                                 <button
                                     type="button"
                                     onClick={() => onRemoveQuestion(questionIndex)}

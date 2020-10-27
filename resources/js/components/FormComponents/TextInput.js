@@ -4,12 +4,14 @@ import PropTypes from "prop-types";
 const TextInput = ({ name, label, onChange, placeholder, value, error }) => {
     return (
         <div className="field">
-            <label
-                className="block mb-2 uppercase font-bold text-xs text-gray-700"
-                htmlFor={name}
-            >
-                {label}
-            </label>
+            {label &&
+                <label
+                    className="block mb-2 font-bold text-xs text-gray-700"
+                    htmlFor={name}
+                >
+                    {label}
+                </label>
+            }
             <div className="control">
                 <input
                     type="text"
@@ -30,7 +32,7 @@ const TextInput = ({ name, label, onChange, placeholder, value, error }) => {
 
 TextInput.propTypes = {
     name: PropTypes.string.isRequired,
-    label: PropTypes.string.isRequired,
+    label: PropTypes.string,
     onChange: PropTypes.func.isRequired,
     placeholder: PropTypes.string,
     value: PropTypes.string,
