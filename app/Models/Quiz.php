@@ -62,7 +62,7 @@ class Quiz extends Model
             'creator' => [
                 "username" => $this->user->username,
                 'id' => $this->user->id,
-                'profile_image' => $this->user->profile_image_url ? $this->user->profile_image_url : 'https://picsum.photos/200'
+                'profile_image' => $this->user->profile_image_url ? $this->user->profile_image_url : config('globalVariables.default_profile_pictures'),
             ],
         ];
     }
@@ -84,7 +84,7 @@ class Quiz extends Model
             'creator' => [
                 "username" => $this->user->username,
                 'id' => $this->user->id,
-                'profile_image' => $this->user->profile_image_url ? $this->user->profile_image_url : 'https://picsum.photos/200'
+                'profile_image' => $this->user->profile_image_url ? $this->user->profile_image_url : config('globalVariables.default_profile_pictures'),
             ],
         ];
     }
@@ -105,7 +105,7 @@ class Quiz extends Model
             'creator' => [
                 "username" => $this->user->username,
                 'id' => $this->user->id,
-                'profile_image' => $this->user->profile_image_url ? $this->user->profile_image_url : 'https://picsum.photos/200'
+                'profile_image' => $this->user->profile_image_url ? $this->user->profile_image_url : config('globalVariables.default_profile_pictures'),
             ],
             'likedByUser' => $this->isLikedBy($user),
             'dislikedByUser' => $this->isDislikedBy($user),
