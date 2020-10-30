@@ -45,7 +45,6 @@ class UsersController extends Controller
         $user->profile_image_url = $attributes['profile_image'];
         $user->update($attributes);
         $user = $user->fresh();
-        dd($user);
         return response()->json($user);
     }
 
