@@ -18,13 +18,15 @@ const SelectInput = ({ name, label, onChange, value, options, error }) => {
                     className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 leading-tight focus:outline-none focus:outline"
                 >
                     <option value={null} >Select</option>
-                    {options.map((option) => {
-                        return (
-                            <option key={option.value} value={option.value}>
-                                {option.text}
-                            </option>
-                        );
-                    })}
+                    {options &&
+                        options.map((option) => {
+                            return (
+                                <option key={option.value} value={option.value}>
+                                    {option.text}
+                                </option>
+                            );
+                        })
+                    }
                 </select>
                 {error && (
                     <div className="text-red-500 text-xs p-1 mt-2">{error}</div>
