@@ -31,6 +31,11 @@ class Quiz extends Model
         return $this->hasMany(Score::class);
     }
 
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
     public function tags()
     {
         return $this->belongsToMany(Tag::class)->withTimestamps();
@@ -109,6 +114,9 @@ class Quiz extends Model
             ],
             'likedByUser' => $this->isLikedBy($user),
             'dislikedByUser' => $this->isDislikedBy($user),
+            'comments' => $this->comments()->get()->map(function ($comment) {
+                return $comment->map();
+            }),
         ];
     }
 
@@ -123,6 +131,9 @@ class Quiz extends Model
         });
         $this->creator = $this->user->username;
         $this->creator_id = $this->user->id;
+        $this->comments = $this->comments()->get()->map(function ($comment) {
+            return $comment->map();
+        });
         return $this;
     }
 
