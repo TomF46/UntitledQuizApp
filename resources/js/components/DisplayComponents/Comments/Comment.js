@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import Moment from 'react-moment';
 
 const Comment = ({ comment }) => {
     return (
@@ -9,7 +10,12 @@ const Comment = ({ comment }) => {
                     <div className="flex">
                         <img src={comment.user_img} alt="profile-picture" className="rounded-full h-12 w-12" />
                     </div>
-                    <div className="flex items-center ml-2">{comment.username}</div>
+                    <div className="flex ml-2">
+                        <div className="flex flex-col">
+                            <div className="flex">{comment.username}</div>
+                            <div className="flex text-xs"><Moment format="DD/MM/YYYY h:mm:ss a">{comment.created_at}</Moment></div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div className="col-span-12 lg:col-span-9 p-4">{comment.text}</div>
