@@ -20,7 +20,7 @@ import EditProfilePage from "./Profile/Edit/EditProfilePage";
 const Main = ({ location }) => (
     <>
         <Header />
-        <div className="relative">
+        <div className="relative mt-4">
             <div className="container mx-auto">
                 <TransitionGroup className="transition-group">
                     <CSSTransition

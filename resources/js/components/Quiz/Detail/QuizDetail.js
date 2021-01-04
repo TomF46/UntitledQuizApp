@@ -5,10 +5,10 @@ import ScoresTableWithPagination from "../../DisplayComponents/ScoresTableWithPa
 import LoadingMessage from "../../DisplayComponents/LoadingMessage";
 import LikeControls from "../../DisplayComponents/LikeControls";
 
-const QuizDetail = ({ quiz, scoresPaginator, onScoresPageChange, onLikesUpdated }) => {
+const QuizDetail = ({ quiz, scoresPaginator, onScoresPageChange, onLikesUpdated, isCreator, onDelete }) => {
     return (
         <div className="grid grid-cols-12 pb-4">
-            <div className="col-span-12 lg:col-span-3 px-4">
+            <div className="col-span-12 lg:col-span-3 lg:mr-4 px-4 overflow-hidden shadow-lg page">
                 <h2 className="lg:hidden font-bold text-4xl py-4 border-b lg:border-none text-center">
                     {quiz.title}
                 </h2>
@@ -50,10 +50,36 @@ const QuizDetail = ({ quiz, scoresPaginator, onScoresPageChange, onLikesUpdated 
                     <div className="flex flex-col justify-center">
                         <Link to={`/profile/${quiz.creator.id}`} className="border border-gray-800 text-gray-800 text-center rounded py-2 px-4 hover:bg-gray-600 hover:text-white shadow">View profile</Link>
                     </div>
-
                 </div>
+                {isCreator && (
+                    <>
+                        <h3 className="text-lg font-bold text-center mb-4 mt-4">Actions</h3>
+                        <div className="flex flex-col justify-center text-center">
+                            <button
+                                type="button"
+                                onClick={() => history.push(`/quiz/${quiz.id}/edit`)}
+                                className="border border-gray-800 text-gray-800 text-center rounded py-2 px-4 hover:bg-gray-600 shadow inline-flex items-center justify-center"
+                            >
+                                <svg className="h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                                </svg>
+                                <span className="ml-1">Edit Quiz</span>
+                            </button>
+                            <button
+                                type="button"
+                                onClick={onDelete}
+                                className="border border-red-400 text-red-400 text-center rounded py-2 px-4 mt-4 hover:bg-red-600 hover:text-white shadow inline-flex items-center justify-center"
+                            >
+                                <svg className="h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                </svg>
+                                <span className="ml-1">Delete</span>
+                            </button>
+                        </div>
+                    </>
+                )}
             </div>
-            <div className="col-span-12 lg:col-span-9">
+            <div className="col-span-12 lg:col-span-9 overflow-hidden shadow-lg page">
                 <h2 className="hidden lg:block font-bold text-4xl py-4 text-center">
                     {quiz.title}
                 </h2>
@@ -71,17 +97,6 @@ const QuizDetail = ({ quiz, scoresPaginator, onScoresPageChange, onLikesUpdated 
                         <p className="text-center">{quiz.totalLikes}</p>
                     </div>
                 </div>
-                {/* <div className="flex justify-center my-4">
-                    <Link
-                        to={`/quiz/${quiz.id}/play`}
-                        className="bg-gray-800 text-white rounded py-2 px-4 hover:bg-gray-600 ml-4 shadow items-center inline-flex"
-                    >
-                        <svg className="text-white h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" /> <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>
-                        <p className="ml-1">Play</p>
-                    </Link>
-                </div> */}
                 <div>
                     <div className="flex justify-center">
                         <div className="inline-block p-4">
@@ -95,7 +110,7 @@ const QuizDetail = ({ quiz, scoresPaginator, onScoresPageChange, onLikesUpdated 
                     </div>
                 </div>
             </div>
-        </div>
+        </div >
     );
 };
 
@@ -103,7 +118,9 @@ QuizDetail.propTypes = {
     quiz: PropTypes.object.isRequired,
     scoresPaginator: PropTypes.object,
     onLikesUpdated: PropTypes.func.isRequired,
-    onScoresPageChange: PropTypes.func.isRequired
+    onDelete: PropTypes.func.isRequired,
+    onScoresPageChange: PropTypes.func.isRequired,
+    isCreator: PropTypes.func.isRequired
 };
 
 export default QuizDetail;

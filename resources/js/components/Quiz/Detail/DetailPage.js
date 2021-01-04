@@ -8,6 +8,7 @@ import { confirmAlert } from "react-confirm-alert";
 import { toast } from "react-toastify";
 import { getScoresWithPaginator } from "../../../api/userApi";
 import LoadingMessage from "../../DisplayComponents/LoadingMessage";
+// import CommentsSection from "../../DisplayComponents/Comments/CommentsSection";
 
 const QuizDetailPage = ({ quizId, currentUser, history }) => {
     const [quiz, setQuiz] = useState(null);
@@ -85,43 +86,18 @@ const QuizDetailPage = ({ quizId, currentUser, history }) => {
 
 
     return (
-        <div className="overflow-hidden shadow-lg page">
+        <>
             {!quiz ? (
                 <LoadingMessage message={"Loading quiz"} />
             ) : (
-                    <div>
-                        <QuizDetail quiz={quiz} scoresPaginator={scoresPaginator} onScoresPageChange={getScoresPage} onLikesUpdated={handleLikesUpdated} />
-                        {quiz.creator.id == currentUser && (
-                            <div className="p-4 flex justify-between items-center border-t">
-                                <div className="flex">
-                                    <button
-                                        type="button"
-                                        onClick={() => history.push(`/quiz/${quiz.id}/edit`)}
-                                        className="bg-gray-800 text-white rounded py-2 px-4 hover:bg-gray-600 shadow inline-flex items-center"
-                                    >
-                                        <svg className="text-white h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
-                                        </svg>
-                                        <span className="ml-1">Edit Quiz</span>
-                                    </button>
-                                </div>
-                                <div className="flex justify-end">
-                                    <button
-                                        type="button"
-                                        onClick={handleDeleteQuiz}
-                                        className="bg-red-400 text-white rounded py-2 px-4 hover:bg-red-500 shadow inline-flex items-center"
-                                    >
-                                        <svg className="text-white h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                                        </svg>
-                                        <span className="ml-1">Delete</span>
-                                    </button>
-                                </div>
-                            </div>
-                        )}
-                    </div>
+                    <>
+                        <QuizDetail quiz={quiz} scoresPaginator={scoresPaginator} onScoresPageChange={getScoresPage} onLikesUpdated={handleLikesUpdated} isCreator={quiz.creator.id == currentUser} onDelete={handleDeleteQuiz} />
+                        {/* <div className="overflow-hidden shadow-lg page mt-4">
+                            <CommentsSection quizId={quizId} comments={quiz.comments} />
+                        </div> */}
+                    </>
                 )}
-        </div>
+        </>
     )
 };
 

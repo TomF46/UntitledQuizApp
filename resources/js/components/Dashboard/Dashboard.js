@@ -26,12 +26,12 @@ const DashboardPage = ({ userId, history }) => {
     }, [userId, user])
 
     return (
-        <div className="dashboard-page overflow-hidden shadow-lg page">
+        <div className="dashboard-page">
             {user == null ? (
                 <LoadingMessage message={'Loading Dashboard'} />
             ) : (
                     <div className="grid grid-cols-12 pb-4">
-                        <div className="col-span-12 lg:col-span-3 px-4">
+                        <div className="col-span-12 lg:col-span-3 lg:mr-4 px-4 overflow-hidden shadow-lg page">
                             <h1 className="font-bold text-4xl my-4 text-center">Welcome {user.username}</h1>
                             <div className="mb-4">
                                 <img src={user.profile_image} alt="profile-picture" className="rounded-full profile-photo shadow" />
@@ -43,7 +43,7 @@ const DashboardPage = ({ userId, history }) => {
                                 <Link to="/quiz" className="border border-gray-800 text-gray-800 text-center rounded py-2 px-4 hover:bg-gray-600 hover:text-white shadow">Create</Link>
                             </div>
                         </div>
-                        <div className="col-span-12 lg:col-span-9">
+                        <div className="col-span-12 lg:col-span-9 overflow-hidden shadow-lg page">
                             <div className="my-4">
                                 <PopularQuizzesDashboard />
                             </div>

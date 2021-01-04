@@ -88,13 +88,13 @@ const ProfilePage = ({ userId, currentUser, history, logout, ...props }) => {
     }
 
     return (
-        <div className="profile-page overflow-hidden shadow-lg page">
+        <div className="profile-page">
             {user == null ? (
                 <LoadingMessage message={'Loading profile'} />
             ) : (
                     <>
                         <div className="grid grid-cols-12 pb-4">
-                            <div className="col-span-12 lg:col-span-3 px-4">
+                            <div className="col-span-12 lg:col-span-3 lg:mr-4 px-4 overflow-hidden shadow-lg page">
                                 <h2 className="font-bold text-4xl py-4 text-center">
                                     {user.username}
                                 </h2>
@@ -154,7 +154,7 @@ const ProfilePage = ({ userId, currentUser, history, logout, ...props }) => {
                                         )}
                                 </div>
                             </div>
-                            <div className="col-span-12 lg:col-span-9 px-4">
+                            <div className="col-span-12 lg:col-span-9 px-4 overflow-hidden shadow-lg page">
                                 <div className="my-4">
                                     <h3 className="font-bold text-3xl mb-2">
                                         Created quizzes

@@ -66,7 +66,7 @@ const QuizPlayPage = ({ quizId, history }) => {
     function handleSubmit() {
         confirmAlert({
             title: "Confirm submit",
-            message: `Are you sure you're ready want to submit?`,
+            message: `Are you sure you're ready to submit?`,
             buttons: [
                 {
                     label: "Yes",
