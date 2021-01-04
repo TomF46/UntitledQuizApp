@@ -16,7 +16,6 @@ const EditProfilePage = ({ userId, history }) => {
     useEffect(() => {
         if (!user) {
             getUserForEditing(userId).then(userData => {
-                console.log(userData);
                 setUser(userData);
             }).catch(error => {
                 toast.error("Error getting user " + error.message, {
@@ -61,7 +60,6 @@ const EditProfilePage = ({ userId, history }) => {
         event.preventDefault();
         if (!formIsValid()) return;
         setSaving(true);
-        console.log(userId);
 
         editUserProfile(userId, user).then(response => {
             toast.success("Profile updated!")

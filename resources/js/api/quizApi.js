@@ -4,7 +4,7 @@ export function saveQuiz(quiz) {
     return quiz.id ? editQuiz(quiz) : createQuiz(quiz);
 }
 
-function editQuiz(quiz){
+function editQuiz(quiz) {
     return axiosClient
         .put(`/api/quizzes/${quiz.id}`, quiz)
         .then(response => {
@@ -15,7 +15,7 @@ function editQuiz(quiz){
         });
 }
 
-function createQuiz(quiz){
+function createQuiz(quiz) {
     return axiosClient
         .post('/api/quizzes', quiz)
         .then(response => {
@@ -81,7 +81,7 @@ export function searchQuizzesWithPagination(url, filters) {
         });
 }
 
-export function getQuizzesByUserFollowing(){
+export function getQuizzesByUserFollowing() {
     return axiosClient
         .get('/api/dashboard/quizzes/followed')
         .then(response => {
@@ -92,7 +92,7 @@ export function getQuizzesByUserFollowing(){
         });
 }
 
-export function getMostPopularQuizzes(){
+export function getMostPopularQuizzes() {
     return axiosClient
         .get('/api/dashboard/quizzes/popular')
         .then(response => {
@@ -104,7 +104,7 @@ export function getMostPopularQuizzes(){
 }
 
 
-export function submitScore(quizId, submission){
+export function submitScore(quizId, submission) {
     return axiosClient
         .post(`/api/quizzes/${quizId}/scores`, submission)
         .then(response => {
@@ -115,40 +115,40 @@ export function submitScore(quizId, submission){
         });
 }
 
-export function getScoresForQuiz(quizId){
+export function getScoresForQuiz(quizId) {
     return axiosClient
-    .get(`/api/quizzes/${quizId}/scores`)
-    .then(response => {
-        return response.data;
-    })
-    .catch(error => {
-        throw error;
-    });
+        .get(`/api/quizzes/${quizId}/scores`)
+        .then(response => {
+            return response.data;
+        })
+        .catch(error => {
+            throw error;
+        });
 }
 
-export function deleteQuiz(quizId){
+export function deleteQuiz(quizId) {
     return axiosClient
-    .delete(`/api/quizzes/${quizId}`)
-    .then(response => {
-        return response.data;
-    })
-    .catch(error => {
-        throw error;
-    });
+        .delete(`/api/quizzes/${quizId}`)
+        .then(response => {
+            return response.data;
+        })
+        .catch(error => {
+            throw error;
+        });
 }
 
-export function getQuizzesByUser(userId){
+export function getQuizzesByUser(userId) {
     return axiosClient
-    .get(`/api/users/${userId}/quizzes`)
-    .then(response => {
-        return response.data;
-    })
-    .catch(error => {
-        throw error;
-    });
+        .get(`/api/users/${userId}/quizzes`)
+        .then(response => {
+            return response.data;
+        })
+        .catch(error => {
+            throw error;
+        });
 }
 
-export function searchQuizzes(filters){
+export function searchQuizzes(filters) {
     return axiosClient
         .post(`/api/quizzes/search`, filters)
         .then(response => {
@@ -159,7 +159,7 @@ export function searchQuizzes(filters){
         });
 }
 
-export function likeQuiz(quizId){
+export function likeQuiz(quizId) {
     return axiosClient
         .post(`/api/quizzes/${quizId}/like`)
         .then(response => {
@@ -170,7 +170,7 @@ export function likeQuiz(quizId){
         });
 }
 
-export function dislikeQuiz(quizId){
+export function dislikeQuiz(quizId) {
     return axiosClient
         .post(`/api/quizzes/${quizId}/dislike`)
         .then(response => {
@@ -181,9 +181,20 @@ export function dislikeQuiz(quizId){
         });
 }
 
-export function removeLikeOrDislike(quizId){
+export function removeLikeOrDislike(quizId) {
     return axiosClient
         .delete(`/api/quizzes/${quizId}/like`)
+        .then(response => {
+            return response.data;
+        })
+        .catch(error => {
+            throw error;
+        });
+}
+
+export function addComment(quizId, comment) {
+    return axiosClient
+        .post(`/api/quizzes/${quizId}/comments`, { text: comment })
         .then(response => {
             return response.data;
         })

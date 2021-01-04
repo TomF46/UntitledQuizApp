@@ -4,8 +4,9 @@ import { Link } from "react-router-dom";
 import ScoresTableWithPagination from "../../DisplayComponents/ScoresTableWithPagination";
 import LoadingMessage from "../../DisplayComponents/LoadingMessage";
 import LikeControls from "../../DisplayComponents/LikeControls";
+import CommentsSection from "../../DisplayComponents/Comments/CommentsSection"
 
-const QuizDetail = ({ quiz, scoresPaginator, onScoresPageChange, onLikesUpdated, isCreator, onDelete }) => {
+const QuizDetail = ({ quiz, scoresPaginator, onScoresPageChange, onQuizReload, isCreator, onDelete }) => {
     return (
         <div className="grid grid-cols-12 pb-4">
             <div className="col-span-12 lg:col-span-3 lg:mr-4 px-4 overflow-hidden shadow-lg page">
@@ -16,7 +17,7 @@ const QuizDetail = ({ quiz, scoresPaginator, onScoresPageChange, onLikesUpdated,
                     Details
                 </h2>
                 <div className="p-4 flex justify-center items-center">
-                    <LikeControls quiz={quiz} onLikesUpdated={onLikesUpdated} />
+                    <LikeControls quiz={quiz} onLikesUpdated={onQuizReload} />
                 </div>
                 <div className="p-4">
                     <h3 className="text-lg font-bold text-center">Description</h3>
@@ -109,6 +110,7 @@ const QuizDetail = ({ quiz, scoresPaginator, onScoresPageChange, onLikesUpdated,
                         </div>
                     </div>
                 </div>
+                <CommentsSection quizId={quiz.id} comments={quiz.comments} onReloadQuiz={onQuizReload} />
             </div>
         </div >
     );
@@ -117,7 +119,7 @@ const QuizDetail = ({ quiz, scoresPaginator, onScoresPageChange, onLikesUpdated,
 QuizDetail.propTypes = {
     quiz: PropTypes.object.isRequired,
     scoresPaginator: PropTypes.object,
-    onLikesUpdated: PropTypes.func.isRequired,
+    onQuizReload: PropTypes.func.isRequired,
     onDelete: PropTypes.func.isRequired,
     onScoresPageChange: PropTypes.func.isRequired,
     isCreator: PropTypes.func.isRequired

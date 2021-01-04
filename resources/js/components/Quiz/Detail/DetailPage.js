@@ -8,7 +8,7 @@ import { confirmAlert } from "react-confirm-alert";
 import { toast } from "react-toastify";
 import { getScoresWithPaginator } from "../../../api/userApi";
 import LoadingMessage from "../../DisplayComponents/LoadingMessage";
-// import CommentsSection from "../../DisplayComponents/Comments/CommentsSection";
+
 
 const QuizDetailPage = ({ quizId, currentUser, history }) => {
     const [quiz, setQuiz] = useState(null);
@@ -80,7 +80,7 @@ const QuizDetailPage = ({ quizId, currentUser, history }) => {
         })
     }
 
-    function handleLikesUpdated() {
+    function handleQuizReload() {
         getQuizData();
     }
 
@@ -91,10 +91,7 @@ const QuizDetailPage = ({ quizId, currentUser, history }) => {
                 <LoadingMessage message={"Loading quiz"} />
             ) : (
                     <>
-                        <QuizDetail quiz={quiz} scoresPaginator={scoresPaginator} onScoresPageChange={getScoresPage} onLikesUpdated={handleLikesUpdated} isCreator={quiz.creator.id == currentUser} onDelete={handleDeleteQuiz} />
-                        {/* <div className="overflow-hidden shadow-lg page mt-4">
-                            <CommentsSection quizId={quizId} comments={quiz.comments} />
-                        </div> */}
+                        <QuizDetail quiz={quiz} scoresPaginator={scoresPaginator} onScoresPageChange={getScoresPage} onQuizReload={handleQuizReload} isCreator={quiz.creator.id == currentUser} onDelete={handleDeleteQuiz} />
                     </>
                 )}
         </>

@@ -31,6 +31,7 @@ class Comment extends Model
             'id' => $this->id,
             'username' => $this->user->username,
             'user_id' => $this->user->id,
+            'user_img' => $this->user->profile_image_url ? $this->user->profile_image_url : config('globalVariables.default_profile_pictures'),
             'quiz_name' => $this->quiz->title,
             'quiz_id' => $this->quiz->id,
             'text' => $this->text,
@@ -42,6 +43,7 @@ class Comment extends Model
     {
         $this->username = $this->user->username;
         $this->user_id = $this->user->id;
+        $this->user_img = $this->user->profile_image_url ? $this->user->profile_image_url : config('globalVariables.default_profile_pictures');
         $this->quiz_name = $this->quiz->title;
         $this->quiz_id = $this->quiz->id;
         return $this;
