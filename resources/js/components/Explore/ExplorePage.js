@@ -10,7 +10,7 @@ import FiltersForm from "./Filters/FiltersForm";
 
 const ExplorePage = ({ history }) => {
     const [quizzesPaginator, setQuizzesPaginator] = useState(null);
-    const [filters, setFilters] = useState({ searchTerm: "", tag: null });
+    const [filters, setFilters] = useState({ searchTerm: "", user: "Dave", tag: null });
     const [tags, setTags] = useState(null);
 
 
@@ -37,6 +37,7 @@ const ExplorePage = ({ history }) => {
     }, [filters])
 
     function search() {
+        console.log(filters);
         searchQuizzes(filters).then(quizzesData => {
             setQuizzesPaginator(quizzesData);
         }).catch(error => {

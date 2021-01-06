@@ -5,8 +5,6 @@ namespace App\Filters;
 use App\Models\Quiz;
 use Illuminate\Http\Request;
 
-use function PHPUnit\Framework\isNull;
-
 class QuizSearch
 {
     public static function apply(Request $filters)
@@ -15,6 +13,12 @@ class QuizSearch
 
         if ($filters->has('searchTerm')) {
             $quiz->where('title', 'like', "{$filters->input('searchTerm')}%");
+        }
+
+        if ($filters->has('user')) {
+            $quiz->whereHas('user', function ($query) use ($filters) {
+                $query->where('username', 'like', "{$filters->input('user')}%");
+            });
         }
 
         if ($filters->has('tag') && $filters->input('tag') != null) {

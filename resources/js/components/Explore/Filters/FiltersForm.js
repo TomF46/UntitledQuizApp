@@ -14,6 +14,14 @@ const FiltersForm = ({ filters, tags, onFilterChange }) => {
                     onChange={onFilterChange}
                 />
             </div>
+            <div className="mb-4">
+                <TextInput
+                    name="user"
+                    label="User"
+                    value={filters.user}
+                    onChange={onFilterChange}
+                />
+            </div>
             <div>
                 <SelectInput
                     name="tag"
