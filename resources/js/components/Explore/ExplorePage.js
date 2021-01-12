@@ -10,7 +10,7 @@ import FiltersForm from "./Filters/FiltersForm";
 
 const ExplorePage = ({ history }) => {
     const [quizzesPaginator, setQuizzesPaginator] = useState(null);
-    const [filters, setFilters] = useState({ searchTerm: "", user: "Dave", tag: null });
+    const [filters, setFilters] = useState({ searchTerm: "", user: "", tag: null });
     const [tags, setTags] = useState(null);
 
 
