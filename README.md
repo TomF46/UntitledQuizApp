@@ -31,11 +31,13 @@ Deployed onto EC2 with various AWS services (e.g. RDS) via Laravel Forge.
 -   Explore
 
     -   Text search for quizzes
+    -   User search for quizzes
     -   Tag search for quizzes
     -   View results
 
 -   Create Quiz
 -   Details
+-   Comment on quiz
 -   Scores
 -   Edit Quiz
 -   Play Quiz

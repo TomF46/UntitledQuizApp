@@ -62,4 +62,7 @@ Route::middleware('auth:api')->group(function () {
     Route::get('/dashboard/quizzes/followed', [App\Http\Controllers\DashboardController::class, 'getQuizzesByFollowedUser']);
     Route::get('/dashboard/quizzes/popular', [App\Http\Controllers\DashboardController::class, 'getPopularQuizzes']);
     Route::get('/dashboard/users/followed', [App\Http\Controllers\DashboardController::class, 'getFollowedUsers']);
+
+    Route::get('/challenges', [App\Http\Controllers\ChallengesController::class, 'index']);
+    Route::post('/challenges', [App\Http\Controllers\ChallengesController::class, 'store']);
 });
