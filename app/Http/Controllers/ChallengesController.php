@@ -2,12 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Answer;
 use App\Models\Challenge;
-use App\Models\Question;
-use App\Models\Quiz;
+use App\Models\Score;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
 
 class ChallengesController extends Controller
 {
@@ -16,7 +13,7 @@ class ChallengesController extends Controller
         $currentUser = $request->User();
         $paginator = challenge::Where('recipient_id', $currentUser->id)->paginate(10);
         $paginator->getCollection()->transform(function ($challenge) {
-            return $challenge->transform();
+            return $challenge->map();
         });
         return response()->json($paginator);
     }
@@ -26,13 +23,32 @@ class ChallengesController extends Controller
         $currentUser = $request->User();
         $attributes = $this->validateChallenge($request);
 
+        if ($attributes['recipient_id'] == $currentUser->id) return response()->json(['error' => 'Recipient must not be the same as challenger.'], 400);
+
+        // make sure score belongs to challenger
+        $score = Score::find($attributes['score_id']);
+        if ($score->user->id != $currentUser->id) return response()->json(['error' => 'Score must belong to challenger.'], 400);
+
         $challenge = challenge::create([
             'challenger_id' => $currentUser->id,
             'recipient_id' =>  $attributes['recipient_id'],
-            'score_id' => $attributes['score_id'],
+            'score_id' => $score->id,
         ]);
 
         return response()->json($challenge, 201);
+    }
+
+    public function show(Challenge $challenge)
+    {
+        return response()->json($challenge->map());
+    }
+
+    public function destroy(Request $request, Challenge $challenge)
+    {
+        if ($challenge->challenger->id != $request->user()->id) return response()->json(['error' => 'unauthorized.'], 401);
+
+        $challenge->delete();
+        return response()->noContent();
     }
 
     protected function validateChallenge(Request $request)

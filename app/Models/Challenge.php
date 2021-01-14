@@ -38,4 +38,18 @@ class Challenge extends Model
         $this->quiz_id = $this->score->quiz->id;
         return $this;
     }
+
+    public function map()
+    {
+        return [
+            'id' => $this->id,
+            'challengerId' => $this->challenger->id,
+            'challengerUsername' => $this->challenger->username,
+            'recipientId' => $this->recipient->id,
+            'recipientUsername' => $this->recipient->username,
+            'quizId' => $this->score->quiz->id,
+            'quizName' => $this->score->quiz->title,
+            'scorePercentToBeat' => $this->score->score_percent
+        ];
+    }
 }
