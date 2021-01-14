@@ -46,6 +46,12 @@ const Header = ({ userIsAuthenticated }) => {
                                 Explore
                             </Link>
                             <Link
+                                to="/challenges"
+                                className="block mt-4 md:inline-block md:mt-0 text-white hover:text-white md:mx-4"
+                            >
+                                Challenges
+                            </Link>
+                            <Link
                                 to="/quiz"
                                 className="block mt-4 md:inline-block md:mt-0 text-white hover:text-white"
                             >

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Filters\ChallengeSearch;
 use App\Models\Challenge;
 use App\Models\Score;
 use Illuminate\Http\Request;
@@ -11,10 +12,20 @@ class ChallengesController extends Controller
     public function index(Request $request)
     {
         $currentUser = $request->User();
-        $paginator = challenge::Where('recipient_id', $currentUser->id)->paginate(10);
+        $paginator = challenge::Where('recipient_id', $currentUser->id)->orWhere('challenger_id', $currentUser->id)->paginate(10);
         $paginator->getCollection()->transform(function ($challenge) {
             return $challenge->map();
         });
+        return response()->json($paginator);
+    }
+
+    public function filter(Request $request)
+    {
+        $paginator = ChallengeSearch::apply($request)->paginate(10);
+        $paginator->getCollection()->transform(function ($challenge) {
+            return $challenge->map();
+        });
+
         return response()->json($paginator);
     }
 

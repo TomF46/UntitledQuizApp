@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\ChallengeStatus;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -49,7 +50,23 @@ class Challenge extends Model
             'recipientUsername' => $this->recipient->username,
             'quizId' => $this->score->quiz->id,
             'quizName' => $this->score->quiz->title,
-            'scorePercentToBeat' => $this->score->score_percent
+            'scorePercentToBeat' => $this->score->score_percent,
+            'status' => $this->getStatusText($this->status)
         ];
+    }
+
+    protected function getStatusText($status)
+    {
+        switch ($status) {
+            case ChallengeStatus::NotStarted:
+                return "Not Started";
+                break;
+            case ChallengeStatus::Success:
+                return "Success";
+                break;
+            case ChallengeStatus::Failed:
+                return "Failed";
+                break;
+        }
     }
 }

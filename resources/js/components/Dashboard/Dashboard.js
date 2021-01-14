@@ -5,7 +5,6 @@ import { getUserById } from "../../api/userApi";
 import { toast } from "react-toastify";
 import FollowingQuizDashboard from "./Components/FollowingQuizDashboard";
 import FollowingUsersDashboard from "./Components/FollowingUsersDashboard";
-import ScoreDashboard from "./Components/ScoreDashboard";
 import PopularQuizzesDashboard from "./Components/PopularQuizzesDashboard";
 import LoadingMessage from "../DisplayComponents/LoadingMessage";
 import { Link } from "react-router-dom";

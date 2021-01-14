@@ -65,6 +65,7 @@ Route::middleware('auth:api')->group(function () {
 
     Route::get('/challenges', [App\Http\Controllers\ChallengesController::class, 'index']);
     Route::post('/challenges', [App\Http\Controllers\ChallengesController::class, 'store']);
+    Route::post('/challenges/search', [App\Http\Controllers\ChallengesController::class, 'filter']);
     Route::get('/challenges/{challenge}', [App\Http\Controllers\ChallengesController::class, 'show']);
     Route::delete('/challenges/{challenge}', [App\Http\Controllers\ChallengesController::class, 'destroy']);
 });
