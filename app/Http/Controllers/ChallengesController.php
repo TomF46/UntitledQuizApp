@@ -12,7 +12,7 @@ class ChallengesController extends Controller
     public function index(Request $request)
     {
         $currentUser = $request->User();
-        $paginator = challenge::Where('recipient_id', $currentUser->id)->orWhere('challenger_id', $currentUser->id)->paginate(10);
+        $paginator = challenge::Where('recipient_id', $currentUser->id)->paginate(5);
         $paginator->getCollection()->transform(function ($challenge) {
             return $challenge->map();
         });
@@ -21,7 +21,7 @@ class ChallengesController extends Controller
 
     public function filter(Request $request)
     {
-        $paginator = ChallengeSearch::apply($request)->paginate(10);
+        $paginator = ChallengeSearch::apply($request)->paginate(20);
         $paginator->getCollection()->transform(function ($challenge) {
             return $challenge->map();
         });

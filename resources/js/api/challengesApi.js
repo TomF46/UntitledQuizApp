@@ -21,3 +21,25 @@ export function searchChallengesWithPagination(url, filters) {
             throw error;
         });
 }
+
+export function getActiveChallenges() {
+    return axiosClient
+        .get(`/api/challenges`)
+        .then(response => {
+            return response.data;
+        })
+        .catch(error => {
+            throw error;
+        });
+}
+
+export function getActiveChallengesWithPaginator(url) {
+    return axiosClient
+        .post(url)
+        .then(response => {
+            return response.data;
+        })
+        .catch(error => {
+            throw error;
+        });
+}

@@ -66,7 +66,7 @@ const ChallengesPage = ({ history }) => {
                     <div className="grid grid-cols-12">
                         <div className="col-span-12 lg:col-span-3 lg:mr-4 px-4 pb-4 overflow-hidden shadow-lg page">
                             <h1 className="font-bold text-4xl my-4 text-center">Details</h1>
-                            <p>After completing a quiz you can challenge another user to beat or match your score, this page shows a record of all of your challenges so far (challenger or recipient). Coming soon challange scoring leaderboard win points by winning challenges.</p>
+                            <p>After completing a quiz you can challenge another user to beat or match your score, this page shows a record of all of your challenges so far (challenger or recipient). Coming soon challenge scoring leaderboard win points by winning challenges.</p>
                         </div>
                         <div className="col-span-12 lg:col-span-9 px-4 overflow-hidden shadow-lg page">
                             <h1 className="font-bold text-4xl my-4 text-center">Challenges</h1>

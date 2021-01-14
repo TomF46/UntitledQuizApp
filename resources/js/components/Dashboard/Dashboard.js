@@ -8,6 +8,7 @@ import FollowingUsersDashboard from "./Components/FollowingUsersDashboard";
 import PopularQuizzesDashboard from "./Components/PopularQuizzesDashboard";
 import LoadingMessage from "../DisplayComponents/LoadingMessage";
 import { Link } from "react-router-dom";
+import ChallengesDashboard from "./Components/ChallengesDashboard";
 
 const DashboardPage = ({ userId, history }) => {
     const [user, setUser] = useState(null);
@@ -51,6 +52,9 @@ const DashboardPage = ({ userId, history }) => {
                             </div>
                             <div className="mb-4">
                                 <FollowingQuizDashboard user={user} />
+                            </div>
+                            <div className="mb-4">
+                                <ChallengesDashboard user={user} />
                             </div>
                         </div>
                     </div>
