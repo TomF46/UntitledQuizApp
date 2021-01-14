@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\ChallengeStatus;
 use App\Models\Answer;
+use App\Models\Challenge;
 use App\Models\Score;
 use App\Models\Quiz;
 use Illuminate\Http\Request;
@@ -32,6 +34,10 @@ class QuizScoresController extends Controller
             "score_percent" => $percentScore
         ]);
 
+        if ($request->get('challengeId')) {
+            return $this->handleChallengeResponse($score, $request->get('challengeId'));
+        };
+
         return response()->json($score, 201);
     }
 
@@ -43,6 +49,24 @@ class QuizScoresController extends Controller
         });
 
         return response()->json($paginator);
+    }
+
+    protected function handleChallengeResponse(Score $score, $challengeId)
+    {
+        $challenge = Challenge::find($challengeId);
+
+        if ($score->user->id != $challenge->recipient->id) return response()->json(['error' => 'User who submitted score does not match challenge recipient'], 400);
+        if ($challenge->status != ChallengeStatus::NotStarted) return response()->json(['error' => 'Challenge has already been attempted'], 400);
+
+        if ($score->score_percent >= $challenge->score->score_percent) {
+            $challenge->status = ChallengeStatus::Success;
+        } else {
+            $challenge->status = ChallengeStatus::Failed;
+        }
+
+        $challenge->save();
+
+        return response()->json($score, 201);
     }
 
     protected function validateAnswers(Request $request)
