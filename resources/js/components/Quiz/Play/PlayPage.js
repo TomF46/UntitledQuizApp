@@ -2,14 +2,17 @@ import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { getQuiz, submitScore } from "../../../api/quizApi";
+import { getChallenge } from "../../../api/challengesApi";
 import QuizPlayForm from "./QuizPlayForm";
 import ScoreDetail from "./ScoreDetail";
 import { toast } from "react-toastify";
 import { confirmAlert } from "react-confirm-alert";
 import LoadingMessage from "../../DisplayComponents/LoadingMessage";
+import ChallengeInfoPanel from "./ChallegeInfoPanel";
 
-const QuizPlayPage = ({ quizId, history }) => {
+const QuizPlayPage = ({ quizId, challengeId, history }) => {
     const [quiz, setQuiz] = useState(null);
+    const [challenge, setChallenge] = useState(null);
     const [submission, setSubmission] = useState(null);
     const [score, setScore] = useState(null)
     const [errors, setErrors] = useState({});
@@ -29,6 +32,19 @@ const QuizPlayPage = ({ quizId, history }) => {
             });
         }
     }, [quizId, quiz])
+
+    useEffect(() => {
+        if (!challenge && challengeId) {
+            getChallenge(challengeId).then(challengeData => {
+                console.log(challengeData);
+                setChallenge(challengeData)
+            }).catch(error => {
+                toast.error("Error getting challenge data " + error.message, {
+                    autoClose: false,
+                });
+            });
+        }
+    }, [challengeId])
 
     function createBlankSubmission(quizData) {
         let submission = {
@@ -85,6 +101,11 @@ const QuizPlayPage = ({ quizId, history }) => {
     function submit() {
         if (!submissionIsValid()) return;
 
+        if (challenge) {
+            submission.challengeId = challenge.id;
+            setSubmission({ ...submission });
+        }
+
         submitScore(quiz.id, submission).then(response => {
             setScore({ ...response });
         }).catch(error => {
@@ -128,11 +149,14 @@ const QuizPlayPage = ({ quizId, history }) => {
             ) : (
                     !score ? (
                         <div>
+                            {challenge && (
+                                <ChallengeInfoPanel challenge={challenge} />
+                            )}
                             <QuizPlayForm quiz={quiz} submission={submission} onAnswerChange={handleAnswerChange} onSubmit={handleSubmit} onReset={handleReplay} currentQuestionNumber={currentQuestionNumber} onNext={handleNext} onPrevious={handlePrevious} errors={errors} />
                         </div>
                     ) : (
                             <div>
-                                <ScoreDetail quiz={quiz} score={score} onReplay={handleReplay} onLikesUpdated={handleLikesUpdated} />
+                                <ScoreDetail quiz={quiz} score={score} onReplay={handleReplay} onLikesUpdated={handleLikesUpdated} challenge={challenge} />
                             </div>
                         ))}
         </div>
@@ -141,12 +165,14 @@ const QuizPlayPage = ({ quizId, history }) => {
 
 QuizPlayPage.propTypes = {
     quizId: PropTypes.any.isRequired,
+    challengeId: PropTypes.any,
     history: PropTypes.object.isRequired
 };
 
 const mapStateToProps = (state, ownProps) => {
     return {
-        quizId: ownProps.match.params.quizId
+        quizId: ownProps.match.params.quizId,
+        challengeId: ownProps.match.params.challengeId
     };
 };
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\ChallengeStatus;
 use App\Filters\ChallengeSearch;
 use App\Models\Challenge;
 use App\Models\Score;
@@ -12,7 +13,7 @@ class ChallengesController extends Controller
     public function index(Request $request)
     {
         $currentUser = $request->User();
-        $paginator = challenge::Where('recipient_id', $currentUser->id)->paginate(5);
+        $paginator = challenge::Where([['recipient_id', $currentUser->id], ['status', ChallengeStatus::NotStarted]])->paginate(5);
         $paginator->getCollection()->transform(function ($challenge) {
             return $challenge->map();
         });

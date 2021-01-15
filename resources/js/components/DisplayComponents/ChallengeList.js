@@ -31,7 +31,7 @@ const ChallengeList = ({ challenges }) => {
                         <div className="col-span-2 flex justify-end">
                             <div className="table vertical-centered">
                                 <Link
-                                    to={`/quiz/${challenge.quizId}/play`}
+                                    to={`/quiz/${challenge.quizId}/challenge/${challenge.id}/play`}
                                     className="bg-gray-800 text-white rounded py-2 px-4 hover:bg-gray-600 shadow inline-flex items-center ml-2"
                                 >
                                     <svg className="text-white h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">

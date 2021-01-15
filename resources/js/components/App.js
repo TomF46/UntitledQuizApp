@@ -67,6 +67,10 @@ const Main = ({ location }) => (
                                     component={QuizPlayPage}
                                 />
                                 <AuthenticatedRoute
+                                    path="/quiz/:quizId/challenge/:challengeId/play"
+                                    component={QuizPlayPage}
+                                />
+                                <AuthenticatedRoute
                                     path="/quiz/:quizId"
                                     component={QuizDetailPage}
                                 />

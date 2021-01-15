@@ -1,5 +1,16 @@
 import axiosClient from "../tools/axiosClient";
 
+export function getChallenge(id) {
+    return axiosClient
+        .get(`/api/challenges/${id}`)
+        .then(response => {
+            return response.data;
+        })
+        .catch(error => {
+            throw error;
+        });
+}
+
 export function searchChallenges(filters) {
     return axiosClient
         .post(`/api/challenges/search`, filters)
