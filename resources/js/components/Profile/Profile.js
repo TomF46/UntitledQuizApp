@@ -137,20 +137,32 @@ const ProfilePage = ({ userId, currentUser, history, logout, ...props }) => {
                                             </button>
                                         </>
                                     ) : (
-                                            <button
-                                                type="button"
-                                                onClick={toggleFollow}
-                                                className="border border-gray-800 text-gray-800 text-center rounded py-2 px-4 hover:bg-gray-600 shadow inline-flex items-center justify-center"
-                                            >
-                                                <svg className="text-gray-800 h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                    {user.following ? (
-                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7a4 4 0 11-8 0 4 4 0 018 0zM9 14a6 6 0 00-6 6v1h12v-1a6 6 0 00-6-6zM21 12h-6" />
-                                                    ) : (
-                                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
-                                                        )}
-                                                </svg>
-                                                <span className="ml-1">{user.following ? "Unfollow" : "Follow"}</span>
-                                            </button>
+                                            <>
+                                                <button
+                                                    type="button"
+                                                    onClick={toggleFollow}
+                                                    className="border border-gray-800 text-gray-800 text-center rounded py-2 px-4 hover:bg-gray-600 shadow inline-flex items-center justify-center"
+                                                >
+                                                    <svg className="text-gray-800 h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        {user.following ? (
+                                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7a4 4 0 11-8 0 4 4 0 018 0zM9 14a6 6 0 00-6 6v1h12v-1a6 6 0 00-6-6zM21 12h-6" />
+                                                        ) : (
+                                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
+                                                            )}
+                                                    </svg>
+                                                    <span className="ml-1">{user.following ? "Unfollow" : "Follow"}</span>
+                                                </button>
+                                                <button
+                                                    type="button"
+                                                    onClick={() => history.push(`/profile/${userId}/challenge`)}
+                                                    className="border border-gray-800 text-gray-800 text-center rounded py-2 px-4 mt-4 hover:bg-gray-600 shadow inline-flex items-center justify-center"
+                                                >
+                                                    <svg className="text-gray-800 h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                                                    </svg>
+                                                    <span className="ml-1">Challenge</span>
+                                                </button>
+                                            </>
                                         )}
                                 </div>
                             </div>

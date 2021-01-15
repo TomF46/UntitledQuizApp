@@ -30,7 +30,6 @@ const ChallengesPage = ({ history }) => {
 
     function search() {
         searchChallenges(filters).then(challengesData => {
-            console.log(challengesData);
             setChallengesPaginator(challengesData);
         }).catch(error => {
             toast.error("Error getting challenges " + error.message, {

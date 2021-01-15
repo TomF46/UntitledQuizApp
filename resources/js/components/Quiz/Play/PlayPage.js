@@ -36,7 +36,6 @@ const QuizPlayPage = ({ quizId, challengeId, history }) => {
     useEffect(() => {
         if (!challenge && challengeId) {
             getChallenge(challengeId).then(challengeData => {
-                console.log(challengeData);
                 setChallenge(challengeData)
             }).catch(error => {
                 toast.error("Error getting challenge data " + error.message, {

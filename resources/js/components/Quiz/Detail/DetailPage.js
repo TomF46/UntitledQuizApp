@@ -37,11 +37,7 @@ const QuizDetailPage = ({ quizId, currentUser, history }) => {
 
     function getHighScores(id) {
         getUsersHighScoreForQuiz(id).then(highScoreData => {
-            console.log(highScoreData);
             setHighScore(highScoreData);
-            hasHighScore();
-            // console.log(highScoreData);
-            // console.log(hasHighScore());
         }).catch(error => {
             toast.error("Error getting high score " + error.message, {
                 autoClose: false,
@@ -101,13 +97,6 @@ const QuizDetailPage = ({ quizId, currentUser, history }) => {
         getQuizData();
     }
 
-    function hasHighScore() {
-        console.log(highScore);
-        console.log(_.isEmpty(highScore));
-        // return !_.isEmpty(highScore);
-    }
-
-
     return (
         <>
             {!quiz ? (
@@ -133,7 +122,6 @@ const mapStateToProps = (state, ownProps) => {
     };
 };
 
-const mapDispatchToProps = {};
 
-export default connect(mapStateToProps, mapDispatchToProps)(QuizDetailPage);
+export default connect(mapStateToProps)(QuizDetailPage);
 

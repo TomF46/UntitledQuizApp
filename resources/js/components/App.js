@@ -17,6 +17,7 @@ import QuizPlayPage from "./Quiz/Play/PlayPage";
 import ExplorePage from "./Explore/ExplorePage";
 import EditProfilePage from "./Profile/Edit/EditProfilePage";
 import ChallengesPage from "./Challenges/ChallengesPage";
+import UserChallengePage from "./Challenges/UserChallengePage";
 
 const Main = ({ location }) => (
     <>
@@ -41,6 +42,10 @@ const Main = ({ location }) => (
                                 <AuthenticatedRoute
                                     path="/profile/:userId/edit"
                                     component={EditProfilePage}
+                                />
+                                <AuthenticatedRoute
+                                    path="/profile/:userId/challenge"
+                                    component={UserChallengePage}
                                 />
                                 <AuthenticatedRoute
                                     path="/profile/:userId"
