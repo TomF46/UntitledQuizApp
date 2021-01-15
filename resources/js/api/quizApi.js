@@ -202,3 +202,14 @@ export function addComment(quizId, comment) {
             throw error;
         });
 }
+
+export function getUsersHighScoreForQuiz(quizId) {
+    return axiosClient
+        .get(`/api/quizzes/${quizId}/myHighscore`)
+        .then(response => {
+            return response.data;
+        })
+        .catch(error => {
+            throw error;
+        });
+}

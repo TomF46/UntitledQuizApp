@@ -51,6 +51,14 @@ class QuizScoresController extends Controller
         return response()->json($paginator);
     }
 
+    public function showMyHighScore(Request $request, Quiz $quiz)
+    {
+        $currentUser = $request->User();
+        $highScore = $quiz->scores()->where('user_id', $currentUser->id)->orderBy('score_percent', 'desc')->first();
+        if ($highScore == null) return response()->json($highScore);
+        return response()->json($highScore->map());
+    }
+
     protected function handleChallengeResponse(Score $score, $challengeId)
     {
         $challenge = Challenge::find($challengeId);

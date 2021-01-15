@@ -1,17 +1,19 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { getQuiz, getScoresForQuiz } from "../../../api/quizApi";
+import { getQuiz, getScoresForQuiz, getUsersHighScoreForQuiz } from "../../../api/quizApi";
 import QuizDetail from "./QuizDetail";
 import * as QuizApi from '../../../api/quizApi';
 import { confirmAlert } from "react-confirm-alert";
 import { toast } from "react-toastify";
 import { getScoresWithPaginator } from "../../../api/userApi";
 import LoadingMessage from "../../DisplayComponents/LoadingMessage";
+import _ from 'lodash';
 
 
 const QuizDetailPage = ({ quizId, currentUser, history }) => {
     const [quiz, setQuiz] = useState(null);
+    const [highScore, setHighScore] = useState(null);
     const [scoresPaginator, setScores] = useState(null);
 
 
@@ -24,9 +26,24 @@ const QuizDetailPage = ({ quizId, currentUser, history }) => {
     function getQuizData() {
         getQuiz(quizId).then(quizData => {
             setQuiz(quizData);
+            getHighScores(quizData.id);
             getScores(quizData.id);
         }).catch(error => {
             toast.error("Error getting quiz " + error.message, {
+                autoClose: false,
+            });
+        });
+    }
+
+    function getHighScores(id) {
+        getUsersHighScoreForQuiz(id).then(highScoreData => {
+            console.log(highScoreData);
+            setHighScore(highScoreData);
+            hasHighScore();
+            // console.log(highScoreData);
+            // console.log(hasHighScore());
+        }).catch(error => {
+            toast.error("Error getting high score " + error.message, {
                 autoClose: false,
             });
         });
@@ -84,6 +101,12 @@ const QuizDetailPage = ({ quizId, currentUser, history }) => {
         getQuizData();
     }
 
+    function hasHighScore() {
+        console.log(highScore);
+        console.log(_.isEmpty(highScore));
+        // return !_.isEmpty(highScore);
+    }
+
 
     return (
         <>
@@ -91,7 +114,7 @@ const QuizDetailPage = ({ quizId, currentUser, history }) => {
                 <LoadingMessage message={"Loading quiz"} />
             ) : (
                     <>
-                        <QuizDetail quiz={quiz} scoresPaginator={scoresPaginator} onScoresPageChange={getScoresPage} onQuizReload={handleQuizReload} isCreator={quiz.creator.id == currentUser} onDelete={handleDeleteQuiz} />
+                        <QuizDetail quiz={quiz} scoresPaginator={scoresPaginator} onScoresPageChange={getScoresPage} onQuizReload={handleQuizReload} isCreator={quiz.creator.id == currentUser} onDelete={handleDeleteQuiz} userHighScore={highScore} />
                     </>
                 )}
         </>

@@ -36,6 +36,7 @@ Route::middleware('auth:api')->group(function () {
     Route::delete('/quizzes/{quiz}', [App\Http\Controllers\QuizController::class, 'destroy']);
     Route::get('/quizzes/{quiz}/edit', [App\Http\Controllers\QuizController::class, 'edit']);
     Route::get('/quizzes/{quiz}/scores', [App\Http\Controllers\QuizScoresController::class, 'show']);
+    Route::get('/quizzes/{quiz}/myHighscore', [App\Http\Controllers\QuizScoresController::class, 'showMyHighScore']);
     Route::post('/quizzes/{quiz}/scores', [App\Http\Controllers\QuizScoresController::class, 'store']);
     Route::post('/quizzes/search', [App\Http\Controllers\QuizSearchController::class, 'filter']);
     Route::post('/quizzes/{quiz}/like', [App\Http\Controllers\QuizLikesController::class, 'like']);

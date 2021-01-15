@@ -79,12 +79,12 @@ const CommentsSection = ({ quizId, comments, onReloadQuiz }) => {
 
     return (
         <div>
-            <h2 className="font-bold text-2xl mb-pageLength text-center">Comments</h2>
+            <h2 className="font-bold text-2xl mb-4 text-center">Comments</h2>
             {comments.length <= 0 ? (
-                <p>This quiz currently has no comment, why not add one</p>
+                <p className="px-4">This quiz currently has no comment, why not add one</p>
             ) : (
                     commentsPagination.length > 0 && (
-                        <div className="p-pageLength">
+                        <div className="p-4">
                             {commentsPagination[paginationIndex - 1].map((comment) => {
                                 return (
                                     <Comment key={comment.id} comment={comment} />

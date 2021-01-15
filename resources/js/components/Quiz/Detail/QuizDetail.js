@@ -5,8 +5,9 @@ import ScoresTableWithPagination from "../../DisplayComponents/ScoresTableWithPa
 import LoadingMessage from "../../DisplayComponents/LoadingMessage";
 import LikeControls from "../../DisplayComponents/LikeControls";
 import CommentsSection from "../../DisplayComponents/Comments/CommentsSection"
+import _ from 'lodash';
 
-const QuizDetail = ({ quiz, scoresPaginator, onScoresPageChange, onQuizReload, isCreator, onDelete }) => {
+const QuizDetail = ({ quiz, scoresPaginator, onScoresPageChange, onQuizReload, isCreator, onDelete, userHighScore }) => {
     return (
         <div className="grid grid-cols-12 pb-4">
             <div className="col-span-12 lg:col-span-3 lg:mr-4 px-4 overflow-hidden shadow-lg page">
@@ -98,6 +99,22 @@ const QuizDetail = ({ quiz, scoresPaginator, onScoresPageChange, onQuizReload, i
                         <p className="text-center">{quiz.totalLikes}</p>
                     </div>
                 </div>
+                {!_.isEmpty(userHighScore) && (
+                    <div className="grid grid-cols-12 p-4 border-b">
+                        <div className="col-span-12">
+                            <h2 className="font-bold text-2xl mb-4 text-center">Your high score</h2>
+                        </div>
+                        <div className="col-span-6 text-center">
+                            <p className="text-sm text-gray-600">Score</p>
+                            <p className="font-medium items-center">{userHighScore.score}</p>
+                        </div>
+                        <div className="col-span-6 text-center">
+                            <p className="text-sm text-gray-600">Score percentage</p>
+                            <p className="font-medium items-center">{userHighScore.score_percent}%</p>
+                        </div>
+
+                    </div>
+                )}
                 <div>
                     <div className="flex justify-center">
                         <div className="inline-block p-4">
@@ -118,6 +135,7 @@ const QuizDetail = ({ quiz, scoresPaginator, onScoresPageChange, onQuizReload, i
 
 QuizDetail.propTypes = {
     quiz: PropTypes.object.isRequired,
+    userHighScore: PropTypes.object,
     scoresPaginator: PropTypes.object,
     onQuizReload: PropTypes.func.isRequired,
     onDelete: PropTypes.func.isRequired,
