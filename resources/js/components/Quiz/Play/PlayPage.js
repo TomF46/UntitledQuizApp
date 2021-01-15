@@ -37,6 +37,7 @@ const QuizPlayPage = ({ quizId, challengeId, history }) => {
         if (!challenge && challengeId) {
             getChallenge(challengeId).then(challengeData => {
                 setChallenge(challengeData)
+                checkUserCanAccess(challengeData);
             }).catch(error => {
                 toast.error("Error getting challenge data " + error.message, {
                     autoClose: false,
@@ -44,6 +45,15 @@ const QuizPlayPage = ({ quizId, challengeId, history }) => {
             });
         }
     }, [challengeId])
+
+    function checkUserCanAccess(challengeData) {
+        if (!challengeData.userCanAttempt) {
+            toast.error("User does not have permission to attempt this challenge", {
+                autoClose: false,
+            });
+            history.push("/challenges");
+        }
+    }
 
     function createBlankSubmission(quizData) {
         let submission = {

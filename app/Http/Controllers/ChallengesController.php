@@ -14,17 +14,18 @@ class ChallengesController extends Controller
     {
         $currentUser = $request->User();
         $paginator = challenge::Where([['recipient_id', $currentUser->id], ['status', ChallengeStatus::NotStarted]])->paginate(5);
-        $paginator->getCollection()->transform(function ($challenge) {
-            return $challenge->map();
+        $paginator->getCollection()->transform(function ($challenge) use ($currentUser) {
+            return $challenge->map($currentUser);
         });
         return response()->json($paginator);
     }
 
     public function filter(Request $request)
     {
+        $currentUser = $request->User();
         $paginator = ChallengeSearch::apply($request)->paginate(20);
-        $paginator->getCollection()->transform(function ($challenge) {
-            return $challenge->map();
+        $paginator->getCollection()->transform(function ($challenge) use ($currentUser) {
+            return $challenge->map($currentUser);
         });
 
         return response()->json($paginator);
@@ -50,9 +51,10 @@ class ChallengesController extends Controller
         return response()->json($challenge, 201);
     }
 
-    public function show(Challenge $challenge)
+    public function show(Challenge $challenge, Request $request)
     {
-        return response()->json($challenge->map());
+        $currentUser = $request->User();
+        return response()->json($challenge->map($currentUser));
     }
 
     public function destroy(Request $request, Challenge $challenge)

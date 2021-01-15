@@ -40,7 +40,7 @@ class Challenge extends Model
         return $this;
     }
 
-    public function map()
+    public function map(User $user)
     {
         return [
             'id' => $this->id,
@@ -51,7 +51,8 @@ class Challenge extends Model
             'quizId' => $this->score->quiz->id,
             'quizName' => $this->score->quiz->title,
             'scorePercentToBeat' => $this->score->score_percent,
-            'status' => $this->getStatusText($this->status)
+            'status' => $this->getStatusText($this->status),
+            'userCanAttempt' => $this->canUserAttempt($user->id, $this->status, $this->recipient->id)
         ];
     }
 
@@ -68,5 +69,13 @@ class Challenge extends Model
                 return "Failed";
                 break;
         }
+    }
+
+    protected function canUserAttempt($userId, $status, $recipientId)
+    {
+        if ($status != ChallengeStatus::NotStarted) return false;
+        if ($recipientId != $userId) return false;
+
+        return true;
     }
 }
