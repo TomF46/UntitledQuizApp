@@ -25,7 +25,10 @@ trait Followable
 
     public function following(User $user)
     {
-        return $this->follows()->where('following_user_id', $user->id)->exists();
+        return DB::table('follows')
+            ->where('user_id', $user->id)
+            ->where('following_user_id', $this->id)
+            ->count();
     }
 
     public function followerCount()
