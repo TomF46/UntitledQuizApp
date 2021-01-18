@@ -7,7 +7,7 @@ import LikeControls from "../../DisplayComponents/LikeControls";
 import CommentsSection from "../../DisplayComponents/Comments/CommentsSection"
 import _ from 'lodash';
 
-const QuizDetail = ({ quiz, scoresPaginator, onScoresPageChange, onQuizReload, isCreator, onDelete, userHighScore }) => {
+const QuizDetail = ({ quiz, scoresPaginator, onScoresPageChange, onQuizReload, isCreator, onDelete, userHighScore, history }) => {
     return (
         <div className="grid grid-cols-12 pb-4">
             <div className="col-span-12 lg:col-span-3 lg:mr-4 px-4 overflow-hidden shadow-lg page">
@@ -57,16 +57,15 @@ const QuizDetail = ({ quiz, scoresPaginator, onScoresPageChange, onQuizReload, i
                     <>
                         <h3 className="text-lg font-bold text-center mb-4 mt-4">Actions</h3>
                         <div className="flex flex-col justify-center text-center">
-                            <button
-                                type="button"
-                                onClick={() => history.push(`/quiz/${quiz.id}/edit`)}
+                            <Link
+                                to={`/quiz/${quiz.id}/edit`}
                                 className="border border-gray-800 text-gray-800 text-center rounded py-2 px-4 hover:bg-gray-600 shadow inline-flex items-center justify-center"
                             >
                                 <svg className="h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                                 </svg>
                                 <span className="ml-1">Edit Quiz</span>
-                            </button>
+                            </Link>
                             <button
                                 type="button"
                                 onClick={onDelete}
@@ -140,7 +139,8 @@ QuizDetail.propTypes = {
     onQuizReload: PropTypes.func.isRequired,
     onDelete: PropTypes.func.isRequired,
     onScoresPageChange: PropTypes.func.isRequired,
-    isCreator: PropTypes.func.isRequired
+    isCreator: PropTypes.func.isRequired,
+    history: PropTypes.object.isRequired
 };
 
 export default QuizDetail;

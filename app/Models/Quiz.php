@@ -94,7 +94,7 @@ class Quiz extends Model
         ];
     }
 
-    public function mapDetailWithoutQuestions(User $user)
+    public function mapDetailWithoutAnswers(User $user)
     {
         return [
             'id' => $this->id,
@@ -118,23 +118,6 @@ class Quiz extends Model
                 return $comment->map();
             }),
         ];
-    }
-
-    public function transformWithoutQuestions()
-    {
-        $this->questionsCount = count($this->questions);
-        $this->totalPlays = count($this->scores);
-        $this->totalLikes = $this->totalLikes();
-        $this->totalDislikes = $this->totalDislikes();
-        $this->tags = $this->tags()->get()->map(function ($tag) {
-            return $tag->map();
-        });
-        $this->creator = $this->user->username;
-        $this->creator_id = $this->user->id;
-        $this->comments = $this->comments()->get()->map(function ($comment) {
-            return $comment->map();
-        });
-        return $this;
     }
 
     protected function removeAnswersFromQuestion($questions)

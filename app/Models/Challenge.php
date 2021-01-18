@@ -32,14 +32,6 @@ class Challenge extends Model
         return $this->belongsTo(Score::class);
     }
 
-    public function transform()
-    {
-        $this->challengerUsername = $this->challenger->username;
-        $this->recipientUsername = $this->recipient->username;
-        $this->quiz_id = $this->score->quiz->id;
-        return $this;
-    }
-
     public function map(User $user)
     {
         return [

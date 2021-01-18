@@ -22,7 +22,7 @@ class UsersController extends Controller
     {
         $paginator = $user->quizzes()->with('tags')->latest()->paginate(10);
         $paginator->getCollection()->transform(function ($quiz) {
-            return $quiz->transformWithoutQuestions();
+            return $quiz->mapOverview();
         });
 
         return response()->json($paginator);

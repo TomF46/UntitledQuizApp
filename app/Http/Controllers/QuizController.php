@@ -6,7 +6,6 @@ use App\Models\Answer;
 use App\Models\Question;
 use App\Models\Quiz;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
 
 class QuizController extends Controller
 {
@@ -15,7 +14,7 @@ class QuizController extends Controller
 
         $paginator = Quiz::latest()->paginate(10);
         $paginator->getCollection()->transform(function ($quiz) {
-            return $quiz->transformWithoutQuestions();
+            return $quiz->mapOverview();
         });
 
         return response()->json($paginator);
@@ -50,7 +49,7 @@ class QuizController extends Controller
 
     public function show(Request $request, Quiz $quiz)
     {
-        $mappedQuiz = $quiz->mapDetailWithoutQuestions($request->User());
+        $mappedQuiz = $quiz->mapDetailWithoutAnswers($request->User());
         return response()->json($mappedQuiz);
     }
 

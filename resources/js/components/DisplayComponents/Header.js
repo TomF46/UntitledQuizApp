@@ -35,7 +35,7 @@ const Header = ({ userIsAuthenticated }) => {
                         <>
                             <Link
                                 to="/"
-                                className="block mt-4 md:inline-block md:mt-0 text-white hover:text-white"
+                                className="block mt-4 md:inline-block md:mt-0 text-white hover:text-white md:mx-4"
                             >
                                 Dashboard
                             </Link>
@@ -53,7 +53,7 @@ const Header = ({ userIsAuthenticated }) => {
                             </Link>
                             <Link
                                 to="/quiz"
-                                className="block mt-4 md:inline-block md:mt-0 text-white hover:text-white"
+                                className="block mt-4 md:inline-block md:mt-0 text-white hover:text-white md:mx-4"
                             >
                                 Create
                             </Link>

@@ -2,9 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Answer;
 use App\Models\Comment;
-use App\Models\Score;
 use App\Models\Quiz;
 use Illuminate\Http\Request;
 
@@ -27,7 +25,7 @@ class QuizCommentsController extends Controller
     {
         $paginator = $quiz->comments()->orderBy('created_at', 'desc')->paginate(10);
         $paginator->getCollection()->transform(function ($comment) {
-            return $comment->transform();
+            return $comment->map();
         });
 
         return response()->json($paginator);

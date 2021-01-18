@@ -11,7 +11,7 @@ class QuizSearchController extends Controller
     {
         $paginator = QuizSearch::apply($request)->paginate(10);
         $paginator->getCollection()->transform(function ($quiz) {
-            return $quiz->transformWithoutQuestions();
+            return $quiz->mapOverview();
         });
 
         return response()->json($paginator);

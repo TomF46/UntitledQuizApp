@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use App\Followable;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -81,13 +80,5 @@ class User extends Authenticatable
             'followerCount' => $this->followerCount(),
             'following' => $this->following($user)
         ];
-    }
-
-    public function transform()
-    {
-        $this->profile_image =  $this->profile_image_url ? $this->profile_image_url : config('globalVariables.default_profile_pictures');
-        $this->followerCount = $this->followerCount();
-        $this->totalQuizzesCreated = Count($this->quizzes);
-        return $this;
     }
 }

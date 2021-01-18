@@ -37,13 +37,4 @@ class Score extends Model
             'score_percent' => $this->score_percent
         ];
     }
-
-    public function transform()
-    {
-        $this->username = $this->user->username;
-        $this->user_id = $this->user->id;
-        $this->quiz_name = $this->quiz->title;
-        $this->quiz_id = $this->quiz->id;
-        return $this;
-    }
 }

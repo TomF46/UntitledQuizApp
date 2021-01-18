@@ -45,7 +45,7 @@ class QuizScoresController extends Controller
     {
         $paginator = $quiz->scores()->orderBy('score_percent', 'desc')->paginate(10);
         $paginator->getCollection()->transform(function ($score) {
-            return $score->transform();
+            return $score->map();
         });
 
         return response()->json($paginator);
