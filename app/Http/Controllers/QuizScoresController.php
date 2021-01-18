@@ -68,8 +68,10 @@ class QuizScoresController extends Controller
 
         if ($score->score_percent >= $challenge->score->score_percent) {
             $challenge->status = ChallengeStatus::Success;
+            $challenge->recipient->incrementChallengePoints();
         } else {
             $challenge->status = ChallengeStatus::Failed;
+            $challenge->challenger->incrementChallengePoints();
         }
 
         $challenge->save();

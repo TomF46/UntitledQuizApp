@@ -58,6 +58,12 @@ class User extends Authenticatable
         return $this->hasMany(Like::class);
     }
 
+    public function incrementChallengePoints()
+    {
+        $this->challenge_points++;
+        $this->save();
+    }
+
     public function mapForEditing()
     {
         return [
@@ -78,7 +84,17 @@ class User extends Authenticatable
             'profile_image' => $this->profile_image_url ? $this->profile_image_url : config('globalVariables.default_profile_pictures'),
             'totalQuizzesCreated' => Count($this->quizzes),
             'followerCount' => $this->followerCount(),
-            'following' => $this->following($user)
+            'following' => $this->following($user),
+            'challengePoints' => $this->challenge_points
+        ];
+    }
+
+    public function mapForChallengeLeaderboard()
+    {
+        return [
+            'id' => $this->id,
+            'username' => $this->username,
+            'challengePoints' => $this->challenge_points
         ];
     }
 }

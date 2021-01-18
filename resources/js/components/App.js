@@ -18,6 +18,7 @@ import ExplorePage from "./Explore/ExplorePage";
 import EditProfilePage from "./Profile/Edit/EditProfilePage";
 import ChallengesPage from "./Challenges/ChallengesPage";
 import UserChallengePage from "./Challenges/UserChallengePage";
+import ChallengesLeaderboardPage from "./Challenges/Leaderboard/LeaderboardPage";
 
 const Main = ({ location }) => (
     <>
@@ -58,6 +59,10 @@ const Main = ({ location }) => (
                                 <AuthenticatedRoute
                                     path="/explore"
                                     component={ExplorePage}
+                                />
+                                <AuthenticatedRoute
+                                    path="/challenges/leaderboard"
+                                    component={ChallengesLeaderboardPage}
                                 />
                                 <AuthenticatedRoute
                                     path="/challenges"

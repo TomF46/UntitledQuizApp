@@ -107,6 +107,7 @@ const ProfilePage = ({ userId, currentUser, history, logout, ...props }) => {
                                     <p>Email: {user.email}</p>
                                     <p>Quizzes created: {user.totalQuizzesCreated}</p>
                                     {scoresPaginator && <p>Quiz Attempts: {scoresPaginator.total}</p>}
+                                    <p>Challenge points: {user.challengePoints}</p>
                                 </div>
                                 <div className="text-center mb-4">
                                     <h3 className="text-lg font-bold">User Bio</h3>

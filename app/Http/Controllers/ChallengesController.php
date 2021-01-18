@@ -6,6 +6,7 @@ use App\Enums\ChallengeStatus;
 use App\Filters\ChallengeSearch;
 use App\Models\Challenge;
 use App\Models\Score;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class ChallengesController extends Controller
@@ -63,6 +64,15 @@ class ChallengesController extends Controller
 
         $challenge->delete();
         return response()->noContent();
+    }
+
+    public function leaderboard()
+    {
+        $paginator = User::orderByDesc('challenge_points')->paginate(20);
+        $paginator->getCollection()->transform(function ($score) {
+            return $score->mapForChallengeLeaderboard();
+        });
+        return response()->json($paginator);
     }
 
     protected function validateChallenge(Request $request)
