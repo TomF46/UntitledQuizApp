@@ -28,14 +28,14 @@ const QuizPlayForm = ({ quiz, submission, onAnswerChange, currentQuestionNumber,
                                                 <img src={question.image_url} alt="question-image" className="question-image py-16 max-w-xs md:max-w-md lg:max-w-lg" />
                                             </div>
                                         }
-                                        <div className="flex flex-col md:flex-row">
+                                        <div className="grid grid-cols-12 mt-4 md:flex-row">
                                             {quiz.questions[question.ordinal].answers.map((answer) => {
                                                 return (
                                                     <button
                                                         key={answer.id}
                                                         type="button"
                                                         onClick={(e) => onAnswerChange(question.id, answer.id, e)}
-                                                        className={`text-white py-2 px-4 hover:bg-green-500 mr-2 my-4 md:my-12 flex-1 shadow 
+                                                        className={`text-white py-3 px-6 hover:bg-green-500 mx-4 my-2 col-span-12 md:col-span-6 shadow 
                                                      ${submission.questions[question.ordinal].answer_id == answer.id ? "bg-green-400" : "bg-gray-800"}`}
                                                     >
                                                         {answer.text}
