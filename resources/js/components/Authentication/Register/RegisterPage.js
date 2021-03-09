@@ -52,8 +52,20 @@ const RegisterPage = ({ userIsAuthenticated, history }) => {
             })
             .catch(err => {
                 setSaving(false);
-                setErrors({ onSave: err.message });
+                toast.error(formatErrorText(err), {
+                    autoClose: false,
+                });
             });
+    }
+
+    function formatErrorText(error) {
+        let errorText = '';
+
+        for (const [key, value] of Object.entries(error.data.errors)) {
+            errorText = `${errorText} ${value}`;
+        }
+
+        return errorText;
     }
 
     return (

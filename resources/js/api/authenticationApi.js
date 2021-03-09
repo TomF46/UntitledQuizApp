@@ -7,7 +7,7 @@ export function Login(userLoginDetails) {
             return response.data;
         })
         .catch(error => {
-            throw error;
+            throw error.response;
         });
 }
 
@@ -18,6 +18,6 @@ export function Register(userRegistrationDetails) {
             return response;
         })
         .catch(error => {
-            throw error;
+            throw error.response;
         });
 }

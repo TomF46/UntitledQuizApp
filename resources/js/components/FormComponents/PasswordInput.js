@@ -25,6 +25,7 @@ const PasswordInput = ({
                     placeholder={placeholder}
                     value={value}
                     onChange={onChange}
+                    autoComplete="off"
                     required
                 />
                 {error && (

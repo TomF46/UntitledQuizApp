@@ -11,15 +11,11 @@ class AuthController extends Controller
 {
     public function register(Request $request)
     {
-        $request->validate([
-            'username' => 'required|string|unique:users|max:255',
-            'email' => 'required|string|email|unique:users',
-            'password' => 'required|string|confirmed'
-        ]);
+        $attributes = $this->validateRegistration($request);
         $user = new User([
-            'username' => $request->username,
-            'email' => $request->email,
-            'password' => bcrypt($request->password)
+            'username' => $attributes['username'],
+            'email' => $attributes['email'],
+            'password' => bcrypt($attributes['password'])
         ]);
         $user->save();
         return response()->json([
@@ -29,22 +25,22 @@ class AuthController extends Controller
 
     public function login(Request $request)
     {
-        $request->validate([
-            'email' => 'required|string|email',
-            'password' => 'required|string',
-            'remember_me' => 'boolean'
-        ]);
+        $attributes = $this->validateLogin($request);
         $credentials = request(['email', 'password']);
+
         if (!Auth::attempt($credentials))
             return response()->json([
                 'message' => 'Unauthorized'
             ], 401);
+
         $user = $request->user();
         $tokenResult = $user->createToken('Personal Access Token');
         $token = $tokenResult->token;
-        if ($request->remember_me)
-            $token->expires_at = Carbon::now()->addWeeks(1);
+
+        if ($request->remember_me) $token->expires_at = Carbon::now()->addWeeks(1);
+
         $token->save();
+
         return response()->json([
             'access_token' => $tokenResult->accessToken,
             'token_type' => 'Bearer',
@@ -66,5 +62,23 @@ class AuthController extends Controller
     public function user(Request $request)
     {
         return response()->json($request->user());
+    }
+
+    public function validateRegistration(Request $request)
+    {
+        return $request->validate([
+            'username' => 'required|string|unique:users|max:255',
+            'email' => 'required|string|email|unique:users',
+            'password' => 'required|string|confirmed'
+        ]);
+    }
+
+    public function validateLogin(Request $request)
+    {
+        return $request->validate([
+            'email' => 'required|string|email',
+            'password' => 'required|string',
+            'remember_me' => 'boolean'
+        ]);
     }
 }

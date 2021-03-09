@@ -5,6 +5,7 @@ import LoginForm from "./LoginForm";
 import { login } from "../../../redux/actions/authenticationActions";
 import CenterFormCard from "../../DisplayComponents/CenterFormCard";
 import { Link, Redirect } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const LoginPage = ({ login, userIsAuthenticated, history }) => {
     const [user, setUser] = useState({
@@ -38,12 +39,14 @@ const LoginPage = ({ login, userIsAuthenticated, history }) => {
         if (!formIsValid()) return;
         setSaving(true);
         login(user)
-            .then(response => {
+            .then(() => {
                 history.push("/");
             })
             .catch(err => {
                 setSaving(false);
-                setErrors({ onSave: err.message });
+                toast.error(`${err.statusText} please try again.`, {
+                    autoClose: false,
+                });
             });
     }
 
