@@ -51,7 +51,7 @@ const UserChallengesPage = ({ userId, currentUser, history }) => {
 
     function handleScoreSelected(score) {
         confirmAlert({
-            title: "Confirm deletion",
+            title: "Confirm challenge",
             message: `Are you sure you want to challenge ${recipient.username} with this score?`,
             buttons: [
                 {
