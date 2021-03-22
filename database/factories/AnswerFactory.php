@@ -2,17 +2,18 @@
 
 namespace Database\Factories;
 
-use App\Models\Scores;
+use App\Models\Answer;
+use App\Models\Question;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class ScoresFactory extends Factory
+class AnswerFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = Scores::class;
+    protected $model = Answer::class;
 
     /**
      * Define the model's default state.
@@ -22,7 +23,9 @@ class ScoresFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'question_id' => Question::factory(),
+            'text' => $this->faker->text(20),
+            'is_correct' => $this->faker->boolean,
         ];
     }
 }

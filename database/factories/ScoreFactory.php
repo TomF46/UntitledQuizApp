@@ -2,18 +2,20 @@
 
 namespace Database\Factories;
 
-use App\Models\Quiz;
+use App\Models\Score;
 use App\Models\User;
+use App\Models\Quiz;
+
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class QuizFactory extends Factory
+class ScoreFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = Quiz::class;
+    protected $model = Score::class;
 
     /**
      * Define the model's default state.
@@ -24,8 +26,9 @@ class QuizFactory extends Factory
     {
         return [
             'user_id' => User::factory(),
-            'title' => $this->faker->text(20),
-            'description' => $this->faker->text
+            'quiz_id' => Quiz::factory(),
+            'score' => $this->faker->numberBetween(0,10),
+            'score_percent' => $this->faker->randomFloat(2,0,100)
         ];
     }
 }
