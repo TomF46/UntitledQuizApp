@@ -116,13 +116,13 @@ const QuizDetail = ({ quiz, scoresPaginator, onScoresPageChange, onQuizReload, i
                 )}
                 <div>
                     <div className="flex justify-center">
-                        <div className="inline-block p-4 border-b">
+                        <div className="inline-block p-4 border-b min-w-full">
                             <h2 className="font-bold text-2xl mb-4 text-center">Scores</h2>
                             {!scoresPaginator ? (
                                 <LoadingMessage message={'Loading scores'} />
                             ) : (
-                                    <ScoresTableWithPagination paginationData={scoresPaginator} onPageChange={onScoresPageChange} showUser={true} showQuiz={false} />
-                                )}
+                                <ScoresTableWithPagination paginationData={scoresPaginator} onPageChange={onScoresPageChange} showUser={true} showQuiz={false} />
+                            )}
                         </div>
                     </div>
                 </div>

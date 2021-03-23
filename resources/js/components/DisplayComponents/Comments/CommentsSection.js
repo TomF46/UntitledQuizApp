@@ -83,19 +83,19 @@ const CommentsSection = ({ quizId, comments, onReloadQuiz }) => {
                 <h2 className="font-bold text-2xl mb-4 text-center">Comments</h2>
             </div>
             {comments.length <= 0 ? (
-                <p className="px-4">This quiz currently has no comment, why not add one</p>
+                <p className="px-4 text-center">This quiz currently has no comment, why not add one</p>
             ) : (
-                    commentsPagination.length > 0 && (
-                        <div className="p-4">
-                            {commentsPagination[paginationIndex - 1].map((comment) => {
-                                return (
-                                    <Comment key={comment.id} comment={comment} />
-                                )
-                            })}
-                            <PaginationControls from={from} to={to} of={comments.length} currentPage={paginationIndex} lastPage={commentsPagination.length} onNext={handleNext} onPrevious={handlePrevious} />
-                        </div>
-                    )
-                )}
+                commentsPagination.length > 0 && (
+                    <div className="p-4">
+                        {commentsPagination[paginationIndex - 1].map((comment) => {
+                            return (
+                                <Comment key={comment.id} comment={comment} />
+                            )
+                        })}
+                        <PaginationControls from={from} to={to} of={comments.length} currentPage={paginationIndex} lastPage={commentsPagination.length} onNext={handleNext} onPrevious={handlePrevious} />
+                    </div>
+                )
+            )}
             <CommentForm comment={comment} onChange={handleCommentChange} errors={errors} submitting={submitting} onSubmit={handleCommentSubmit} />
         </div>
     );

@@ -8,28 +8,35 @@ use App\Models\Challenge;
 use App\Models\Score;
 use App\Models\Quiz;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 
 class QuizScoresController extends Controller
 {
     public function store(Quiz $quiz, Request $request)
     {
         $attributes = $this->validateAnswers($request);
-        $questions = $attributes['questions'];
-
-        $maxScore = count($questions);
+        $questionAnswers = $attributes['answers'];
+        $maxScore = count($questionAnswers);
         $currentScore = 0;
+        $quiz = $quiz->mapOverviewWithQuestions();
 
-        //TODO improve its weaknesses
-        foreach ($questions as $question) {
-            $is_correct = Answer::find($question['answer_id'])->is_correct;
-            if ($is_correct == true) $currentScore++;
+        $index = 0;
+        foreach ($quiz['questions'] as $question) {
+            $answer = $questionAnswers[$index];
+            $index++;
+            // Check question at index matches expected question for quiz at index
+            if ($answer['question_id'] != $question['id']) return response()->json(['error' => 'Inputted question does not match expected question for this quiz'], 400);
+            // Find stored answer given and check its question_id matches the one it has been submitted for
+            $answerObj = Answer::find($answer['answer_id']);
+            if ($answerObj['question_id'] != $question['id'])  return response()->json(['error' => 'Inputted answer does not match optional answers for question it is submitted for'], 400);
+            if ($answerObj->is_correct == true) $currentScore++;
         }
 
         $percentScore = ($currentScore / $maxScore) * 100;
 
         $score = Score::create([
             'user_id' => $request->user()->id,
-            'quiz_id' => $quiz->id,
+            'quiz_id' => $quiz['id'],
             'score' => $currentScore,
             "score_percent" => $percentScore
         ]);
@@ -82,8 +89,8 @@ class QuizScoresController extends Controller
     protected function validateAnswers(Request $request)
     {
         return $request->validate([
-            'questions.*.id' => 'required',
-            'questions.*.answer_id' => 'required',
+            'answers.*.question_id' => 'required',
+            'answers.*.answer_id' => 'required',
         ]);
     }
 }

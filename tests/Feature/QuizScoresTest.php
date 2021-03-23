@@ -35,9 +35,9 @@ class QuizScoresTest extends TestCase
         ])->postJson(
             $path,
             [
-                "questions" => [
+                "answers" => [
                     [
-                        "id" => 0,
+                        "question_id" => 1,
                         "answer_id" => 1
                     ]
                 ]

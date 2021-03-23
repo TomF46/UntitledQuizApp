@@ -36,7 +36,7 @@ const QuizPlayForm = ({ quiz, submission, onAnswerChange, currentQuestionNumber,
                                                         type="button"
                                                         onClick={(e) => onAnswerChange(question.id, answer.id, e)}
                                                         className={`text-white py-3 px-6 hover:bg-green-500 mx-4 my-2 col-span-12 md:col-span-6 shadow 
-                                                     ${submission.questions[question.ordinal].answer_id == answer.id ? "bg-green-400" : "bg-gray-800"}`}
+                                                     ${submission.answers[question.ordinal].answer_id == answer.id ? "bg-green-400" : "bg-gray-800"}`}
                                                     >
                                                         {answer.text}
                                                     </button>
@@ -101,13 +101,13 @@ const QuizPlayForm = ({ quiz, submission, onAnswerChange, currentQuestionNumber,
                                 <span className="ml-1">Next</span>
                             </button>
                         ) : (
-                                <button
-                                    onClick={onSubmit}
-                                    className="bg-gray-800 text-white rounded py-2 px-4 mb-2 md:mb-0 hover:bg-gray-600 shadow justify-center"
-                                >
-                                    Submit
-                                </button>
-                            )
+                            <button
+                                onClick={onSubmit}
+                                className="bg-gray-800 text-white rounded py-2 px-4 mb-2 md:mb-0 hover:bg-gray-600 shadow justify-center"
+                            >
+                                Submit
+                            </button>
+                        )
                         }
                     </div>
                 </div>

@@ -57,12 +57,12 @@ const QuizPlayPage = ({ quizId, challengeId, history }) => {
 
     function createBlankSubmission(quizData) {
         let submission = {
-            questions: []
+            answers: []
         }
 
         quizData.questions.forEach(question => {
-            submission.questions.push({
-                id: question.id,
+            submission.answers.push({
+                question_id: question.id,
                 answer_id: null
             });
         });
@@ -71,8 +71,8 @@ const QuizPlayPage = ({ quizId, challengeId, history }) => {
     }
 
     function handleAnswerChange(questionId, answerId, e) {
-        let question = submission.questions.find(question => question.id == questionId);
-        question.answer_id = answerId;
+        let answer = submission.answers.find(answer => answer.question_id == questionId);
+        answer.answer_id = answerId;
         setSubmission({ ...submission });
         if (currentQuestionNumber < quiz.questions.length) handleNext();
     }
@@ -80,9 +80,9 @@ const QuizPlayPage = ({ quizId, challengeId, history }) => {
     function submissionIsValid() {
         const errors = {};
 
-        var emptyAnswers = submission.questions.filter(question => question.answer_id == null);
+        var emptyAnswers = submission.answers.filter(answer => answer.answer_id == null);
         if (emptyAnswers.length > 0) errors.incomplete = "Submission is incomplete not all questions have an answer set."
-        if (submission.questions.length != quiz.questions.length) errors.onSubmit = "Error collating quiz submission."
+        if (submission.answers.length != quiz.questions.length) errors.onSubmit = "Error collating quiz submission."
 
         setErrors(errors);
         return Object.keys(errors).length === 0;
@@ -156,18 +156,18 @@ const QuizPlayPage = ({ quizId, challengeId, history }) => {
             {!submission ? (
                 <LoadingMessage message={'Loading quiz'} />
             ) : (
-                    !score ? (
-                        <div>
-                            {challenge && (
-                                <ChallengeInfoPanel challenge={challenge} />
-                            )}
-                            <QuizPlayForm quiz={quiz} submission={submission} onAnswerChange={handleAnswerChange} onSubmit={handleSubmit} onReset={handleReplay} currentQuestionNumber={currentQuestionNumber} onNext={handleNext} onPrevious={handlePrevious} errors={errors} />
-                        </div>
-                    ) : (
-                            <div>
-                                <ScoreDetail quiz={quiz} score={score} onReplay={handleReplay} onLikesUpdated={handleLikesUpdated} challenge={challenge} />
-                            </div>
-                        ))}
+                !score ? (
+                    <div>
+                        {challenge && (
+                            <ChallengeInfoPanel challenge={challenge} />
+                        )}
+                        <QuizPlayForm quiz={quiz} submission={submission} onAnswerChange={handleAnswerChange} onSubmit={handleSubmit} onReset={handleReplay} currentQuestionNumber={currentQuestionNumber} onNext={handleNext} onPrevious={handlePrevious} errors={errors} />
+                    </div>
+                ) : (
+                    <div>
+                        <ScoreDetail quiz={quiz} score={score} onReplay={handleReplay} onLikesUpdated={handleLikesUpdated} challenge={challenge} />
+                    </div>
+                ))}
         </div>
     )
 };
