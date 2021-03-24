@@ -84,7 +84,7 @@ class User extends Authenticatable
             'profile_image' => $this->profile_image_url ? $this->profile_image_url : config('globalVariables.default_profile_pictures'),
             'totalQuizzesCreated' => Count($this->quizzes),
             'followerCount' => $this->followerCount(),
-            'following' => $this->following($user),
+            'following' => $this->followedBy($user),
             'challengePoints' => $this->challenge_points
         ];
     }

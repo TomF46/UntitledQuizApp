@@ -23,7 +23,7 @@ trait Followable
         return $this->follows()->toggle($user);
     }
 
-    public function following(User $user)
+    public function followedBy(User $user)
     {
         return DB::table('follows')
             ->where('user_id', $user->id)
