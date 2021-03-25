@@ -3,8 +3,11 @@
 namespace Tests\Feature;
 
 use App\Models\User;
+use App\Models\Quiz;
+use App\Models\Question;
+use App\Models\Answer;
+use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Facades\Artisan;
 use Tests\TestCase;
 
@@ -47,42 +50,22 @@ class QuizSearchTest extends TestCase
 
     protected function addTestQuiz()
     {
-        $this->testQuiz = $this->withHeaders([
-            'Accept' => 'application/json',
-            'Authorization' => 'Bearer ' . $this->token
-        ])->postJson(
-            '/api/quizzes',
-            [
-                "id" => null,
-                "title" => "Test Quiz",
+        $this->testQuiz = Quiz::factory()
+            ->has(
+                Question::factory()
+                    ->has(
+                        Answer::factory()
+                            ->count(4)
+                            ->state(new Sequence(
+                                ['is_correct' => false],
+                                ['is_correct' => true],
+                                ['is_correct' => false],
+                                ['is_correct' => false]
+                            ))
+                    )
+            )->create([
+                'title' => 'Test Quiz',
                 "description" => "A Test quiz",
-                "tags" => [],
-                "questions" =>
-                [
-                    [
-                        "text" => "What is 10 + 10?",
-                        "answers" => [
-                            [
-                                "text" => "17",
-                                "is_correct" => false
-                            ],
-                            [
-                                "text" => "20",
-                                "is_correct" => true
-                            ],
-                            [
-                                "text" => "30",
-                                "is_correct" => false
-                            ],
-                            [
-                                "text" => "0",
-                                "is_correct" => false
-                            ]
-                        ],
-                        "image_url" => null
-                    ]
-                ]
-            ]
-        );
+            ]);
     }
 }

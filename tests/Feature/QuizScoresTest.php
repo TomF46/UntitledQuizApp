@@ -3,8 +3,11 @@
 namespace Tests\Feature;
 
 use App\Models\User;
+use App\Models\Quiz;
+use App\Models\Question;
+use App\Models\Answer;
+use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Facades\Artisan;
 use Tests\TestCase;
 
@@ -28,7 +31,7 @@ class QuizScoresTest extends TestCase
 
     public function testCanAddSubmission()
     {
-        $path = '/api/quizzes/' . $this->testQuiz['id']  . '/scores';
+        $path = '/api/quizzes/' . $this->testQuiz->id  . '/scores';
         $response = $this->withHeaders([
             'Accept' => 'application/json',
             'Authorization' => 'Bearer ' . $this->token
@@ -37,8 +40,8 @@ class QuizScoresTest extends TestCase
             [
                 "answers" => [
                     [
-                        "question_id" => 1,
-                        "answer_id" => 1
+                        "question_id" => $this->testQuiz->questions[0]->id,
+                        "answer_id" => $this->testQuiz->questions[0]->answers[2]->id
                     ]
                 ]
             ]
@@ -48,42 +51,19 @@ class QuizScoresTest extends TestCase
 
     protected function addTestQuiz()
     {
-        $this->testQuiz = $this->withHeaders([
-            'Accept' => 'application/json',
-            'Authorization' => 'Bearer ' . $this->token
-        ])->postJson(
-            '/api/quizzes',
-            [
-                "id" => null,
-                "title" => "Test Quiz",
-                "description" => "A Test quiz",
-                "tags" => [],
-                "questions" =>
-                [
-                    [
-                        "text" => "What is 10 + 10?",
-                        "answers" => [
-                            [
-                                "text" => "17",
-                                "is_correct" => false
-                            ],
-                            [
-                                "text" => "20",
-                                "is_correct" => true
-                            ],
-                            [
-                                "text" => "30",
-                                "is_correct" => false
-                            ],
-                            [
-                                "text" => "0",
-                                "is_correct" => false
-                            ]
-                        ],
-                        "image_url" => null
-                    ]
-                ]
-            ]
-        );
+        $this->testQuiz = Quiz::factory()
+            ->has(
+                Question::factory()
+                    ->has(
+                        Answer::factory()
+                            ->count(4)
+                            ->state(new Sequence(
+                                ['is_correct' => false],
+                                ['is_correct' => true],
+                                ['is_correct' => false],
+                                ['is_correct' => false]
+                            ))
+                    )
+            )->create();
     }
 }

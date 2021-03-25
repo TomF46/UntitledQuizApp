@@ -3,8 +3,8 @@
 namespace Tests\Feature;
 
 use App\Models\User;
+use App\Models\Quiz;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Facades\Artisan;
 use Tests\TestCase;
 
@@ -43,42 +43,6 @@ class CommentsTest extends TestCase
 
     protected function addTestQuiz()
     {
-        $this->testQuiz = $this->withHeaders([
-            'Accept' => 'application/json',
-            'Authorization' => 'Bearer ' . $this->token
-        ])->postJson(
-            '/api/quizzes',
-            [
-                "id" => null,
-                "title" => "Test Quiz",
-                "description" => "A Test quiz",
-                "tags" => [],
-                "questions" =>
-                [
-                    [
-                        "text" => "What is 10 + 10?",
-                        "answers" => [
-                            [
-                                "text" => "17",
-                                "is_correct" => false
-                            ],
-                            [
-                                "text" => "20",
-                                "is_correct" => true
-                            ],
-                            [
-                                "text" => "30",
-                                "is_correct" => false
-                            ],
-                            [
-                                "text" => "0",
-                                "is_correct" => false
-                            ]
-                        ],
-                        "image_url" => null
-                    ]
-                ]
-            ]
-        );
+        $this->testQuiz = Quiz::factory()->create();
     }
 }
