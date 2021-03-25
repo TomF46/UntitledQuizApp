@@ -59,26 +59,6 @@ class UserTest extends TestCase
         $this->assertEquals(2, count($user->quizzes));
     }
 
-    public function testCanGetUserScoress()
-    {
-        $user = User::factory()->create();
-
-        User::factory()
-            ->has(
-                Quiz::factory()
-                    ->has(
-                        Score::factory()
-                            ->count(3)
-                            ->state([
-                                'user_id' => $user->id
-                            ])
-                    )
-            )
-            ->create();
-
-        $this->assertEquals(3, count($user->scores));
-    }
-
     public function testCanIncrementChallengePoints()
     {
         $user = User::factory()->create();

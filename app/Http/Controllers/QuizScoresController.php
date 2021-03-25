@@ -8,7 +8,6 @@ use App\Models\Challenge;
 use App\Models\Score;
 use App\Models\Quiz;
 use Illuminate\Http\Request;
-use Illuminate\Support\Arr;
 
 class QuizScoresController extends Controller
 {

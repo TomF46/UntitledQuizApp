@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Followable;
+use App\Enums\ChallengeStatus;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -56,6 +57,11 @@ class User extends Authenticatable
     public function likes()
     {
         return $this->hasMany(Like::class);
+    }
+
+    public function getChallenges()
+    {
+        return challenge::Where([['recipient_id', $this->id], ['status', ChallengeStatus::NotStarted]])->get();
     }
 
     public function incrementChallengePoints()
