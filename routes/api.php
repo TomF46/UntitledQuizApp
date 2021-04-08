@@ -21,14 +21,14 @@ Route::group([
     Route::post('register', [App\Http\Controllers\AuthController::class, 'register']);
 
     Route::group([
-        'middleware' => 'auth:api'
+        'middleware' => ['auth:api', 'role']
     ], function () {
         Route::get('logout', [App\Http\Controllers\AuthController::class, 'logout']);
         Route::get('user', [App\Http\Controllers\AuthController::class, 'user']);
     });
 });
 
-Route::middleware('auth:api')->group(function () {
+Route::middleware(['auth:api', 'role'])->group(function () {
     Route::get('/quizzes', [App\Http\Controllers\QuizController::class, 'index']);
     Route::post('/quizzes', [App\Http\Controllers\QuizController::class, 'store']);
     Route::get('/quizzes/{quiz}', [App\Http\Controllers\QuizController::class, 'show']);
@@ -70,4 +70,10 @@ Route::middleware('auth:api')->group(function () {
     Route::get('/challenges/leaderboard', [App\Http\Controllers\ChallengesController::class, 'leaderboard']);
     Route::get('/challenges/{challenge}', [App\Http\Controllers\ChallengesController::class, 'show']);
     Route::delete('/challenges/{challenge}', [App\Http\Controllers\ChallengesController::class, 'destroy']);
+});
+
+
+//Admin Only
+Route::middleware(['auth:api', 'admin', 'role'])->group(function () {
+    // 
 });

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\Roles;
+use App\Models\Role;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
@@ -18,6 +20,10 @@ class AuthController extends Controller
             'password' => bcrypt($attributes['password'])
         ]);
         $user->save();
+        $role = new Role([
+            'role' => Roles::USER
+        ]);
+        $user->role()->save($role);
         return response()->json([
             'message' => 'Successfully created user!'
         ], 201);
@@ -34,7 +40,13 @@ class AuthController extends Controller
             ], 401);
 
         $user = $request->user();
-        $tokenResult = $user->createToken('Personal Access Token');
+        $userRole = $user->role()->first();
+
+        if ($userRole) {
+            $this->scope = $userRole->role;
+        }
+
+        $tokenResult = $user->createToken('Personal Access Token', [$this->scope]);
         $token = $tokenResult->token;
 
         if ($request->remember_me) $token->expires_at = Carbon::now()->addWeeks(1);

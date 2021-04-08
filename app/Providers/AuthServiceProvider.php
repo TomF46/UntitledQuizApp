@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Enums\Roles;
 use Laravel\Passport\Passport;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
@@ -27,5 +28,14 @@ class AuthServiceProvider extends ServiceProvider
         $this->registerPolicies();
 
         Passport::routes();
+
+        Passport::tokensCan([
+            Roles::ADMINISTRATOR => 'Administer Content',
+            Roles::USER => 'Basic Usage'
+        ]);
+
+        Passport::setDefaultScope([
+            Roles::USER
+        ]);
     }
 }
