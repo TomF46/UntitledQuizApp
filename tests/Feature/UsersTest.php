@@ -3,6 +3,8 @@
 namespace Tests\Feature;
 
 use App\Models\User;
+use App\Models\Role;
+use App\Enums\Roles;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
 use Tests\TestCase;
@@ -75,6 +77,42 @@ class UsersTest extends TestCase
         $response->assertStatus(200);
         $response->assertJson([
             'username' => 'Updated user'
+        ]);
+    }
+
+    public function testCanFindIfUserIsAdmin()
+    {
+        $user = User::factory()->create();
+        $role = new Role([
+            'role' => Roles::ADMINISTRATOR
+        ]);
+        $user->role()->save($role);
+        $pat = $user->createToken('Personal Access Token');
+        $bearerToken = $pat->accessToken;
+        $response = $this->withHeaders([
+            'Accept' => 'application/json',
+            'Authorization' => 'Bearer ' . $bearerToken
+        ])->get('/api/me/isAdmin');
+        $response->assertJson([
+            'isAdmin' => true
+        ]);
+    }
+
+    public function testCanFindIfUserIsNotAdmin()
+    {
+        $user = User::factory()->create();
+        $role = new Role([
+            'role' => Roles::USER
+        ]);
+        $user->role()->save($role);
+        $pat = $user->createToken('Personal Access Token');
+        $bearerToken = $pat->accessToken;
+        $response = $this->withHeaders([
+            'Accept' => 'application/json',
+            'Authorization' => 'Bearer ' . $bearerToken
+        ])->get('/api/me/isAdmin');
+        $response->assertJson([
+            'isAdmin' => false
         ]);
     }
 }

@@ -64,7 +64,7 @@ class LikeableTest extends TestCase
         $this->assertEquals(1, $quiz->totalDislikes());
     }
 
-    public function testCanCalculateNetlikeQuiz()
+    public function testCanCalculateNetlikesForQuiz()
     {
         $user = User::factory()->create();
         $user2 = User::factory()->create();

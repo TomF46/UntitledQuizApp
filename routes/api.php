@@ -54,6 +54,8 @@ Route::middleware(['auth:api', 'role'])->group(function () {
     Route::post('/users/{user}/follow', [App\Http\Controllers\UserFollowsController::class, 'index']);
     Route::get('/users/{user}/following', [App\Http\Controllers\UserFollowsController::class, 'following']);
 
+    Route::get('/me/isAdmin', [App\Http\Controllers\MeController::class, 'isAdmin']);
+
     Route::post('/images', [App\Http\Controllers\ImagesController::class, 'store']);
 
     Route::delete('/scores/{score}', [App\Http\Controllers\ScoresController::class, 'destroy']);
@@ -75,5 +77,4 @@ Route::middleware(['auth:api', 'role'])->group(function () {
 
 //Admin Only
 Route::middleware(['auth:api', 'admin', 'role'])->group(function () {
-    // 
 });

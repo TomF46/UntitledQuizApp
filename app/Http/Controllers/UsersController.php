@@ -48,6 +48,15 @@ class UsersController extends Controller
         return response()->json($user);
     }
 
+    public function isAdmin(Request $request)
+    {
+        return response()->json(
+            [
+                'isAdmin' => $request->user()->isAdmin()
+            ]
+        );
+    }
+
     protected function validateUser(Request $request, User $user)
     {
         return $request->validate([
