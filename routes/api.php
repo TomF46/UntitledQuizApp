@@ -77,4 +77,7 @@ Route::middleware(['auth:api', 'role'])->group(function () {
 
 //Admin Only
 Route::middleware(['auth:api', 'admin', 'role'])->group(function () {
+    Route::post('/tags', [App\Http\Controllers\TagsController::class, 'store']);
+    Route::delete('/tags/{tag}', [App\Http\Controllers\TagsController::class, 'destroy']);
+    Route::put('/tags/{tag}', [App\Http\Controllers\TagsController::class, 'update']);
 });

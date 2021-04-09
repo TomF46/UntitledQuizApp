@@ -8,7 +8,7 @@ use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 
-class TagsTest extends TestCase
+class TagTest extends TestCase
 {
     use RefreshDatabase;
 
