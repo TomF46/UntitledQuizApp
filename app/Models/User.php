@@ -102,7 +102,8 @@ class User extends Authenticatable
             'totalQuizzesCreated' => Count($this->quizzes),
             'followerCount' => $this->followerCount(),
             'following' => $this->followedBy($user),
-            'challengePoints' => $this->challenge_points
+            'challengePoints' => $this->challenge_points,
+            'isAdmin' => $this->isAdmin()
         ];
     }
 

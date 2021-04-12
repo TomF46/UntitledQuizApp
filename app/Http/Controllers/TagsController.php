@@ -9,11 +9,26 @@ use Illuminate\Validation\Rule;
 
 class TagsController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        return response()->json(Tag::all()->map(function ($tag) {
-            return $tag->map();
-        }));
+        $tags = null;
+
+        if ($request->input('paginated', false) == true) {
+            $tags = Tag::paginate(20);
+            $tags->getCollection()->transform(function ($tag) {
+                return $tag->map();
+            });
+        } else {
+            $tags = Tag::all()->map(function ($tag) {
+                return $tag->map();
+            });
+        }
+        return response()->json($tags);
+    }
+
+    public function show(Tag $tag)
+    {
+        return response()->json($tag->map());
     }
 
     public function store(Request $request)

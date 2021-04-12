@@ -17,8 +17,14 @@ const newAnswer = {
     is_correct: false
 }
 
+const newTag = {
+    id: null,
+    name: ""
+}
+
 module.exports = {
     newQuiz,
     newQuestion,
-    newAnswer
+    newAnswer,
+    newTag
 };

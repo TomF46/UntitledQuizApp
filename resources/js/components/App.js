@@ -5,6 +5,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 
 import AuthenticatedRoute from "../AuthenticatedRoute";
+import AdminRoute from "../AdminRoute";
 import Login from "./Authentication/Login/LoginPage";
 import Register from "./Authentication/Register/RegisterPage";
 import Dashboard from "./Dashboard/Dashboard";
@@ -19,6 +20,9 @@ import EditProfilePage from "./Profile/Edit/EditProfilePage";
 import ChallengesPage from "./Challenges/ChallengesPage";
 import UserChallengePage from "./Challenges/UserChallengePage";
 import ChallengesLeaderboardPage from "./Challenges/Leaderboard/LeaderboardPage";
+import AdminPage from "./Admin/AdminPage";
+import TagsAdminPage from "./Admin/TagsAdmin/TagsAdminPage";
+import TagManagementPage from "./Admin/TagsAdmin/TagManagementPage";
 
 const Main = ({ location }) => (
     <>
@@ -87,6 +91,22 @@ const Main = ({ location }) => (
                                 <AuthenticatedRoute
                                     path="/quiz"
                                     component={QuizManagementPage}
+                                />
+                                <AdminRoute
+                                    path="/admin/tags/create"
+                                    component={TagManagementPage}
+                                />
+                                <AdminRoute
+                                    path="/admin/tags/:tagId"
+                                    component={TagManagementPage}
+                                />
+                                <AdminRoute
+                                    path="/admin/tags"
+                                    component={TagsAdminPage}
+                                />
+                                <AdminRoute
+                                    path="/admin"
+                                    component={AdminPage}
                                 />
                                 <Route component={NotFound} />
                             </Switch>

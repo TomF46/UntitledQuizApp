@@ -61,6 +61,8 @@ Route::middleware(['auth:api', 'role'])->group(function () {
     Route::delete('/scores/{score}', [App\Http\Controllers\ScoresController::class, 'destroy']);
 
     Route::get('/tags', [App\Http\Controllers\TagsController::class, 'index']);
+    Route::get('/tags/{tag}', [App\Http\Controllers\TagsController::class, 'show']);
+
 
     Route::get('/dashboard/quizzes/followed', [App\Http\Controllers\DashboardController::class, 'getQuizzesByFollowedUser']);
     Route::get('/dashboard/quizzes/popular', [App\Http\Controllers\DashboardController::class, 'getPopularQuizzes']);

@@ -55,7 +55,7 @@ export function getScoresWithPaginator(url) {
 }
 
 
-export function editUserProfile(userId, profile){
+export function editUserProfile(userId, profile) {
     return axiosClient
         .put(`/api/users/${userId}`, profile)
         .then(response => {
@@ -66,7 +66,7 @@ export function editUserProfile(userId, profile){
         });
 }
 
-export function followUser(userId){
+export function followUser(userId) {
     return axiosClient
         .post(`/api/users/${userId}/follow`)
         .then(response => {
@@ -77,7 +77,7 @@ export function followUser(userId){
         });
 }
 
-export function getFollowedUsers(){
+export function getFollowedUsers() {
     return axiosClient
         .get('/api/dashboard/users/followed')
         .then(response => {
@@ -91,6 +91,17 @@ export function getFollowedUsers(){
 export function getUsersWithPaginator(url) {
     return axiosClient
         .get(url)
+        .then(response => {
+            return response.data;
+        })
+        .catch(error => {
+            throw error;
+        });
+}
+
+export function getUserIsAdmin() {
+    return axiosClient
+        .get('/api/me/isAdmin')
         .then(response => {
             return response.data;
         })
