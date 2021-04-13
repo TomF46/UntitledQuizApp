@@ -155,3 +155,28 @@ export function getUserIsAdmin() {
         });
 }
 
+export function toggleBan(id, isBanned) {
+    return isBanned ? unbanUser(id) : banUser(id);
+}
+
+function unbanUser(id) {
+    return axiosClient
+        .post(`/api/users/${id}/unban`, {})
+        .then(response => {
+            return response.data;
+        })
+        .catch(error => {
+            throw error;
+        });
+}
+
+function banUser(id) {
+    return axiosClient
+        .post(`/api/users/${id}/ban`, {})
+        .then(response => {
+            return response.data;
+        })
+        .catch(error => {
+            throw error;
+        });
+}

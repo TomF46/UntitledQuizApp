@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { followUser, getScoresForUser, getScoresWithPaginator, getUserById } from "../../api/userApi";
+import { followUser, getScoresForUser, getScoresWithPaginator, getUserById, toggleBan } from "../../api/userApi";
 import { toast } from "react-toastify";
 import { getQuizzesByUser, getQuizzesWithPagination } from "../../api/quizApi";
 import QuizListWithPagination from "../DisplayComponents/QuizListWithPagination";
@@ -9,7 +9,7 @@ import ScoresTableWithPagination from "../DisplayComponents/ScoresTableWithPagin
 import LoadingMessage from "../DisplayComponents/LoadingMessage";
 import { logout } from "../../redux/actions/authenticationActions";
 
-const ProfilePage = ({ userId, currentUser, history, logout, ...props }) => {
+const ProfilePage = ({ userId, currentUser, history, logout, isAdmin, ...props }) => {
     const [user, setUser] = useState(null);
     const [quizzesPaginator, setQuizzesPaginator] = useState(null);
     const [scoresPaginator, setScoresPaginator] = useState(null);
@@ -82,9 +82,18 @@ const ProfilePage = ({ userId, currentUser, history, logout, ...props }) => {
     }
 
     function handleLogout() {
-        logout().then(() => {
-            toast.info("Logged out.");
-        });
+        logout();
+        toast.info("Logged out.");
+    }
+
+    function toggleBanned() {
+        toggleBan(user.id, user.isBanned).then(res => {
+            let tempUser = { ...user };
+            tempUser.isBanned = !user.isBanned
+            setUser({ ...tempUser });
+        }).catch(err => {
+            toast.error(`Failed to perform action ${err.message}`);
+        })
     }
 
     return (
@@ -104,6 +113,7 @@ const ProfilePage = ({ userId, currentUser, history, logout, ...props }) => {
                             <div className="text-center my-4">
                                 <h3 className="text-lg font-bold">User Info</h3>
                                 {user.isAdmin && <p className="font-bold">Administrator</p>}
+                                {user.isBanned && <p className="font-bold">Banned</p>}
                                 <p>Username: {user.username}</p>
                                 <p>Email: {user.email}</p>
                                 <p>Quizzes created: {user.totalQuizzesCreated}</p>
@@ -164,6 +174,23 @@ const ProfilePage = ({ userId, currentUser, history, logout, ...props }) => {
                                             </svg>
                                             <span className="ml-1">Challenge</span>
                                         </button>
+                                        {
+                                            isAdmin && (
+                                                <>
+                                                    <p className="font-bold my-2">Admin controls</p>
+                                                    <button
+                                                        type="button"
+                                                        onClick={toggleBanned}
+                                                        className="border border-red-400 text-red-400 text-center rounded py-2 px-4 mt-4 hover:bg-red-600 hover:text-white shadow inline-flex items-center justify-center"
+                                                    >
+                                                        <svg className="text-red-400 hover:text-white h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                                                        </svg>
+                                                        <span className="ml-1">{user.isBanned ? 'Unban' : 'Ban'}</span>
+                                                    </button>
+                                                </>
+                                            )
+                                        }
                                     </>
                                 )}
                             </div>
@@ -214,6 +241,7 @@ ProfilePage.propTypes = {
     userId: PropTypes.any.isRequired,
     currentUser: PropTypes.any.isRequired,
     history: PropTypes.object.isRequired,
+    isAdmin: PropTypes.bool.isRequired,
     logout: PropTypes.func.isRequired
 };
 
@@ -221,7 +249,8 @@ const mapStateToProps = (state, ownProps) => {
     return {
         userIsAuthenticated: state.tokens != null,
         userId: ownProps.match.params.userId ? ownProps.match.params.userId : state.tokens.user_id,
-        currentUser: state.tokens.user_id
+        currentUser: state.tokens.user_id,
+        isAdmin: state.isAdmin
     };
 };
 

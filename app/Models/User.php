@@ -55,6 +55,11 @@ class User extends Authenticatable
         return $this->role()->first()->role == Roles::ADMINISTRATOR;
     }
 
+    public function isBanned()
+    {
+        return $this->role()->first()->role == Roles::BANNED;
+    }
+
     public function quizzes()
     {
         return $this->hasMany(Quiz::class);
@@ -103,7 +108,8 @@ class User extends Authenticatable
             'followerCount' => $this->followerCount(),
             'following' => $this->followedBy($user),
             'challengePoints' => $this->challenge_points,
-            'isAdmin' => $this->isAdmin()
+            'isAdmin' => $this->isAdmin(),
+            'isBanned' => $this->isBanned()
         ];
     }
 

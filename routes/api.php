@@ -28,7 +28,7 @@ Route::group([
     });
 });
 
-Route::middleware(['auth:api', 'role'])->group(function () {
+Route::middleware(['auth:api', 'role', 'notBanned'])->group(function () {
     Route::get('/quizzes', [App\Http\Controllers\QuizController::class, 'index']);
     Route::post('/quizzes', [App\Http\Controllers\QuizController::class, 'store']);
     Route::get('/quizzes/{quiz}', [App\Http\Controllers\QuizController::class, 'show']);
@@ -83,4 +83,7 @@ Route::middleware(['auth:api', 'admin', 'role'])->group(function () {
     Route::post('/tags', [App\Http\Controllers\TagsController::class, 'store']);
     Route::delete('/tags/{tag}', [App\Http\Controllers\TagsController::class, 'destroy']);
     Route::put('/tags/{tag}', [App\Http\Controllers\TagsController::class, 'update']);
+
+    Route::post('/users/{user}/ban', [App\Http\Controllers\UsersController::class, 'ban']);
+    Route::post('/users/{user}/unban', [App\Http\Controllers\UsersController::class, 'unban']);
 });

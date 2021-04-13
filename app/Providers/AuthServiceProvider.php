@@ -31,7 +31,8 @@ class AuthServiceProvider extends ServiceProvider
 
         Passport::tokensCan([
             Roles::ADMINISTRATOR => 'Administer Content',
-            Roles::USER => 'Basic Usage'
+            Roles::USER => 'Basic Usage',
+            Roles::BANNED => 'Forbidden'
         ]);
 
         Passport::setDefaultScope([

@@ -10,6 +10,16 @@ if (token) {
     );
 }
 
+AxiosClient.interceptors.response.use(function (response) {
+    return response;
+}, function (error) {
+    if (error.response.status === 403) {
+        window.location.assign("/banned");
+    }
+
+    return Promise.reject(error);
+});
+
 export function attatchBearerToken(token) {
     AxiosClient.defaults.headers.common = { Authorization: `Bearer ${token}` };
 }

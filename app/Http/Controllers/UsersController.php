@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Filters\UserSearch;
 use App\Models\User;
+use App\Models\Role;
+use App\Enums\Roles;
 use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
 
@@ -63,13 +65,24 @@ class UsersController extends Controller
         return response()->json($user);
     }
 
-    public function isAdmin(Request $request)
+    public function ban(User $user)
     {
-        return response()->json(
-            [
-                'isAdmin' => $request->user()->isAdmin()
-            ]
-        );
+        $user->role()->delete();
+        $role = new Role([
+            'role' => Roles::BANNED
+        ]);
+        $user->role()->save($role);
+        response()->json(['success' => 'success'], 200);
+    }
+
+    public function unban(User $user)
+    {
+        $user->role()->delete();
+        $role = new Role([
+            'role' => Roles::USER
+        ]);
+        $user->role()->save($role);
+        response()->json(['success' => 'success'], 200);
     }
 
     protected function validateUser(Request $request, User $user)
@@ -77,6 +90,7 @@ class UsersController extends Controller
         return $request->validate([
             'username' => ['required', 'string', 'max:255', Rule::unique('users')->ignore($user)],
             'bio' => 'string|nullable',
+
             'profile_image' => 'string|nullable',
 
         ]);

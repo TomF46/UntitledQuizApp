@@ -4,6 +4,8 @@ namespace Tests\Feature;
 
 use App\Models\User;
 use App\Models\Quiz;
+use App\Models\Role;
+use App\Enums\Roles;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
 use Tests\TestCase;
@@ -21,6 +23,10 @@ class CommentsTest extends TestCase
         parent::setUp();
         Artisan::call('passport:install');
         $this->user = User::factory()->create();
+        $role = new Role([
+            'role' => Roles::ADMINISTRATOR
+        ]);
+        $this->user->role()->save($role);
         $pat = $this->user->createToken('Personal Access Token');
         $this->token = $pat->accessToken;
         $this->addTestQuiz();

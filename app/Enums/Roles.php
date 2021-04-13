@@ -13,4 +13,5 @@ final class Roles extends Enum
 {
     const ADMINISTRATOR = 0;
     const USER = 1;
+    const BANNED = 2;
 }

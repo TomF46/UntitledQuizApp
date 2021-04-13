@@ -6,6 +6,8 @@ use App\Models\User;
 use App\Models\Quiz;
 use App\Models\Question;
 use App\Models\Answer;
+use App\Models\Role;
+use App\Enums\Roles;
 use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
@@ -24,6 +26,10 @@ class QuizTest extends TestCase
         parent::setUp();
         Artisan::call('passport:install');
         $this->user = User::factory()->create();
+        $role = new Role([
+            'role' => Roles::ADMINISTRATOR
+        ]);
+        $this->user->role()->save($role);
         $pat = $this->user->createToken('Personal Access Token');
         $this->token = $pat->accessToken;
         $this->addTestQuiz();

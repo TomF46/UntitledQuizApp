@@ -21,6 +21,10 @@ class UsersTest extends TestCase
         parent::setUp();
         Artisan::call('passport:install');
         $this->user = User::factory()->create();
+        $role = new Role([
+            'role' => Roles::ADMINISTRATOR
+        ]);
+        $this->user->role()->save($role);
         $pat = $this->user->createToken('Personal Access Token');
         $this->token = $pat->accessToken;
     }

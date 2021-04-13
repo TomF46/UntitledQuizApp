@@ -24,6 +24,7 @@ import AdminPage from "./Admin/AdminPage";
 import TagsAdminPage from "./Admin/TagsAdmin/TagsAdminPage";
 import TagManagementPage from "./Admin/TagsAdmin/TagManagementPage";
 import UsersAdminPage from "./Admin/UsersAdmin/UsersAdminPage";
+import BannedPage from "./Banned";
 
 const Main = ({ location }) => (
     <>
@@ -45,6 +46,8 @@ const Main = ({ location }) => (
                                 />
                                 <Route path="/login" component={Login} />
                                 <Route path="/register" component={Register} />
+                                <Route path="/banned" component={BannedPage} />
+
                                 <AuthenticatedRoute
                                     path="/profile/:userId/edit"
                                     component={EditProfilePage}

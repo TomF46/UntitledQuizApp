@@ -21,3 +21,16 @@ export function Register(userRegistrationDetails) {
             throw error.response;
         });
 }
+
+export function getUserIsAdmin() {
+    return axiosClient
+        .get('/api/me/isAdmin')
+        .then(response => {
+            return response.data;
+        })
+        .catch(error => {
+            throw error;
+        });
+}
+
+
