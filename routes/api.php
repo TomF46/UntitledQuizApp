@@ -53,6 +53,7 @@ Route::middleware(['auth:api', 'role'])->group(function () {
     Route::get('/users/{user}/scores', [App\Http\Controllers\UserScoresController::class, 'show']);
     Route::post('/users/{user}/follow', [App\Http\Controllers\UserFollowsController::class, 'index']);
     Route::get('/users/{user}/following', [App\Http\Controllers\UserFollowsController::class, 'following']);
+    Route::post('/users/search', [App\Http\Controllers\UsersController::class, 'filter']);
 
     Route::get('/me/isAdmin', [App\Http\Controllers\MeController::class, 'isAdmin']);
 

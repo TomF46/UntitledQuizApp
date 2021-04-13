@@ -1,5 +1,50 @@
 import axiosClient from "../tools/axiosClient";
 
+export function getUsers() {
+    return axiosClient
+        .get("/api/users")
+        .then(response => {
+            return response.data;
+        })
+        .catch(error => {
+            throw error;
+        });
+}
+
+export function searchUsers(searchTerm) {
+    return axiosClient
+        .post(`/api/users/search`, { searchTerm: searchTerm })
+        .then(response => {
+            return response.data;
+        })
+        .catch(error => {
+            throw error;
+        });
+}
+
+export function getUsersPage(url) {
+    return axiosClient
+        .get(url)
+        .then(response => {
+            return response.data;
+        })
+        .catch(error => {
+            throw error;
+        });
+}
+
+export function searchUsersWithPage(url, searchTerm) {
+    return axiosClient
+        .post(url, { searchTerm: searchTerm })
+        .then(response => {
+            return response.data;
+        })
+        .catch(error => {
+            throw error;
+        });
+}
+
+
 export function getCurrentUser() {
     return axiosClient
         .get("/api/auth/user")

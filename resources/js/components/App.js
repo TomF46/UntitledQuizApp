@@ -23,6 +23,7 @@ import ChallengesLeaderboardPage from "./Challenges/Leaderboard/LeaderboardPage"
 import AdminPage from "./Admin/AdminPage";
 import TagsAdminPage from "./Admin/TagsAdmin/TagsAdminPage";
 import TagManagementPage from "./Admin/TagsAdmin/TagManagementPage";
+import UsersAdminPage from "./Admin/UsersAdmin/UsersAdminPage";
 
 const Main = ({ location }) => (
     <>
@@ -103,6 +104,10 @@ const Main = ({ location }) => (
                                 <AdminRoute
                                     path="/admin/tags"
                                     component={TagsAdminPage}
+                                />
+                                <AdminRoute
+                                    path="/admin/users"
+                                    component={UsersAdminPage}
                                 />
                                 <AdminRoute
                                     path="/admin"

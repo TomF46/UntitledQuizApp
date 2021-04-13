@@ -2,15 +2,30 @@
 
 namespace App\Http\Controllers;
 
+use App\Filters\UserSearch;
 use App\Models\User;
 use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
 
 class UsersController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        return response()->json(User::all());
+        $users = User::paginate(20);
+        $users->getCollection()->transform(function ($user) use ($request) {
+            return $user->map($request->User());
+        });
+        return response()->json($users);
+    }
+
+    public function filter(Request $request)
+    {
+        $paginator = UserSearch::apply($request)->paginate(20);
+        $paginator->getCollection()->transform(function ($user) use ($request) {
+            return $user->map($request->User());
+        });
+
+        return response()->json($paginator);
     }
 
     public function show(Request $request, User $user)
