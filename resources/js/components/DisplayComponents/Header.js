@@ -3,18 +3,17 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { getUserIsAdmin } from "../../api/userApi";
+import { useLocation } from 'react-router-dom'
+import { checkUserIsAdmin } from "../../redux/actions/isAdminActions"
 
-const Header = ({ userIsAuthenticated }) => {
+const Header = ({ userIsAuthenticated, isAdmin, checkUserIsAdmin }) => {
     const [mobileIsOpen, setMobileIsOpen] = useState(null);
-    const [isAdmin, setIsAdmin] = useState(false);
+    const location = useLocation();
 
     useEffect(() => {
-        getUserIsAdmin().then(res => {
-            setIsAdmin(res.isAdmin);
-        }).catch(err => {
-            //If call fails then assume they are not admin
-            console.log(err);
-        })
+        if (location.pathname != '/banned') {
+            checkUserIsAdmin(); t
+        }
     }, [])
 
     function toggleMobileNavigation() {
@@ -126,13 +125,20 @@ const Header = ({ userIsAuthenticated }) => {
 };
 
 Header.propTypes = {
-    userIsAuthenticated: PropTypes.bool.isRequired
+    userIsAuthenticated: PropTypes.bool.isRequired,
+    isAdmin: PropTypes.bool.isRequired,
+    checkUserIsAdmin: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state, ownProps) => {
     return {
-        userIsAuthenticated: state.tokens != null
+        userIsAuthenticated: state.tokens != null,
+        isAdmin: state.isAdmin
     };
 };
 
-export default connect(mapStateToProps)(Header);
+const mapDispatchToProps = {
+    checkUserIsAdmin
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);
