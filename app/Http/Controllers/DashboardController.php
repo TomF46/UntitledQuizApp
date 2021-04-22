@@ -11,7 +11,7 @@ class DashboardController extends Controller
     {
         $currentUser = $request->User();
         $following = $currentUser->follows()->pluck('id');
-        $response = Quiz::WhereIn('user_id', $following)->paginate(10);
+        $response = Quiz::WhereIn('user_id', $following)->doesntHave('ban')->paginate(10);
         $response->getCollection()->transform(function ($quiz) {
             return $quiz->mapOverview();
         });
@@ -32,7 +32,7 @@ class DashboardController extends Controller
 
     public function getPopularQuizzes()
     {
-        $quizzes = Quiz::with('likes')->get()->sortByDesc(function ($quiz) {
+        $quizzes = Quiz::with('likes')->doesntHave('ban')->get()->sortByDesc(function ($quiz) {
             return $quiz->totalNetLikes();
         })->take(10)->values()->map(function ($quiz) {
             return $quiz->mapOverview();

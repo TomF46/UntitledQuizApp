@@ -41,6 +41,16 @@ class Quiz extends Model
         return $this->belongsToMany(Tag::class)->withTimestamps();
     }
 
+    public function ban()
+    {
+        return $this->hasOne(QuizBan::class);
+    }
+
+    public function isBanned()
+    {
+        return $this->ban()->exists();
+    }
+
     public static function boot()
     {
         parent::boot();
@@ -69,6 +79,7 @@ class Quiz extends Model
                 'id' => $this->user->id,
                 'profile_image' => $this->user->profile_image_url ? $this->user->profile_image_url : config('globalVariables.default_profile_pictures'),
             ],
+            'isBanned' => $this->isBanned()
         ];
     }
 
@@ -91,6 +102,7 @@ class Quiz extends Model
                 'id' => $this->user->id,
                 'profile_image' => $this->user->profile_image_url ? $this->user->profile_image_url : config('globalVariables.default_profile_pictures'),
             ],
+            'isBanned' => $this->isBanned()
         ];
     }
 
@@ -117,6 +129,7 @@ class Quiz extends Model
             'comments' => $this->comments()->get()->map(function ($comment) {
                 return $comment->map();
             }),
+            'isBanned' => $this->isBanned()
         ];
     }
 

@@ -11,6 +11,9 @@ class QuizSearch
     {
         $quiz = (new Quiz)->newQuery();
 
+        //Dont return banned quizzes
+        $quiz->doesntHave('ban');
+
         if ($filters->has('searchTerm')) {
             $quiz->where('title', 'like', "{$filters->input('searchTerm')}%");
         }

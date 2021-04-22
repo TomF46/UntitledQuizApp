@@ -14,7 +14,15 @@ class ChallengesController extends Controller
     public function index(Request $request)
     {
         $currentUser = $request->User();
-        $paginator = challenge::Where([['recipient_id', $currentUser->id], ['status', ChallengeStatus::NotStarted]])->paginate(5);
+
+        $paginator = Challenge::whereHas('score', function ($query) {
+            $query->whereHas('quiz', function ($query) {
+                $query->doesntHave('ban');
+            });
+        })
+            ->where([['recipient_id', $currentUser->id], ['status', ChallengeStatus::NotStarted]])
+            ->paginate(5);
+
         $paginator->getCollection()->transform(function ($challenge) use ($currentUser) {
             return $challenge->map($currentUser);
         });
@@ -54,6 +62,7 @@ class ChallengesController extends Controller
 
     public function show(Challenge $challenge, Request $request)
     {
+        if ($challenge->score->quiz->isBanned()) return response()->json(['message' => 'Not Found!'], 404);
         $currentUser = $request->User();
         return response()->json($challenge->map($currentUser));
     }

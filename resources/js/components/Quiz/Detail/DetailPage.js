@@ -26,8 +26,10 @@ const QuizDetailPage = ({ quizId, currentUser, history }) => {
     function getQuizData() {
         getQuiz(quizId).then(quizData => {
             setQuiz(quizData);
-            getHighScores(quizData.id);
-            getScores(quizData.id);
+            if (!quizData.isBanned) {
+                getHighScores(quizData.id);
+                getScores(quizData.id);
+            }
         }).catch(error => {
             toast.error("Error getting quiz " + error.message, {
                 autoClose: false,
@@ -102,10 +104,10 @@ const QuizDetailPage = ({ quizId, currentUser, history }) => {
             {!quiz ? (
                 <LoadingMessage message={"Loading quiz"} />
             ) : (
-                    <>
-                        <QuizDetail quiz={quiz} scoresPaginator={scoresPaginator} onScoresPageChange={getScoresPage} onQuizReload={handleQuizReload} isCreator={quiz.creator.id == currentUser} onDelete={handleDeleteQuiz} userHighScore={highScore} />
-                    </>
-                )}
+                <>
+                    <QuizDetail quiz={quiz} scoresPaginator={scoresPaginator} onScoresPageChange={getScoresPage} onQuizReload={handleQuizReload} isCreator={quiz.creator.id == currentUser} onDelete={handleDeleteQuiz} userHighScore={highScore} />
+                </>
+            )}
         </>
     )
 };

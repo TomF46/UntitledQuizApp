@@ -8,7 +8,11 @@ class UserScoresController extends Controller
 {
     public function show(User $user)
     {
-        $paginator = $user->scores()->orderBy('score_percent', 'desc')->paginate(10);
+        $paginator = $user->scores()
+            ->whereHas('quiz', function ($query) {
+                $query->doesntHave('ban');
+            })
+            ->orderBy('score_percent', 'desc')->paginate(10);
         $paginator->getCollection()->transform(function ($score) {
             return $score->map();
         });

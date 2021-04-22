@@ -12,7 +12,7 @@ class QuizController extends Controller
     public function index()
     {
 
-        $paginator = Quiz::latest()->paginate(10);
+        $paginator = Quiz::latest()->doesntHave('ban')->paginate(10);
         $paginator->getCollection()->transform(function ($quiz) {
             return $quiz->mapOverview();
         });
@@ -49,6 +49,9 @@ class QuizController extends Controller
 
     public function show(Request $request, Quiz $quiz)
     {
+        $currentUser = $request->user();
+        if ($quiz->isBanned() && $quiz->user->id != $currentUser->id && !$currentUser->isAdmin()) return response()->json(['message' => 'Not Found!'], 404);
+
         $mappedQuiz = $quiz->mapDetailWithoutAnswers($request->User());
         return response()->json($mappedQuiz);
     }

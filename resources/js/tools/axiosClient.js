@@ -16,6 +16,9 @@ AxiosClient.interceptors.response.use(function (response) {
     if (error.response.status === 403) {
         window.location.assign("/banned");
     }
+    if (error.response.status === 404) {
+        window.location.assign("/404");
+    }
 
     return Promise.reject(error);
 });
