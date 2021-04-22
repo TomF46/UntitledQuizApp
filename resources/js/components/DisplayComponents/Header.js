@@ -12,7 +12,7 @@ const Header = ({ userIsAuthenticated, isAdmin, checkUserIsAdmin }) => {
 
     useEffect(() => {
         if (location.pathname != '/banned') {
-            checkUserIsAdmin(); t
+            checkUserIsAdmin();
         }
     }, [])
 
