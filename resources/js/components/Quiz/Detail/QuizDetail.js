@@ -7,7 +7,7 @@ import LikeControls from "../../DisplayComponents/LikeControls";
 import CommentsSection from "../../DisplayComponents/Comments/CommentsSection"
 import _ from 'lodash';
 
-const QuizDetail = ({ quiz, scoresPaginator, onScoresPageChange, onQuizReload, isCreator, onDelete, userHighScore, history }) => {
+const QuizDetail = ({ quiz, scoresPaginator, onScoresPageChange, onQuizReload, isCreator, onDelete, userHighScore, isAdmin, onQuizToggleBan }) => {
     return (
         <div className="grid grid-cols-12 pb-4">
             <div className="col-span-12 lg:col-span-3 lg:mr-4 px-4 overflow-hidden shadow-lg page">
@@ -53,9 +53,9 @@ const QuizDetail = ({ quiz, scoresPaginator, onScoresPageChange, onQuizReload, i
                         <Link to={`/profile/${quiz.creator.id}`} className="border border-gray-800 text-gray-800 text-center rounded py-2 px-4 hover:bg-gray-600 hover:text-white shadow">View profile</Link>
                     </div>
                 </div>
-                {isCreator && (
+                {isCreator ? (
                     <>
-                        <h3 className="text-lg font-bold text-center mb-4 mt-4">Actions</h3>
+                        <h3 className="text-lg font-bold text-center my-4">Actions</h3>
                         <div className="flex flex-col justify-center text-center">
                             <Link
                                 to={`/quiz/${quiz.id}/edit`}
@@ -69,7 +69,7 @@ const QuizDetail = ({ quiz, scoresPaginator, onScoresPageChange, onQuizReload, i
                             <button
                                 type="button"
                                 onClick={onDelete}
-                                className="border border-red-400 text-red-400 text-center rounded py-2 px-4 mt-4 hover:bg-red-600 hover:text-white shadow inline-flex items-center justify-center"
+                                className="border border-red-400 text-red-400 text-center rounded mt-2 py-2 px-4 hover:bg-red-600 hover:text-white shadow inline-flex items-center justify-center"
                             >
                                 <svg className="h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
@@ -77,6 +77,28 @@ const QuizDetail = ({ quiz, scoresPaginator, onScoresPageChange, onQuizReload, i
                                 <span className="ml-1">Delete</span>
                             </button>
                         </div>
+                    </>
+                ) : (
+                    <>
+                        {
+                            isAdmin && (
+                                <>
+                                    <h3 className="text-lg font-bold text-center my-4">Admin controls</h3>
+                                    <div className="flex flex-col justify-center text-center">
+                                        <button
+                                            type="button"
+                                            onClick={onQuizToggleBan}
+                                            className="border border-red-400 text-red-400 text-center rounded py-2 px-4 mt-4 hover:bg-red-600 hover:text-white shadow inline-flex items-center justify-center"
+                                        >
+                                            <svg className="text-red-400 hover:text-white h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                                            </svg>
+                                            <span className="ml-1">{quiz.isBanned ? 'Unban' : 'Ban'}</span>
+                                        </button>
+                                    </div>
+                                </>
+                            )
+                        }
                     </>
                 )}
             </div>
@@ -143,8 +165,9 @@ QuizDetail.propTypes = {
     onQuizReload: PropTypes.func.isRequired,
     onDelete: PropTypes.func.isRequired,
     onScoresPageChange: PropTypes.func.isRequired,
-    isCreator: PropTypes.func.isRequired,
-    history: PropTypes.object.isRequired
+    isCreator: PropTypes.bool.isRequired,
+    isAdmin: PropTypes.bool.isRequired,
+    onQuizToggleBan: PropTypes.func.isRequired
 };
 
 export default QuizDetail;

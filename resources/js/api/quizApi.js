@@ -213,3 +213,25 @@ export function getUsersHighScoreForQuiz(quizId) {
             throw error;
         });
 }
+
+export function ban(quizId, reason) {
+    return axiosClient
+        .post(`/api/quizzes/${quizId}/ban`, { reason: reason })
+        .then(response => {
+            return response.data;
+        })
+        .catch(error => {
+            throw error;
+        });
+}
+
+export function unban(quizId) {
+    return axiosClient
+        .post(`/api/quizzes/${quizId}/unban`, {})
+        .then(response => {
+            return response.data;
+        })
+        .catch(error => {
+            throw error;
+        });
+}

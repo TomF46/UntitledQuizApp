@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { getQuiz, getScoresForQuiz, getUsersHighScoreForQuiz } from "../../../api/quizApi";
+import { getQuiz, getScoresForQuiz, getUsersHighScoreForQuiz, unban } from "../../../api/quizApi";
 import QuizDetail from "./QuizDetail";
 import * as QuizApi from '../../../api/quizApi';
 import { confirmAlert } from "react-confirm-alert";
@@ -11,7 +11,7 @@ import LoadingMessage from "../../DisplayComponents/LoadingMessage";
 import _ from 'lodash';
 
 
-const QuizDetailPage = ({ quizId, currentUser, history }) => {
+const QuizDetailPage = ({ quizId, currentUser, isAdmin, history }) => {
     const [quiz, setQuiz] = useState(null);
     const [highScore, setHighScore] = useState(null);
     const [scoresPaginator, setScores] = useState(null);
@@ -99,13 +99,33 @@ const QuizDetailPage = ({ quizId, currentUser, history }) => {
         getQuizData();
     }
 
+    function handleToggleBan() {
+        if (!quiz.isBanned) {
+            history.push(`/admin/quiz/${quiz.id}/ban`)
+            return;
+        }
+
+        unbanQuiz();
+    }
+
+    function unbanQuiz() {
+        unban(quiz.id).then(res => {
+            toast.success("Quiz unbanned")
+            handleQuizReload();
+        }).catch(error => {
+            toast.error("Error unbanning quiz " + error.message, {
+                autoClose: false,
+            });
+        })
+    }
+
     return (
         <>
             {!quiz ? (
                 <LoadingMessage message={"Loading quiz"} />
             ) : (
                 <>
-                    <QuizDetail quiz={quiz} scoresPaginator={scoresPaginator} onScoresPageChange={getScoresPage} onQuizReload={handleQuizReload} isCreator={quiz.creator.id == currentUser} onDelete={handleDeleteQuiz} userHighScore={highScore} />
+                    <QuizDetail quiz={quiz} scoresPaginator={scoresPaginator} onScoresPageChange={getScoresPage} onQuizReload={handleQuizReload} isCreator={quiz.creator.id == currentUser} onDelete={handleDeleteQuiz} userHighScore={highScore} isAdmin={isAdmin} onQuizToggleBan={handleToggleBan} />
                 </>
             )}
         </>
@@ -114,13 +134,15 @@ const QuizDetailPage = ({ quizId, currentUser, history }) => {
 
 QuizDetailPage.propTypes = {
     quizId: PropTypes.any.isRequired,
-    history: PropTypes.object.isRequired
+    history: PropTypes.object.isRequired,
+    isAdmin: PropTypes.bool.isRequired
 };
 
 const mapStateToProps = (state, ownProps) => {
     return {
         quizId: ownProps.match.params.quizId,
-        currentUser: state.tokens.user_id
+        currentUser: state.tokens.user_id,
+        isAdmin: state.isAdmin
     };
 };
 
