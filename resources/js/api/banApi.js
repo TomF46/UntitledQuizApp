@@ -10,3 +10,26 @@ export function getBan(id) {
             throw error;
         });
 }
+
+export function searchQuizBans(filters) {
+    return axiosClient
+        .post(`/api/bans/quizzes/search`, filters)
+        .then(response => {
+            return response.data;
+        })
+        .catch(error => {
+            throw error;
+        });
+}
+
+export function searchQuizBansWithPagination(url, filters) {
+    return axiosClient
+        .post(url, filters)
+        .then(response => {
+            return response.data;
+        })
+        .catch(error => {
+            console.log(error);
+            throw error;
+        });
+}

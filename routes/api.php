@@ -89,6 +89,8 @@ Route::middleware(['auth:api', 'admin', 'role'])->group(function () {
     Route::post('/users/{user}/ban', [App\Http\Controllers\UsersController::class, 'ban']);
     Route::post('/users/{user}/unban', [App\Http\Controllers\UsersController::class, 'unban']);
 
+    Route::post('/bans/quizzes/search', [App\Http\Controllers\QuizBanController::class, 'filter']);
+
     Route::post('/quizzes/{quiz}/ban', [App\Http\Controllers\QuizBanController::class, 'store']);
     Route::post('/quizzes/{quiz}/unban', [App\Http\Controllers\QuizBanController::class, 'remove']);
 });

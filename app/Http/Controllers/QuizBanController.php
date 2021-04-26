@@ -2,12 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use App\Filters\BannedQuizSearch;
 use App\Models\QuizBan;
 use App\Models\Quiz;
 use Illuminate\Http\Request;
 
 class QuizBanController extends Controller
 {
+    public function filter(Request $request)
+    {
+        $paginator = BannedQuizSearch::apply($request)->paginate(10);
+        $paginator->getCollection()->transform(function ($quiz) {
+            return $quiz->mapOverviewBanned();
+        });
+
+        return response()->json($paginator);
+    }
 
     public function show(QuizBan $quizBan, Request $request)
     {

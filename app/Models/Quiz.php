@@ -84,6 +84,22 @@ class Quiz extends Model
         ];
     }
 
+    public function mapOverviewBanned()
+    {
+        return [
+            'id' => $this->id,
+            'title' => $this->title,
+            'creator' => [
+                "username" => $this->user->username,
+                'id' => $this->user->id,
+                'profile_image' => $this->user->profile_image_url ? $this->user->profile_image_url : config('globalVariables.default_profile_pictures'),
+            ],
+            'isBanned' => $this->isBanned(),
+            'banId' => $this->isBanned() ? $this->ban->id : null,
+            'reason' => $this->ban->reason
+        ];
+    }
+
     public function mapOverviewWithQuestions()
     {
         return [

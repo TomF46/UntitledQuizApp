@@ -26,6 +26,7 @@ import TagManagementPage from "./Admin/TagsAdmin/TagManagementPage";
 import UsersAdminPage from "./Admin/UsersAdmin/UsersAdminPage";
 import BannedPage from "./Banned";
 import QuizBanPage from "./Admin/QuizAdmin/QuizBanPage";
+import QuizBanListPage from "./Admin/QuizAdmin/QuizBanListPage";
 
 const Main = ({ location }) => (
     <>
@@ -112,6 +113,10 @@ const Main = ({ location }) => (
                                 <AdminRoute
                                     path="/admin/users"
                                     component={UsersAdminPage}
+                                />
+                                <AdminRoute
+                                    path="/admin/bans/quizzes"
+                                    component={QuizBanListPage}
                                 />
                                 <AdminRoute
                                     path="/admin/quiz/:quizId/ban"
