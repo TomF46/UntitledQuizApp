@@ -13,4 +13,23 @@ class QuizBan extends Model
         'reason',
         'admin_id'
     ];
+
+    public function quiz()
+    {
+        return $this->belongsTo(Quiz::class);
+    }
+
+    public function quizOwner()
+    {
+        return $this->quiz->user;
+    }
+
+    public function map()
+    {
+        return [
+            'id' => $this->id,
+            'quizTitle' => $this->quiz->title,
+            'reason' => $this->reason
+        ];
+    }
 }

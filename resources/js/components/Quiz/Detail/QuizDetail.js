@@ -6,6 +6,7 @@ import LoadingMessage from "../../DisplayComponents/LoadingMessage";
 import LikeControls from "../../DisplayComponents/LikeControls";
 import CommentsSection from "../../DisplayComponents/Comments/CommentsSection"
 import _ from 'lodash';
+import BanInfo from "../../DisplayComponents/BanInfo";
 
 const QuizDetail = ({ quiz, scoresPaginator, onScoresPageChange, onQuizReload, isCreator, onDelete, userHighScore, isAdmin, onQuizToggleBan }) => {
     return (
@@ -120,7 +121,7 @@ const QuizDetail = ({ quiz, scoresPaginator, onScoresPageChange, onQuizReload, i
                         <p className="text-center">{quiz.totalLikes}</p>
                     </div>
                 </div>
-                {!quiz.isBanned && (
+                {!quiz.isBanned ? (
                     <>
                         {!_.isEmpty(userHighScore) && (
                             <div className="grid grid-cols-12 p-4 border-b">
@@ -152,6 +153,8 @@ const QuizDetail = ({ quiz, scoresPaginator, onScoresPageChange, onQuizReload, i
                         </div>
                         <CommentsSection quizId={quiz.id} comments={quiz.comments} onReloadQuiz={onQuizReload} />
                     </>
+                ) : (
+                    <BanInfo banId={quiz.banId} />
                 )}
             </div>
         </div >

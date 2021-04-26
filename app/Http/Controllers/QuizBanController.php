@@ -8,6 +8,14 @@ use Illuminate\Http\Request;
 
 class QuizBanController extends Controller
 {
+
+    public function show(QuizBan $quizBan, Request $request)
+    {
+        $currentUser = $request->user();
+        if ($quizBan->quizOwner()->id != $currentUser->id && !$currentUser->isAdmin()) return response()->json(['error' => 'unauthorized.'], 401);
+        return response()->json($quizBan->map());
+    }
+
     public function store(Quiz $quiz, Request $request)
     {
         if ($quiz->isBanned()) return response()->json(['success' => 'success'], 200);

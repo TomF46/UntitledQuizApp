@@ -75,6 +75,8 @@ Route::middleware(['auth:api', 'role', 'notBanned'])->group(function () {
     Route::get('/challenges/leaderboard', [App\Http\Controllers\ChallengesController::class, 'leaderboard']);
     Route::get('/challenges/{challenge}', [App\Http\Controllers\ChallengesController::class, 'show']);
     Route::delete('/challenges/{challenge}', [App\Http\Controllers\ChallengesController::class, 'destroy']);
+
+    Route::get('/bans/quizzes/{quizBan}', [App\Http\Controllers\QuizBanController::class, 'show']);
 });
 
 

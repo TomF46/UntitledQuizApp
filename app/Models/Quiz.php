@@ -79,7 +79,8 @@ class Quiz extends Model
                 'id' => $this->user->id,
                 'profile_image' => $this->user->profile_image_url ? $this->user->profile_image_url : config('globalVariables.default_profile_pictures'),
             ],
-            'isBanned' => $this->isBanned()
+            'isBanned' => $this->isBanned(),
+            'banId' => $this->isBanned() ? $this->ban->id : null
         ];
     }
 
@@ -102,7 +103,8 @@ class Quiz extends Model
                 'id' => $this->user->id,
                 'profile_image' => $this->user->profile_image_url ? $this->user->profile_image_url : config('globalVariables.default_profile_pictures'),
             ],
-            'isBanned' => $this->isBanned()
+            'isBanned' => $this->isBanned(),
+            'banId' => $this->isBanned() ? $this->ban->id : null
         ];
     }
 
@@ -129,7 +131,8 @@ class Quiz extends Model
             'comments' => $this->comments()->get()->map(function ($comment) {
                 return $comment->map();
             }),
-            'isBanned' => $this->isBanned()
+            'isBanned' => $this->isBanned(),
+            'banId' => $this->isBanned() ? $this->ban->id : null
         ];
     }
 
