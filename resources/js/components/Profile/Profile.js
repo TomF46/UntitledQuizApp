@@ -114,121 +114,140 @@ const ProfilePage = ({ userId, currentUser, history, logout, isAdmin, ...props }
                                 <h3 className="text-lg font-bold">User Info</h3>
                                 {user.isAdmin && <p className="font-bold">Administrator</p>}
                                 {user.isBanned && <p className="font-bold">Banned</p>}
-                                <p>Username: {user.username}</p>
-                                <p>Email: {user.email}</p>
-                                <p>Quizzes created: {user.totalQuizzesCreated}</p>
-                                {scoresPaginator && <p>Quiz Attempts: {scoresPaginator.total}</p>}
-                                <p>Challenge points: {user.challengePoints}</p>
-                            </div>
-                            <div className="text-center mb-4">
-                                <h3 className="text-lg font-bold">User Bio</h3>
-                                {user.bio ? (<p>{user.bio}</p>) : (<p>No user biography set, please add one so we can get to know you better</p>)}
-                            </div>
-                            <div className="flex flex-col justify-center text-center">
-                                {userId == currentUser ? (
+                                {!user.isBanned || isAdmin ? (
                                     <>
-                                        <button
-                                            type="button"
-                                            onClick={() => history.push(`/profile/${userId}/edit`)}
-                                            className="border border-gray-800 text-gray-800 text-center rounded py-2 px-4 hover:bg-gray-600 shadow inline-flex items-center justify-center"
-                                        >
-                                            <svg className="text-gray-800 h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
-                                            </svg>
-                                            <span className="ml-1">Edit Profile</span>
-                                        </button>
-                                        <button
-                                            type="button"
-                                            onClick={handleLogout}
-                                            className="border border-gray-800 text-gray-800 text-center rounded py-2 px-4 mt-4 hover:bg-gray-600 shadow inline-flex items-center justify-center"
-                                        >
-                                            <svg className="text-gray-800 h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
-                                            </svg>
-                                            <span className="ml-1">Logout</span>
-                                        </button>
+                                        <p>Username: {user.username}</p>
+                                        <p>Email: {user.email}</p>
+                                        <p>Quizzes created: {user.totalQuizzesCreated}</p>
+                                        {scoresPaginator && <p>Quiz Attempts: {scoresPaginator.total}</p>}
+                                        <p>Challenge points: {user.challengePoints}</p>
                                     </>
-                                ) : (
-                                    <>
-                                        <button
-                                            type="button"
-                                            onClick={toggleFollow}
-                                            className="border border-gray-800 text-gray-800 text-center rounded py-2 px-4 hover:bg-gray-600 shadow inline-flex items-center justify-center"
-                                        >
-                                            <svg className="text-gray-800 h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                {user.following ? (
-                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7a4 4 0 11-8 0 4 4 0 018 0zM9 14a6 6 0 00-6 6v1h12v-1a6 6 0 00-6-6zM21 12h-6" />
-                                                ) : (
-                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
-                                                )}
-                                            </svg>
-                                            <span className="ml-1">{user.following ? "Unfollow" : "Follow"}</span>
-                                        </button>
-                                        <button
-                                            type="button"
-                                            onClick={() => history.push(`/profile/${userId}/challenge`)}
-                                            className="border border-gray-800 text-gray-800 text-center rounded py-2 px-4 mt-4 hover:bg-gray-600 shadow inline-flex items-center justify-center"
-                                        >
-                                            <svg className="text-gray-800 h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                                            </svg>
-                                            <span className="ml-1">Challenge</span>
-                                        </button>
-                                        {
-                                            isAdmin && (
-                                                <>
-                                                    <p className="font-bold my-2">Admin controls</p>
-                                                    <button
-                                                        type="button"
-                                                        onClick={toggleBanned}
-                                                        className="border border-red-400 text-red-400 text-center rounded py-2 px-4 hover:bg-red-600 hover:text-white shadow inline-flex items-center justify-center"
-                                                    >
-                                                        <svg className="text-red-400 hover:text-white h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-                                                        </svg>
-                                                        <span className="ml-1">{user.isBanned ? 'Unban' : 'Ban'}</span>
-                                                    </button>
-                                                </>
-                                            )
-                                        }
-                                    </>
-                                )}
+                                ) : (<></>)}
                             </div>
+                            {!user.isBanned || isAdmin ? (
+                                <>
+                                    <div className="text-center mb-4">
+                                        <h3 className="text-lg font-bold">User Bio</h3>
+                                        {user.bio ? (<p>{user.bio}</p>) : (<p>No user biography set, please add one so we can get to know you better</p>)}
+                                    </div>
+                                    <div className="flex flex-col justify-center text-center">
+                                        {userId == currentUser ? (
+                                            <>
+                                                <button
+                                                    type="button"
+                                                    onClick={() => history.push(`/profile/${userId}/edit`)}
+                                                    className="border border-gray-800 text-gray-800 text-center rounded py-2 px-4 hover:bg-gray-600 shadow inline-flex items-center justify-center"
+                                                >
+                                                    <svg className="text-gray-800 h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                                                    </svg>
+                                                    <span className="ml-1">Edit Profile</span>
+                                                </button>
+                                                <button
+                                                    type="button"
+                                                    onClick={handleLogout}
+                                                    className="border border-gray-800 text-gray-800 text-center rounded py-2 px-4 mt-4 hover:bg-gray-600 shadow inline-flex items-center justify-center"
+                                                >
+                                                    <svg className="text-gray-800 h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                                                    </svg>
+                                                    <span className="ml-1">Logout</span>
+                                                </button>
+                                            </>
+                                        ) : (
+                                            <>
+                                                <button
+                                                    type="button"
+                                                    onClick={toggleFollow}
+                                                    className="border border-gray-800 text-gray-800 text-center rounded py-2 px-4 hover:bg-gray-600 shadow inline-flex items-center justify-center"
+                                                >
+                                                    <svg className="text-gray-800 h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        {user.following ? (
+                                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7a4 4 0 11-8 0 4 4 0 018 0zM9 14a6 6 0 00-6 6v1h12v-1a6 6 0 00-6-6zM21 12h-6" />
+                                                        ) : (
+                                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
+                                                        )}
+                                                    </svg>
+                                                    <span className="ml-1">{user.following ? "Unfollow" : "Follow"}</span>
+                                                </button>
+                                                <button
+                                                    type="button"
+                                                    onClick={() => history.push(`/profile/${userId}/challenge`)}
+                                                    className="border border-gray-800 text-gray-800 text-center rounded py-2 px-4 mt-4 hover:bg-gray-600 shadow inline-flex items-center justify-center"
+                                                >
+                                                    <svg className="text-gray-800 h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                                                    </svg>
+                                                    <span className="ml-1">Challenge</span>
+                                                </button>
+                                                {
+                                                    isAdmin && (
+                                                        <>
+                                                            <p className="font-bold my-2">Admin controls</p>
+                                                            <button
+                                                                type="button"
+                                                                onClick={toggleBanned}
+                                                                className="border border-red-400 text-red-400 text-center rounded py-2 px-4 hover:bg-red-600 hover:text-white shadow inline-flex items-center justify-center"
+                                                            >
+                                                                <svg className="text-red-400 hover:text-white h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                                                                </svg>
+                                                                <span className="ml-1">{user.isBanned ? 'Unban' : 'Ban'}</span>
+                                                            </button>
+                                                        </>
+                                                    )
+                                                }
+                                            </>
+                                        )}
+                                    </div>
+                                </>
+                            ) : (<></>)}
                         </div>
                         <div className="col-span-12 lg:col-span-9 px-4 overflow-hidden shadow-lg page">
-                            <div className="my-4">
-                                <h3 className="font-bold text-3xl mb-2">
-                                    Created quizzes
+                            {!user.isBanned || isAdmin ? (
+                                <>
+                                    <div className="my-4">
+                                        <h3 className="font-bold text-3xl mb-2">
+                                            Created quizzes
                                     </h3>
-                                {quizzesPaginator ? (
-                                    <div>
-                                        {quizzesPaginator.total > 0 ? (
-                                            <QuizListWithPagination paginationData={quizzesPaginator} onPageChange={getQuizzesPage} />
-                                        ) : (
-                                            <p>User has not created any quizzes</p>
-                                        )}
+                                        {quizzesPaginator ? (
+                                            <div>
+                                                {quizzesPaginator.total > 0 ? (
+                                                    <QuizListWithPagination paginationData={quizzesPaginator} onPageChange={getQuizzesPage} />
+                                                ) : (
+                                                    <p>User has not created any quizzes</p>
+                                                )}
 
-                                    </div>
-                                ) : (
-                                    <LoadingMessage message={'Loading users quizzes'} />
-                                )}
-                            </div>
-                            <div className="my-4">
-                                <div className="flex">
-                                    <div className="mb-4">
-                                        <h3 className="font-bold text-3xl">
-                                            Scores
-                                        </h3>
-                                        {!scoresPaginator ? (
-                                            <div className="flex justify-center">
-                                                <LoadingMessage message={'Loading scores'} />
                                             </div>
                                         ) : (
-                                            <ScoresTableWithPagination paginationData={scoresPaginator} onPageChange={getScoresPage} showUser={false} showQuiz={true} />
+                                            <LoadingMessage message={'Loading users quizzes'} />
                                         )}
                                     </div>
+                                    <div className="my-4">
+                                        <div className="flex">
+                                            <div className="mb-4">
+                                                <h3 className="font-bold text-3xl">
+                                                    Scores
+                                        </h3>
+                                                {!scoresPaginator ? (
+                                                    <div className="flex justify-center">
+                                                        <LoadingMessage message={'Loading scores'} />
+                                                    </div>
+                                                ) : (
+                                                    <ScoresTableWithPagination paginationData={scoresPaginator} onPageChange={getScoresPage} showUser={false} showQuiz={true} />
+                                                )}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </>
+                            ) : (
+                                <div className="my-4">
+                                    <h3 className="font-bold text-3xl mb-2 text-center">
+                                        Banned
+                                    </h3>
+                                    <p className="text-center">This user is banned, their quizzes may still be available via the explore page if they do not break the rules.</p>
                                 </div>
-                            </div>
+                            )}
                         </div>
                     </div>
                 </>
@@ -247,7 +266,6 @@ ProfilePage.propTypes = {
 
 const mapStateToProps = (state, ownProps) => {
     return {
-        userIsAuthenticated: state.tokens != null,
         userId: ownProps.match.params.userId ? ownProps.match.params.userId : state.tokens.user_id,
         currentUser: state.tokens.user_id,
         isAdmin: state.isAdmin

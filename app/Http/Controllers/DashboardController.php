@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\Roles;
 use App\Models\Quiz;
+use App\Models\Role;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -22,7 +24,9 @@ class DashboardController extends Controller
     public function getFollowedUsers(Request $request)
     {
         $currentUser = $request->User();
-        $following = $currentUser->follows()->paginate(10);
+        $following = $currentUser->follows()->whereHas('role', function ($query) {
+            $query->where('role', '!=', Roles::BANNED);
+        })->paginate(10);
         $following->getCollection()->transform(function ($user) use ($currentUser) {
             return $user->map($currentUser);
         });
