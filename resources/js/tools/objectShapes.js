@@ -3,12 +3,36 @@ const newQuiz = {
     title: "",
     description: "",
     tags: [],
-    questions: []
+    questions: [
+        {
+            text: "",
+            answers: [
+                {
+                    text: "",
+                    is_correct: false
+                },
+                {
+                    text: "",
+                    is_correct: false
+                }
+            ],
+            image_url: null
+        }
+    ]
 };
 
 const newQuestion = {
     text: "",
-    answers: [],
+    answers: [
+        {
+            text: "",
+            is_correct: false
+        },
+        {
+            text: "",
+            is_correct: false
+        }
+    ],
     image_url: null
 }
 

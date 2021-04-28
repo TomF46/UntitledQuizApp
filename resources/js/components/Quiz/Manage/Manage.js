@@ -34,6 +34,7 @@ const QuizManagementPage = ({ quizId, userId, history }) => {
                 });
         } else {
             setQuiz(JSON.parse(JSON.stringify(newQuiz)));
+            updateErrors(QuizManagementService.addBlankErrorsForQuestion(errors));
             setLoaded(true);
         }
     }, [quizId]);
@@ -114,17 +115,17 @@ const QuizManagementPage = ({ quizId, userId, history }) => {
                     <LoadingMessage message={"Loading form"} />
                 </div>
             ) : (
-                    <QuizForm
-                        quiz={quiz}
-                        tags={tags}
-                        errors={errors}
-                        updateQuiz={updateQuiz}
-                        updateErrors={updateErrors}
-                        onReset={handleReset}
-                        onSave={handleSave}
-                        saving={saving}
-                    />
-                )}
+                <QuizForm
+                    quiz={quiz}
+                    tags={tags}
+                    errors={errors}
+                    updateQuiz={updateQuiz}
+                    updateErrors={updateErrors}
+                    onReset={handleReset}
+                    onSave={handleSave}
+                    saving={saving}
+                />
+            )}
         </div>
     );
 };
