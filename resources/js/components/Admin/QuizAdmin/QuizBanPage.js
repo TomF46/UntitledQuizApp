@@ -61,7 +61,7 @@ const QuizBanPage = ({ quizId, history }) => {
 
 
     return (
-        <div className="pt-6 overflow-hidden shadow-lg page">
+        <div className="pt-6 overflow-hidden shadow page">
             {!quiz ? (
                 <LoadingMessage message={"Loading quiz"} />
             ) : (

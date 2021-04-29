@@ -111,7 +111,7 @@ const QuizManagementPage = ({ quizId, userId, history }) => {
                 <Redirect to="/" />
             )}
             {!loaded ? (
-                <div className="shadow-lg page">
+                <div className="shadow page">
                     <LoadingMessage message={"Loading form"} />
                 </div>
             ) : (

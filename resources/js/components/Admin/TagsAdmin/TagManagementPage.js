@@ -86,7 +86,7 @@ const TagManagementPage = ({ tagId, history }) => {
     return (
         <div className="tag-management-page">
             {!loaded ? (
-                <div className="shadow-lg page">
+                <div className="shadow page">
                     <LoadingMessage message={"Loading form"} />
                 </div>
             ) : (

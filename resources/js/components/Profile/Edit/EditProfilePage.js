@@ -72,12 +72,12 @@ const EditProfilePage = ({ userId, history }) => {
     }
 
     return (
-        <div className="pt-6 overflow-hidden shadow-lg page">
+        <div className="pt-6 overflow-hidden shadow page">
             {user == null ? (
                 <LoadingMessage message={'Loading user'} />
             ) : (
-                    <EditProfileForm user={user} onChange={handleChange} onFileChange={handleFileChange} errors={errors} saving={saving} onSave={handleSave} />
-                )}
+                <EditProfileForm user={user} onChange={handleChange} onFileChange={handleFileChange} errors={errors} saving={saving} onSave={handleSave} />
+            )}
         </div>
     );
 };

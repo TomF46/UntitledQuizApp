@@ -83,45 +83,45 @@ const UserChallengesPage = ({ userId, currentUser, history }) => {
             {recipient == null ? (
                 <LoadingMessage message={'Loading user to challenge'} />
             ) : (
-                    <div className="grid grid-cols-12 pb-4">
-                        <div className="col-span-12 lg:col-span-3 lg:mr-4 px-4 overflow-hidden shadow-lg page">
-                            <h2 className="font-bold text-4xl py-4 text-center">
-                                {recipient.username}
-                            </h2>
-                            <div>
-                                <img src={recipient.profile_image} alt="profile-picture" className="rounded-full profile-photo" />
-                            </div>
-                            <div className="text-center my-4">
-                                <h3 className="text-lg font-bold">User Info</h3>
-                                <p>Username: {recipient.username}</p>
-                                <p>Email: {recipient.email}</p>
-                                <p>Quizzes created: {recipient.totalQuizzesCreated}</p>
-                            </div>
-                            <div className="text-center my-4">
-                                <h3 className="text-lg font-bold">Challenge</h3>
-                                <p>Choose one of your own scores from the list to challenge {recipient.username}, they must match or beat your score to succeed</p>
-                            </div>
+                <div className="grid grid-cols-12 pb-4">
+                    <div className="col-span-12 lg:col-span-3 lg:mr-4 px-4 overflow-hidden shadow page">
+                        <h2 className="font-bold text-4xl py-4 text-center">
+                            {recipient.username}
+                        </h2>
+                        <div>
+                            <img src={recipient.profile_image} alt="profile-picture" className="rounded-full profile-photo" />
                         </div>
-                        <div className="col-span-12 lg:col-span-9 px-4 overflow-hidden shadow-lg page">
-                            <div className="my-4">
-                                <div className="flex">
-                                    <div className="mb-4">
-                                        <h3 className="font-bold text-3xl">
-                                            Your scores
+                        <div className="text-center my-4">
+                            <h3 className="text-lg font-bold">User Info</h3>
+                            <p>Username: {recipient.username}</p>
+                            <p>Email: {recipient.email}</p>
+                            <p>Quizzes created: {recipient.totalQuizzesCreated}</p>
+                        </div>
+                        <div className="text-center my-4">
+                            <h3 className="text-lg font-bold">Challenge</h3>
+                            <p>Choose one of your own scores from the list to challenge {recipient.username}, they must match or beat your score to succeed</p>
+                        </div>
+                    </div>
+                    <div className="col-span-12 lg:col-span-9 px-4 overflow-hidden shadow page">
+                        <div className="my-4">
+                            <div className="flex">
+                                <div className="mb-4">
+                                    <h3 className="font-bold text-3xl">
+                                        Your scores
                                         </h3>
-                                        {!scoresPaginator ? (
-                                            <div className="flex justify-center">
-                                                <LoadingMessage message={'Loading your scores'} />
-                                            </div>
-                                        ) : (
-                                                <ChallengeScoresTableWithPagination paginationData={scoresPaginator} onPageChange={getScoresPage} onScoreSelected={handleScoreSelected} />
-                                            )}
-                                    </div>
+                                    {!scoresPaginator ? (
+                                        <div className="flex justify-center">
+                                            <LoadingMessage message={'Loading your scores'} />
+                                        </div>
+                                    ) : (
+                                        <ChallengeScoresTableWithPagination paginationData={scoresPaginator} onPageChange={getScoresPage} onScoreSelected={handleScoreSelected} />
+                                    )}
                                 </div>
                             </div>
                         </div>
                     </div>
-                )}
+                </div>
+            )}
         </div>
 
     );

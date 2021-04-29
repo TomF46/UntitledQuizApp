@@ -53,13 +53,13 @@ const UsersAdminPage = ({ history }) => {
     return (
         <div className="users-admin-page">
             <div className="grid grid-cols-12 pb-4">
-                <div className="col-span-12 lg:col-span-3 lg:mr-4 px-4 overflow-hidden shadow-lg page">
+                <div className="col-span-12 lg:col-span-3 lg:mr-4 px-4 overflow-hidden shadow page">
                     <h1 className="font-bold text-4xl my-4 text-center">Admin controls</h1>
                     <p className="my-4">Search, view, and administer registered users.</p>
                     <h1 className="font-bold text-4xl my-4 text-center">Search</h1>
                     <UserSearchForm searchTerm={searchTerm} onSearchTermChange={handleSearchTermChange} />
                 </div>
-                <div className="col-span-12 lg:col-span-9 overflow-hidden shadow-lg page">
+                <div className="col-span-12 lg:col-span-9 overflow-hidden shadow page">
                     {!usersPaginator ? (
                         <LoadingMessage message={'Loading users'} />
                     ) : (

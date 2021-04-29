@@ -63,25 +63,25 @@ const ChallengesPage = ({ history }) => {
             {!challengesPaginator ? (
                 <LoadingMessage message={'Loading challenges'} />
             ) : (
-                    <div className="grid grid-cols-12">
-                        <div className="col-span-12 lg:col-span-3 lg:mr-4 px-4 pb-4 overflow-hidden shadow-lg page">
-                            <h1 className="font-bold text-4xl my-4 text-center">Details</h1>
-                            <p>After completing a quiz you can challenge another user to beat or match your score, this page shows a record of all of your challenges so far (challenger or recipient). <br></br>
+                <div className="grid grid-cols-12">
+                    <div className="col-span-12 lg:col-span-3 lg:mr-4 px-4 pb-4 overflow-hidden shadow page">
+                        <h1 className="font-bold text-4xl my-4 text-center">Details</h1>
+                        <p>After completing a quiz you can challenge another user to beat or match your score, this page shows a record of all of your challenges so far (challenger or recipient). <br></br>
                             If your opponent matches or beats your score they get a challenge points if they fail you win a point towards the leaderboards.</p>
-                            <div className="flex flex-col justify-center mt-4">
-                                <Link to="/challenges/leaderboard" className="border border-gray-800 text-gray-800 text-center rounded py-2 px-4 hover:bg-gray-600 hover:text-white shadow">View leaderboard</Link>
-                            </div>
-                        </div>
-                        <div className="col-span-12 lg:col-span-9 px-4 overflow-hidden shadow-lg page">
-                            <h1 className="font-bold text-4xl my-4 text-center">Challenges</h1>
-                            {challengesPaginator.total > 0 ? (
-                                <ChallengeListWithPagination paginationData={challengesPaginator} onPageChange={getChallengesPage} />
-                            ) : (
-                                    <p className="text-center">You have no challenges which match your search</p>
-                                )}
+                        <div className="flex flex-col justify-center mt-4">
+                            <Link to="/challenges/leaderboard" className="border border-gray-800 text-gray-800 text-center rounded py-2 px-4 hover:bg-gray-600 hover:text-white shadow">View leaderboard</Link>
                         </div>
                     </div>
-                )}
+                    <div className="col-span-12 lg:col-span-9 px-4 overflow-hidden shadow page">
+                        <h1 className="font-bold text-4xl my-4 text-center">Challenges</h1>
+                        {challengesPaginator.total > 0 ? (
+                            <ChallengeListWithPagination paginationData={challengesPaginator} onPageChange={getChallengesPage} />
+                        ) : (
+                            <p className="text-center">You have no challenges which match your search</p>
+                        )}
+                    </div>
+                </div>
+            )}
         </div>
 
     );

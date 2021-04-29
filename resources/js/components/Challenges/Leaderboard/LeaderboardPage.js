@@ -39,7 +39,7 @@ const ChallengesLeaderboardPage = ({ currentUser, history }) => {
     return (
         <div className="challenge-leaderboard-page">
             <div className="grid grid-cols-12 pb-4">
-                <div className="col-span-12 lg:col-span-3 lg:mr-4 px-4 overflow-hidden shadow-lg page">
+                <div className="col-span-12 lg:col-span-3 lg:mr-4 px-4 overflow-hidden shadow page">
                     <h2 className="font-bold text-2xl py-4 text-center">
                         Challenge points
                     </h2>
@@ -47,7 +47,7 @@ const ChallengesLeaderboardPage = ({ currentUser, history }) => {
                         Earn points towards your total by challenging other users to beat your scores or by beating users who challenge you. <br></br> If your opponent matches or beats your score they get a challenge points if they fail you win a point towards the leaderboards.
                         </p>
                 </div>
-                <div className="col-span-12 lg:col-span-9 px-4 overflow-hidden shadow-lg page text-center">
+                <div className="col-span-12 lg:col-span-9 px-4 overflow-hidden shadow page text-center">
                     <div>
                         <div className="flex justify-center">
                             <div className="mb-4">
@@ -59,8 +59,8 @@ const ChallengesLeaderboardPage = ({ currentUser, history }) => {
                                         <LoadingMessage message={'Loading challange points leaderboard'} />
                                     </div>
                                 ) : (
-                                        <ChallengePointsLeaderboardWithPagination paginationData={leaderboardPaginator} onPageChange={getChallengesLeaderboardPage} />
-                                    )}
+                                    <ChallengePointsLeaderboardWithPagination paginationData={leaderboardPaginator} onPageChange={getChallengesLeaderboardPage} />
+                                )}
                             </div>
                         </div>
                     </div>
