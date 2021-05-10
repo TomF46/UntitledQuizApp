@@ -5,7 +5,7 @@ import ChallengeInfoPanel from "./ChallegeInfoPanel";
 
 const QuizPlayForm = ({ quiz, submission, challenge, onAnswerChange, currentQuestionNumber, onSubmit, onReset, onNext, onPrevious, errors }) => {
     return (
-        <>
+        <div className="container mx-auto">
             <div className="overflow-hidden shadow page">
                 {challenge && (
                     <ChallengeInfoPanel challenge={challenge} />
@@ -118,7 +118,7 @@ const QuizPlayForm = ({ quiz, submission, challenge, onAnswerChange, currentQues
                     </div>
                 </div>
             </div>
-        </>
+        </div>
     );
 };
 

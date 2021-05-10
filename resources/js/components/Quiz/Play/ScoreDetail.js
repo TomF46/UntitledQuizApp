@@ -43,27 +43,27 @@ const ScoreDetail = ({ quiz, score, challenge, onReplay, onLikesUpdated }) => {
                     </button>
                 </div>
             ) : (
-                    <div className="grid grid-cols-12 px-2 py-1 overflow-hidden">
-                        <div className="hidden lg:block lg:col-span-2"></div>
-                        <div className="col-span-3 lg:col-span-2 text-center">
-                            <p className="text-sm text-gray-600">Challenger</p>
-                            <p className="font-medium items-center">{challenge.challengerUsername}</p>
-                        </div>
-                        <div className="col-span-3 lg:col-span-2 text-center">
-                            <p className="text-sm text-gray-600">Score required</p>
-                            <p className="font-medium items-center">{challenge.scorePercentToBeat}%</p>
-                        </div>
-                        <div className="col-span-3 lg:col-span-2 text-center">
-                            <p className="text-sm text-gray-600">Your score</p>
-                            <p className="font-medium items-center">{score.score_percent}%</p>
-                        </div>
-                        <div className="col-span-3 lg:col-span-2 text-center">
-                            <p className="text-sm text-gray-600">Status</p>
-                            <p className="font-medium items-center">{getChallengeText(challenge.scorePercentToBeat, score.score_percent)}</p>
-                        </div>
-                        <div className="hidden lg:block lg:col-span-2"></div>
+                <div className="grid grid-cols-12 px-2 py-1 overflow-hidden">
+                    <div className="hidden lg:block lg:col-span-2"></div>
+                    <div className="col-span-3 lg:col-span-2 text-center">
+                        <p className="text-sm text-gray-600">Challenger</p>
+                        <p className="font-medium items-center">{challenge.challengerUsername}</p>
                     </div>
-                )}
+                    <div className="col-span-3 lg:col-span-2 text-center">
+                        <p className="text-sm text-gray-600">Score required</p>
+                        <p className="font-medium items-center">{challenge.scorePercentToBeat}%</p>
+                    </div>
+                    <div className="col-span-3 lg:col-span-2 text-center">
+                        <p className="text-sm text-gray-600">Your score</p>
+                        <p className="font-medium items-center">{score.score_percent}%</p>
+                    </div>
+                    <div className="col-span-3 lg:col-span-2 text-center">
+                        <p className="text-sm text-gray-600">Status</p>
+                        <p className="font-medium items-center">{getChallengeText(challenge.scorePercentToBeat, score.score_percent)}</p>
+                    </div>
+                    <div className="hidden lg:block lg:col-span-2"></div>
+                </div>
+            )}
             <div className="flex justify-center my-4">
                 <Link
                     to={`/quiz/${score.quiz_id}`}

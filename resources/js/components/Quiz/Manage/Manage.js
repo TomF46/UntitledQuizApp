@@ -106,7 +106,7 @@ const QuizManagementPage = ({ quizId, userId, history }) => {
     }
 
     return (
-        <div className="quiz-management-page">
+        <div className="quiz-management-page container mx-auto">
             {quiz.creator && quiz.creator.id != userId && (
                 <Redirect to="/" />
             )}

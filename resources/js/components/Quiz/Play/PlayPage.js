@@ -153,7 +153,7 @@ const QuizPlayPage = ({ quizId, challengeId, history }) => {
 
     return (
         !submission ? (
-            <div className="overflow-hidden shadow page">
+            <div className="overflow-hidden shadow page container mx-auto">
                 <LoadingMessage message={'Loading quiz'} />
             </div>
         ) : (
@@ -162,7 +162,7 @@ const QuizPlayPage = ({ quizId, challengeId, history }) => {
                     <QuizPlayForm quiz={quiz} submission={submission} challenge={challenge} onAnswerChange={handleAnswerChange} onSubmit={handleSubmit} onReset={handleReplay} currentQuestionNumber={currentQuestionNumber} onNext={handleNext} onPrevious={handlePrevious} errors={errors} />
                 </div>
             ) : (
-                <div className="overflow-hidden shadow page">
+                <div className="overflow-hidden shadow page container mx-auto">
                     <ScoreDetail quiz={quiz} score={score} onReplay={handleReplay} onLikesUpdated={handleLikesUpdated} challenge={challenge} />
                 </div>
             ))
