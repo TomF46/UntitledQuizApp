@@ -32,22 +32,22 @@ const FollowingQuizDashboard = ({ user }) => {
     }
 
     return (
-        <div className="quiz-dashboard px-4">
+        <div className="quiz-dashboard px-4 py-2">
             {quizzesPaginator == null ? (
                 <LoadingMessage message={"Loading quizzes by people you follow"} />
             ) : (
-                    <div>
-                        <h1 className="font-bold text-2xl mb-2">Latest quizzes by followed users</h1>
-                        {quizzesPaginator.total > 0 ? (
-                            <div>
-                                <QuizListWithPagination paginationData={quizzesPaginator} onPageChange={getQuizzesPage} />
-                            </div>
-                        ) : (
-                                <p>You currently dont follow any users, please follow some users to see their latest quizzes here.</p>
-                            )}
+                <div>
+                    <h1 className="font-bold text-2xl text-center md:text-left">Latest quizzes by followed users</h1>
+                    {quizzesPaginator.total > 0 ? (
+                        <div>
+                            <QuizListWithPagination paginationData={quizzesPaginator} onPageChange={getQuizzesPage} />
+                        </div>
+                    ) : (
+                        <p>You currently dont follow any users, please follow some users to see their latest quizzes here.</p>
+                    )}
 
-                    </div>
-                )}
+                </div>
+            )}
         </div>
     );
 };

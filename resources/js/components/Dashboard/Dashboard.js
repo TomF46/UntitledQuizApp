@@ -31,7 +31,7 @@ const DashboardPage = ({ userId, history }) => {
                 <LoadingMessage message={'Loading Dashboard'} />
             ) : (
                 <div className="grid grid-cols-12 pb-4">
-                    <div className="col-span-12 lg:col-span-3 lg:mr-4 mb-4 lg:mb-0 px-4 overflow-hidden shadow page">
+                    <div className="col-span-12 lg:col-span-3 lg:mr-4 mb-4 lg:mb-0 px-4 overflow-hidden shadow card">
                         <h1 className="font-bold text-4xl my-4 text-center">Welcome {user.username}</h1>
                         <div className="mb-4">
                             <img src={user.profile_image} alt="profile-picture" className="rounded-full profile-photo shadow" />
@@ -43,17 +43,17 @@ const DashboardPage = ({ userId, history }) => {
                             <Link to="/quiz" className="border border-gray-800 text-gray-800 text-center rounded py-2 px-4 hover:bg-gray-600 hover:text-white shadow">Create</Link>
                         </div>
                     </div>
-                    <div className="col-span-12 lg:col-span-9 overflow-hidden shadow page">
-                        <div className="my-4">
+                    <div className="col-span-12 lg:col-span-9">
+                        <div className="mb-6 overflow-hidden shadow card">
                             <PopularQuizzesDashboard />
                         </div>
-                        <div className="mb-4">
+                        <div className="mb-6 overflow-hidden shadow card">
                             <FollowingUsersDashboard user={user} />
                         </div>
-                        <div className="mb-4">
+                        <div className="mb-6 overflow-hidden shadow card">
                             <FollowingQuizDashboard user={user} />
                         </div>
-                        <div className="mb-4">
+                        <div className="overflow-hidden shadow page card">
                             <ChallengesDashboard user={user} />
                         </div>
                     </div>

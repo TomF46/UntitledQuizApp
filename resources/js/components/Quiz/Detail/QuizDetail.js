@@ -103,28 +103,30 @@ const QuizDetail = ({ quiz, scoresPaginator, onScoresPageChange, onQuizReload, i
                     </>
                 )}
             </div>
-            <div className="col-span-12 lg:col-span-9 overflow-hidden shadow page">
-                <h2 className="hidden lg:block font-bold text-4xl py-4 text-center">
-                    {quiz.title}
-                </h2>
-                <div className="grid grid-cols-3 p-4 border-b border-t">
-                    <div>
-                        <p className="text-small text-gray-600 text-center">Total Questions:</p>
-                        <p className="text-center">{quiz.questions.length} questions</p>
-                    </div>
-                    <div>
-                        <p className="text-small text-gray-600 text-center">Plays:</p>
-                        <p className="text-center">{quiz.totalPlays}</p>
-                    </div>
-                    <div>
-                        <p className="text-small text-gray-600 text-center">Likes:</p>
-                        <p className="text-center">{quiz.totalLikes}</p>
+            <div className="col-span-12 lg:col-span-9">
+                <div className="overflow-hidden shadow card">
+                    <h2 className="hidden lg:block font-bold text-4xl py-4 text-center">
+                        {quiz.title}
+                    </h2>
+                    <div className="grid grid-cols-3 p-4">
+                        <div>
+                            <p className="text-small text-gray-600 text-center">Total Questions:</p>
+                            <p className="text-center">{quiz.questions.length} questions</p>
+                        </div>
+                        <div>
+                            <p className="text-small text-gray-600 text-center">Plays:</p>
+                            <p className="text-center">{quiz.totalPlays}</p>
+                        </div>
+                        <div>
+                            <p className="text-small text-gray-600 text-center">Likes:</p>
+                            <p className="text-center">{quiz.totalLikes}</p>
+                        </div>
                     </div>
                 </div>
                 {!quiz.isBanned ? (
                     <>
                         {!_.isEmpty(userHighScore) && (
-                            <div className="grid grid-cols-12 p-4 border-b">
+                            <div className="grid grid-cols-12 p-4 my-4 overflow-hidden shadow card">
                                 <div className="col-span-12">
                                     <h2 className="font-bold text-2xl mb-4 text-center">Your high score</h2>
                                 </div>
@@ -140,8 +142,8 @@ const QuizDetail = ({ quiz, scoresPaginator, onScoresPageChange, onQuizReload, i
                             </div>
                         )}
                         <div>
-                            <div className="flex justify-center">
-                                <div className="inline-block p-4 border-b min-w-full">
+                            <div className="flex justify-center overflow-hidden shadow card">
+                                <div className="inline-block p-4 min-w-full">
                                     <h2 className="font-bold text-2xl mb-4 text-center">Scores</h2>
                                     {!scoresPaginator ? (
                                         <LoadingMessage message={'Loading scores'} />

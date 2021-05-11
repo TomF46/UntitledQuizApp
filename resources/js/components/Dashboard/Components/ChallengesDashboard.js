@@ -32,21 +32,21 @@ const ChallengesDashboard = ({ user }) => {
     }
 
     return (
-        <div className="challenges-dashboard px-4">
+        <div className="challenges-dashboard px-4 py-2">
             {challengesPaginator == null ? (
                 <LoadingMessage message={'Loading challenges dashboard'} />
             ) : (
-                    <div>
-                        <h1 className="font-bold text-2xl mb-2">Your active challenges</h1>
-                        {challengesPaginator.total > 0 ? (
-                            <div>
-                                <ChallengeListWithPagination paginationData={challengesPaginator} onPageChange={getChallengesPage} />
-                            </div>
-                        ) : (
-                                <p>You dont currently have any active challenges.</p>
-                            )}
-                    </div>
-                )}
+                <div>
+                    <h1 className="font-bold text-2xl text-center md:text-left">Your active challenges</h1>
+                    {challengesPaginator.total > 0 ? (
+                        <div>
+                            <ChallengeListWithPagination paginationData={challengesPaginator} onPageChange={getChallengesPage} />
+                        </div>
+                    ) : (
+                        <p>You dont currently have any active challenges.</p>
+                    )}
+                </div>
+            )}
         </div>
     );
 };

@@ -32,12 +32,12 @@ const FollowingUsersDashboard = ({ user }) => {
     }
 
     return (
-        <div className="users-following-dashboard px-4">
+        <div className="users-following-dashboard px-4 py-2">
             {usersPaginator == null ? (
                 <LoadingMessage message={'Loading followed users dashboard'} />
             ) : (
                 <div>
-                    <h1 className="font-bold text-2xl mb-2">People you follow</h1>
+                    <h1 className="font-bold text-2xl text-center md:text-left">People you follow</h1>
                     {usersPaginator.total > 0 ? (
                         <div>
                             <UsersListWithPagination paginationData={usersPaginator} onPageChange={getUsersPage} />
