@@ -29,7 +29,6 @@ export function searchQuizBansWithPagination(url, filters) {
             return response.data;
         })
         .catch(error => {
-            console.log(error);
             throw error;
         });
 }

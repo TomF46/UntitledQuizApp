@@ -31,7 +31,7 @@ const DashboardPage = ({ userId, history }) => {
                 <LoadingMessage message={'Loading Dashboard'} />
             ) : (
                 <div className="grid grid-cols-12 pb-4">
-                    <div className="col-span-12 lg:col-span-3 lg:mr-4 px-4 overflow-hidden shadow page">
+                    <div className="col-span-12 lg:col-span-3 lg:mr-4 mb-4 lg:mb-0 px-4 overflow-hidden shadow page">
                         <h1 className="font-bold text-4xl my-4 text-center">Welcome {user.username}</h1>
                         <div className="mb-4">
                             <img src={user.profile_image} alt="profile-picture" className="rounded-full profile-photo shadow" />

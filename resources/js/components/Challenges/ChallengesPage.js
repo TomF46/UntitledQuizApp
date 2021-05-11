@@ -64,7 +64,7 @@ const ChallengesPage = ({ history }) => {
                 <LoadingMessage message={'Loading challenges'} />
             ) : (
                 <div className="grid grid-cols-12">
-                    <div className="col-span-12 lg:col-span-3 lg:mr-4 px-4 pb-4 overflow-hidden shadow page">
+                    <div className="col-span-12 lg:col-span-3 lg:mr-4 mb-4 lg:mb-0 px-4 pb-4 overflow-hidden shadow page">
                         <h1 className="font-bold text-4xl my-4 text-center">Details</h1>
                         <p>After completing a quiz you can challenge another user to beat or match your score, this page shows a record of all of your challenges so far (challenger or recipient). <br></br>
                             If your opponent matches or beats your score they get a challenge points if they fail you win a point towards the leaderboards.</p>

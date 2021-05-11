@@ -17,7 +17,6 @@ const AdminRoute = ({
             setIsChecked(true);
         }).catch(err => {
             //If call fails then assume they are not admin
-            console.log(err);
             setIsChecked(true);
         })
     }, [])

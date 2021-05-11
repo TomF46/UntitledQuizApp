@@ -11,7 +11,7 @@ import BanInfo from "../../DisplayComponents/BanInfo";
 const QuizDetail = ({ quiz, scoresPaginator, onScoresPageChange, onQuizReload, isCreator, onDelete, userHighScore, isAdmin, onQuizToggleBan }) => {
     return (
         <div className="grid grid-cols-12 pb-4">
-            <div className="col-span-12 lg:col-span-3 lg:mr-4 px-4 overflow-hidden shadow page">
+            <div className="col-span-12 lg:col-span-3 lg:mr-4 mb-4 lg:mb-0 px-4 overflow-hidden shadow page">
                 <h2 className="lg:hidden font-bold text-4xl py-4 border-b lg:border-none text-center">
                     {quiz.title}
                 </h2>

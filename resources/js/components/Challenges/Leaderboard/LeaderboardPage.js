@@ -39,7 +39,7 @@ const ChallengesLeaderboardPage = ({ currentUser, history }) => {
     return (
         <div className="challenge-leaderboard-page">
             <div className="grid grid-cols-12 pb-4">
-                <div className="col-span-12 lg:col-span-3 lg:mr-4 px-4 overflow-hidden shadow page">
+                <div className="col-span-12 lg:col-span-3 lg:mr-4 mb-4 lg:mb-0 px-4 overflow-hidden shadow page">
                     <h2 className="font-bold text-2xl py-4 text-center">
                         Challenge points
                     </h2>
