@@ -224,20 +224,21 @@ const ProfilePage = ({ userId, currentUser, history, logout, isAdmin, ...props }
                                         )}
                                     </div>
                                     <div className="px-4 py-2 overflow-hidden shadow card">
-                                        <div className="flex">
-                                            <div className="mb-4">
-                                                <h3 className="font-bold text-2xl text-center md:text-left">
-                                                    Your Best Scores
-                                        </h3>
-                                                {!scoresPaginator ? (
-                                                    <div className="flex justify-center">
-                                                        <LoadingMessage message={'Loading scores'} />
-                                                    </div>
-                                                ) : (
+                                        <h3 className="font-bold text-2xl text-center md:text-left">
+                                            Your Best Scores
+                                    </h3>
+                                        {scoresPaginator ? (
+                                            <div>
+                                                {scoresPaginator.total > 0 ? (
                                                     <ScoresTableWithPagination paginationData={scoresPaginator} onPageChange={getScoresPage} showUser={false} showQuiz={true} />
+                                                ) : (
+                                                    <p>User has not got any scores to show</p>
                                                 )}
+
                                             </div>
-                                        </div>
+                                        ) : (
+                                            <LoadingMessage message={'Loding users scores'} />
+                                        )}
                                     </div>
                                 </>
                             ) : (
