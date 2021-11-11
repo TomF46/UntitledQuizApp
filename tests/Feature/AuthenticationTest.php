@@ -15,16 +15,6 @@ class AuthenticationTest extends TestCase
     {
         parent::setUp();
         Artisan::call('passport:install');
-
-        $this->postJson(
-            '/api/auth/register',
-            [
-                'username' => 'TestUser1',
-                'email' => 'test@email.com',
-                'password' => 'Password1',
-                'password_confirmation' => 'Password1',
-            ]
-        );
     }
 
     public function testCanRegister()
@@ -59,6 +49,16 @@ class AuthenticationTest extends TestCase
 
     public function testCanLogin()
     {
+        $this->postJson(
+            '/api/auth/register',
+            [
+                'username' => 'TestUser1',
+                'email' => 'test@email.com',
+                'password' => 'Password1',
+                'password_confirmation' => 'Password1',
+            ]
+        );
+
         $response = $this->postJson(
             '/api/auth/login',
             [
@@ -87,6 +87,16 @@ class AuthenticationTest extends TestCase
 
     public function testCantLoginWithWrongPassword()
     {
+        $this->postJson(
+            '/api/auth/register',
+            [
+                'username' => 'TestUser1',
+                'email' => 'test@email.com',
+                'password' => 'Password1',
+                'password_confirmation' => 'Password1',
+            ]
+        );
+        
         $response = $this->postJson(
             '/api/auth/login',
             [

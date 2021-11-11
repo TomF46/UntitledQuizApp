@@ -2,47 +2,39 @@
 
 namespace Tests\Feature;
 
-use App\Models\User;
 use App\Models\Quiz;
-use App\Models\Question;
-use App\Models\Answer;
-use App\Models\Role;
-use App\Enums\Roles;
 use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
 use Tests\TestCase;
+use Tests\Helpers\TestHelper;
+
 
 class QuizSearchTest extends TestCase
 {
     use RefreshDatabase;
 
     public $user;
-    public $token;
-    public $testQuiz;
 
     public function setUp(): void
     {
         parent::setUp();
         Artisan::call('passport:install');
-        $this->user = User::factory()->create();
-        $role = new Role([
-            'role' => Roles::ADMINISTRATOR
-        ]);
-        $this->user->role()->save($role);
-        $pat = $this->user->createToken('Personal Access Token');
-        $this->token = $pat->accessToken;
-        $this->addTestQuiz();
+        $this->user = TestHelper::createAdminUser();
     }
 
     public function testCanSearchBySearchTerm()
     {
-        $path = '/api/quizzes/search';
+        Quiz::factory()->create([
+            'title' => 'Test Quiz',
+            "description" => "A Test quiz",
+        ]);
+
         $response = $this->withHeaders([
             'Accept' => 'application/json',
-            'Authorization' => 'Bearer ' . $this->token
+            'Authorization' => 'Bearer ' . TestHelper::getBearerTokenForUser($this->user)
         ])->postJson(
-            $path,
+            '/api/quizzes/search',
             [
                 "searchTerm" => "Test",
                 "user" =>  "",
@@ -50,28 +42,5 @@ class QuizSearchTest extends TestCase
             ]
         );
         $response->assertStatus(200);
-    }
-
-
-
-    protected function addTestQuiz()
-    {
-        $this->testQuiz = Quiz::factory()
-            ->has(
-                Question::factory()
-                    ->has(
-                        Answer::factory()
-                            ->count(4)
-                            ->state(new Sequence(
-                                ['is_correct' => false],
-                                ['is_correct' => true],
-                                ['is_correct' => false],
-                                ['is_correct' => false]
-                            ))
-                    )
-            )->create([
-                'title' => 'Test Quiz',
-                "description" => "A Test quiz",
-            ]);
     }
 }

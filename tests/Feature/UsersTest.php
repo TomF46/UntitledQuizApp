@@ -2,38 +2,30 @@
 
 namespace Tests\Feature;
 
-use App\Models\User;
-use App\Models\Role;
-use App\Enums\Roles;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
 use Tests\TestCase;
+use Tests\Helpers\TestHelper;
+
 
 class UsersTest extends TestCase
 {
     use RefreshDatabase;
 
     public $user;
-    public $token;
 
     public function setUp(): void
     {
         parent::setUp();
         Artisan::call('passport:install');
-        $this->user = User::factory()->create();
-        $role = new Role([
-            'role' => Roles::ADMINISTRATOR
-        ]);
-        $this->user->role()->save($role);
-        $pat = $this->user->createToken('Personal Access Token');
-        $this->token = $pat->accessToken;
+        $this->user = TestHelper::createAdminUser();
     }
 
     public function testCanGetUsers()
     {
         $response = $this->withHeaders([
             'Accept' => 'application/json',
-            'Authorization' => 'Bearer ' . $this->token
+            'Authorization' => 'Bearer ' . TestHelper::getBearerTokenForUser($this->user)
         ])->get('/api/users');
         $response->assertStatus(200);
     }
@@ -50,7 +42,7 @@ class UsersTest extends TestCase
     {
         $response = $this->withHeaders([
             'Accept' => 'application/json',
-            'Authorization' => 'Bearer ' . $this->token
+            'Authorization' => 'Bearer ' . TestHelper::getBearerTokenForUser($this->user)
         ])->get('/api/users/' . $this->user->id);
         $response->assertStatus(200);
         $response->assertJson([
@@ -63,7 +55,7 @@ class UsersTest extends TestCase
     {
         $editResponse = $this->withHeaders([
             'Accept' => 'application/json',
-            'Authorization' => 'Bearer ' . $this->token
+            'Authorization' => 'Bearer ' . TestHelper::getBearerTokenForUser($this->user)
         ])->putJson(
             '/api/users/' . $this->user->id,
             [
@@ -76,7 +68,7 @@ class UsersTest extends TestCase
 
         $response = $this->withHeaders([
             'Accept' => 'application/json',
-            'Authorization' => 'Bearer ' . $this->token
+            'Authorization' => 'Bearer ' . TestHelper::getBearerTokenForUser($this->user)
         ])->get('/api/users/' . $this->user->id);
         $response->assertStatus(200);
         $response->assertJson([
@@ -86,16 +78,10 @@ class UsersTest extends TestCase
 
     public function testCanFindIfUserIsAdmin()
     {
-        $user = User::factory()->create();
-        $role = new Role([
-            'role' => Roles::ADMINISTRATOR
-        ]);
-        $user->role()->save($role);
-        $pat = $user->createToken('Personal Access Token');
-        $bearerToken = $pat->accessToken;
+        $user = TestHelper::createAdminUser();
         $response = $this->withHeaders([
             'Accept' => 'application/json',
-            'Authorization' => 'Bearer ' . $bearerToken
+            'Authorization' => 'Bearer ' . TestHelper::getBearerTokenForUser($user)
         ])->get('/api/me/isAdmin');
         $response->assertJson([
             'isAdmin' => true
@@ -104,16 +90,10 @@ class UsersTest extends TestCase
 
     public function testCanFindIfUserIsNotAdmin()
     {
-        $user = User::factory()->create();
-        $role = new Role([
-            'role' => Roles::USER
-        ]);
-        $user->role()->save($role);
-        $pat = $user->createToken('Personal Access Token');
-        $bearerToken = $pat->accessToken;
+        $user = TestHelper::createUser();
         $response = $this->withHeaders([
             'Accept' => 'application/json',
-            'Authorization' => 'Bearer ' . $bearerToken
+            'Authorization' => 'Bearer ' . TestHelper::getBearerTokenForUser($user)
         ])->get('/api/me/isAdmin');
         $response->assertJson([
             'isAdmin' => false

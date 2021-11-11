@@ -2,34 +2,33 @@
 
 namespace Tests\Feature;
 
-use App\Models\User;
-use App\Models\Role;
-use App\Enums\Roles;
 use App\Models\Tag;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
 use Tests\TestCase;
+use Tests\Helpers\TestHelper;
+
 
 class TagsTest extends TestCase
 {
     use RefreshDatabase;
 
-    public $adminUserToken;
-    public $standardUserToken;
+    public $admin;
+    public $user;
 
     public function setUp(): void
     {
         parent::setUp();
         Artisan::call('passport:install');
-        $this->adminUserToken = $this->createAdminUserToken();
-        $this->standardUserToken = $this->createStandardUserToken();
+        $this->admin = TestHelper::createAdminUser();
+        $this->user = TestHelper::createUser();
     }
 
     public function testAdminCanAddTag()
     {
         $response = $this->withHeaders([
             'Accept' => 'application/json',
-            'Authorization' => 'Bearer ' . $this->adminUserToken
+            'Authorization' => 'Bearer ' . TestHelper::getBearerTokenForUser($this->admin)
         ])->postJson('/api/tags', [
             "name" => "Sports"
         ]);
@@ -41,7 +40,7 @@ class TagsTest extends TestCase
     {
         $response = $this->withHeaders([
             'Accept' => 'application/json',
-            'Authorization' => 'Bearer ' . $this->standardUserToken
+            'Authorization' => 'Bearer ' . TestHelper::getBearerTokenForUser($this->user)
         ])->postJson('/api/tags', [
             "name" => "Sports"
         ]);
@@ -55,7 +54,7 @@ class TagsTest extends TestCase
 
         $response = $this->withHeaders([
             'Accept' => 'application/json',
-            'Authorization' => 'Bearer ' . $this->adminUserToken
+            'Authorization' => 'Bearer ' . TestHelper::getBearerTokenForUser($this->admin)
         ])->delete('/api/tags/' . $tag->id);
 
         $response->assertStatus(204);
@@ -67,7 +66,7 @@ class TagsTest extends TestCase
 
         $response = $this->withHeaders([
             'Accept' => 'application/json',
-            'Authorization' => 'Bearer ' . $this->standardUserToken
+            'Authorization' => 'Bearer ' .TestHelper::getBearerTokenForUser($this->user)
         ])->delete('/api/tags/' . $tag->id);
 
         $response->assertStatus(401);
@@ -79,7 +78,7 @@ class TagsTest extends TestCase
 
         $response = $this->withHeaders([
             'Accept' => 'application/json',
-            'Authorization' => 'Bearer ' . $this->adminUserToken
+            'Authorization' => 'Bearer ' . TestHelper::getBearerTokenForUser($this->admin)
         ])->putJson('/api/tags/' . $tag->id, [
             'name' => 'NewName'
         ]);
@@ -92,32 +91,10 @@ class TagsTest extends TestCase
 
         $response = $this->withHeaders([
             'Accept' => 'application/json',
-            'Authorization' => 'Bearer ' . $this->standardUserToken
+            'Authorization' => 'Bearer ' . TestHelper::getBearerTokenForUser($this->user)
         ])->putJson('/api/tags/' . $tag->id, [
             'name' => 'NewName'
         ]);
         $response->assertStatus(401);
-    }
-
-    protected function createAdminUserToken()
-    {
-        $user = User::factory()->create();
-        $role = new Role([
-            'role' => Roles::ADMINISTRATOR
-        ]);
-        $user->role()->save($role);
-        $pat = $user->createToken('Personal Access Token');
-        return $pat->accessToken;
-    }
-
-    protected function createStandardUserToken()
-    {
-        $user = User::factory()->create();
-        $role = new Role([
-            'role' => Roles::USER
-        ]);
-        $user->role()->save($role);
-        $pat = $user->createToken('Personal Access Token');
-        return $pat->accessToken;
     }
 }

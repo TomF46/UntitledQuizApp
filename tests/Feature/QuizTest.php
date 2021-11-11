@@ -2,57 +2,46 @@
 
 namespace Tests\Feature;
 
-use App\Models\User;
 use App\Models\Quiz;
-use App\Models\Question;
-use App\Models\Answer;
-use App\Models\Role;
-use App\Enums\Roles;
 use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
 use Tests\TestCase;
+use Tests\Helpers\TestHelper;
+
 
 class QuizTest extends TestCase
 {
     use RefreshDatabase;
 
     public $user;
-    public $token;
-    public $testQuiz;
 
     public function setUp(): void
     {
         parent::setUp();
         Artisan::call('passport:install');
-        $this->user = User::factory()->create();
-        $role = new Role([
-            'role' => Roles::ADMINISTRATOR
-        ]);
-        $this->user->role()->save($role);
-        $pat = $this->user->createToken('Personal Access Token');
-        $this->token = $pat->accessToken;
-        $this->addTestQuiz();
+        $this->user = TestHelper::createAdminUser();
     }
 
     public function testCanGetQuizzes()
     {
         $response = $this->withHeaders([
             'Accept' => 'application/json',
-            'Authorization' => 'Bearer ' . $this->token
+            'Authorization' => 'Bearer ' . TestHelper::getBearerTokenForUser($this->user)
         ])->get('/api/quizzes');
         $response->assertStatus(200);
     }
 
     public function testCanGetSpecificQuiz()
     {
+        $quiz = $this->testQuiz = Quiz::factory()->create();
         $response = $this->withHeaders([
             'Accept' => 'application/json',
-            'Authorization' => 'Bearer ' . $this->token
-        ])->get('/api/quizzes/' . $this->testQuiz['id']);
+            'Authorization' => 'Bearer ' . TestHelper::getBearerTokenForUser($this->user)
+        ])->get('/api/quizzes/' . $quiz['id']);
         $response->assertStatus(200);
         $response->assertJson([
-            'title' => $this->testQuiz['title']
+            'title' => $quiz['title']
         ]);
     }
 
@@ -60,7 +49,7 @@ class QuizTest extends TestCase
     {
         $response = $this->withHeaders([
             'Accept' => 'application/json',
-            'Authorization' => 'Bearer ' . $this->token
+            'Authorization' => 'Bearer ' . TestHelper::getBearerTokenForUser($this->user)
         ])->postJson(
             '/api/quizzes',
             [
@@ -96,24 +85,5 @@ class QuizTest extends TestCase
             ]
         );
         $response->assertStatus(201);
-    }
-
-
-    protected function addTestQuiz()
-    {
-        $this->testQuiz = Quiz::factory()
-            ->has(
-                Question::factory()
-                    ->has(
-                        Answer::factory()
-                            ->count(4)
-                            ->state(new Sequence(
-                                ['is_correct' => false],
-                                ['is_correct' => true],
-                                ['is_correct' => false],
-                                ['is_correct' => false]
-                            ))
-                    )
-            )->create();
     }
 }
