@@ -41,4 +41,4 @@ Deployed onto EC2 with various AWS services (e.g. RDS) via Laravel Forge.
 -   Scores
 -   Edit Quiz
 -   Play Quiz
--   Like / Unlike Quiz
+-   Like / dislike Quiz
