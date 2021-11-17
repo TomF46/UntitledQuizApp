@@ -27,6 +27,7 @@ const QuizPlayForm = ({ quiz, submission, challenge, onAnswerChange, currentQues
                                             <div className="p-4">
                                                 <p className="text-center font-bold text-xl">Question {question.ordinal + 1} of {quiz.questions.length}</p>
                                                 <p className="text-center font-bold text-2xl">{question.text}</p>
+                                                <p className="text-center font-bold text-sm">{question.helpText}</p>
                                                 {question.image_url &&
                                                     <div>
                                                         <img src={question.image_url} alt="question-image" className="question-image py-16 max-w-xs md:max-w-md lg:max-w-lg" />

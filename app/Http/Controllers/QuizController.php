@@ -136,6 +136,7 @@ class QuizController extends Controller
         foreach ($questions as $question) {
             $formattedQuestion = new Question([
                 'text' => $question['text'],
+                'helpText' => $question['helpText'],
                 'image_url' => $question['image_url'],
                 'ordinal' => $ordinal
             ]);
@@ -152,6 +153,7 @@ class QuizController extends Controller
             'description' => 'required|max:255',
             'tags' => 'exists:tags,id',
             'questions.*.text' => 'required|max:255',
+            'questions.*.helpText' => 'nullable|max:255',
             'questions.*.image_url' => 'string|nullable',
             'questions.*.answers.*.text' => 'required',
             'questions.*.answers.*.is_correct' => 'required',

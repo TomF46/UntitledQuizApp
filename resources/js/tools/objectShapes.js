@@ -6,6 +6,7 @@ const newQuiz = {
     questions: [
         {
             text: "",
+            helpText: null,
             answers: [
                 {
                     text: "",
@@ -23,6 +24,7 @@ const newQuiz = {
 
 const newQuestion = {
     text: "",
+    helpText: null,
     answers: [
         {
             text: "",

@@ -11,6 +11,7 @@ class Question extends Model
 
     protected $fillable = [
         'text',
+        'helpText',
         'ordinal',
         'image_url'
     ];

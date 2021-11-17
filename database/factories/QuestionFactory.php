@@ -25,6 +25,7 @@ class QuestionFactory extends Factory
         return [
             'quiz_id' => Quiz::factory(),
             'text' => $this->faker->text(40),
+            'helpText' => $this->faker->text(60),
             'ordinal' => $this->faker->randomNumber,
             'image_url' => null
         ];

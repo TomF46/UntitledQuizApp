@@ -18,6 +18,11 @@ const QuestionManagement = ({ quiz, updateQuiz, errors = {}, setIsUpploadingImag
         updateQuiz(QuizManagementService.changeQuestionText(quiz, questionIndex, value));
     }
 
+    function onQuestionHelpTextChange(questionIndex, event) {
+        const { value } = event.target;
+        updateQuiz(QuizManagementService.changeQuestionHelpText(quiz, questionIndex, value));
+    }
+
     function onAnswerChange(questionIndex, answerIndex, event) {
         const { value } = event.target;
         updateQuiz(QuizManagementService.changeAnswerText(quiz, questionIndex, answerIndex, value));
@@ -88,17 +93,24 @@ const QuestionManagement = ({ quiz, updateQuiz, errors = {}, setIsUpploadingImag
 
     return (
         <>
-            {/* {quiz.questions.length > 0 && <h2 className="font-bold text-3xl py-4 text-center">Questions</h2>} */}
             {quiz.questions.map((question, questionIndex) => {
                 return (
                     <div className="p-4 shadow card mt-4" key={question.id ? question.id : questionIndex}>
                         <h3 className="font-bold text-xl">Question {questionIndex + 1}</h3>
-                        <div>
+                        <div className="mb-1">
                             <TextInput
                                 name={`questions[${questionIndex}].text`}
                                 label="Text"
                                 value={quiz.questions[questionIndex].text}
                                 onChange={(e) => onQuestionChange(questionIndex, e)}
+                            />
+                        </div>
+                        <div className="mb-1">
+                            <TextInput
+                                name={`questions[${questionIndex}].helpText`}
+                                label="Help text"
+                                value={quiz.questions[questionIndex].helpText}
+                                onChange={(e) => onQuestionHelpTextChange(questionIndex, e)}
                             />
                         </div>
                         <div>
@@ -108,17 +120,17 @@ const QuestionManagement = ({ quiz, updateQuiz, errors = {}, setIsUpploadingImag
                                     <p className="text-red-400 font-bold pointer inline hover:text-red-500" onClick={() => onRemoveImage(questionIndex)}>Remove image</p>
                                 </div>
                             ) : (
-                                    <label className="pointer inline text-gray-600 font-bold hover:text-gray-800 pb-4">
-                                        Add image
-                                        <input
-                                            type="file"
-                                            name={`questions[${questionIndex}].image_url`}
-                                            className=" border-gray-400 p-2 w-full hidden"
-                                            onChange={(e) => onQuestionImageChange(questionIndex, e)}
+                                <label className="pointer inline text-gray-600 font-bold hover:text-gray-800 pb-4">
+                                    Add image
+                                    <input
+                                        type="file"
+                                        name={`questions[${questionIndex}].image_url`}
+                                        className=" border-gray-400 p-2 w-full hidden"
+                                        onChange={(e) => onQuestionImageChange(questionIndex, e)}
 
-                                        />
-                                    </label>
-                                )}
+                                    />
+                                </label>
+                            )}
                         </div>
                         {quiz.questions[questionIndex].answers.length > 0 && <h2 className="font-bold text-lg my-2">Answers:</h2>}
                         {quiz.questions[questionIndex].answers.map((answer, answerIndex) => {

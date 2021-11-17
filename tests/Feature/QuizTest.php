@@ -72,6 +72,7 @@ class QuizTest extends TestCase
                 [
                     [
                         "text" => "What is 1 + 1?",
+                        "helpText" => null,
                         "answers" => [
                             [
                                 "text" => "5",
