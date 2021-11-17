@@ -31,6 +31,7 @@ Route::group([
 Route::middleware(['auth:api', 'role', 'notBanned'])->group(function () {
     Route::get('/quizzes', [App\Http\Controllers\QuizController::class, 'index']);
     Route::post('/quizzes', [App\Http\Controllers\QuizController::class, 'store']);
+    Route::get('/quizzes/random', [App\Http\Controllers\QuizController::class, 'getRandomQuizId']);
     Route::get('/quizzes/{quiz}', [App\Http\Controllers\QuizController::class, 'show']);
     Route::put('/quizzes/{quiz}', [App\Http\Controllers\QuizController::class, 'update']);
     Route::delete('/quizzes/{quiz}', [App\Http\Controllers\QuizController::class, 'destroy']);

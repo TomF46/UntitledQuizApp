@@ -37,6 +37,17 @@ export function getQuiz(id) {
         });
 }
 
+export function getRandomQuiz() {
+    return axiosClient
+        .get(`/api/quizzes/random`)
+        .then(response => {
+            return response.data;
+        })
+        .catch(error => {
+            throw error;
+        });
+}
+
 export function getQuizForEdit(id) {
     return axiosClient
         .get(`/api/quizzes/${id}/edit`)

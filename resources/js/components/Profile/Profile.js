@@ -103,7 +103,7 @@ const ProfilePage = ({ userId, currentUser, history, logout, isAdmin, ...props }
             ) : (
                 <>
                     <div className="grid grid-cols-12 pb-4">
-                        <div className="col-span-12 lg:col-span-3 lg:mr-4 mb-4 lg:mb-0 px-4 overflow-hidden shadow card">
+                        <div className="col-span-12 lg:col-span-3 lg:mr-4 mb-4 lg:mb-0 px-4 pb-4 overflow-hidden shadow card">
                             <h2 className="font-bold text-4xl py-4 text-center">
                                 {user.username}
                             </h2>
@@ -209,7 +209,7 @@ const ProfilePage = ({ userId, currentUser, history, logout, isAdmin, ...props }
                                     <div className="mb-6 px-4 py-2 overflow-hidden shadow card">
                                         <h3 className="font-bold text-2xl text-center md:text-left">
                                             Created quizzes
-                                    </h3>
+                                        </h3>
                                         {quizzesPaginator ? (
                                             <div>
                                                 {quizzesPaginator.total > 0 ? (
@@ -226,7 +226,7 @@ const ProfilePage = ({ userId, currentUser, history, logout, isAdmin, ...props }
                                     <div className="px-4 py-2 overflow-hidden shadow card">
                                         <h3 className="font-bold text-2xl text-center md:text-left">
                                             Your Best Scores
-                                    </h3>
+                                        </h3>
                                         {scoresPaginator ? (
                                             <div>
                                                 {scoresPaginator.total > 0 ? (

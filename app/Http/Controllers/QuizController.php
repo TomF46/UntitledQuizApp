@@ -95,6 +95,14 @@ class QuizController extends Controller
         return response()->noContent();
     }
 
+    public function getRandomQuizId()
+    {
+        $quiz = Quiz::inRandomOrder()->first();
+        return response()->json([
+            'id' => $quiz->id
+        ], 200);
+    }
+
     protected function saveAnswers($quiz, $requestQuestions)
     {
         $quizQuestions = $quiz->questions;

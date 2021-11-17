@@ -41,7 +41,4 @@ const PopularQuizzesDashboard = () => {
     );
 };
 
-PopularQuizzesDashboard.propTypes = {
-};
-
 export default PopularQuizzesDashboard;

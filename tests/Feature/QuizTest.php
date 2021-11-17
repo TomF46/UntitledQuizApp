@@ -44,6 +44,17 @@ class QuizTest extends TestCase
             'title' => $quiz['title']
         ]);
     }
+#
+    public function testCanGetRandomQuiz()
+    {
+        Quiz::factory()->count(10)->create();
+
+        $response = $this->withHeaders([
+            'Accept' => 'application/json',
+            'Authorization' => 'Bearer ' . TestHelper::getBearerTokenForUser($this->user)
+        ])->get('/api/quizzes/random');
+        $response->assertStatus(200);
+    }
 
     public function testCanAddQuiz()
     {
