@@ -59,7 +59,7 @@ const UsersAdminPage = ({ history }) => {
                     <h1 className="font-bold text-4xl my-4 text-center">Search</h1>
                     <UserSearchForm searchTerm={searchTerm} onSearchTermChange={handleSearchTermChange} />
                 </div>
-                <div className="col-span-12 lg:col-span-9 overflow-hidden shadow page">
+                <div className="col-span-12 lg:col-span-9 overflow-hidden shadow page px-4">
                     {!usersPaginator ? (
                         <LoadingMessage message={'Loading users'} />
                     ) : (

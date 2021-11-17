@@ -36,7 +36,7 @@ const Main = ({ location }) => (
                 <TransitionGroup className="transition-group">
                     <CSSTransition
                         key={location.key}
-                        timeout={{ enter: 150, exit: 150 }}
+                        timeout={{ enter: 200, exit: 200 }}
                         classNames={'fade'}
                     >
                         <section className="route-section">

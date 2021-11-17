@@ -79,7 +79,7 @@ const TagsAdminPage = ({ history }) => {
                         </Link>
                     </div>
                 </div>
-                <div className="col-span-12 lg:col-span-9 overflow-hidden shadow page">
+                <div className="col-span-12 lg:col-span-9 overflow-hidden shadow page px-4">
                     {!tagsPaginator ? (
                         <LoadingMessage message={'Loading tags'} />
                     ) : (

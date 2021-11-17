@@ -11,7 +11,8 @@ const AdminPage = ({ history }) => {
                     <p className="text-center my-4 font-bold">Actions</p>
                     <div className="flex flex-col justify-center">
                         <Link to="/admin/users" className="border border-gray-800 text-gray-800 text-center rounded py-2 px-4 mb-2 hover:bg-gray-600 hover:text-white shadow">Users</Link>
-                        <Link to="/admin/tags" className="border border-gray-800 text-gray-800 text-center rounded py-2 px-4 hover:bg-gray-600 hover:text-white shadow">Tags</Link>
+                        <Link to="/admin/tags" className="border border-gray-800 text-gray-800 text-center rounded py-2 px-4 mb-2 hover:bg-gray-600 hover:text-white shadow">Tags</Link>
+                        <Link to="/admin/bans/quizzes" className="border border-gray-800 text-gray-800 text-center rounded py-2 px-4 hover:bg-gray-600 hover:text-white shadow">Banned Quizzes</Link>
                     </div>
                 </div>
                 <div className="col-span-12 lg:col-span-9 overflow-hidden shadow page">

@@ -65,7 +65,7 @@ const DashboardPage = ({ userId, history }) => {
                         <div className="mb-6 overflow-hidden shadow card">
                             <FollowingQuizDashboard user={user} />
                         </div>
-                        <div className="overflow-hidden shadow page card">
+                        <div className="overflow-hidden shadow card">
                             <ChallengesDashboard user={user} />
                         </div>
                     </div>

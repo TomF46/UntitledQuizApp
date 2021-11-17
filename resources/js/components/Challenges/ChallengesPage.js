@@ -77,7 +77,7 @@ const ChallengesPage = ({ history }) => {
                         {challengesPaginator.total > 0 ? (
                             <ChallengeListWithPagination paginationData={challengesPaginator} onPageChange={getChallengesPage} />
                         ) : (
-                            <p className="text-center">You have no challenges which match your search</p>
+                            <p className="text-center">You have not recieved any challenges yet</p>
                         )}
                     </div>
                 </div>
