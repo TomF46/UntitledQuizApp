@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { getQuiz, getScoresForQuiz, getUsersHighScoreForQuiz, unban } from "../../../api/quizApi";
+import { getQuiz, getScoresForQuiz, getUsersHighScoreForQuiz, unban, deleteQuiz, toggleRecommended } from "../../../api/quizApi";
 import QuizDetail from "./QuizDetail";
-import * as QuizApi from '../../../api/quizApi';
 import { confirmAlert } from "react-confirm-alert";
 import { toast } from "react-toastify";
 import { getScoresWithPaginator } from "../../../api/userApi";
@@ -74,7 +73,7 @@ const QuizDetailPage = ({ quizId, currentUser, isAdmin, history }) => {
             buttons: [
                 {
                     label: "Yes",
-                    onClick: () => deleteQuiz(),
+                    onClick: () => handleDelete(),
                 },
                 {
                     label: "No",
@@ -84,8 +83,8 @@ const QuizDetailPage = ({ quizId, currentUser, isAdmin, history }) => {
         });
     }
 
-    function deleteQuiz() {
-        QuizApi.deleteQuiz(quiz.id).then(response => {
+    function handleDelete() {
+        deleteQuiz(quiz.id).then(response => {
             toast.success("Quiz deleted.")
             history.push('/explore');
         }).catch(error => {
@@ -119,13 +118,24 @@ const QuizDetailPage = ({ quizId, currentUser, isAdmin, history }) => {
         })
     }
 
+    function handleToggleRecommended() {
+        toggleRecommended(quiz.id).then(res => {
+            toast.success(`${quiz.recommended ? "Recommendation removed" : "Recommendation added"}`)
+            handleQuizReload();
+        }).catch(error => {
+            toast.error(`Error ${quiz.recommended ? "removing recommendation" : "recommending"} quiz ${error.message}`, {
+                autoClose: false,
+            });
+        })
+    }
+
     return (
         <>
             {!quiz ? (
                 <LoadingMessage message={"Loading quiz"} />
             ) : (
                 <>
-                    <QuizDetail quiz={quiz} scoresPaginator={scoresPaginator} onScoresPageChange={getScoresPage} onQuizReload={handleQuizReload} isCreator={quiz.creator.id == currentUser} onDelete={handleDeleteQuiz} userHighScore={highScore} isAdmin={isAdmin} onQuizToggleBan={handleToggleBan} />
+                    <QuizDetail quiz={quiz} scoresPaginator={scoresPaginator} onScoresPageChange={getScoresPage} onQuizReload={handleQuizReload} isCreator={quiz.creator.id == currentUser} onDelete={handleDeleteQuiz} userHighScore={highScore} isAdmin={isAdmin} onQuizToggleBan={handleToggleBan} onToggleRecommended={handleToggleRecommended} />
                 </>
             )}
         </>

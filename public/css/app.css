@@ -21753,7 +21753,7 @@ nav {
 
 .fade-enter.fade-enter-active {
   opacity: 1;
-  transition: opacity 200ms ease-in;
+  transition: opacity 150ms ease-in;
 }
 
 .fade-exit {
@@ -21762,25 +21762,7 @@ nav {
 
 .fade-exit.fade-exit-active {
   opacity: 0.01;
-  transition: opacity 200ms ease-in;
-}
-
-.fadein-enter {
-  opacity: 0.01;
-}
-
-.fadein-enter.fadein-enter-active {
-  opacity: 1;
-  transition: opacity 300ms ease-in;
-}
-
-.fadein-exit {
-  opacity: 1;
-}
-
-.fadein-exit.fadein-exit-active {
-  opacity: 0.01;
-  transition: opacity 300ms ease-in;
+  transition: opacity 150ms ease-in;
 }
 
 div.transition-group {

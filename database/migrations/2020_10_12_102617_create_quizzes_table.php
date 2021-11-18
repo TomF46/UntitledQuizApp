@@ -18,6 +18,7 @@ class CreateQuizzesTable extends Migration
             $table->foreignId('user_id');
             $table->string('title');
             $table->string('description');
+            $table->boolean('recommended')->default(false);
             $table->timestamps();
         });
     }

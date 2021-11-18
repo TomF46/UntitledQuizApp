@@ -25,7 +25,8 @@ class QuizFactory extends Factory
         return [
             'user_id' => User::factory(),
             'title' => $this->faker->text(20),
-            'description' => $this->faker->text
+            'description' => $this->faker->text,
+            'recommended' => $this->faker->boolean,
         ];
     }
 }

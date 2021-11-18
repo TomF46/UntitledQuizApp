@@ -32,6 +32,7 @@ Route::middleware(['auth:api', 'role', 'notBanned'])->group(function () {
     Route::get('/quizzes', [App\Http\Controllers\QuizController::class, 'index']);
     Route::post('/quizzes', [App\Http\Controllers\QuizController::class, 'store']);
     Route::get('/quizzes/random', [App\Http\Controllers\QuizController::class, 'getRandomQuizId']);
+    Route::get('/quizzes/recommended', [App\Http\Controllers\QuizRecommendController::class, 'index']);
     Route::get('/quizzes/{quiz}', [App\Http\Controllers\QuizController::class, 'show']);
     Route::put('/quizzes/{quiz}', [App\Http\Controllers\QuizController::class, 'update']);
     Route::delete('/quizzes/{quiz}', [App\Http\Controllers\QuizController::class, 'destroy']);
@@ -94,4 +95,5 @@ Route::middleware(['auth:api', 'admin', 'role'])->group(function () {
 
     Route::post('/quizzes/{quiz}/ban', [App\Http\Controllers\QuizBanController::class, 'store']);
     Route::post('/quizzes/{quiz}/unban', [App\Http\Controllers\QuizBanController::class, 'remove']);
+    Route::post('/quizzes/{quiz}/recommended/toggle', [App\Http\Controllers\QuizRecommendController::class, 'toggle']);
 });

@@ -246,3 +246,25 @@ export function unban(quizId) {
             throw error;
         });
 }
+
+export function toggleRecommended(quizId) {
+    return axiosClient
+        .post(`/api/quizzes/${quizId}/recommended/toggle`)
+        .then(response => {
+            return response.data;
+        })
+        .catch(error => {
+            throw error;
+        });
+}
+
+export function getRecommendedQuizzes() {
+    return axiosClient
+        .get(`/api/quizzes/recommended`)
+        .then(response => {
+            return response.data;
+        })
+        .catch(error => {
+            throw error;
+        });
+}

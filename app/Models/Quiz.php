@@ -3,12 +3,13 @@
 namespace App\Models;
 
 use App\Likeable;
+use App\Recommendable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Quiz extends Model
 {
-    use HasFactory, Likeable;
+    use HasFactory, Likeable, Recommendable;
 
     protected $fillable = [
         'user_id',
@@ -79,6 +80,7 @@ class Quiz extends Model
                 'id' => $this->user->id,
                 'profile_image' => $this->user->profile_image_url ? $this->user->profile_image_url : config('globalVariables.default_profile_pictures'),
             ],
+            'recommended' => $this->recommended,
             'isBanned' => $this->isBanned(),
             'banId' => $this->isBanned() ? $this->ban->id : null
         ];
@@ -119,6 +121,7 @@ class Quiz extends Model
                 'id' => $this->user->id,
                 'profile_image' => $this->user->profile_image_url ? $this->user->profile_image_url : config('globalVariables.default_profile_pictures'),
             ],
+            'recommended' => $this->recommended,
             'isBanned' => $this->isBanned(),
             'banId' => $this->isBanned() ? $this->ban->id : null
         ];
@@ -147,6 +150,7 @@ class Quiz extends Model
             'comments' => $this->comments()->get()->map(function ($comment) {
                 return $comment->map();
             }),
+            'recommended' => $this->recommended,
             'isBanned' => $this->isBanned(),
             'banId' => $this->isBanned() ? $this->ban->id : null
         ];

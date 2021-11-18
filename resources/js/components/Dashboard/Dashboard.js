@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 import FollowingQuizDashboard from "./Components/FollowingQuizDashboard";
 import FollowingUsersDashboard from "./Components/FollowingUsersDashboard";
 import PopularQuizzesDashboard from "./Components/PopularQuizzesDashboard";
+import RecommendedQuizzesDashboard from "./Components/RecommendedQuizzesDashboard";
 import LoadingMessage from "../DisplayComponents/LoadingMessage";
 import { Link } from "react-router-dom";
 import ChallengesDashboard from "./Components/ChallengesDashboard";
@@ -58,6 +59,9 @@ const DashboardPage = ({ userId, history }) => {
                     <div className="col-span-12 lg:col-span-9">
                         <div className="mb-6 overflow-hidden shadow card">
                             <PopularQuizzesDashboard />
+                        </div>
+                        <div className="mb-6 overflow-hidden shadow card">
+                            <RecommendedQuizzesDashboard />
                         </div>
                         <div className="mb-6 overflow-hidden shadow card">
                             <FollowingUsersDashboard user={user} />
