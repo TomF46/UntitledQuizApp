@@ -14,6 +14,10 @@ class QuizSearch
         //Dont return banned quizzes
         $quiz->doesntHave('ban');
 
+        if ($filters->input('onlyShowRecommended') == true) {
+            $quiz->where('recommended', true);
+        }
+
         if ($filters->has('searchTerm')) {
             $quiz->where('title', 'like', "{$filters->input('searchTerm')}%");
         }

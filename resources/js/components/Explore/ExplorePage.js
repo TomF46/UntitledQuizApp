@@ -10,7 +10,7 @@ import FiltersForm from "./Filters/FiltersForm";
 
 const ExplorePage = ({ history }) => {
     const [quizzesPaginator, setQuizzesPaginator] = useState(null);
-    const [filters, setFilters] = useState({ searchTerm: "", user: "", tag: null });
+    const [filters, setFilters] = useState({ searchTerm: "", user: "", tag: null, onlyShowRecommended: false });
     const [tags, setTags] = useState(null);
 
 
@@ -37,6 +37,7 @@ const ExplorePage = ({ history }) => {
     }, [filters])
 
     function search() {
+        console.log(filters);
         searchQuizzes(filters).then(quizzesData => {
             setQuizzesPaginator(quizzesData);
         }).catch(error => {
@@ -57,11 +58,17 @@ const ExplorePage = ({ history }) => {
     }
 
     function handleFilterChange(event) {
-        const { name, value } = event.target;
+        const { name, value, checked } = event.target;
+
+        let input = value;
+
+        input = name == "tag" ? Number(value) : input;
+
+        input = name == "onlyShowRecommended" ? checked : input;
 
         setFilters(prevFilters => ({
             ...prevFilters,
-            [name]: name == "tag" ? Number(value) : value
+            [name]: input
         }));
     }
 

@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import TextInput from "../../FormComponents/TextInput";
 import SelectInput from "../../FormComponents/SelectInput";
+import CheckboxInput from "../../FormComponents/CheckboxInput";
 
 const FiltersForm = ({ filters, tags, onFilterChange }) => {
     return (
@@ -22,12 +23,21 @@ const FiltersForm = ({ filters, tags, onFilterChange }) => {
                     onChange={onFilterChange}
                 />
             </div>
-            <div>
+            <div className="mb-4">
                 <SelectInput
                     name="tag"
                     label="Tag"
                     value={filters.tag}
                     options={tags}
+                    onChange={onFilterChange}
+                />
+            </div>
+            <div>
+                <CheckboxInput
+                    name="onlyShowRecommended"
+                    label="Only show QuizApp recommended"
+                    value={filters.onlyShowRecommended}
+                    checked={filters.onlyShowRecommended}
                     onChange={onFilterChange}
                 />
             </div>
