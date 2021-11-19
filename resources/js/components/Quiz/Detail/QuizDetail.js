@@ -18,6 +18,11 @@ const QuizDetail = ({ quiz, scoresPaginator, onScoresPageChange, onQuizReload, i
                 <h2 className="hidden lg:block font-bold text-4xl py-4 border-b lg:border-none text-center">
                     Details
                 </h2>
+                {!!quiz.recommended && (
+                    <div className="flex items-center flex-shrink-0">
+                        <img src="https://untitled-quiz-app-images.s3.eu-west-1.amazonaws.com/QAppRecommended.png" className="w-32 m-auto" />
+                    </div>
+                )}
                 <div className="p-4 flex justify-center items-center">
                     <LikeControls quiz={quiz} onLikesUpdated={onQuizReload} />
                 </div>

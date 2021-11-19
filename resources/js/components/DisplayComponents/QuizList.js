@@ -8,7 +8,7 @@ const QuizList = ({ quizzes }) => {
             {quizzes.map((quiz) => {
                 return (
                     <div key={quiz.id} className="grid grid-cols-12 px-2 py-1 border-b border-gray-200 overflow-hidden">
-                        <div className="col-span-6 md:col-span-5 lg:col-span-4">
+                        <div className="col-span-6 md:col-span-4 lg:col-span-3">
                             <p className="text-sm text-gray-600">Name:</p>
                             <Link className="font-medium items-center pointer" to={`/quiz/${quiz.id}`}>{quiz.title}</Link>
                         </div>
@@ -31,6 +31,9 @@ const QuizList = ({ quizzes }) => {
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 14H5.236a2 2 0 01-1.789-2.894l3.5-7A2 2 0 018.736 3h4.018a2 2 0 01.485.06l3.76.94m-7 10v5a2 2 0 002 2h.096c.5 0 .905-.405.905-.904 0-.715.211-1.413.608-2.008L17 13V4m-7 10h2m5-10h2a2 2 0 012 2v6a2 2 0 01-2 2h-2.5" />
                             </svg>
                             <p className="ml-1">{quiz.totalDislikes}</p>
+                        </div>
+                        <div className="hidden md:inline-flex col-span-1 items-center">
+                            {!!quiz.recommended && (<img src="https://untitled-quiz-app-images.s3.eu-west-1.amazonaws.com/QAppRecommended.png" className="w-12 m-auto" />)}
                         </div>
                         <div className="col-span-6 md:col-span-5 lg:col-span-3 flex justify-end mb-2">
                             <Link
