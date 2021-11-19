@@ -21,6 +21,7 @@ const EditProfileForm = ({ user, onChange, onFileChange, onSave, errors = {}, sa
                         value={user.username}
                         onChange={onChange}
                         error={errors.username}
+                        required={true}
                     />
                 </div>
                 <div className="mb-6">

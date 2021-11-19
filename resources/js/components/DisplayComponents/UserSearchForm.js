@@ -11,6 +11,7 @@ const UserSearchForm = ({ searchTerm, onSearchTermChange }) => {
                     label="Search term"
                     value={searchTerm}
                     onChange={onSearchTermChange}
+                    required={false}
                 />
             </div>
         </div>

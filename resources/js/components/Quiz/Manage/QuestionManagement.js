@@ -103,6 +103,7 @@ const QuestionManagement = ({ quiz, updateQuiz, errors = {}, setIsUpploadingImag
                                 label="Text"
                                 value={quiz.questions[questionIndex].text}
                                 onChange={(e) => onQuestionChange(questionIndex, e)}
+                                required={true}
                             />
                         </div>
                         <div className="mb-1">
@@ -111,6 +112,7 @@ const QuestionManagement = ({ quiz, updateQuiz, errors = {}, setIsUpploadingImag
                                 label="Help text"
                                 value={quiz.questions[questionIndex].helpText}
                                 onChange={(e) => onQuestionHelpTextChange(questionIndex, e)}
+                                required={false}
                             />
                         </div>
                         <div>
@@ -141,6 +143,7 @@ const QuestionManagement = ({ quiz, updateQuiz, errors = {}, setIsUpploadingImag
                                         label="Text"
                                         value={quiz.questions[questionIndex].answers[answerIndex].text}
                                         onChange={(e) => onAnswerChange(questionIndex, answerIndex, e)}
+                                        required={true}
                                     />
                                     <div className="flex justify-between">
                                         <div>

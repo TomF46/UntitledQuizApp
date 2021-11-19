@@ -36,6 +36,7 @@ const QuizForm = ({ quiz, tags, updateQuiz, updateErrors, onSave, onReset, savin
                             value={quiz.title}
                             onChange={onChange}
                             error={errors.title}
+                            required={true}
                         />
                     </div>
                     <div className="mb-6">
@@ -45,6 +46,7 @@ const QuizForm = ({ quiz, tags, updateQuiz, updateErrors, onSave, onReset, savin
                             value={quiz.description}
                             onChange={onChange}
                             error={errors.description}
+                            required={true}
                         />
                     </div>
                     {tags && tags.length > 0 && (

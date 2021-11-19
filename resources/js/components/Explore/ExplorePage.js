@@ -37,7 +37,6 @@ const ExplorePage = ({ history }) => {
     }, [filters])
 
     function search() {
-        console.log(filters);
         searchQuizzes(filters).then(quizzesData => {
             setQuizzesPaginator(quizzesData);
         }).catch(error => {

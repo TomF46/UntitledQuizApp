@@ -28,6 +28,7 @@ const RegisterForm = ({
                     value={user.username}
                     onChange={onChange}
                     error={errors.username}
+                    required={true}
                 />
             </div>
             <div className="mb-6">

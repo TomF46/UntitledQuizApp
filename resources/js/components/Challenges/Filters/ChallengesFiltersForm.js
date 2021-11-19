@@ -11,6 +11,7 @@ const ChallengesFiltersForm = ({ filters, onFilterChange }) => {
                     label="Quiz Name"
                     value={filters.quizName}
                     onChange={onFilterChange}
+                    required={false}
                 />
             </div>
             <div className="mb-4">
@@ -19,6 +20,7 @@ const ChallengesFiltersForm = ({ filters, onFilterChange }) => {
                     label="User"
                     value={filters.user}
                     onChange={onFilterChange}
+                    required={false}
                 />
             </div>
         </div>

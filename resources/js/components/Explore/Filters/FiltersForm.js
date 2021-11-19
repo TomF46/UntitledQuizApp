@@ -13,6 +13,7 @@ const FiltersForm = ({ filters, tags, onFilterChange }) => {
                     label="Title"
                     value={filters.searchTerm}
                     onChange={onFilterChange}
+                    required={false}
                 />
             </div>
             <div className="mb-4">
@@ -21,6 +22,7 @@ const FiltersForm = ({ filters, tags, onFilterChange }) => {
                     label="User"
                     value={filters.user}
                     onChange={onFilterChange}
+                    required={false}
                 />
             </div>
             <div className="mb-4">

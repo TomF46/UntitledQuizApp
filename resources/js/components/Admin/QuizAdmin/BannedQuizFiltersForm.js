@@ -11,6 +11,7 @@ const BannedQuizFiltersForm = ({ filters, onFilterChange }) => {
                     label="Title"
                     value={filters.searchTerm}
                     onChange={onFilterChange}
+                    required={false}
                 />
             </div>
             <div className="mb-4">
@@ -19,6 +20,7 @@ const BannedQuizFiltersForm = ({ filters, onFilterChange }) => {
                     label="User"
                     value={filters.user}
                     onChange={onFilterChange}
+                    required={false}
                 />
             </div>
         </div>

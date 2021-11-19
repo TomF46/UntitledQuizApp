@@ -23,6 +23,7 @@ const TagManagementForm = ({
                             value={tag.name}
                             onChange={onChange}
                             error={errors.name}
+                            required={true}
                         />
                     </div>
                 </div>

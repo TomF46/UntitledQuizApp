@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const TextInput = ({ name, label, onChange, placeholder, value, error }) => {
+const TextInput = ({ name, label, onChange, placeholder, value, required, error }) => {
     return (
         <div className="field">
             {label &&
@@ -20,7 +20,7 @@ const TextInput = ({ name, label, onChange, placeholder, value, error }) => {
                     placeholder={placeholder}
                     value={value}
                     onChange={onChange}
-                    required
+                    required={required}
                 />
                 {error && (
                     <div className="text-red-500 text-xs p-1 mt-2">{error}</div>
@@ -36,6 +36,7 @@ TextInput.propTypes = {
     onChange: PropTypes.func.isRequired,
     placeholder: PropTypes.string,
     value: PropTypes.string,
+    required: PropTypes.bool.isRequired,
     error: PropTypes.string
 };
 
