@@ -64,13 +64,13 @@ const DashboardPage = ({ userId, history }) => {
                             <RecommendedQuizzesDashboard />
                         </div>
                         <div className="mb-6 overflow-hidden shadow card">
-                            <FollowingUsersDashboard user={user} />
+                            <FollowingUsersDashboard />
                         </div>
                         <div className="mb-6 overflow-hidden shadow card">
-                            <FollowingQuizDashboard user={user} />
+                            <FollowingQuizDashboard />
                         </div>
                         <div className="overflow-hidden shadow card">
-                            <ChallengesDashboard user={user} />
+                            <ChallengesDashboard />
                         </div>
                     </div>
                 </div>

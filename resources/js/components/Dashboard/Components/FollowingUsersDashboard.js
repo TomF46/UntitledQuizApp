@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from "react";
-import PropTypes from "prop-types";
 import { toast } from "react-toastify";
 import { getUsersWithPaginator, getFollowedUsers } from "../../../api/userApi"
 import LoadingMessage from "../../DisplayComponents/LoadingMessage";
 import UsersListWithPagination from "../../DisplayComponents/UsersListWithPagination";
 
-const FollowingUsersDashboard = ({ user }) => {
+const FollowingUsersDashboard = () => {
     const [usersPaginator, setUsers] = useState(null);
-
 
     useEffect(() => {
         if (!usersPaginator) {
@@ -49,10 +47,6 @@ const FollowingUsersDashboard = ({ user }) => {
             )}
         </div>
     );
-};
-
-FollowingUsersDashboard.propTypes = {
-    user: PropTypes.object.isRequired,
 };
 
 export default FollowingUsersDashboard;

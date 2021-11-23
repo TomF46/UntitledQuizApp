@@ -7,7 +7,6 @@ import QuizListWithPagination from "../../DisplayComponents/QuizListWithPaginati
 const RecommendedQuizzesDashboard = () => {
     const [quizzesPaginator, setQuizzesPaginator] = useState(null);
 
-
     useEffect(() => {
         if (!quizzesPaginator) {
             getRecommendedQuizzes().then(quizzesData => {

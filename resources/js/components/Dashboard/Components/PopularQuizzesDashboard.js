@@ -7,7 +7,6 @@ import LoadingMessage from "../../DisplayComponents/LoadingMessage";
 const PopularQuizzesDashboard = () => {
     const [quizzes, setquizzes] = useState(null);
 
-
     useEffect(() => {
         if (!quizzes) {
             getMostPopularQuizzes().then(quizzesData => {

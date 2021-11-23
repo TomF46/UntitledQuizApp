@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
-import PropTypes from "prop-types";
 import { toast } from "react-toastify";
 import { getActiveChallengesWithPaginator, getActiveChallenges } from "../../../api/challengesApi"
 import LoadingMessage from "../../DisplayComponents/LoadingMessage";
 import ChallengeListWithPagination from "../../DisplayComponents/ChallengesListWithPagination";
 
-const ChallengesDashboard = ({ user }) => {
+const ChallengesDashboard = () => {
     const [challengesPaginator, setChallenges] = useState(null);
 
 
@@ -49,10 +48,6 @@ const ChallengesDashboard = ({ user }) => {
             )}
         </div>
     );
-};
-
-ChallengesDashboard.propTypes = {
-    user: PropTypes.object.isRequired,
 };
 
 export default ChallengesDashboard;

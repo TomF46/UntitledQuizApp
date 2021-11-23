@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from "react";
-import PropTypes from "prop-types";
 import { getQuizzesByUserFollowing, getQuizzesWithPagination } from "../../../api/quizApi";
 import { toast } from "react-toastify";
 import QuizListWithPagination from "../../DisplayComponents/QuizListWithPagination";
 import LoadingMessage from "../../DisplayComponents/LoadingMessage";
 
-const FollowingQuizDashboard = ({ user }) => {
+const FollowingQuizDashboard = () => {
     const [quizzesPaginator, setQuizzesPaginator] = useState(null);
-
 
     useEffect(() => {
         if (!quizzesPaginator) {
@@ -50,10 +48,6 @@ const FollowingQuizDashboard = ({ user }) => {
             )}
         </div>
     );
-};
-
-FollowingQuizDashboard.propTypes = {
-    user: PropTypes.object.isRequired,
 };
 
 export default FollowingQuizDashboard;
