@@ -13,7 +13,7 @@ const Header = ({ userIsAuthenticated, isAdmin, checkUserIsAdmin }) => {
         if (location.pathname != '/banned') {
             checkUserIsAdmin();
         }
-    }, [])
+    }, [userIsAuthenticated])
 
     useEffect(() => {
         setMobileIsOpen(false);
@@ -21,10 +21,6 @@ const Header = ({ userIsAuthenticated, isAdmin, checkUserIsAdmin }) => {
 
     function toggleMobileNavigation() {
         setMobileIsOpen(!mobileIsOpen);
-    }
-
-    function navigate(link) {
-
     }
 
     return (

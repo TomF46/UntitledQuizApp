@@ -5,7 +5,7 @@ const CheckboxInput = ({ name, label, onChange, value, checked, error }) => {
   return (
     <div className="field">
       <div className="control">
-        <label className="block text-gray-500 font-bold" htmlFor={name}>
+        <label className="block text-gray-700 font-bold" htmlFor={name}>
           <input
             type="checkbox"
             name={name}
