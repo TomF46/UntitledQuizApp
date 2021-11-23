@@ -33,17 +33,6 @@ export function searchChallenges(filters) {
         });
 }
 
-export function searchChallengesWithPagination(url, filters) {
-    return axiosClient
-        .post(url, filters)
-        .then(response => {
-            return response.data;
-        })
-        .catch(error => {
-            throw error;
-        });
-}
-
 export function getActiveChallenges() {
     return axiosClient
         .get(`/api/challenges`)
@@ -55,31 +44,9 @@ export function getActiveChallenges() {
         });
 }
 
-export function getActiveChallengesWithPaginator(url) {
-    return axiosClient
-        .post(url)
-        .then(response => {
-            return response.data;
-        })
-        .catch(error => {
-            throw error;
-        });
-}
-
 export function getChallengePointsLeaderboard() {
     return axiosClient
         .get(`/api/challenges/leaderboard`)
-        .then(response => {
-            return response.data;
-        })
-        .catch(error => {
-            throw error;
-        });
-}
-
-export function getChallengePointsLeaderboardWithPaginator(url) {
-    return axiosClient
-        .post(url)
         .then(response => {
             return response.data;
         })

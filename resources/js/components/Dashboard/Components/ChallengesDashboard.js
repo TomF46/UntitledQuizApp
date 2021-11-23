@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import { getActiveChallengesWithPaginator, getActiveChallenges } from "../../../api/challengesApi"
+import { getActiveChallenges } from "../../../api/challengesApi"
 import LoadingMessage from "../../DisplayComponents/LoadingMessage";
 import ChallengeListWithPagination from "../../DisplayComponents/ChallengesListWithPagination";
+import { getPageWithPaginationUrl } from "../../../api/paginationApi";
 
 const ChallengesDashboard = () => {
     const [challengesPaginator, setChallenges] = useState(null);
@@ -21,7 +22,7 @@ const ChallengesDashboard = () => {
     }, [challengesPaginator])
 
     function getChallengesPage(url) {
-        getActiveChallengesWithPaginator(url).then(challengesData => {
+        getPageWithPaginationUrl(url).then(challengesData => {
             setChallenges(challengesData);
         }).catch(error => {
             toast.error(`Error getting challenges ${error.message}`, {

@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import { searchQuizBans, searchQuizBansWithPagination } from "../../../api/banApi";
+import { searchQuizBans } from "../../../api/banApi";
 import { toast } from "react-toastify";
 import _, { debounce } from 'lodash';
 import BannedQuizListWithPagination from "../../DisplayComponents/BannedQuizListWithPagination";
 import LoadingMessage from "../../DisplayComponents/LoadingMessage";
 import BannedQuizFiltersForm from "./BannedQuizFiltersForm";
 import { unban } from "../../../api/quizApi";
+import { getPageWithPaginationUrlAndFilters } from "../../../api/paginationApi";
 
 const QuizBanListPage = ({ history }) => {
     const [quizzesPaginator, setQuizzesPaginator] = useState(null);
@@ -39,7 +40,7 @@ const QuizBanListPage = ({ history }) => {
     }
 
     function getQuizPage(pageUrl) {
-        searchQuizBansWithPagination(pageUrl, filters).then(quizzesData => {
+        getPageWithPaginationUrlAndFilters(pageUrl, filters).then(quizzesData => {
             setCurrentPageUrl(pageUrl);
             setQuizzesPaginator(quizzesData);
         }).catch(error => {

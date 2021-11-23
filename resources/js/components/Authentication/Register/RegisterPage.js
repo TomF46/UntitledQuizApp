@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import RegisterForm from "./RegisterForm";
-import { Register } from "../../../api/authenticationApi";
+import { register } from "../../../api/authenticationApi";
 import CenterFormCard from "../../DisplayComponents/CenterFormCard";
 import { connect } from "react-redux";
 import { Link, Redirect } from "react-router-dom";
@@ -45,7 +45,7 @@ const RegisterPage = ({ userIsAuthenticated, history }) => {
         event.preventDefault();
         if (!formIsValid()) return;
         setSaving(true);
-        Register(user)
+        register(user)
             .then(response => {
                 toast.success("Successfully registered");
                 history.push("/login");
@@ -87,7 +87,7 @@ const RegisterPage = ({ userIsAuthenticated, history }) => {
                                 className="text-center hover:text-gray-600 hover:underline"
                             >
                                 Already registered? Login now!
-                        </Link>
+                            </Link>
                         </div>
                     </>
                 }

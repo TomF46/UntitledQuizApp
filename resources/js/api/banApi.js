@@ -21,14 +21,3 @@ export function searchQuizBans(filters) {
             throw error;
         });
 }
-
-export function searchQuizBansWithPagination(url, filters) {
-    return axiosClient
-        .post(url, filters)
-        .then(response => {
-            return response.data;
-        })
-        .catch(error => {
-            throw error;
-        });
-}

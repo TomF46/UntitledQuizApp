@@ -2,9 +2,10 @@ import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import LoadingMessage from "../../DisplayComponents/LoadingMessage";
-import { getChallengePointsLeaderboard, getChallengePointsLeaderboardWithPaginator } from "../../../api/challengesApi";
+import { getChallengePointsLeaderboard } from "../../../api/challengesApi";
 import { toast } from "react-toastify";
 import ChallengePointsLeaderboardWithPagination from "../../DisplayComponents/ChallengePointsLeaderboardWithPagination";
+import { getPageWithPaginationUrl } from "../../../api/paginationApi";
 
 const ChallengesLeaderboardPage = ({ currentUser, history }) => {
     const [leaderboardPaginator, setLeaderboardPaginator] = useState(null);
@@ -26,7 +27,7 @@ const ChallengesLeaderboardPage = ({ currentUser, history }) => {
     }
 
     function getChallengesLeaderboardPage(url) {
-        getChallengePointsLeaderboardWithPaginator(url).then(leaderboardData => {
+        getPageWithPaginationUrl(url).then(leaderboardData => {
             setLeaderboardPaginator(leaderboardData);
         }).catch(error => {
             toast.error(`Error getting challenge points leaderboard ${error.message}`, {

@@ -10,3 +10,14 @@ export function getPageWithPaginationUrl(url) {
             throw error;
         });
 }
+
+export function getPageWithPaginationUrlAndFilters(url, filters) {
+    return axiosClient
+        .post(url, filters)
+        .then(response => {
+            return response.data;
+        })
+        .catch(error => {
+            throw error;
+        });
+}

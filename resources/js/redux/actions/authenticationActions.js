@@ -16,7 +16,7 @@ export function login(userLoginDetails) {
     return function (dispatch) {
         dispatch(beginApiCall());
         return authenticationApi
-            .Login(userLoginDetails)
+            .login(userLoginDetails)
             .then(tokens => {
                 saveTokens(tokens);
                 attatchBearerToken(tokens.access_token);

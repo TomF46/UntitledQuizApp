@@ -59,28 +59,6 @@ export function getQuizForEdit(id) {
         });
 }
 
-export function getQuizzes() {
-    return axiosClient
-        .get(`/api/quizzes`)
-        .then(response => {
-            return response.data;
-        })
-        .catch(error => {
-            throw error;
-        });
-}
-
-export function searchQuizzesWithPagination(url, filters) {
-    return axiosClient
-        .post(url, filters)
-        .then(response => {
-            return response.data;
-        })
-        .catch(error => {
-            throw error;
-        });
-}
-
 export function getQuizzesByUserFollowing() {
     return axiosClient
         .get('/api/dashboard/quizzes/followed')

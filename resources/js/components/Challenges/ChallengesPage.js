@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import { searchChallenges, searchChallengesWithPagination } from "../../api/challengesApi";
+import { searchChallenges } from "../../api/challengesApi";
 import { toast } from "react-toastify";
-import _, { debounce, filter } from 'lodash';
+import _, { debounce } from 'lodash';
 import LoadingMessage from "../DisplayComponents/LoadingMessage";
 import ChallengeListWithPagination from "../DisplayComponents/ChallengesListWithPagination";
 import ChallengesFiltersForm from "./Filters/ChallengesFiltersForm";
 import { Link } from "react-router-dom";
+import { getPageWithPaginationUrlAndFilters } from "../../api/paginationApi";
 
 
 const ChallengesPage = ({ history }) => {
@@ -49,7 +50,7 @@ const ChallengesPage = ({ history }) => {
     }
 
     function getChallengesPage(pageUrl) {
-        searchChallengesWithPagination(pageUrl, filters).then(challengesData => {
+        getPageWithPaginationUrlAndFilters(pageUrl, filters).then(challengesData => {
             setChallengesPaginator(challengesData);
         }).catch(error => {
             toast.error(`Error getting challenges ${error.message}`, {

@@ -69,7 +69,7 @@ const LoginPage = ({ login, userIsAuthenticated, history }) => {
                                 className="text-center hover:text-gray-600 hover:underline"
                             >
                                 No account? Click here to register
-                    </Link>
+                            </Link>
                         </div>
                     </>
                 }

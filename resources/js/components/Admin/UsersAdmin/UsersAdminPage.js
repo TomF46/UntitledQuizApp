@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import { searchUsers, searchUsersWithPage } from "../../../api/userApi"
+import { searchUsers } from "../../../api/userApi"
 import { toast } from "react-toastify";
 import LoadingMessage from "../../DisplayComponents/LoadingMessage";
 import UsersListWithPagination from "../../DisplayComponents/UsersListWithPagination";
 import UserSearchForm from "../../DisplayComponents/UserSearchForm";
 import _, { debounce } from 'lodash';
+import { getPageWithPaginationUrlAndFilters } from "../../../api/paginationApi";
 
 const UsersAdminPage = ({ history }) => {
     const [usersPaginator, setUsersPaginator] = useState(null);
@@ -36,7 +37,7 @@ const UsersAdminPage = ({ history }) => {
     }
 
     function getUsersWithUrl(url) {
-        searchUsersWithPage(url, searchTerm).then(usersData => {
+        getPageWithPaginationUrlAndFilters(url, { searchTerm: searchTerm }).then(usersData => {
             setUsersPaginator(usersData);
         }).catch(error => {
             toast.error(`Error getting users ${error.message}`, {

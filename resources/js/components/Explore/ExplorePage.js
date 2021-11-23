@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import { searchQuizzes, searchQuizzesWithPagination } from "../../api/quizApi";
+import { searchQuizzes } from "../../api/quizApi";
 import { toast } from "react-toastify";
 import _, { debounce } from 'lodash';
 import { getTags } from "../../api/tagsApi";
 import QuizListWithPagination from "../DisplayComponents/QuizListWithPagination";
 import LoadingMessage from "../DisplayComponents/LoadingMessage";
 import FiltersForm from "./Filters/FiltersForm";
+import { getPageWithPaginationUrlAndFilters } from "../../api/paginationApi";
 
 const ExplorePage = ({ history }) => {
     const [quizzesPaginator, setQuizzesPaginator] = useState(null);
@@ -47,7 +48,7 @@ const ExplorePage = ({ history }) => {
     }
 
     function getQuizPage(pageUrl) {
-        searchQuizzesWithPagination(pageUrl, filters).then(quizzesData => {
+        getPageWithPaginationUrlAndFilters(pageUrl, filters).then(quizzesData => {
             setQuizzesPaginator(quizzesData);
         }).catch(error => {
             toast.error(`Error getting quizzes ${error.message}`, {
