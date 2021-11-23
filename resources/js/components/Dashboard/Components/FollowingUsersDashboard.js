@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import { getUsersWithPaginator, getFollowedUsers } from "../../../api/userApi"
+import { getPageWithPaginationUrl } from "../../../api/paginationApi";
+import { getFollowedUsers } from "../../../api/userApi"
 import LoadingMessage from "../../DisplayComponents/LoadingMessage";
 import UsersListWithPagination from "../../DisplayComponents/UsersListWithPagination";
 
@@ -20,7 +21,7 @@ const FollowingUsersDashboard = () => {
     }, [usersPaginator])
 
     function getUsersPage(url) {
-        getUsersWithPaginator(url).then(usersData => {
+        getPageWithPaginationUrl(url).then(usersData => {
             setUsers(usersData);
         }).catch(error => {
             toast.error(`Error getting users ${error.message}`, {

@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { getQuizzesByUserFollowing, getQuizzesWithPagination } from "../../../api/quizApi";
+import { getQuizzesByUserFollowing } from "../../../api/quizApi";
 import { toast } from "react-toastify";
 import QuizListWithPagination from "../../DisplayComponents/QuizListWithPagination";
 import LoadingMessage from "../../DisplayComponents/LoadingMessage";
+import { getPageWithPaginationUrl } from "../../../api/paginationApi";
 
 const FollowingQuizDashboard = () => {
     const [quizzesPaginator, setQuizzesPaginator] = useState(null);
@@ -20,7 +21,7 @@ const FollowingQuizDashboard = () => {
     }, [quizzesPaginator])
 
     function getQuizzesPage(url) {
-        getQuizzesWithPagination(url).then(quizzesData => {
+        getPageWithPaginationUrl(url).then(quizzesData => {
             setQuizzesPaginator(quizzesData);
         }).catch(error => {
             toast.error(`Error getting quizzes ${error.message}`, {

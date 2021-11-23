@@ -5,9 +5,9 @@ import { getQuiz, getScoresForQuiz, getUsersHighScoreForQuiz, unban, deleteQuiz,
 import QuizDetail from "./QuizDetail";
 import { confirmAlert } from "react-confirm-alert";
 import { toast } from "react-toastify";
-import { getScoresWithPaginator } from "../../../api/userApi";
 import LoadingMessage from "../../DisplayComponents/LoadingMessage";
 import _ from 'lodash';
+import { getPageWithPaginationUrl } from "../../../api/paginationApi";
 
 
 const QuizDetailPage = ({ quizId, currentUser, isAdmin, history }) => {
@@ -57,7 +57,7 @@ const QuizDetailPage = ({ quizId, currentUser, isAdmin, history }) => {
     }
 
     function getScoresPage(url) {
-        getScoresWithPaginator(url).then(scoreData => {
+        getPageWithPaginationUrl(url).then(scoreData => {
             setScores(scoreData);
         }).catch(error => {
             toast.error(`Error getting user scores ${error.message}`, {

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import { getUsers, getUsersPage, searchUsers, searchUsersWithPage } from "../../../api/userApi"
+import { searchUsers, searchUsersWithPage } from "../../../api/userApi"
 import { toast } from "react-toastify";
 import LoadingMessage from "../../DisplayComponents/LoadingMessage";
 import UsersListWithPagination from "../../DisplayComponents/UsersListWithPagination";

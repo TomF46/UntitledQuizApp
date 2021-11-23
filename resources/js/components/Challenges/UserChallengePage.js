@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { getScoresForUser, getScoresWithPaginator, getUserById } from "../../api/userApi";
+import { getScoresForUser, getUserById } from "../../api/userApi";
 import LoadingMessage from "../DisplayComponents/LoadingMessage";
 import ChallengeScoresTableWithPagination from "../DisplayComponents/ChallengeScoresTableWithPagination";
 import { confirmAlert } from "react-confirm-alert";
 import { toast } from "react-toastify";
 import { sendChallenge } from "../../api/challengesApi";
+import { getPageWithPaginationUrl } from "../../api/paginationApi";
 
 
 const UserChallengesPage = ({ userId, currentUser, history }) => {
@@ -40,7 +41,7 @@ const UserChallengesPage = ({ userId, currentUser, history }) => {
     }
 
     function getScoresPage(url) {
-        getScoresWithPaginator(url).then(scoreData => {
+        getPageWithPaginationUrl(url).then(scoreData => {
             setScoresPaginator(scoreData);
         }).catch(error => {
             toast.error(`Error getting current users scores ${error.message}`, {

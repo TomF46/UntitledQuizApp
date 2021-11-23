@@ -3,7 +3,8 @@ import PropTypes from "prop-types";
 import { toast } from "react-toastify";
 import LoadingMessage from "../../DisplayComponents/LoadingMessage";
 import QuizListWithPagination from "../../DisplayComponents/QuizListWithPagination";
-import { getQuizzesByUser, getQuizzesWithPagination } from "../../../api/quizApi";
+import { getQuizzesByUser } from "../../../api/quizApi";
+import { getPageWithPaginationUrl } from "../../../api/paginationApi";
 
 const UsersQuizList = ({ user }) => {
     const [quizzesPaginator, setQuizzesPaginator] = useState(null);
@@ -23,7 +24,7 @@ const UsersQuizList = ({ user }) => {
     }
 
     function getQuizzesPage(url) {
-        getQuizzesWithPagination(url).then(quizzesData => {
+        getPageWithPaginationUrl(url).then(quizzesData => {
             setQuizzesPaginator(quizzesData);
         }).catch(error => {
             toast.error(`Error getting quizzes ${error.message}`, {

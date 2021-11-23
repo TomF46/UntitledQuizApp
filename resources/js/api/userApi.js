@@ -22,17 +22,6 @@ export function searchUsers(searchTerm) {
         });
 }
 
-export function getUsersPage(url) {
-    return axiosClient
-        .get(url)
-        .then(response => {
-            return response.data;
-        })
-        .catch(error => {
-            throw error;
-        });
-}
-
 export function searchUsersWithPage(url, searchTerm) {
     return axiosClient
         .post(url, { searchTerm: searchTerm })
@@ -88,17 +77,6 @@ export function getScoresForUser(id) {
             throw error;
         });
 }
-export function getScoresWithPaginator(url) {
-    return axiosClient
-        .get(url)
-        .then(response => {
-            return response.data;
-        })
-        .catch(error => {
-            throw error;
-        });
-}
-
 
 export function editUserProfile(userId, profile) {
     return axiosClient
@@ -125,17 +103,6 @@ export function followUser(userId) {
 export function getFollowedUsers() {
     return axiosClient
         .get('/api/dashboard/users/followed')
-        .then(response => {
-            return response.data;
-        })
-        .catch(error => {
-            throw error;
-        });
-}
-
-export function getUsersWithPaginator(url) {
-    return axiosClient
-        .get(url)
         .then(response => {
             return response.data;
         })

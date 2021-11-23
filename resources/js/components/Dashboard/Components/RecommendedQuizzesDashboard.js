@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { getRecommendedQuizzes, getQuizzesWithPagination } from "../../../api/quizApi";
+import { getRecommendedQuizzes } from "../../../api/quizApi";
 import { toast } from "react-toastify";
 import LoadingMessage from "../../DisplayComponents/LoadingMessage";
 import QuizListWithPagination from "../../DisplayComponents/QuizListWithPagination";
+import { getPageWithPaginationUrl } from "../../../api/paginationApi";
 
 const RecommendedQuizzesDashboard = () => {
     const [quizzesPaginator, setQuizzesPaginator] = useState(null);
@@ -20,7 +21,7 @@ const RecommendedQuizzesDashboard = () => {
     }, [quizzesPaginator])
 
     function getQuizzesPage(url) {
-        getQuizzesWithPagination(url).then(quizzesData => {
+        getPageWithPaginationUrl(url).then(quizzesData => {
             setQuizzesPaginator(quizzesData);
         }).catch(error => {
             toast.error(`Error getting recommended quizzes ${error.message}`, {

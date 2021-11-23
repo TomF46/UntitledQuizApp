@@ -2,8 +2,9 @@ import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { toast } from "react-toastify";
 import LoadingMessage from "../../DisplayComponents/LoadingMessage";
-import { getScoresForUser, getScoresWithPaginator } from "../../../api/userApi";
+import { getScoresForUser } from "../../../api/userApi";
 import ScoresTableWithPagination from "../../DisplayComponents/ScoresTableWithPagination";
+import { getPageWithPaginationUrl } from "../../../api/paginationApi";
 
 const UsersBestScoresList = ({ user }) => {
     const [scoresPaginator, setScoresPaginator] = useState(null);
@@ -23,7 +24,7 @@ const UsersBestScoresList = ({ user }) => {
     }
 
     function getScoresPage(url) {
-        getScoresWithPaginator(url).then(scoreData => {
+        getPageWithPaginationUrl(url).then(scoreData => {
             setScoresPaginator(scoreData);
         }).catch(error => {
             toast.error(`Error getting user scores ${error.message}`, {
