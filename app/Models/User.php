@@ -108,6 +108,7 @@ class User extends Authenticatable
             'followerCount' => $this->followerCount(),
             'following' => $this->followedBy($user),
             'challengePoints' => $this->challenge_points,
+            'quizAttempts' => $this->scores->count(),
             'isAdmin' => $this->isAdmin(),
             'isBanned' => $this->isBanned()
         ];
