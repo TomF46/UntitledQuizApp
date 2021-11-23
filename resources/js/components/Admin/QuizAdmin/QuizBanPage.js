@@ -25,7 +25,7 @@ const QuizBanPage = ({ quizId, history }) => {
         getQuiz(quizId).then(quizData => {
             setQuiz(quizData);
         }).catch(error => {
-            toast.error("Error getting quiz " + error.message, {
+            toast.error(`Error getting quiz ${error.message}`, {
                 autoClose: false,
             });
         });
@@ -53,7 +53,7 @@ const QuizBanPage = ({ quizId, history }) => {
             toast.success("Quiz banned")
             history.push(`/quiz/${quiz.id}`)
         }).catch(error => {
-            toast.error("Error banning quiz " + error.message, {
+            toast.error(`Error banning quiz ${error.message}`, {
                 autoClose: false,
             });
         })

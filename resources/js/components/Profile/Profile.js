@@ -21,7 +21,7 @@ const ProfilePage = ({ userId, currentUser, history, logout, isAdmin, ...props }
                 getUserScores(userData.id);
                 getUserQuizzes(userData.id);
             }).catch(error => {
-                toast.error("Error getting user " + error.message, {
+                toast.error(`Error getting user ${error.message}`, {
                     autoClose: false,
                 });
             });
@@ -32,7 +32,7 @@ const ProfilePage = ({ userId, currentUser, history, logout, isAdmin, ...props }
         getScoresForUser(id).then(scoreData => {
             setScoresPaginator(scoreData);
         }).catch(error => {
-            toast.error("Error getting user scores " + error.message, {
+            toast.error(`Error getting user scores ${error.message}`, {
                 autoClose: false,
             });
         });
@@ -42,7 +42,7 @@ const ProfilePage = ({ userId, currentUser, history, logout, isAdmin, ...props }
         getQuizzesByUser(id).then(quizzesData => {
             setQuizzesPaginator(quizzesData);
         }).catch(error => {
-            toast.error("Error getting quizzes " + error.message, {
+            toast.error(`Error getting quizzes ${error.message}`, {
                 autoClose: false,
             });
         });
@@ -52,7 +52,7 @@ const ProfilePage = ({ userId, currentUser, history, logout, isAdmin, ...props }
         getQuizzesWithPagination(url).then(quizzesData => {
             setQuizzesPaginator(quizzesData);
         }).catch(error => {
-            toast.error("Error getting quizzes " + error.message, {
+            toast.error(`Error getting quizzes ${error.message}`, {
                 autoClose: false,
             });
         });
@@ -62,7 +62,7 @@ const ProfilePage = ({ userId, currentUser, history, logout, isAdmin, ...props }
         getScoresWithPaginator(url).then(scoreData => {
             setScoresPaginator(scoreData);
         }).catch(error => {
-            toast.error("Error getting user scores " + error.message, {
+            toast.error(`Error getting user scores ${error.message}`, {
                 autoClose: false,
             });
         });

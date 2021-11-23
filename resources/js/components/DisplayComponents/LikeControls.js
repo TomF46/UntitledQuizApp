@@ -15,7 +15,7 @@ const LikeControls = ({ quiz, onLikesUpdated }) => {
             toast.success("Quiz Liked.")
             onLikesUpdated();
         }).catch(error => {
-            toast.error("Unable to like quiz " + error.message, {
+            toast.error(`Unable to like quiz ${error.message}`, {
                 autoClose: false,
             });
         })
@@ -30,7 +30,7 @@ const LikeControls = ({ quiz, onLikesUpdated }) => {
             toast.success("Quiz disliked.")
             onLikesUpdated();
         }).catch(error => {
-            toast.error("Unable to dislike quiz " + error.message, {
+            toast.error(`Unable to dislike quiz ${error.message}`, {
                 autoClose: false,
             });
         })
@@ -40,7 +40,7 @@ const LikeControls = ({ quiz, onLikesUpdated }) => {
         QuizApi.removeLikeOrDislike(quiz.id).then(() => {
             onLikesUpdated();
         }).catch(error => {
-            toast.error("Error performing action " + error.message, {
+            toast.error(`Error performing action ${error.message}`, {
                 autoClose: false,
             });
         });

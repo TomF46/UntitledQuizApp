@@ -22,10 +22,9 @@ const TagManagementPage = ({ tagId, history }) => {
                 })
                 .catch(error => {
                     toast.error(
-                        "Error fetching tag to edit " + error.message,
-                        {
-                            autoClose: false
-                        }
+                        `Error fetching tag to edit ${error.message}`, {
+                        autoClose: false
+                    }
                     );
                 });
         } else {

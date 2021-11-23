@@ -26,7 +26,7 @@ const QuizPlayPage = ({ quizId, challengeId, history }) => {
                 setQuiz(quizData);
                 createBlankSubmission(quizData);
             }).catch(error => {
-                toast.error("Error getting quiz " + error.message, {
+                toast.error(`Error getting quiz ${error.message}`, {
                     autoClose: false,
                 });
             });
@@ -39,7 +39,7 @@ const QuizPlayPage = ({ quizId, challengeId, history }) => {
                 setChallenge(challengeData)
                 checkUserCanAccess(challengeData);
             }).catch(error => {
-                toast.error("Error getting challenge data " + error.message, {
+                toast.error(`Error getting challenge data ${error.message}`, {
                     autoClose: false,
                 });
             });
@@ -118,7 +118,7 @@ const QuizPlayPage = ({ quizId, challengeId, history }) => {
         submitScore(quiz.id, submission).then(response => {
             setScore({ ...response });
         }).catch(error => {
-            toast.error("Unable to submit " + error.message, {
+            toast.error(`Unable to submit ${error.message}`, {
                 autoClose: false,
             });
             setErrors({ onSubmit: error.message });
@@ -145,7 +145,7 @@ const QuizPlayPage = ({ quizId, challengeId, history }) => {
         getQuiz(quizId).then(quizData => {
             setQuiz(quizData);
         }).catch(error => {
-            toast.error("Error getting quiz " + error.message, {
+            toast.error(`Error getting quiz ${error.message}`, {
                 autoClose: false,
             });
         });

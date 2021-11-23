@@ -18,7 +18,7 @@ const UserChallengesPage = ({ userId, currentUser, history }) => {
             getUserById(userId).then(userData => {
                 setRecipient(userData);
             }).catch(error => {
-                toast.error("Error getting user " + error.message, {
+                toast.error(`Error getting user ${error.message}`, {
                     autoClose: false,
                 });
             });
@@ -33,7 +33,7 @@ const UserChallengesPage = ({ userId, currentUser, history }) => {
         getScoresForUser(currentUser).then(scoreData => {
             setScoresPaginator(scoreData);
         }).catch(error => {
-            toast.error("Error getting current users scores " + error.message, {
+            toast.error(`Error getting current users scores ${error.message}`, {
                 autoClose: false,
             });
         });
@@ -43,7 +43,7 @@ const UserChallengesPage = ({ userId, currentUser, history }) => {
         getScoresWithPaginator(url).then(scoreData => {
             setScoresPaginator(scoreData);
         }).catch(error => {
-            toast.error("Error getting current users scores " + error.message, {
+            toast.error(`Error getting current users scores ${error.message}`, {
                 autoClose: false,
             });
         });
@@ -108,7 +108,7 @@ const UserChallengesPage = ({ userId, currentUser, history }) => {
                                 <div className="mb-4">
                                     <h3 className="font-bold text-3xl">
                                         Your scores
-                                        </h3>
+                                    </h3>
                                     {!scoresPaginator ? (
                                         <div className="flex justify-center">
                                             <LoadingMessage message={'Loading your scores'} />

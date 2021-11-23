@@ -20,7 +20,7 @@ const DashboardPage = ({ userId, history }) => {
             getUserById(userId).then(userData => {
                 setUser(userData);
             }).catch(error => {
-                toast.error("Error getting user " + error.message, {
+                toast.error(`Error getting user ${error.message}`, {
                     autoClose: false,
                 });
             });
@@ -31,7 +31,7 @@ const DashboardPage = ({ userId, history }) => {
         getRandomQuiz().then(quizData => {
             history.push(`/quiz/${quizData.id}/play`);
         }).catch(error => {
-            toast.error("Error getting random quiz" + error.message, {
+            toast.error(`Error getting random quiz ${error.message}`, {
                 autoClose: false,
             });
         })

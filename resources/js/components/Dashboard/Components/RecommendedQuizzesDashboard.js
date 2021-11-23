@@ -13,7 +13,7 @@ const RecommendedQuizzesDashboard = () => {
             getRecommendedQuizzes().then(quizzesData => {
                 setQuizzesPaginator(quizzesData);
             }).catch(error => {
-                toast.error("Error getting quizzes " + error.message, {
+                toast.error(`Error getting quizzes ${error.message}`, {
                     autoClose: false,
                 });
             });
@@ -24,7 +24,7 @@ const RecommendedQuizzesDashboard = () => {
         getQuizzesWithPagination(url).then(quizzesData => {
             setQuizzesPaginator(quizzesData);
         }).catch(error => {
-            toast.error("Error getting recommended quizzes " + error.message, {
+            toast.error(`Error getting recommended quizzes ${error.message}`, {
                 autoClose: false,
             });
         });

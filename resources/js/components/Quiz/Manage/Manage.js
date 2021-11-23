@@ -25,11 +25,9 @@ const QuizManagementPage = ({ quizId, userId, history }) => {
                     setLoaded(true);
                 })
                 .catch(error => {
-                    toast.error(
-                        "Error fetching quiz to edit " + error.message,
-                        {
-                            autoClose: false
-                        }
+                    toast.error(`Error fetching quiz to edit ${error.message}`, {
+                        autoClose: false
+                    }
                     );
                 });
         } else {

@@ -14,7 +14,7 @@ const ChallengesDashboard = ({ user }) => {
             getActiveChallenges().then(challengesData => {
                 setChallenges(challengesData)
             }).catch(error => {
-                toast.error("Error getting challenges " + error.message, {
+                toast.error(`Error getting challenges ${error.message}`, {
                     autoClose: false,
                 });
             });
@@ -25,7 +25,7 @@ const ChallengesDashboard = ({ user }) => {
         getActiveChallengesWithPaginator(url).then(challengesData => {
             setChallenges(challengesData);
         }).catch(error => {
-            toast.error("Error getting challenges " + error.message, {
+            toast.error(`Error getting challenges ${error.message}`, {
                 autoClose: false,
             });
         });

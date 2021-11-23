@@ -14,7 +14,7 @@ const TagsAdminPage = ({ history }) => {
             getTagsPaginated().then(tagsData => {
                 setTagsPaginator(tagsData);
             }).catch(error => {
-                toast.error("Error getting tags " + error.message, {
+                toast.error(`Error getting tags ${error.message}`, {
                     autoClose: false,
                 });
             });
@@ -25,7 +25,7 @@ const TagsAdminPage = ({ history }) => {
         getTagsWithUrl(url).then(tagsData => {
             setTagsPaginator(tagsData);
         }).catch(error => {
-            toast.error("Error getting tags " + error.message, {
+            toast.error(`Error getting tags ${error.message}`, {
                 autoClose: false,
             });
         });
@@ -53,7 +53,7 @@ const TagsAdminPage = ({ history }) => {
             toast.success("Tag deleted.")
             getTagsPage(`${tagsPaginator.path}?page=${tagsPaginator.current_page}`)
         }).catch(error => {
-            toast.error("Unable to delete tag " + error.message, {
+            toast.error(`Unable to delete tag ${error.message}`, {
                 autoClose: false,
             });
         })

@@ -19,7 +19,7 @@ const ChallengesLeaderboardPage = ({ currentUser, history }) => {
         getChallengePointsLeaderboard().then(leaderboardData => {
             setLeaderboardPaginator(leaderboardData);
         }).catch(error => {
-            toast.error("Error getting challenge points leaderboard " + error.message, {
+            toast.error(`Error getting challenge points leaderboard ${error.message}`, {
                 autoClose: false,
             });
         });
@@ -29,7 +29,7 @@ const ChallengesLeaderboardPage = ({ currentUser, history }) => {
         getChallengePointsLeaderboardWithPaginator(url).then(leaderboardData => {
             setLeaderboardPaginator(leaderboardData);
         }).catch(error => {
-            toast.error("Error getting challenge points leaderboard " + error.message, {
+            toast.error(`Error getting challenge points leaderboard ${error.message}`, {
                 autoClose: false,
             });
         });
@@ -45,7 +45,7 @@ const ChallengesLeaderboardPage = ({ currentUser, history }) => {
                     </h2>
                     <p>
                         Earn points towards your total by challenging other users to beat your scores or by beating users who challenge you. <br></br> If your opponent matches or beats your score they get a challenge points if they fail you win a point towards the leaderboards.
-                        </p>
+                    </p>
                 </div>
                 <div className="col-span-12 lg:col-span-9 px-4 overflow-hidden shadow page text-center">
                     <div>

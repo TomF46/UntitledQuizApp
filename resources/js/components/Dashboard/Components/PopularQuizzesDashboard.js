@@ -13,7 +13,7 @@ const PopularQuizzesDashboard = () => {
             getMostPopularQuizzes().then(quizzesData => {
                 setquizzes(quizzesData);
             }).catch(error => {
-                toast.error("Error getting quizzes " + error.message, {
+                toast.error(`Error getting quizzes ${error.message}`, {
                     autoClose: false,
                 });
             });

@@ -29,7 +29,7 @@ const UsersAdminPage = ({ history }) => {
         searchUsers(searchTerm).then(usersData => {
             setUsersPaginator(usersData);
         }).catch(error => {
-            toast.error("Error getting users " + error.message, {
+            toast.error(`Error getting users ${error.message}`, {
                 autoClose: false,
             });
         });
@@ -39,7 +39,7 @@ const UsersAdminPage = ({ history }) => {
         searchUsersWithPage(url, searchTerm).then(usersData => {
             setUsersPaginator(usersData);
         }).catch(error => {
-            toast.error("Error getting users " + error.message, {
+            toast.error(`Error getting users ${error.message}`, {
                 autoClose: false,
             });
         });

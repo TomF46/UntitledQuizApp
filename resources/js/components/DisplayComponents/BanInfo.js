@@ -17,7 +17,7 @@ const BanInfo = ({ banId }) => {
         getBan(banId).then(banData => {
             setBan(banData);
         }).catch(error => {
-            toast.error("Error getting ban information " + error.message, {
+            toast.error(`Error getting ban information ${error.message}`, {
                 autoClose: false,
             });
         });

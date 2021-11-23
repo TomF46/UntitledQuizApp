@@ -14,7 +14,7 @@ const FollowingUsersDashboard = ({ user }) => {
             getFollowedUsers().then(usersData => {
                 setUsers(usersData)
             }).catch(error => {
-                toast.error("Error getting users " + error.message, {
+                toast.error(`Error getting users ${error.message}`, {
                     autoClose: false,
                 });
             });
@@ -25,7 +25,7 @@ const FollowingUsersDashboard = ({ user }) => {
         getUsersWithPaginator(url).then(usersData => {
             setUsers(usersData);
         }).catch(error => {
-            toast.error("Error getting users " + error.message, {
+            toast.error(`Error getting users ${error.message}`, {
                 autoClose: false,
             });
         });

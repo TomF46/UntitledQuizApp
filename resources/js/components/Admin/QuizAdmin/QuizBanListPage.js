@@ -32,7 +32,7 @@ const QuizBanListPage = ({ history }) => {
         searchQuizBans(filters).then(quizzesData => {
             setQuizzesPaginator(quizzesData);
         }).catch(error => {
-            toast.error("Error getting banned quizzes " + error.message, {
+            toast.error(`Error getting banned quizzes ${error.message}`, {
                 autoClose: false,
             });
         });
@@ -43,7 +43,7 @@ const QuizBanListPage = ({ history }) => {
             setCurrentPageUrl(pageUrl);
             setQuizzesPaginator(quizzesData);
         }).catch(error => {
-            toast.error("Error getting banned quizzes " + error.message, {
+            toast.error(`Error getting banned quizzes ${error.message}`, {
                 autoClose: false,
             });
         });
@@ -63,7 +63,7 @@ const QuizBanListPage = ({ history }) => {
             toast.success("Quiz unbanned")
             currentPageUrl ? getQuizPage(currentPageUrl) : search();
         }).catch(error => {
-            toast.error("Error unbanning quiz " + error.message, {
+            toast.error(`Error unbanning quiz ${error.message}`, {
                 autoClose: false,
             });
         })

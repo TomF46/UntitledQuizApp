@@ -40,7 +40,7 @@ const ExplorePage = ({ history }) => {
         searchQuizzes(filters).then(quizzesData => {
             setQuizzesPaginator(quizzesData);
         }).catch(error => {
-            toast.error("Error getting quizzes " + error.message, {
+            toast.error(`Error getting quizzes ${error.message}`, {
                 autoClose: false,
             });
         });
@@ -50,7 +50,7 @@ const ExplorePage = ({ history }) => {
         searchQuizzesWithPagination(pageUrl, filters).then(quizzesData => {
             setQuizzesPaginator(quizzesData);
         }).catch(error => {
-            toast.error("Error getting quizzes " + error.message, {
+            toast.error(`Error getting quizzes ${error.message}`, {
                 autoClose: false,
             });
         });

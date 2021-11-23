@@ -30,7 +30,7 @@ const QuizDetailPage = ({ quizId, currentUser, isAdmin, history }) => {
                 getScores(quizData.id);
             }
         }).catch(error => {
-            toast.error("Error getting quiz " + error.message, {
+            toast.error(`Error getting quiz ${error.message}`, {
                 autoClose: false,
             });
         });
@@ -40,7 +40,7 @@ const QuizDetailPage = ({ quizId, currentUser, isAdmin, history }) => {
         getUsersHighScoreForQuiz(id).then(highScoreData => {
             setHighScore(highScoreData);
         }).catch(error => {
-            toast.error("Error getting high score " + error.message, {
+            toast.error(`Error getting high score ${error.message}`, {
                 autoClose: false,
             });
         });
@@ -50,7 +50,7 @@ const QuizDetailPage = ({ quizId, currentUser, isAdmin, history }) => {
         getScoresForQuiz(id).then(scores => {
             setScores(scores);
         }).catch(error => {
-            toast.error("Error getting scores " + error.message, {
+            toast.error(`Error getting scores ${error.message}`, {
                 autoClose: false,
             });
         });
@@ -60,7 +60,7 @@ const QuizDetailPage = ({ quizId, currentUser, isAdmin, history }) => {
         getScoresWithPaginator(url).then(scoreData => {
             setScores(scoreData);
         }).catch(error => {
-            toast.error("Error getting user scores " + error.message, {
+            toast.error(`Error getting user scores ${error.message}`, {
                 autoClose: false,
             });
         });
@@ -88,7 +88,7 @@ const QuizDetailPage = ({ quizId, currentUser, isAdmin, history }) => {
             toast.success("Quiz deleted.")
             history.push('/explore');
         }).catch(error => {
-            toast.error("Unable to delete quiz " + error.message, {
+            toast.error(`Unable to delete quiz ${error.message}`, {
                 autoClose: false,
             });
         })
@@ -112,7 +112,7 @@ const QuizDetailPage = ({ quizId, currentUser, isAdmin, history }) => {
             toast.success("Quiz unbanned")
             handleQuizReload();
         }).catch(error => {
-            toast.error("Error unbanning quiz " + error.message, {
+            toast.error(`Error unbanning quiz ${error.message}`, {
                 autoClose: false,
             });
         })

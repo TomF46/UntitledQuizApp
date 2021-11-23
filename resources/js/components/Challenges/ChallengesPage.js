@@ -33,7 +33,7 @@ const ChallengesPage = ({ history }) => {
         searchChallenges(filters).then(challengesData => {
             setChallengesPaginator(challengesData);
         }).catch(error => {
-            toast.error("Error getting challenges " + error.message, {
+            toast.error(`Error getting challenges ${error.message}`, {
                 autoClose: false,
             });
         });
@@ -52,7 +52,7 @@ const ChallengesPage = ({ history }) => {
         searchChallengesWithPagination(pageUrl, filters).then(challengesData => {
             setChallengesPaginator(challengesData);
         }).catch(error => {
-            toast.error("Error getting challenges " + error.message, {
+            toast.error(`Error getting challenges ${error.message}`, {
                 autoClose: false,
             });
         });
