@@ -8,7 +8,6 @@ import ScoreDetail from "./ScoreDetail";
 import { toast } from "react-toastify";
 import { confirmAlert } from "react-confirm-alert";
 import LoadingMessage from "../../DisplayComponents/LoadingMessage";
-import ChallengeInfoPanel from "./ChallegeInfoPanel";
 
 const QuizPlayPage = ({ quizId, challengeId, history }) => {
     const [quiz, setQuiz] = useState(null);

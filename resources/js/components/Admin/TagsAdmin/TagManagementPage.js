@@ -28,7 +28,7 @@ const TagManagementPage = ({ tagId, history }) => {
                     );
                 });
         } else {
-            setTag(JSON.parse(JSON.stringify(newTag)));
+            setTag({ ...newTag });
             setLoaded(true);
         }
     }, [tagId]);

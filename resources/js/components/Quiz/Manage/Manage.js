@@ -10,6 +10,8 @@ import { confirmAlert } from "react-confirm-alert";
 import { toast } from "react-toastify";
 import LoadingMessage from "../../DisplayComponents/LoadingMessage";
 import * as QuizManagementService from "../../../tools/QuizManagementService";
+import _ from 'lodash';
+
 const QuizManagementPage = ({ quizId, userId, history }) => {
     const [quiz, setQuiz] = useState({ ...newQuiz });
     const [tags, setTags] = useState(null);
@@ -31,7 +33,7 @@ const QuizManagementPage = ({ quizId, userId, history }) => {
                     );
                 });
         } else {
-            setQuiz(JSON.parse(JSON.stringify(newQuiz)));
+            setQuiz(_.cloneDeep(newQuiz));
             updateErrors(QuizManagementService.addBlankErrorsForQuestion(errors));
             setLoaded(true);
         }

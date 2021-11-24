@@ -1,4 +1,5 @@
 import { newAnswer, newQuestion, newQuiz } from "./objectShapes";
+import _ from 'lodash';
 
 export function validateQuiz(quiz) {
     const errors = { questions: [] };
@@ -45,7 +46,7 @@ export function validateQuiz(quiz) {
 }
 
 export function addBlankQuestion(quiz) {
-    quiz.questions.push(JSON.parse(JSON.stringify(newQuestion)));
+    quiz.questions.push(_.cloneDeep(newQuestion));
     return quiz;
 }
 
@@ -55,7 +56,7 @@ export function addBlankErrorsForQuestion(errors) {
 }
 
 export function addBlankAnswerToQuestion(quiz, questionIndex) {
-    quiz.questions[questionIndex].answers.push(JSON.parse(JSON.stringify(newAnswer)));
+    quiz.questions[questionIndex].answers.push(_.cloneDeep(newAnswer));
     return quiz;
 }
 
