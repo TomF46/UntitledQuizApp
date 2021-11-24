@@ -22,7 +22,7 @@ const CommentForm = ({ comment, onChange, onSubmit, errors = {}, submitting = fa
                     />
                 </div>
             </div>
-            <div id="comments-toolbar" className="px-4 flex flex-col justify-between items-end">
+            <div id="comments-toolbar" className="px-4 flex flex-col justify-between items-center">
                 <div className="flex">
                     <button
                         type="submit"
