@@ -6,12 +6,14 @@ import ChallengeInfoPanel from "./ChallegeInfoPanel";
 const QuizPlayForm = ({ quiz, submission, challenge, onAnswerChange, currentQuestionNumber, onSubmit, onReset, onNext, onPrevious, errors }) => {
     return (
         <div className="container mx-auto">
-            <div className="overflow-hidden shadow page">
-                {challenge && (
-                    <ChallengeInfoPanel challenge={challenge} />
-                )}
-                <div className="mt-6">
-                    <h1 className="font-bold text-4xl mb-4 text-center">{quiz.title}</h1>
+            {challenge && (
+                <ChallengeInfoPanel challenge={challenge} />
+            )}
+            <div className="overflow-hidden shadow page mt-4">
+                <div>
+                    <div className="bg-primary ">
+                        <h1 className="font-bold text-white text-4xl text-center">{quiz.title}</h1>
+                    </div>
                     <div>
                         {quiz.questions.map((question) => {
                             return (
@@ -36,15 +38,19 @@ const QuizPlayForm = ({ quiz, submission, challenge, onAnswerChange, currentQues
                                                 <div className="grid grid-cols-12 mt-4 md:flex-row">
                                                     {quiz.questions[question.ordinal].answers.map((answer) => {
                                                         return (
-                                                            <button
-                                                                key={answer.id}
-                                                                type="button"
-                                                                onClick={(e) => onAnswerChange(question.id, answer.id, e)}
-                                                                className={`text-white py-3 px-6 hover:bg-green-500 mx-4 my-2 col-span-12 md:col-span-6 shadow 
-                                                     ${submission.answers[question.ordinal].answer_id == answer.id ? "bg-green-400" : "bg-gray-800"}`}
-                                                            >
-                                                                {answer.text}
-                                                            </button>
+                                                            <>
+                                                                <div className="hidden md:block md:col-span-3"></div>
+                                                                <button
+                                                                    key={answer.id}
+                                                                    type="button"
+                                                                    onClick={(e) => onAnswerChange(question.id, answer.id, e)}
+                                                                    className={`text-white py-3 px-6 hover:bg-green-500 mx-4 my-2 col-span-12 md:col-span-6 shadow 
+                                                     ${submission.answers[question.ordinal].answer_id == answer.id ? "bg-green-400" : "bg-primary "}`}
+                                                                >
+                                                                    {answer.text}
+                                                                </button>
+                                                                <div className="hidden md:block md:col-span-3"></div>
+                                                            </>
                                                         )
                                                     })}
                                                 </div>
@@ -88,7 +94,7 @@ const QuizPlayForm = ({ quiz, submission, challenge, onAnswerChange, currentQues
                             <button
                                 type="button"
                                 onClick={onPrevious}
-                                className="bg-gray-800 text-white rounded py-2 px-4 md:mx-4 mb-2 md:mb-0 hover:bg-gray-600 shadow inline-flex items-center justify-center"
+                                className="bg-primary  text-white rounded py-2 px-4 md:mx-4 mb-2 md:mb-0 hover:opacity-75 shadow inline-flex items-center justify-center"
                             >
                                 <svg className="text-white h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 15l-3-3m0 0l3-3m-3 3h8M3 12a9 9 0 1118 0 9 9 0 01-18 0z" />
@@ -100,7 +106,7 @@ const QuizPlayForm = ({ quiz, submission, challenge, onAnswerChange, currentQues
                             <button
                                 type="button"
                                 onClick={onNext}
-                                className="bg-gray-800 text-white rounded py-2 px-4 md:mx-4 mb-2 md:mb-0 hover:bg-gray-600 shadow inline-flex items-center justify-center"
+                                className="bg-primary  text-white rounded py-2 px-4 md:mx-4 mb-2 md:mb-0 hover:opacity-75 shadow inline-flex items-center justify-center"
                             >
                                 <svg className="text-white h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 9l3 3m0 0l-3 3m3-3H8m13 0a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -110,7 +116,7 @@ const QuizPlayForm = ({ quiz, submission, challenge, onAnswerChange, currentQues
                         ) : (
                             <button
                                 onClick={onSubmit}
-                                className="bg-gray-800 text-white rounded py-2 px-4 md:mx-4 mb-2 md:mb-0 hover:bg-gray-600 shadow justify-center"
+                                className="bg-primary  text-white rounded py-2 px-4 md:mx-4 mb-2 md:mb-0 hover:opacity-75 shadow justify-center"
                             >
                                 Submit
                             </button>

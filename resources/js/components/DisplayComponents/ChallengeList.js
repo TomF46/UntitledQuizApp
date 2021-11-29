@@ -33,7 +33,7 @@ const ChallengeList = ({ challenges }) => {
                                 {challenge.userCanAttempt && (
                                     <Link
                                         to={`/quiz/${challenge.quizId}/challenge/${challenge.id}/play`}
-                                        className="bg-gray-800 text-white rounded py-2 px-4 hover:bg-gray-600 shadow inline-flex items-center ml-2"
+                                        className="bg-primary  text-white rounded py-2 px-4 hover:opacity-75 shadow inline-flex items-center ml-2"
                                     >
                                         <svg className="text-white h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" /> <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />

@@ -27,7 +27,7 @@ const CommentForm = ({ comment, onChange, onSubmit, errors = {}, submitting = fa
                     <button
                         type="submit"
                         disabled={submitting}
-                        className="bg-gray-800 text-white rounded py-2 px-4 hover:bg-gray-600 shadow"
+                        className="bg-primary text-white rounded py-2 px-4 hover:opacity-75 shadow"
                     >
                         {submitting ? "Submitting..." : "Submit"}
                     </button>

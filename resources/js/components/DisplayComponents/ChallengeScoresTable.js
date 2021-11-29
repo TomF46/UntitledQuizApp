@@ -23,7 +23,7 @@ const ChallengeScoresTable = ({ scores, onScoreSelected }) => {
                                 <td className="px-4 py-2 flex justify-center">
                                     <button
                                         onClick={() => { onScoreSelected(score) }}
-                                        className="bg-gray-800 text-white rounded pointer py-2 px-4 hover:bg-gray-600 align-middle shadow table vertical-centered"
+                                        className="bg-primary text-white rounded pointer py-2 px-4 hover:opacity-75 align-middle shadow table vertical-centered"
                                     >
                                         Challenge
                                     </button>
@@ -35,8 +35,8 @@ const ChallengeScoresTable = ({ scores, onScoreSelected }) => {
             </table>
         </div>
     ) : (
-            <p className="text-center">There is currently no score data to show.</p>
-        )
+        <p className="text-center">There is currently no score data to show.</p>
+    )
 };
 
 ChallengeScoresTable.propTypes = {

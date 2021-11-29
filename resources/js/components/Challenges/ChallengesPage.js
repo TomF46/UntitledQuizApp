@@ -70,7 +70,7 @@ const ChallengesPage = ({ history }) => {
                         <p>After completing a quiz you can challenge another user to beat or match your score, this page shows a record of all of your challenges so far (challenger or recipient). <br></br>
                             If your opponent matches or beats your score they get a challenge points if they fail you win a point towards the leaderboards.</p>
                         <div className="flex flex-col justify-center mt-4">
-                            <Link to="/challenges/leaderboard" className="border border-gray-800 text-gray-800 text-center rounded py-2 px-4 hover:bg-gray-600 hover:text-white shadow">View leaderboard</Link>
+                            <Link to="/challenges/leaderboard" className="border border-gray-800 text-gray-800 text-center rounded py-2 px-4 hover:bg-secondary hover:text-white hover:border-white shadow">View leaderboard</Link>
                         </div>
                     </div>
                     <div className="col-span-12 lg:col-span-9 px-4 overflow-hidden shadow page">

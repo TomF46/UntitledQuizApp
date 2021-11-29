@@ -60,7 +60,7 @@ const EditProfileForm = ({ user, onChange, onFileChange, onSave, errors = {}, sa
                     <button
                         type="submit"
                         disabled={saving}
-                        className="bg-gray-800 text-white rounded py-2 px-4 hover:bg-gray-600 shadow"
+                        className="bg-primary  text-white rounded py-2 px-4 hover:opacity-75 shadow"
                     >
                         {saving ? "Saving..." : "Save"}
                     </button>

@@ -50,10 +50,10 @@ const DashboardPage = ({ userId, history }) => {
                         </div>
                         <p className="text-center my-4 font-bold">Actions</p>
                         <div className="flex flex-col justify-center">
-                            <Link to="/profile" className="border border-gray-800 text-gray-800 text-center rounded py-2 px-4 hover:bg-gray-600 hover:text-white shadow mb-4">View profile</Link>
-                            <Link to="/explore" className="border border-gray-800 text-gray-800 text-center rounded py-2 px-4 hover:bg-gray-600 hover:text-white shadow mb-4">Explore</Link>
-                            <Link to="/quiz" className="border border-gray-800 text-gray-800 text-center rounded py-2 px-4 hover:bg-gray-600 hover:text-white shadow mb-4">Create</Link>
-                            <button onClick={() => goToRandomQuiz()} className="border border-gray-800 text-gray-800 text-center rounded py-2 px-4 hover:bg-gray-600 hover:text-white shadow">Play random quiz</button>
+                            <Link to="/profile" className="border border-gray-800 text-gray-800 text-center rounded py-2 px-4 hover:bg-secondary hover:text-white hover:border-white shadow mb-4">View profile</Link>
+                            <Link to="/explore" className="border border-gray-800 text-gray-800 text-center rounded py-2 px-4 hover:bg-secondary hover:text-white hover:border-white shadow mb-4">Explore</Link>
+                            <Link to="/quiz" className="border border-gray-800 text-gray-800 text-center rounded py-2 px-4 hover:bg-secondary hover:text-white hover:border-white shadow mb-4">Create</Link>
+                            <button onClick={() => goToRandomQuiz()} className="border border-gray-800 text-gray-800 text-center rounded py-2 px-4 hover:bg-secondary hover:text-white hover:border-white shadow">Play random quiz</button>
                         </div>
                     </div>
                     <div className="col-span-12 lg:col-span-9">

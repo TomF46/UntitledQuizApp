@@ -24,14 +24,14 @@ const Header = ({ userIsAuthenticated, isAdmin, checkUserIsAdmin }) => {
     }
 
     return (
-        <nav className="flex items-center justify-between flex-wrap bg-gray-800 p-4 shadow-lg">
+        <nav className="flex items-center justify-between flex-wrap bg-primary p-4 shadow-lg">
             <div className="flex items-center flex-shrink-0 text-white mr-6">
                 <Link to="/" className="tracking-tight">
                     <img src="https://untitled-quiz-app-images.s3-eu-west-1.amazonaws.com/QApp.png" className="w-16" />
                 </Link>
             </div>
             <div className="block md:hidden">
-                <button className="flex items-center px-3 py-2 border rounded text-white border-teal-400 hover:text-white hover:border-white pointer" onClick={toggleMobileNavigation}>
+                <button className="flex items-center px-3 py-2 border rounded text-white border-teal-400 hover:border-white pointer" onClick={toggleMobileNavigation}>
                     <svg
                         className="fill-current h-3 w-3"
                         viewBox="0 0 20 20"
@@ -48,25 +48,25 @@ const Header = ({ userIsAuthenticated, isAdmin, checkUserIsAdmin }) => {
                         <>
                             <Link
                                 to="/"
-                                className="block mt-4 md:inline-block md:mt-0 text-white hover:text-white md:mx-4"
+                                className="block mt-4 md:inline-block md:mt-0 text-white md:mx-4"
                             >
                                 Dashboard
                             </Link>
                             <Link
                                 to="/explore"
-                                className="block mt-4 md:inline-block md:mt-0 text-white hover:text-white md:mx-4"
+                                className="block mt-4 md:inline-block md:mt-0 text-white md:mx-4"
                             >
                                 Explore
                             </Link>
                             <Link
                                 to="/challenges"
-                                className="block mt-4 md:inline-block md:mt-0 text-white hover:text-white md:mx-4"
+                                className="block mt-4 md:inline-block md:mt-0 text-white md:mx-4"
                             >
                                 Challenges
                             </Link>
                             <Link
                                 to="/quiz"
-                                className="block mt-4 md:inline-block md:mt-0 text-white hover:text-white md:mx-4"
+                                className="block mt-4 md:inline-block md:mt-0 text-white md:mx-4"
                             >
                                 Create
                             </Link>

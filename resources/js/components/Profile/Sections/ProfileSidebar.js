@@ -37,7 +37,7 @@ const ProfileSidebar = ({ user, currentUser, isAdmin, onToggleFollow, onLogout, 
                             <>
                                 <Link
                                     to={`/profile/${user.id}/edit`}
-                                    className="border border-gray-800 text-gray-800 text-center rounded py-2 px-4 hover:bg-gray-600 shadow inline-flex items-center justify-center"
+                                    className="border border-gray-800 text-gray-800 text-center rounded py-2 px-4 hover:opacity-75 shadow inline-flex items-center justify-center"
                                 >
                                     <svg className="text-gray-800 h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
@@ -47,7 +47,7 @@ const ProfileSidebar = ({ user, currentUser, isAdmin, onToggleFollow, onLogout, 
                                 <button
                                     type="button"
                                     onClick={onLogout}
-                                    className="border border-gray-800 text-gray-800 text-center rounded py-2 px-4 mt-4 hover:bg-gray-600 shadow inline-flex items-center justify-center"
+                                    className="border border-gray-800 text-gray-800 text-center rounded py-2 px-4 mt-4 hover:opacity-75 shadow inline-flex items-center justify-center"
                                 >
                                     <svg className="text-gray-800 h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
@@ -60,7 +60,7 @@ const ProfileSidebar = ({ user, currentUser, isAdmin, onToggleFollow, onLogout, 
                                 <button
                                     type="button"
                                     onClick={onToggleFollow}
-                                    className="border border-gray-800 text-gray-800 text-center rounded py-2 px-4 hover:bg-gray-600 shadow inline-flex items-center justify-center"
+                                    className="border border-gray-800 text-gray-800 text-center rounded py-2 px-4 hover:opacity-75 shadow inline-flex items-center justify-center"
                                 >
                                     <svg className="text-gray-800 h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         {user.following ? (
@@ -73,7 +73,7 @@ const ProfileSidebar = ({ user, currentUser, isAdmin, onToggleFollow, onLogout, 
                                 </button>
                                 <Link
                                     to={`/profile/${user.id}/challenge`}
-                                    className="border border-gray-800 text-gray-800 text-center rounded py-2 px-4 mt-4 hover:bg-gray-600 shadow inline-flex items-center justify-center"
+                                    className="border border-gray-800 text-gray-800 text-center rounded py-2 px-4 mt-4 hover:opacity-75 shadow inline-flex items-center justify-center"
                                 >
                                     <svg className="text-gray-800 h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />

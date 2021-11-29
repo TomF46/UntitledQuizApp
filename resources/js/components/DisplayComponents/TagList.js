@@ -14,14 +14,14 @@ const TagList = ({ tags, onDelete }) => {
                         <div className="col-span-2 flex justify-end">
                             <Link
                                 to={`/admin/tags/${tag.id}`}
-                                className="bg-gray-800 text-white rounded py-2 px-4 hover:bg-gray-600 align-middle shadow table vertical-centered"
+                                className="bg-primary  text-white rounded py-2 px-4 hover:opacity-75 align-middle shadow table vertical-centered"
                             >
                                 Edit
                             </Link>
                             <div className="table vertical-centered">
                                 <button
                                     onClick={() => onDelete(tag)}
-                                    className="bg-red-800 text-white rounded py-2 px-4 hover:bg-red-600 shadow inline-flex items-center ml-2"
+                                    className="bg-red-800 text-white rounded py-2 px-4 hover:opacity-75 shadow inline-flex items-center ml-2"
                                 >
                                     <p className="ml-1">Delete</p>
                                 </button>

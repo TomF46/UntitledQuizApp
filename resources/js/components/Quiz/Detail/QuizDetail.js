@@ -35,7 +35,7 @@ const QuizDetail = ({ quiz, scoresPaginator, onScoresPageChange, onQuizReload, i
                             <ul className="tagList text-center my-4">
                                 {quiz.tags.map((tag) => {
                                     return (
-                                        <li className="rounded-full py-1 px-4 bg-gray-800 hover:bg-gray-600 my-1 text-white shadow" key={tag.id}>{tag.name}</li>
+                                        <li className="rounded-full py-1 px-4 bg-primary  hover:opacity-75 my-1 text-white shadow" key={tag.id}>{tag.name}</li>
                                     )
                                 })}
                             </ul>
@@ -44,7 +44,7 @@ const QuizDetail = ({ quiz, scoresPaginator, onScoresPageChange, onQuizReload, i
                 </div>
                 <Link
                     to={`/quiz/${quiz.id}/play`}
-                    className="border border-gray-800 bg-gray-800 text-white text-center rounded container py-2 px-4 my-4 hover:bg-gray-600 shadow inline-flex items-center justify-center"
+                    className="border border-gray-800 bg-primary  text-white text-center rounded container py-2 px-4 my-4 hover:opacity-75 shadow inline-flex items-center justify-center"
                 >
                     <svg className="h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" /> <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -56,7 +56,7 @@ const QuizDetail = ({ quiz, scoresPaginator, onScoresPageChange, onQuizReload, i
                     <img src={quiz.creator.profile_image} alt="profile-picture" className="rounded-full h-24 w-24 centered" />
                     <p className="text-center my-4">{quiz.creator.username}</p>
                     <div className="flex flex-col justify-center">
-                        <Link to={`/profile/${quiz.creator.id}`} className="border border-gray-800 text-gray-800 text-center rounded py-2 px-4 hover:bg-gray-600 hover:text-white shadow">View profile</Link>
+                        <Link to={`/profile/${quiz.creator.id}`} className="border border-gray-800 text-gray-800 text-center rounded py-2 px-4 hover:bg-secondary hover:text-white hover:border-white shadow">View profile</Link>
                     </div>
                 </div>
                 {isCreator ? (
@@ -65,7 +65,7 @@ const QuizDetail = ({ quiz, scoresPaginator, onScoresPageChange, onQuizReload, i
                         <div className="flex flex-col justify-center text-center">
                             <Link
                                 to={`/quiz/${quiz.id}/edit`}
-                                className="border border-gray-800 text-gray-800 text-center rounded py-2 px-4 hover:bg-gray-600 shadow inline-flex items-center justify-center"
+                                className="border border-gray-800 text-gray-800 text-center rounded py-2 px-4 hover:opacity-75 shadow inline-flex items-center justify-center"
                             >
                                 <svg className="h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
@@ -104,9 +104,9 @@ const QuizDetail = ({ quiz, scoresPaginator, onScoresPageChange, onQuizReload, i
                                         <button
                                             type="button"
                                             onClick={onToggleRecommended}
-                                            className="border border-gray-800 text-gray-800 text-center rounded py-2 px-4 mt-4 hover:bg-gray-600 shadow inline-flex items-center justify-center"
+                                            className="border border-gray-800 text-gray-800 text-center rounded py-2 px-4 mt-4 hover:opacity-75 shadow inline-flex items-center justify-center"
                                         >
-                                            <svg className="text-gray-800 hover:text-white h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <svg className="text-gray-800 h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
                                             </svg>
                                             <span className="ml-1">{quiz.recommended ? 'Remove Recommendation' : 'Recommend'}</span>
