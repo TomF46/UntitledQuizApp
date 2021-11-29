@@ -7,7 +7,7 @@ import CheckboxInput from "../../FormComponents/CheckboxInput";
 const LoginForm = ({ user, onSave, onChange, saving = false, errors = {} }) => {
     return (
         <form className="" onSubmit={onSave}>
-            <h2 className="font-bold text-lg mb-4 text-center">Login</h2>
+            <h2 className="font-bold text-primary text-lg mb-4 text-center">Login</h2>
             {errors.onSave && (
                 <div className="text-red-500 text-xs p-1" role="alert">
                     {errors.onSave}

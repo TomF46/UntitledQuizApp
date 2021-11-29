@@ -14,7 +14,7 @@ const BannedPage = ({ history, logout }) => {
 
     return (
         <div className="Banned-page">
-            <h1 className="font-bold text-4xl text-center">You're Banned</h1>
+            <h1 className="font-bold text-primary text-primary text-4xl text-center">You're Banned</h1>
             <p className="text-center">Contact an administrator to find out why and work to resolving the issue</p>
             <div className="flex justify-center">
                 <button

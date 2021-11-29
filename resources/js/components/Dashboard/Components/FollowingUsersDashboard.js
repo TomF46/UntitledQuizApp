@@ -36,7 +36,7 @@ const FollowingUsersDashboard = () => {
                 <LoadingMessage message={'Loading followed users dashboard'} />
             ) : (
                 <div>
-                    <h1 className="font-bold text-2xl text-center md:text-left">People you follow</h1>
+                    <h1 className="font-bold text-primary text-2xl text-center md:text-left">People you follow</h1>
                     {usersPaginator.total > 0 ? (
                         <div>
                             <UsersListWithPagination paginationData={usersPaginator} onPageChange={getUsersPage} />

@@ -26,7 +26,7 @@ const PopularQuizzesDashboard = () => {
                 <LoadingMessage message={'Loading popular quizzes dashboard'} />
             ) : (
                 <div>
-                    <h1 className="font-bold text-2xl text-center md:text-left">Most popular quizzes</h1>
+                    <h1 className="font-bold text-primary text-primary text-2xl text-center md:text-left">Most popular quizzes</h1>
                     {quizzes.length > 0 ? (
                         <div>
                             <QuizList quizzes={quizzes} />

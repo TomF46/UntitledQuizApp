@@ -37,7 +37,7 @@ const ScoreDashboard = ({ user }) => {
                 <LoadingMessage message={'Loading scores dashboard'} />
             ) : (
                 <>
-                    <h1 className="font-bold text-2xl mb-2">Your highest scores</h1>
+                    <h1 className="font-bold text-primary text-2xl mb-2">Your highest scores</h1>
                     <div className="border-b">
                         <ScoresTableWithPagination paginationData={scoresPaginator} onPageChange={getScoresPage} showUser={false} showQuiz={true} />
                     </div>

@@ -37,7 +37,7 @@ const RecommendedQuizzesDashboard = () => {
                 <LoadingMessage message={'Loading recommended quizzes dashboard'} />
             ) : (
                 <div>
-                    <h1 className="font-bold text-2xl text-center md:text-left">QuizApp recommended quizzes</h1>
+                    <h1 className="font-bold text-primary text-2xl text-center md:text-left">QuizApp recommended quizzes</h1>
                     {quizzesPaginator.total > 0 ? (
                         <div>
                             <QuizListWithPagination paginationData={quizzesPaginator} onPageChange={getQuizzesPage} />

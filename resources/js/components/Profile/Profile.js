@@ -71,7 +71,7 @@ const ProfilePage = ({ userId, history, logout, isAdmin, ...props }) => {
                                 </>
                             ) : (
                                 <div className="px-4 py-2 overflow-hidden shadow page">
-                                    <h3 className="font-bold text-3xl mb-2 text-center">
+                                    <h3 className="font-bold text-primary text-3xl mb-2 text-center">
                                         Banned
                                     </h3>
                                     <p className="text-center">This user is banned, their quizzes may still be available via the explore page if they do not break the rules.</p>

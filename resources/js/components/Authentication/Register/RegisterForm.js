@@ -14,7 +14,7 @@ const RegisterForm = ({
 }) => {
     return (
         <form className="" onSubmit={onSave}>
-            <h2 className="font-bold text-lg mb-4 text-center">Register</h2>
+            <h2 className="font-bold text-primary text-lg mb-4 text-center">Register</h2>
             {errors.onSave && (
                 <div className="text-red-500 text-xs p-1" role="alert">
                     {errors.onSave}

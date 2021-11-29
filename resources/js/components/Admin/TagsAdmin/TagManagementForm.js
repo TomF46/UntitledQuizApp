@@ -14,7 +14,7 @@ const TagManagementForm = ({
         <form onSubmit={onSave}>
             <div className="shadow page">
 
-                <h2 className="font-bold text-4xl py-4 text-center">{tag.id ? "Edit" : "Add"} Tag</h2>
+                <h2 className="font-bold text-primary text-4xl py-4 text-center">{tag.id ? "Edit" : "Add"} Tag</h2>
                 <div className="p-4">
                     <div className="mb-6">
                         <TextInput

@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 const ProfileSidebar = ({ user, currentUser, isAdmin, onToggleFollow, onLogout, onToggleBanned }) => {
     return (
         <>
-            <h2 className="font-bold text-4xl py-4 text-center">
+            <h2 className="font-bold text-primary text-4xl py-4 text-center">
                 {user.username}
             </h2>
             <div>

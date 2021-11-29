@@ -96,7 +96,7 @@ const QuestionManagement = ({ quiz, updateQuiz, errors = {}, setIsUpploadingImag
             {quiz.questions.map((question, questionIndex) => {
                 return (
                     <div className="p-4 shadow card mt-4" key={question.id ? question.id : questionIndex}>
-                        <h3 className="font-bold text-xl">Question {questionIndex + 1}</h3>
+                        <h3 className="font-bold text-primary text-xl">Question {questionIndex + 1}</h3>
                         <div className="mb-1">
                             <TextInput
                                 name={`questions[${questionIndex}].text`}
@@ -134,7 +134,7 @@ const QuestionManagement = ({ quiz, updateQuiz, errors = {}, setIsUpploadingImag
                                 </label>
                             )}
                         </div>
-                        {quiz.questions[questionIndex].answers.length > 0 && <h2 className="font-bold text-lg my-2">Answers:</h2>}
+                        {quiz.questions[questionIndex].answers.length > 0 && <h2 className="font-bold text-primary text-lg my-2">Answers:</h2>}
                         {quiz.questions[questionIndex].answers.map((answer, answerIndex) => {
                             return (
                                 <div className="mb-6" key={answer.id ? answer.id : answerIndex}>

@@ -26,10 +26,10 @@ const ScoreDetail = ({ quiz, score, challenge, onReplay, onLikesUpdated }) => {
 
     return (
         <div className="mt-6">
-            <h1 className="font-bold text-4xl mb-4 text-center">{quiz.title}</h1>
+            <h1 className="font-bold text-primary text-4xl mb-4 text-center">{quiz.title}</h1>
             <LikeControls quiz={quiz} onLikesUpdated={onLikesUpdated} />
-            <h1 className="font-bold text-2xl my-4 text-center">{getScoreText(score.score, score.score_percent)}</h1>
-            <h1 className="font-bold text-2xl mb-4 text-center">Percentage: {score.score_percent}%</h1>
+            <h1 className="font-bold text-primary text-2xl my-4 text-center">{getScoreText(score.score, score.score_percent)}</h1>
+            <h1 className="font-bold text-primary text-2xl mb-4 text-center">Percentage: {score.score_percent}%</h1>
             {!challenge ? (
                 <div className="flex justify-center my-4">
                     <button

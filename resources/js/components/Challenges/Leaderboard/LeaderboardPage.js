@@ -41,7 +41,7 @@ const ChallengesLeaderboardPage = ({ currentUser, history }) => {
         <div className="challenge-leaderboard-page">
             <div className="grid grid-cols-12 pb-4">
                 <div className="col-span-12 lg:col-span-3 lg:mr-4 mb-4 lg:mb-0 px-4 overflow-hidden shadow page">
-                    <h2 className="font-bold text-2xl py-4 text-center">
+                    <h2 className="font-bold text-primary text-2xl py-4 text-center">
                         Challenge points
                     </h2>
                     <p>
@@ -52,7 +52,7 @@ const ChallengesLeaderboardPage = ({ currentUser, history }) => {
                     <div>
                         <div className="flex justify-center">
                             <div className="mb-4">
-                                <h3 className="font-bold text-4xl my-4 text-center">
+                                <h3 className="font-bold text-primary text-4xl my-4 text-center">
                                     Challenge points leaderboards
                                 </h3>
                                 {!leaderboardPaginator ? (

@@ -66,7 +66,7 @@ const ChallengesPage = ({ history }) => {
             ) : (
                 <div className="grid grid-cols-12">
                     <div className="col-span-12 lg:col-span-3 lg:mr-4 mb-4 lg:mb-0 px-4 pb-4 overflow-hidden shadow page">
-                        <h1 className="font-bold text-4xl my-4 text-center">Details</h1>
+                        <h1 className="font-bold text-primary text-4xl my-4 text-center">Details</h1>
                         <p>After completing a quiz you can challenge another user to beat or match your score, this page shows a record of all of your challenges so far (challenger or recipient). <br></br>
                             If your opponent matches or beats your score they get a challenge points if they fail you win a point towards the leaderboards.</p>
                         <div className="flex flex-col justify-center mt-4">
@@ -74,7 +74,7 @@ const ChallengesPage = ({ history }) => {
                         </div>
                     </div>
                     <div className="col-span-12 lg:col-span-9 px-4 overflow-hidden shadow page">
-                        <h1 className="font-bold text-4xl my-4 text-center">Challenges</h1>
+                        <h1 className="font-bold text-primary text-4xl my-4 text-center">Challenges</h1>
                         {challengesPaginator.total > 0 ? (
                             <ChallengeListWithPagination paginationData={challengesPaginator} onPageChange={getChallengesPage} />
                         ) : (

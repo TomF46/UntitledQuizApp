@@ -80,7 +80,7 @@ const CommentsSection = ({ quizId, comments, onReloadQuiz }) => {
     return (
         <div className="overflow-hidden shadow card mt-4 pb-2">
             <div className="col-span-12 pt-4">
-                <h2 className="font-bold text-2xl mb-4 text-center">Comments</h2>
+                <h2 className="font-bold text-primary text-2xl mb-4 text-center">Comments</h2>
             </div>
             {comments.length <= 0 ? (
                 <p className="px-4 text-center">This quiz currently has no comment, why not add one</p>

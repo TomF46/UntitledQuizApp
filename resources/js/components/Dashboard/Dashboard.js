@@ -44,11 +44,11 @@ const DashboardPage = ({ userId, history }) => {
             ) : (
                 <div className="grid grid-cols-12 pb-4">
                     <div className="col-span-12 lg:col-span-3 lg:mr-4 mb-4 lg:mb-0 px-4 pb-4 overflow-hidden shadow card">
-                        <h1 className="font-bold text-4xl my-4 text-center">Welcome {user.username}</h1>
+                        <h1 className="font-bold text-primary text-primary text-4xl my-4 text-center">Welcome {user.username}</h1>
                         <div className="mb-4">
                             <img src={user.profile_image} alt="profile-picture" className="rounded-full profile-photo shadow" />
                         </div>
-                        <p className="text-center my-4 font-bold">Actions</p>
+                        <p className="text-center text-primary my-4 font-bold">Actions</p>
                         <div className="flex flex-col justify-center">
                             <Link to="/profile" className="border border-gray-800 text-gray-800 text-center rounded py-2 px-4 hover:bg-secondary hover:text-white hover:border-white shadow mb-4">View profile</Link>
                             <Link to="/explore" className="border border-gray-800 text-gray-800 text-center rounded py-2 px-4 hover:bg-secondary hover:text-white hover:border-white shadow mb-4">Explore</Link>

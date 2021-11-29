@@ -27,7 +27,7 @@ const BanInfo = ({ banId }) => {
         <div>
             <div className="flex justify-center">
                 <div className="inline-block p-4 border-b min-w-full">
-                    <h2 className="font-bold text-2xl mb-4 text-center">This quiz is banned</h2>
+                    <h2 className="font-bold text-primary text-2xl mb-4 text-center">This quiz is banned</h2>
                     {!ban ? (
                         <LoadingMessage message={'Loading ban information'} />
                     ) : (

@@ -37,7 +37,7 @@ const ChallengesDashboard = () => {
                 <LoadingMessage message={'Loading challenges dashboard'} />
             ) : (
                 <div>
-                    <h1 className="font-bold text-2xl text-center md:text-left">Your active challenges</h1>
+                    <h1 className="font-bold text-primary text-2xl text-center md:text-left">Your active challenges</h1>
                     {challengesPaginator.total > 0 ? (
                         <div>
                             <ChallengeListWithPagination paginationData={challengesPaginator} onPageChange={getChallengesPage} />

@@ -143,7 +143,7 @@ const QuizDetail = ({ quiz, scoresPaginator, onScoresPageChange, onQuizReload, i
                         {!_.isEmpty(userHighScore) && (
                             <div className="grid grid-cols-12 p-4 my-4 overflow-hidden shadow card">
                                 <div className="col-span-12">
-                                    <h2 className="font-bold text-2xl mb-4 text-center">Your high score</h2>
+                                    <h2 className="font-bold text-primary text-2xl mb-4 text-center">Your high score</h2>
                                 </div>
                                 <div className="col-span-6 text-center">
                                     <p className="text-sm text-gray-600">Score</p>
@@ -159,7 +159,7 @@ const QuizDetail = ({ quiz, scoresPaginator, onScoresPageChange, onQuizReload, i
                         <div>
                             <div className="flex justify-center overflow-hidden shadow card">
                                 <div className="inline-block p-4 min-w-full">
-                                    <h2 className="font-bold text-2xl mb-4 text-center">Scores</h2>
+                                    <h2 className="font-bold text-primary text-2xl mb-4 text-center">Scores</h2>
                                     {!scoresPaginator ? (
                                         <LoadingMessage message={'Loading scores'} />
                                     ) : (
