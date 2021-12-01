@@ -15,7 +15,7 @@ const QuizDetail = ({ quiz, scoresPaginator, onScoresPageChange, onQuizReload, i
                 <h2 className="lg:hidden font-bold text-4xl py-4 border-b lg:border-none text-center">
                     {quiz.title}
                 </h2>
-                <h2 className="hidden lg:block font-bold text-4xl py-4 border-b lg:border-none text-center">
+                <h2 className="hidden lg:block font-bold text-4xl text-primary py-4 border-b lg:border-none text-center">
                     Details
                 </h2>
                 {!!quiz.recommended && (
@@ -35,7 +35,7 @@ const QuizDetail = ({ quiz, scoresPaginator, onScoresPageChange, onQuizReload, i
                             <ul className="tagList text-center my-4">
                                 {quiz.tags.map((tag) => {
                                     return (
-                                        <li className="rounded-full py-1 px-4 bg-primary  hover:opacity-75 my-1 text-white shadow" key={tag.id}>{tag.name}</li>
+                                        <li className="rounded-full py-1 px-4 bg-secondary hover:opacity-75 my-1 text-white shadow" key={tag.id}>{tag.name}</li>
                                     )
                                 })}
                             </ul>
@@ -56,7 +56,15 @@ const QuizDetail = ({ quiz, scoresPaginator, onScoresPageChange, onQuizReload, i
                     <img src={quiz.creator.profile_image} alt="profile-picture" className="rounded-full h-24 w-24 centered" />
                     <p className="text-center my-4">{quiz.creator.username}</p>
                     <div className="flex flex-col justify-center">
-                        <Link to={`/profile/${quiz.creator.id}`} className="border border-gray-800 text-gray-800 text-center rounded py-2 px-4 hover:bg-secondary hover:text-white hover:border-white shadow">View profile</Link>
+                        <Link
+                            to={`/profile/${quiz.creator.id}`}
+                            className="border border-gray-800 text-gray-800 text-center rounded py-2 px-4 hover:opacity-75 hover:text-secondary shadow inline-flex items-center justify-center mb-4"
+                        >
+                            <svg className="text-secondary h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                            </svg>
+                            <span className="ml-1">View Profile</span>
+                        </Link>
                     </div>
                 </div>
                 {isCreator ? (
@@ -120,7 +128,7 @@ const QuizDetail = ({ quiz, scoresPaginator, onScoresPageChange, onQuizReload, i
             </div>
             <div className="col-span-12 lg:col-span-9">
                 <div className="overflow-hidden shadow card">
-                    <h2 className="hidden lg:block font-bold text-4xl py-4 text-center">
+                    <h2 className="hidden lg:block font-bold text-primary text-4xl py-4 text-center">
                         {quiz.title}
                     </h2>
                     <div className="grid grid-cols-3 p-4">
