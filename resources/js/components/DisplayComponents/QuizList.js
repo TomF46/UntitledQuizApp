@@ -33,7 +33,7 @@ const QuizList = ({ quizzes }) => {
                             <p className="ml-1">{quiz.totalDislikes}</p>
                         </div>
                         <div className="hidden md:inline-flex col-span-1 items-center">
-                            {!!quiz.recommended && (<img src="https://untitled-quiz-app-images.s3.eu-west-1.amazonaws.com/QAppRecommended.png" className="w-12 m-auto" />)}
+                            {!!quiz.recommended && (<img src="https://untitled-quiz-app-images.s3.eu-west-1.amazonaws.com/QAppRecommended38A3A5.png" className="w-12 m-auto" />)}
                         </div>
                         <div className="col-span-6 md:col-span-5 lg:col-span-3 flex justify-end mb-2">
                             <Link

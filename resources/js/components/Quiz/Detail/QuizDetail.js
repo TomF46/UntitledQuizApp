@@ -20,7 +20,7 @@ const QuizDetail = ({ quiz, scoresPaginator, onScoresPageChange, onQuizReload, i
                 </h2>
                 {!!quiz.recommended && (
                     <div className="flex items-center flex-shrink-0">
-                        <img src="https://untitled-quiz-app-images.s3.eu-west-1.amazonaws.com/QAppRecommended.png" className="w-32 m-auto" />
+                        <img src="https://untitled-quiz-app-images.s3.eu-west-1.amazonaws.com/QAppRecommended38A3A5.png" className="w-32 m-auto" />
                     </div>
                 )}
                 <div className="p-4 flex justify-center items-center">
