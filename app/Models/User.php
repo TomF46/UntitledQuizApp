@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Followable;
+use App\Friendable;
 use App\Enums\ChallengeStatus;
 use App\Enums\Roles;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -12,7 +13,7 @@ use Laravel\Passport\HasApiTokens;
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable, HasApiTokens, Followable;
+    use HasFactory, Notifiable, HasApiTokens, Followable, Friendable;
 
     /**
      * The attributes that are mass assignable.
