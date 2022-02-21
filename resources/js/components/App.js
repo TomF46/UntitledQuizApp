@@ -27,6 +27,7 @@ import UsersAdminPage from "./Admin/UsersAdmin/UsersAdminPage";
 import BannedPage from "./Banned";
 import QuizBanPage from "./Admin/QuizAdmin/QuizBanPage";
 import QuizBanListPage from "./Admin/QuizAdmin/QuizBanListPage";
+import FriendsPage from "./Friends/FriendsPage";
 
 const Main = ({ location }) => (
     <>
@@ -65,6 +66,10 @@ const Main = ({ location }) => (
                                 <AuthenticatedRoute
                                     path="/profile"
                                     component={ProfilePage}
+                                />
+                                <AuthenticatedRoute
+                                    path="/friends"
+                                    component={FriendsPage}
                                 />
                                 <AuthenticatedRoute
                                     path="/explore"

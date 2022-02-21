@@ -14,8 +14,8 @@ trait Friendable
     public function sendFriendRequest(User $user)
     {
         $friendship = Friendship::create([
-            'user1_id' => $this->id,
-            'user2_id' => $user->id,
+            'sender_id' => $this->id,
+            'recipient_id' => $user->id,
         ]);
 
         return $friendship;
@@ -39,16 +39,60 @@ trait Friendable
     public function friendsRequestList()
     {
         return Friendship::where('status', FriendshipStatus::Requested)
-            ->where('user1_id', $this->id)
-            ->orWhere('user2_id', $this->id)
-            ->get();
+            ->where(function($q){
+                $q->where('sender_id', $this->id)
+                ->orWhere('recipient_id', $this->id);
+        })->get();
     }
 
     public function friendsList()
     {
         return Friendship::where('status', FriendshipStatus::Accepted)
-            ->where('user1_id', $this->id)
-            ->orWhere('user2_id', $this->id)
-            ->get();
+            ->where(function($q){
+                $q->where('sender_id', $this->id)
+                ->orWhere('recipient_id', $this->id);
+        })->get();
+
+    }
+
+    public function friendRequestsListPaginated()
+    {
+        return Friendship::where('status', FriendshipStatus::Requested)
+            ->where(function($q){
+                $q->where('sender_id', $this->id)
+                ->orWhere('recipient_id', $this->id);
+        })->paginate(10);
+    }
+
+    public function friendsListPaginated()
+    {
+        return Friendship::where('status', FriendshipStatus::Accepted)
+            ->where(function($q){
+                $q->where('sender_id', $this->id)
+                ->orWhere('recipient_id', $this->id);
+        })->paginate(10);
+
+    }
+
+    public function isFriendsWith(User $user)
+    {
+        $matches = Friendship::where('status', FriendshipStatus::Accepted)
+            ->where(function($q) use ($user){
+                $q->where([['sender_id', $this->id],['recipient_id', $user->id]])
+            ->orWhere([['recipient_id', $this->id],['sender_id', $user->id]]);
+        })->count();
+
+        return $matches > 0;
+    }
+
+    public function hasFriendRequest(User $user)
+    {
+        $matches = Friendship::where('status', FriendshipStatus::Requested)
+            ->where(function($q) use ($user){
+                $q->where([['sender_id', $this->id],['recipient_id', $user->id]])
+                ->orWhere([['recipient_id', $this->id],['sender_id', $user->id]]);
+        })->count();
+
+        return $matches > 0;
     }
 }

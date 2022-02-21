@@ -14,15 +14,19 @@ const ProfilePage = ({ userId, history, logout, isAdmin, ...props }) => {
 
     useEffect(() => {
         if (!user || user.id != userId) {
-            getUserById(userId).then(userData => {
-                setUser(userData);
-            }).catch(error => {
-                toast.error(`Error getting user ${error.message}`, {
-                    autoClose: false,
-                });
-            });
+            loadUser();
         }
     }, [userId, user])
+
+    function loadUser() {
+        getUserById(userId).then(userData => {
+            setUser(userData);
+        }).catch(error => {
+            toast.error(`Error getting user ${error.message}`, {
+                autoClose: false,
+            });
+        });
+    }
 
 
     function toggleFollow() {
@@ -61,7 +65,7 @@ const ProfilePage = ({ userId, history, logout, isAdmin, ...props }) => {
                 <>
                     <div className="grid grid-cols-12 pb-4">
                         <div className="col-span-12 lg:col-span-3 lg:mr-4 mb-4 lg:mb-0 px-4 pb-4 overflow-hidden shadow card">
-                            <ProfileSidebar user={user} onLogout={handleLogout} onToggleBanned={toggleBanned} onToggleFollow={toggleFollow} />
+                            <ProfileSidebar user={user} onLogout={handleLogout} onToggleBanned={toggleBanned} onToggleFollow={toggleFollow} reloadUser={loadUser} />
                         </div>
                         <div className="col-span-12 lg:col-span-9">
                             {!user.isBanned || isAdmin ? (

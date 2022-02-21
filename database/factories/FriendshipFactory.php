@@ -24,8 +24,8 @@ class FriendshipFactory extends Factory
     public function definition()
     {
         return [
-            'user1_id' => User::factory(),
-            'user2_id' => User::factory(),
+            'sender_id' => User::factory(),
+            'recipient_id' => User::factory(),
             'status' => $this->faker->randomElement([FriendshipStatus::Requested, FriendshipStatus::Accepted])
         ];
     }

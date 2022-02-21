@@ -57,7 +57,7 @@ class FriendshipTest extends TestCase
     public function testCanAcceptFriendRequests()
     {
         $friendship = Friendship::factory()->create([
-            'user2_id' => $this->user->id,
+            'recipient_id' => $this->user->id,
             'status' => FriendshipStatus::Requested
         ]);
 
@@ -72,7 +72,7 @@ class FriendshipTest extends TestCase
     public function testCantAcceptFriendRequestsNotForUser()
     {
         $friendship = Friendship::factory()->create([
-            'user2_id' => $this->user->id,
+            'recipient_id' => $this->user->id,
             'status' => FriendshipStatus::Requested
         ]);
 
@@ -89,7 +89,7 @@ class FriendshipTest extends TestCase
     public function testCanRejectFriendRequests()
     {
         $friendship = Friendship::factory()->create([
-            'user2_id' => $this->user->id,
+            'recipient_id' => $this->user->id,
             'status' => FriendshipStatus::Requested
         ]);
 
@@ -104,7 +104,7 @@ class FriendshipTest extends TestCase
     public function testCantDeleteFriendRequestsNotForUser()
     {
         $friendship = Friendship::factory()->create([
-            'user2_id' => $this->user->id,
+            'recipient_id' => $this->user->id,
             'status' => FriendshipStatus::Requested
         ]);
 
@@ -121,7 +121,7 @@ class FriendshipTest extends TestCase
     public function testCanRemoveFriend()
     {
         $friendship = Friendship::factory()->create([
-            'user2_id' => $this->user->id,
+            'recipient_id' => $this->user->id,
             'status' => FriendshipStatus::Accepted
         ]);
 
@@ -136,7 +136,7 @@ class FriendshipTest extends TestCase
     public function testCantRemoveFriendshipYourNotPartOf()
     {
         $friendship = Friendship::factory()->create([
-            'user2_id' => $this->user->id,
+            'recipient_id' => $this->user->id,
             'status' => FriendshipStatus::Accepted
         ]);
 

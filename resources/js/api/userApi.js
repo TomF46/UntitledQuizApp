@@ -124,3 +124,14 @@ function banUser(id) {
             throw error;
         });
 }
+
+export function friendRequest(id) {
+    return axiosClient
+        .post(`/api/users/${id}/friendRequest`, {})
+        .then(response => {
+            return response.data;
+        })
+        .catch(error => {
+            throw error;
+        });
+}

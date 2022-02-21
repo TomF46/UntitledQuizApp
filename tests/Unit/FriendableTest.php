@@ -20,8 +20,8 @@ class FriendableTest extends TestCase
 
         $user->sendFriendRequest($user2);
 
-        $this->assertEquals(1, $user->friendsRequestList()->count());
-        $this->assertEquals(0, $user->friendsList()->count());
+        $this->assertTrue($user2->hasFriendRequest($user));
+        $this->assertFalse($user->isFriendsWith($user2));
     }
 
     public function testUserCanAcceptFriendRequest()
@@ -32,8 +32,8 @@ class FriendableTest extends TestCase
         $request = $user->sendFriendRequest($user2);
         $user2->acceptFriendRequestById($request->id);
 
-        $this->assertEquals(0, $user->friendsRequestList()->count());
-        $this->assertEquals(1, $user->friendsList()->count());
+        $this->assertFalse($user2->hasFriendRequest($user));
+        $this->assertTrue($user->isFriendsWith($user2));
     }
 
     public function testUserCanRejectFriendRequest()
@@ -44,8 +44,8 @@ class FriendableTest extends TestCase
         $request = $user->sendFriendRequest($user2);
         $user2->removeFriendOrFriendRequestById($request->id);
 
-        $this->assertEquals(0, $user->friendsRequestList()->count());
-        $this->assertEquals(0, $user->friendsList()->count());
+        $this->assertFalse($user2->hasFriendRequest($user));
+        $this->assertFalse($user->isFriendsWith($user2));
     }
 
     public function testUserCanRetractFriendRequest()
@@ -56,8 +56,8 @@ class FriendableTest extends TestCase
         $request = $user->sendFriendRequest($user2);
         $user->removeFriendOrFriendRequestById($request->id);
 
-        $this->assertEquals(0, $user->friendsRequestList()->count());
-        $this->assertEquals(0, $user->friendsList()->count());
+        $this->assertFalse($user2->hasFriendRequest($user));
+        $this->assertFalse($user->isFriendsWith($user2));
     }
 
     public function testUserCanRemoveFriend()
@@ -69,8 +69,8 @@ class FriendableTest extends TestCase
         $user2->acceptFriendRequestById($request->id);
         $user2->removeFriendOrFriendRequestById($request->id);
 
-        $this->assertEquals(0, $user->friendsRequestList()->count());
-        $this->assertEquals(0, $user->friendsList()->count());
+        $this->assertFalse($user2->hasFriendRequest($user));
+        $this->assertFalse($user->isFriendsWith($user2));
     }
 
     public function testUserCanRemoveFriendThatTheySent()
@@ -82,7 +82,7 @@ class FriendableTest extends TestCase
         $user2->acceptFriendRequestById($request->id);
         $user->removeFriendOrFriendRequestById($request->id);
 
-        $this->assertEquals(0, $user->friendsRequestList()->count());
-        $this->assertEquals(0, $user->friendsList()->count());
+        $this->assertFalse($user2->hasFriendRequest($user));
+        $this->assertFalse($user->isFriendsWith($user2));
     }
 }

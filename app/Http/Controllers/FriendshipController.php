@@ -10,12 +10,24 @@ class FriendshipController extends Controller
 {
     public function index(Request $request)
     {
-        return response()->json($request->user()->friendsList());
+        $currentUser = $request->User();
+
+        $paginator = $request->user()->friendsListPaginated();
+        $paginator->getCollection()->transform(function ($friendship) use ($currentUser){
+            return $friendship->mapForFriendList($currentUser);
+        });
+        return response()->json($paginator);
     }
 
-    public function requests()
+    public function requests(Request $request)
     {
-        return response()->json($request->user()->friendsRequestList());
+        $currentUser = $request->User();
+
+        $paginator = $request->user()->friendRequestsListPaginated();
+        $paginator->getCollection()->transform(function ($friendship) use ($currentUser){
+            return $friendship->mapForFriendRequestsList($currentUser);
+        });
+        return response()->json($paginator);
     }
 
     public function sendRequest(Request $request, User $user)
@@ -26,7 +38,7 @@ class FriendshipController extends Controller
 
     public function acceptRequest(Request $request, Friendship $friendship)
     {
-        if($friendship->user1_id != $request->user()->id && $friendship->user2_id != $request->user()->id) return response()->json(['error' => 'unauthorized.'], 401);
+        if($friendship->sender_id != $request->user()->id && $friendship->recipient_id != $request->user()->id) return response()->json(['error' => 'unauthorized.'], 401);
 
         $request->user()->acceptFriendRequestById($friendship->id);
         return response()->noContent();
@@ -34,7 +46,7 @@ class FriendshipController extends Controller
 
     public function rejectOrRemoveFriendship(Request $request, Friendship $friendship)
     {
-        if($friendship->user1_id != $request->user()->id && $friendship->user2_id != $request->user()->id) return response()->json(['error' => 'unauthorized.'], 401);
+        if($friendship->sender_id != $request->user()->id && $friendship->recipient_id != $request->user()->id) return response()->json(['error' => 'unauthorized.'], 401);
 
         $request->user()->removeFriendOrFriendRequestById($friendship->id);
         return response()->noContent();

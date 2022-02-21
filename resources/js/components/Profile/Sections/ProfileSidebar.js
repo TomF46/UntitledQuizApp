@@ -2,8 +2,24 @@ import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import { friendRequest } from "../../../api/userApi";
+import { toast } from "react-toastify";
 
-const ProfileSidebar = ({ user, currentUser, isAdmin, onToggleFollow, onLogout, onToggleBanned }) => {
+const ProfileSidebar = ({ user, currentUser, isAdmin, onToggleFollow, onLogout, onToggleBanned, reloadUser }) => {
+
+    function sendFriendRequest() {
+        friendRequest(user.id).then(res => {
+            reloadUser();
+            toast.success("Request sent");
+        }).catch(err => {
+            toast.error(`Failed to send friend request ${err.message}`);
+        })
+    }
+
+    function seeRequests() {
+        alert("see requests");
+    }
+
     return (
         <>
             <h2 className="font-bold text-primary text-4xl py-4 text-center">
@@ -57,10 +73,29 @@ const ProfileSidebar = ({ user, currentUser, isAdmin, onToggleFollow, onLogout, 
                             </>
                         ) : (
                             <>
+                                {user.isFriend ? (
+                                    <>
+                                        <p className="font-bold">This user is your friend</p>
+                                    </>
+                                ) : (
+                                    <>
+                                        <button
+                                            type="button"
+                                            onClick={() => { user.hasFriendRequest ? seeRequests() : sendFriendRequest() }}
+                                            className="border border-gray-800 text-gray-800 text-center rounded py-2 px-4 hover:opacity-75 hover:text-secondary shadow inline-flex items-center justify-center"
+                                        >
+                                            <svg className="text-secondary h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+                                            </svg>
+                                            <span className="ml-1">{user.hasFriendRequest ? "See request" : "Send Friend Request"}</span>
+                                        </button>
+                                    </>
+                                )
+                                }
                                 <button
                                     type="button"
                                     onClick={onToggleFollow}
-                                    className="border border-gray-800 text-gray-800 text-center rounded py-2 px-4 hover:opacity-75 hover:text-secondary shadow inline-flex items-center justify-center"
+                                    className="border border-gray-800 text-gray-800 text-center rounded py-2 px-4 mt-4 hover:opacity-75 hover:text-secondary shadow inline-flex items-center justify-center"
                                 >
                                     <svg className="text-secondary h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         {user.following ? (
@@ -111,6 +146,7 @@ ProfileSidebar.propTypes = {
     onToggleFollow: PropTypes.func.isRequired,
     onToggleBanned: PropTypes.func.isRequired,
     onLogout: PropTypes.func.isRequired,
+    reloadUser: PropTypes.func.isRequired,
     isAdmin: PropTypes.bool.isRequired,
     currentUser: PropTypes.any.isRequired,
 };

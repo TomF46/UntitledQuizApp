@@ -111,7 +111,9 @@ class User extends Authenticatable
             'challengePoints' => $this->challenge_points,
             'quizAttempts' => $this->scores->count(),
             'isAdmin' => $this->isAdmin(),
-            'isBanned' => $this->isBanned()
+            'isBanned' => $this->isBanned(),
+            'isFriend' => $this->isFriendsWith($user),
+            'hasFriendRequest' => $this->hasFriendRequest($user)
         ];
     }
 

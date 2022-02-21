@@ -16,8 +16,8 @@ class CreateFriendshipsTable extends Migration
     {
         Schema::create('friendships', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user1_id');
-            $table->foreignId('user2_id');
+            $table->foreignId('sender_id');
+            $table->foreignId('recipient_id');
             $table->tinyInteger('status')->unsigned()->default(FriendshipStatus::Requested);
             $table->timestamps();
         });
