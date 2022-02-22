@@ -68,6 +68,7 @@ class QuizTest extends TestCase
                 "title" => "Simple Test Quiz",
                 "description" => "A simple test quiz",
                 "tags" => [],
+                "collaborators" => [],
                 "questions" =>
                 [
                     [

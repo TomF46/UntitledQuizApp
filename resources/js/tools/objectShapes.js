@@ -3,6 +3,7 @@ const newQuiz = {
     title: "",
     description: "",
     tags: [],
+    collaborators: [],
     questions: [
         {
             text: "",
