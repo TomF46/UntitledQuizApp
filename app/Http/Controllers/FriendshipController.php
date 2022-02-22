@@ -38,7 +38,7 @@ class FriendshipController extends Controller
 
     public function acceptRequest(Request $request, Friendship $friendship)
     {
-        if($friendship->sender_id != $request->user()->id && $friendship->recipient_id != $request->user()->id) return response()->json(['error' => 'unauthorized.'], 401);
+        if(!$friendship->userIsRecipient($request->user())) return response()->json(['error' => 'unauthorized.'], 401);
 
         $request->user()->acceptFriendRequestById($friendship->id);
         return response()->noContent();
@@ -46,7 +46,7 @@ class FriendshipController extends Controller
 
     public function rejectOrRemoveFriendship(Request $request, Friendship $friendship)
     {
-        if($friendship->sender_id != $request->user()->id && $friendship->recipient_id != $request->user()->id) return response()->json(['error' => 'unauthorized.'], 401);
+        if(!$friendship->userCanManage($request->user())) return response()->json(['error' => 'unauthorized.'], 401);
 
         $request->user()->removeFriendOrFriendRequestById($friendship->id);
         return response()->noContent();

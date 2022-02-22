@@ -86,6 +86,24 @@ class FriendshipTest extends TestCase
         $response->assertStatus(401);
     }
 
+    public function testUserCantAcceptFriendRequestTheySent()
+    {
+        $user2 = TestHelper::createUser();
+
+        $friendship = Friendship::factory()->create([
+            'sender_id' => $user2->id,
+            'recipient_id' => $this->user->id,
+            'status' => FriendshipStatus::Requested
+        ]);
+
+        $response = $this->withHeaders([
+            'Accept' => 'application/json',
+            'Authorization' => 'Bearer ' . TestHelper::getBearerTokenForUser($user2)
+            ])->postJson('/api/friendships/' . $friendship->id  . '/acceptRequest');
+
+        $response->assertStatus(401);
+    }
+
     public function testCanRejectFriendRequests()
     {
         $friendship = Friendship::factory()->create([

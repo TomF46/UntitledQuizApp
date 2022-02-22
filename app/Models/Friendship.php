@@ -27,6 +27,21 @@ class Friendship extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function userIsRecipient(User $user)
+    {
+        return $this->recipient->id == $user->id;
+    }
+
+    public function userIsSender(User $user)
+    {
+        return $this->sender->id == $user->id;
+    }
+
+    public function userCanManage(User $user)
+    {
+        return $this->userIsRecipient($user) || $this->userIsSender($user);
+    }
+
 
     public function map()
     {
