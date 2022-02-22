@@ -43,6 +43,7 @@ class QuizController extends Controller
 
         $quiz->tags()->attach($attributes['tags']);
 
+        $quiz->collaborators()->attach($attributes['collaborators']);
 
         return response()->json($quiz, 201);
     }
@@ -50,7 +51,7 @@ class QuizController extends Controller
     public function show(Request $request, Quiz $quiz)
     {
         $currentUser = $request->user();
-        if ($quiz->isBanned() && $quiz->user->id != $currentUser->id && !$currentUser->isAdmin()) return response()->json(['message' => 'Not Found!'], 404);
+        if ($quiz->isBanned() && !$quiz->isOwner($currentUser) && !$currentUser->isAdmin()) return response()->json(['message' => 'Not Found!'], 404);
 
         $mappedQuiz = $quiz->mapDetailWithoutAnswers($request->User());
         return response()->json($mappedQuiz);
@@ -58,14 +59,14 @@ class QuizController extends Controller
 
     public function edit(Request $request, Quiz $quiz)
     {
-        if ($quiz->user->id != $request->user()->id) return response()->json(['error' => 'unauthorized.'], 401);
+        if (!$quiz->userCanManage($request->user())) return response()->json(['error' => 'unauthorized.'], 401);
 
-        return response()->json($quiz->mapOverviewWithQuestions());
+        return response()->json($quiz->mapOverviewWithQuestions($request->user()));
     }
 
     public function update(Request $request, Quiz $quiz)
     {
-        if ($quiz->user->id != $request->user()->id) return response()->json(['error' => 'Unauthorized.'], 401);
+        if (!$quiz->userCanManage($request->user())) return response()->json(['error' => 'Unauthorized.'], 401);
 
         $attributes = $this->validateQuiz($request);
 
@@ -74,6 +75,9 @@ class QuizController extends Controller
         $quiz->update($attributes);
 
         $quiz->tags()->sync($attributes['tags']);
+
+        // Only owner can edit collaborators
+        if ($quiz->isOwner($request->user())) $quiz->collaborators()->sync($attributes['collaborators']);
 
         $quiz->questions()->delete();
 
@@ -89,7 +93,7 @@ class QuizController extends Controller
 
     public function destroy(Request $request, Quiz $quiz)
     {
-        if ($quiz->user->id != $request->user()->id) return response()->json(['error' => 'unauthorized.'], 401);
+        if (!$quiz->isOwner($request->user())) return response()->json(['error' => 'unauthorized.'], 401);
 
         $quiz->delete();
         return response()->noContent();
@@ -152,6 +156,7 @@ class QuizController extends Controller
             'title' => 'required|max:255',
             'description' => 'required|max:255',
             'tags' => 'exists:tags,id',
+            'collaborators' => 'exists:users,id',
             'questions.*.text' => 'required|max:255',
             'questions.*.helpText' => 'nullable|max:255',
             'questions.*.image_url' => 'string|nullable',

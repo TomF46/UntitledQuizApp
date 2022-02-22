@@ -17,7 +17,7 @@ class QuizScoresController extends Controller
         $questionAnswers = $attributes['answers'];
         $maxScore = count($questionAnswers);
         $currentScore = 0;
-        $quiz = $quiz->mapOverviewWithQuestions();
+        $quiz = $quiz->mapOverviewWithQuestions($request->user());
 
         $index = 0;
         foreach ($quiz['questions'] as $question) {

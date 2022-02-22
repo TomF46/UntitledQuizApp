@@ -8,7 +8,7 @@ import CommentsSection from "../../DisplayComponents/Comments/CommentsSection"
 import _ from 'lodash';
 import BanInfo from "../../DisplayComponents/BanInfo";
 
-const QuizDetail = ({ quiz, scoresPaginator, onScoresPageChange, onQuizReload, isCreator, onDelete, userHighScore, isAdmin, onQuizToggleBan, onToggleRecommended }) => {
+const QuizDetail = ({ quiz, scoresPaginator, onScoresPageChange, onQuizReload, onDelete, userHighScore, isAdmin, onQuizToggleBan, onToggleRecommended }) => {
     return (
         <div className="grid grid-cols-12 pb-4">
             <div className="col-span-12 lg:col-span-3 lg:mr-4 mb-4 lg:mb-0 px-4 overflow-hidden shadow page">
@@ -26,6 +26,11 @@ const QuizDetail = ({ quiz, scoresPaginator, onScoresPageChange, onQuizReload, i
                 <div className="p-4 flex justify-center items-center">
                     <LikeControls quiz={quiz} onLikesUpdated={onQuizReload} />
                 </div>
+                {quiz.userCanManage && (
+                    <div className="p-4 flex justify-center items-center">
+                        <div className="rounded-full py-1 px-4 bg-primary hover:opacity-75 my-1 text-white shadow">{quiz.userIsOwner ? 'Owner' : 'Collaborator'}</div>
+                    </div>
+                )}
                 <div className="p-4">
                     <h3 className="text-lg font-bold text-center">Description</h3>
                     <p className="text-center">{quiz.description}</p>
@@ -67,7 +72,7 @@ const QuizDetail = ({ quiz, scoresPaginator, onScoresPageChange, onQuizReload, i
                         </Link>
                     </div>
                 </div>
-                {isCreator ? (
+                {quiz.userCanManage ? (
                     <>
                         <h3 className="text-lg font-bold text-center my-4">Actions</h3>
                         <div className="flex flex-col justify-center text-center">
@@ -80,16 +85,18 @@ const QuizDetail = ({ quiz, scoresPaginator, onScoresPageChange, onQuizReload, i
                                 </svg>
                                 <span className="ml-1">Edit Quiz</span>
                             </Link>
-                            <button
-                                type="button"
-                                onClick={onDelete}
-                                className="border border-red-400 text-red-400 text-center rounded mt-2 py-2 px-4 hover:bg-red-600 hover:text-white shadow inline-flex items-center justify-center"
-                            >
-                                <svg className="h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                                </svg>
-                                <span className="ml-1">Delete</span>
-                            </button>
+                            {quiz.userIsOwner && (
+                                <button
+                                    type="button"
+                                    onClick={onDelete}
+                                    className="border border-red-400 text-red-400 text-center rounded mt-2 py-2 px-4 hover:bg-red-600 hover:text-white shadow inline-flex items-center justify-center"
+                                >
+                                    <svg className="h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                    </svg>
+                                    <span className="ml-1">Delete</span>
+                                </button>
+                            )}
                         </div>
                     </>
                 ) : (
@@ -193,7 +200,6 @@ QuizDetail.propTypes = {
     onQuizReload: PropTypes.func.isRequired,
     onDelete: PropTypes.func.isRequired,
     onScoresPageChange: PropTypes.func.isRequired,
-    isCreator: PropTypes.bool.isRequired,
     isAdmin: PropTypes.bool.isRequired,
     onQuizToggleBan: PropTypes.func.isRequired,
     onToggleRecommended: PropTypes.func.isRequired

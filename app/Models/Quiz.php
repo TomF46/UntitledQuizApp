@@ -42,6 +42,11 @@ class Quiz extends Model
         return $this->belongsToMany(Tag::class)->withTimestamps();
     }
 
+    public function collaborators()
+    {
+        return $this->belongsToMany(User::class,'quiz_collaborators')->withTimestamps();
+    }
+
     public function ban()
     {
         return $this->hasOne(QuizBan::class);
@@ -50,6 +55,21 @@ class Quiz extends Model
     public function isBanned()
     {
         return $this->ban()->exists();
+    }
+
+    public function isOwner(User $user)
+    {
+        return $this->user->id == $user->id;
+    }
+
+    public function isCollaborator(User $user)
+    {
+        return $this->collaborators->contains($user);
+    }
+
+    public function userCanManage(User $user)
+    {
+        return $this->isOwner($user) || $this->isCollaborator($user);
     }
 
     public static function boot()
@@ -80,6 +100,9 @@ class Quiz extends Model
                 'id' => $this->user->id,
                 'profile_image' => $this->user->profile_image_url ? $this->user->profile_image_url : config('globalVariables.default_profile_pictures'),
             ],
+            'collaborators' => $this->collaborators()->get()->map(function ($user) {
+                return $user->username;
+            }),
             'recommended' => $this->recommended,
             'isBanned' => $this->isBanned(),
             'banId' => $this->isBanned() ? $this->ban->id : null
@@ -102,7 +125,7 @@ class Quiz extends Model
         ];
     }
 
-    public function mapOverviewWithQuestions()
+    public function mapOverviewWithQuestions(User $user)
     {
         return [
             'id' => $this->id,
@@ -116,6 +139,9 @@ class Quiz extends Model
             'tags' => $this->tags()->get()->map(function ($tag) {
                 return $tag->mapForSelect();
             }),
+            'collaborators' => $this->collaborators()->get()->map(function ($collaborator) {
+                return $collaborator->mapForSelect();
+            }),
             'creator' => [
                 "username" => $this->user->username,
                 'id' => $this->user->id,
@@ -123,7 +149,9 @@ class Quiz extends Model
             ],
             'recommended' => $this->recommended,
             'isBanned' => $this->isBanned(),
-            'banId' => $this->isBanned() ? $this->ban->id : null
+            'banId' => $this->isBanned() ? $this->ban->id : null,
+            'userCanManage' => $this->userCanManage($user),
+            'userIsOwner' => $this->isOwner($user)
         ];
     }
 
@@ -145,6 +173,9 @@ class Quiz extends Model
                 'id' => $this->user->id,
                 'profile_image' => $this->user->profile_image_url ? $this->user->profile_image_url : config('globalVariables.default_profile_pictures'),
             ],
+            'collaborators' => $this->collaborators()->get()->map(function ($user) {
+                return $user->username;
+            }),
             'likedByUser' => $this->isLikedBy($user),
             'dislikedByUser' => $this->isDislikedBy($user),
             'comments' => $this->comments()->get()->map(function ($comment) {
@@ -152,7 +183,9 @@ class Quiz extends Model
             }),
             'recommended' => $this->recommended,
             'isBanned' => $this->isBanned(),
-            'banId' => $this->isBanned() ? $this->ban->id : null
+            'banId' => $this->isBanned() ? $this->ban->id : null,
+            'userCanManage' => $this->userCanManage($user),
+            'userIsOwner' => $this->isOwner($user)
         ];
     }
 

@@ -5,7 +5,7 @@ import MultiSelectInput from "../../FormComponents/MultiSelectInput";
 import * as QuizManagementService from "../../../tools/QuizManagementService";
 import QuestionManagement from "./QuestionManagement";
 
-const QuizForm = ({ quiz, tags, updateQuiz, updateErrors, onSave, onReset, saving = false, errors = {} }) => {
+const QuizForm = ({ quiz, tags, collaborators, updateQuiz, updateErrors, onSave, onReset, saving = false, errors = {} }) => {
     const [uploadingImage, setUploadingImage] = useState(false);
 
 
@@ -21,6 +21,10 @@ const QuizForm = ({ quiz, tags, updateQuiz, updateErrors, onSave, onReset, savin
 
     function onTagChange(selected) {
         updateQuiz(QuizManagementService.updateTags(quiz, selected));
+    }
+
+    function onCollaboratorChange(selected) {
+        updateQuiz(QuizManagementService.updateCollaborators(quiz, selected));
     }
 
     return (
@@ -58,6 +62,19 @@ const QuizForm = ({ quiz, tags, updateQuiz, updateErrors, onSave, onReset, savin
                                 options={tags}
                                 onChange={onTagChange}
                                 error={errors.tags}
+                            />
+                        </div>
+                    )}
+
+                    {quiz.userIsOwner && collaborators && collaborators.length > 0 && (
+                        <div className="mb-6">
+                            <MultiSelectInput
+                                name="collaborators"
+                                label="Collaborators"
+                                value={quiz.collaborators}
+                                options={collaborators}
+                                onChange={onCollaboratorChange}
+                                error={errors.collaborators}
                             />
                         </div>
                     )}
@@ -128,6 +145,7 @@ const QuizForm = ({ quiz, tags, updateQuiz, updateErrors, onSave, onReset, savin
 QuizForm.propTypes = {
     quiz: PropTypes.object.isRequired,
     tags: PropTypes.array,
+    collaborators: PropTypes.array,
     errors: PropTypes.object,
     onSave: PropTypes.func.isRequired,
     onReset: PropTypes.func.isRequired,

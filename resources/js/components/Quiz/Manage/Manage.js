@@ -4,17 +4,18 @@ import PropTypes from "prop-types";
 import { newQuiz } from "../../../tools/objectShapes";
 import QuizForm from "./QuizForm";
 import { getQuizForEdit, saveQuiz } from "../../../api/quizApi";
-import { Redirect } from "react-router-dom";
 import { getTags } from "../../../api/tagsApi";
 import { confirmAlert } from "react-confirm-alert";
 import { toast } from "react-toastify";
 import LoadingMessage from "../../DisplayComponents/LoadingMessage";
 import * as QuizManagementService from "../../../tools/QuizManagementService";
 import _ from 'lodash';
+import { getPotentialCollaboratorsList } from "../../../api/friendsApi";
 
 const QuizManagementPage = ({ quizId, userId, history }) => {
     const [quiz, setQuiz] = useState({ ...newQuiz });
     const [tags, setTags] = useState(null);
+    const [collaborators, setCollaborators] = useState(null);
     const [errors, setErrors] = useState({ questions: [] });
     const [saving, setSaving] = useState(false);
     const [loaded, setLoaded] = useState(false);
@@ -47,6 +48,14 @@ const QuizManagementPage = ({ quizId, userId, history }) => {
         }
     }, [tags]);
 
+    useEffect(() => {
+        if (!collaborators) {
+            getPotentialCollaboratorsList().then(collaborators => {
+                setCollaborators(collaborators);
+            });
+        }
+    }, [collaborators]);
+
     function formIsValid() {
         var validated = QuizManagementService.validateQuiz(quiz);
         setErrors({ ...validated.errors });
@@ -61,6 +70,7 @@ const QuizManagementPage = ({ quizId, userId, history }) => {
         let quizToPost = { ...quiz };
 
         quizToPost.tags = quizToPost.tags.map(tag => tag.value);
+        quizToPost.collaborators = quizToPost.collaborators.map(collaborator => collaborator.value);
 
         saveQuiz(quizToPost)
             .then(response => {
@@ -107,9 +117,6 @@ const QuizManagementPage = ({ quizId, userId, history }) => {
 
     return (
         <div className="quiz-management-page container mx-auto">
-            {quiz.creator && quiz.creator.id != userId && (
-                <Redirect to="/" />
-            )}
             {!loaded ? (
                 <div className="shadow page">
                     <LoadingMessage message={"Loading form"} />
@@ -118,6 +125,7 @@ const QuizManagementPage = ({ quizId, userId, history }) => {
                 <QuizForm
                     quiz={quiz}
                     tags={tags}
+                    collaborators={collaborators}
                     errors={errors}
                     updateQuiz={updateQuiz}
                     updateErrors={updateErrors}

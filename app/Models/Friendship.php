@@ -50,6 +50,15 @@ class Friendship extends Model
         ];
     }
 
+    public function mapForCollaboratorList(User $user)
+    {
+        $friend = $user->id == $this->sender->id ? $this->recipient : $this->sender;
+        return [
+            'id' => $friend->id,
+            'username' => $friend->username
+        ];
+    }
+
     public function mapForFriendRequestsList(User $user)
     {
         $canAnswer = $user->id != $this->sender->id;

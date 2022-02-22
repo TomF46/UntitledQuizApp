@@ -95,6 +95,11 @@ export function updateTags(quiz, tags) {
     return quiz;
 }
 
+export function updateCollaborators(quiz, collaborators) {
+    quiz.collaborators = collaborators;
+    return quiz;
+}
+
 export function updateQuiz(quiz, name, value) {
     quiz[name] = value;
     return quiz;

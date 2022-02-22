@@ -65,6 +65,11 @@ class User extends Authenticatable
     {
         return $this->hasMany(Quiz::class);
     }
+    
+    public function collaboratedQuizzes()
+    {
+        return $this->belongsToMany(Quiz::class, 'quiz_collaborators');
+    }
 
     public function scores()
     {
@@ -113,7 +118,10 @@ class User extends Authenticatable
             'isAdmin' => $this->isAdmin(),
             'isBanned' => $this->isBanned(),
             'isFriend' => $this->isFriendsWith($user),
-            'hasFriendRequest' => $this->hasFriendRequest($user)
+            'hasFriendRequest' => $this->hasFriendRequest($user),
+            'collaboratedQuizzes' => $this->collaboratedQuizzes()->get()->map(function ($quiz) {
+                return $quiz->title;
+            })
         ];
     }
 
@@ -123,6 +131,14 @@ class User extends Authenticatable
             'id' => $this->id,
             'username' => $this->username,
             'challengePoints' => $this->challenge_points
+        ];
+    }
+
+    public function mapForSelect()
+    {
+        return [
+            'value' => $this->id,
+            'text' => $this->username
         ];
     }
 }

@@ -62,7 +62,7 @@ Route::middleware(['auth:api', 'role', 'notBanned'])->group(function () {
     Route::get('/friendships/requests', [App\Http\Controllers\FriendshipController::class, 'requests']);
     Route::post('/friendships/{friendship}/acceptRequest', [App\Http\Controllers\FriendshipController::class, 'acceptRequest']);
     Route::delete('/friendships/{friendship}', [App\Http\Controllers\FriendshipController::class, 'rejectOrRemoveFriendship']);
-
+    Route::get('/collaborators', [App\Http\Controllers\CollaboratorsController::class, 'index']);
 
 
     Route::get('/me/isAdmin', [App\Http\Controllers\MeController::class, 'isAdmin']);

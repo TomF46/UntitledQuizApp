@@ -43,3 +43,17 @@ export function acceptFriendRequest(friendshipId) {
             throw error;
         });
 }
+
+export function getPotentialCollaboratorsList() {
+    return axiosClient
+        .get(`/api/collaborators`)
+        .then(response => {
+            let collaborators = response.data.map(collaborator => {
+                return { value: collaborator.id, text: collaborator.username }
+            });
+            return collaborators;
+        })
+        .catch(error => {
+            throw error;
+        });
+}
