@@ -66,7 +66,7 @@ const QuizForm = ({ quiz, tags, collaborators, updateQuiz, updateErrors, onSave,
                         </div>
                     )}
 
-                    {quiz.userIsOwner && collaborators && collaborators.length > 0 && (
+                    {(collaborators && collaborators.length > 0) && (quiz.userIsOwner || !quiz.id) && (
                         <div className="mb-6">
                             <MultiSelectInput
                                 name="collaborators"

@@ -18,14 +18,12 @@ const QuizManagementPage = ({ quizId, userId, history }) => {
     const [collaborators, setCollaborators] = useState(null);
     const [errors, setErrors] = useState({ questions: [] });
     const [saving, setSaving] = useState(false);
-    const [loaded, setLoaded] = useState(false);
 
     useEffect(() => {
         if (quizId) {
             getQuizForEdit(quizId)
                 .then(data => {
                     setQuiz({ ...data });
-                    setLoaded(true);
                 })
                 .catch(error => {
                     toast.error(`Error fetching quiz to edit ${error.message}`, {
@@ -36,7 +34,6 @@ const QuizManagementPage = ({ quizId, userId, history }) => {
         } else {
             setQuiz(_.cloneDeep(newQuiz));
             updateErrors(QuizManagementService.addBlankErrorsForQuestion(errors));
-            setLoaded(true);
         }
     }, [quizId]);
 
@@ -117,11 +114,7 @@ const QuizManagementPage = ({ quizId, userId, history }) => {
 
     return (
         <div className="quiz-management-page container mx-auto">
-            {!loaded ? (
-                <div className="shadow page">
-                    <LoadingMessage message={"Loading form"} />
-                </div>
-            ) : (
+            {quiz && tags && collaborators ? (
                 <QuizForm
                     quiz={quiz}
                     tags={tags}
@@ -133,6 +126,10 @@ const QuizManagementPage = ({ quizId, userId, history }) => {
                     onSave={handleSave}
                     saving={saving}
                 />
+            ) : (
+                <div className="shadow page">
+                    <LoadingMessage message={"Loading form"} />
+                </div>
             )}
         </div>
     );
