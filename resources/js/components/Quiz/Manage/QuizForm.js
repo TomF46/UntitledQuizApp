@@ -62,6 +62,7 @@ const QuizForm = ({ quiz, tags, collaborators, updateQuiz, updateErrors, onSave,
                                 options={tags}
                                 onChange={onTagChange}
                                 error={errors.tags}
+                                helpText={'Add as many relevant tags as possible to improve searching allowing your quiz to be found by more people.'}
                             />
                         </div>
                     )}
@@ -75,6 +76,7 @@ const QuizForm = ({ quiz, tags, collaborators, updateQuiz, updateErrors, onSave,
                                 options={collaborators}
                                 onChange={onCollaboratorChange}
                                 error={errors.collaborators}
+                                helpText={'Collaborators can edit the quiz allowing collaboration between users. You must be friends with the user to add them as a collaborator.'}
                             />
                         </div>
                     )}

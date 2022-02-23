@@ -104,7 +104,7 @@ const FriendsPage = ({ history }) => {
                 <div className="col-span-12 lg:col-span-3 lg:mr-4 mb-4 lg:mb-0 px-4 pb-4 overflow-hidden shadow page">
                     <h1 className="font-bold text-primary text-4xl my-4 text-center">Details</h1>
                     <p>On this page you can view and manage your friends list as well as see and respond to any pending friend requests.</p>
-                    <p>Friends offer improved social interaction between users over just following each other. Upcoming features such as collaboratively managed quizzes will take advantage of this.</p>
+                    <p className="mt-4">Friends offer improved social interaction between users over just following each other. Upcoming features such as collaboratively managed quizzes will take advantage of this.</p>
                 </div>
                 <div className="col-span-12 lg:col-span-9">
                     <div className="mb-6 overflow-hidden shadow card px-4 py-2">
