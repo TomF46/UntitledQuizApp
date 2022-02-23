@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { friendRequest } from "../../../api/userApi";
 import { toast } from "react-toastify";
+import history from "../../../history";
 
 const ProfileSidebar = ({ user, currentUser, isAdmin, onToggleFollow, onLogout, onToggleBanned, reloadUser }) => {
 
@@ -17,7 +18,7 @@ const ProfileSidebar = ({ user, currentUser, isAdmin, onToggleFollow, onLogout, 
     }
 
     function seeRequests() {
-        alert("see requests");
+        history.push('/friends');
     }
 
     return (
@@ -28,7 +29,13 @@ const ProfileSidebar = ({ user, currentUser, isAdmin, onToggleFollow, onLogout, 
             <div>
                 <img src={user.profile_image} alt="profile-picture" className="rounded-full profile-photo" />
             </div>
+
             <div className="text-center my-4">
+                {user.id != currentUser && user.isFriend && (
+                    <div className="p-4 flex justify-center items-center">
+                        <div className="rounded-full py-1 px-4 bg-primary hover:opacity-75 my-1 text-white shadow">Friend</div>
+                    </div>
+                )}
                 <h3 className="text-lg font-bold">User Info</h3>
                 {user.isAdmin && <p className="font-bold">Administrator</p>}
                 {user.isBanned && <p className="font-bold text-red-400">Banned</p>}
