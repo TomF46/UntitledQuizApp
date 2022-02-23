@@ -11,6 +11,7 @@ import LoadingMessage from "../DisplayComponents/LoadingMessage";
 import { Link } from "react-router-dom";
 import ChallengesDashboard from "./Components/ChallengesDashboard";
 import { getRandomQuiz } from "../../api/quizApi";
+import FriendRequestsDashboard from "./Components/FriendRequestsDashboard";
 
 const DashboardPage = ({ userId, history }) => {
     const [user, setUser] = useState(null);
@@ -51,15 +52,6 @@ const DashboardPage = ({ userId, history }) => {
                         <p className="text-center text-primary my-4 font-bold">Actions</p>
                         <div className="flex flex-col justify-center">
                             <Link
-                                to={`/profile`}
-                                className="border border-gray-800 text-gray-800 text-center rounded py-2 px-4 hover:opacity-75 hover:text-secondary shadow inline-flex items-center justify-center mb-4"
-                            >
-                                <svg className="text-secondary h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                                </svg>
-                                <span className="ml-1">View Profile</span>
-                            </Link>
-                            <Link
                                 to={`/explore`}
                                 className="border border-gray-800 text-gray-800 text-center rounded py-2 px-4 hover:opacity-75 hover:text-secondary shadow inline-flex items-center justify-center mb-4"
                             >
@@ -76,6 +68,15 @@ const DashboardPage = ({ userId, history }) => {
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
                                 </svg>
                                 <span className="ml-1">Create</span>
+                            </Link>
+                            <Link
+                                to={`/profile`}
+                                className="border border-gray-800 text-gray-800 text-center rounded py-2 px-4 hover:opacity-75 hover:text-secondary shadow inline-flex items-center justify-center mb-4"
+                            >
+                                <svg className="text-secondary h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                                </svg>
+                                <span className="ml-1">View Profile</span>
                             </Link>
                             <Link
                                 to={`/friends`}
@@ -95,6 +96,7 @@ const DashboardPage = ({ userId, history }) => {
                         </div>
                     </div>
                     <div className="col-span-12 lg:col-span-9">
+                        <FriendRequestsDashboard />
                         <div className="mb-6 overflow-hidden shadow card">
                             <PopularQuizzesDashboard />
                         </div>
