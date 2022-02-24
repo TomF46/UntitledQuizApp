@@ -16,7 +16,7 @@ const BannedQuizList = ({ quizzes, onQuizUnban }) => {
                             <p className="text-sm text-gray-600">Reason:</p>
                             <p>{quiz.reason}</p>
                         </div>
-                        <div className="col-span-6 md:col-span-5 lg:col-span-3 flex justify-end mb-2">
+                        <div className="col-span-6 md:col-span-5 lg:col-span-3 flex justify-end">
                             <button
                                 type="button"
                                 onClick={() => onQuizUnban(quiz.id)}

@@ -8,7 +8,7 @@ const QuizList = ({ quizzes }) => {
             {quizzes.map((quiz) => {
                 return (
                     <div key={quiz.id} className="grid grid-cols-12 px-2 py-1 border-b border-gray-200 overflow-hidden">
-                        <div className="col-span-6 md:col-span-4 lg:col-span-3">
+                        <div className="col-span-6 pr-4 md:pr-0 md:col-span-4 lg:col-span-3">
                             <p className="text-sm text-gray-600">Name:</p>
                             <Link className="font-medium items-center pointer" to={`/quiz/${quiz.id}`}>{quiz.title}</Link>
                         </div>
@@ -35,7 +35,7 @@ const QuizList = ({ quizzes }) => {
                         <div className="hidden md:inline-flex col-span-1 items-center">
                             {!!quiz.recommended && (<img src="https://untitled-quiz-app-images.s3.eu-west-1.amazonaws.com/QAppRecommended38A3A5.png" className="w-12 m-auto" />)}
                         </div>
-                        <div className="col-span-6 md:col-span-5 lg:col-span-3 flex justify-end mb-2">
+                        <div className="col-span-6 md:col-span-5 lg:col-span-3 flex justify-end  my-2 sm:my-0">
                             <Link
                                 to={`/quiz/${quiz.id}`}
                                 className="bg-secondary text-white rounded py-2 px-4 hover:opacity-75 align-middle shadow table vertical-centered"

@@ -9,15 +9,15 @@ const FriendRequestsList = ({ requests, onAccept, onRemove }) => {
             {requests.map((request) => {
                 return (
                     <div key={request.id} className="grid grid-cols-12  px-2 py-1 border-b border-gray-200 overflow-hidden">
-                        <div className="col-span-2 text-center md:text-left">
+                        <div className="col-span-4 md:col-span-2 text-center md:text-left">
                             <p className="text-sm text-gray-600">Sender:</p>
                             <Link className="font-medium items-center pointer" to={`/profile/${request.sender.id}`}>{request.sender.username}</Link>
                         </div>
-                        <div className="col-span-2 text-center md:text-left">
+                        <div className="col-span-4 md:col-span-2 text-center md:text-left">
                             <p className="text-sm text-gray-600">Recipient:</p>
                             <Link className="font-medium items-center pointer" to={`/profile/${request.recipient.id}`}>{request.recipient.username}</Link>
                         </div>
-                        <div className="col-span-4 text-center md:text-left">
+                        <div className="hidden md:block col-span-4 text-center md:text-left">
                             <p className="text-sm text-gray-600">Sent:</p>
                             <p><Moment format="DD/MM/YYYY h:mm:ss a">{request.date}</Moment></p>
                         </div>

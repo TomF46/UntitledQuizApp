@@ -9,7 +9,7 @@ const UsersList = ({ users }) => {
                 return (
                     <div key={user.id} className="grid grid-cols-12 px-2 py-1 border-b border-gray-200 overflow-hidden">
                         <div className="col-span-2 lg:col-span-1 inline-flex items-center">
-                            <img src={user.profile_image} alt="profile-picture" className="rounded-full h-12 w-12" />
+                            <img src={user.profile_image} alt="profile-picture" className="rounded-full h-10 w-10" />
                         </div>
                         <div className="col-span-6 lg:col-span-4">
                             <p className="text-sm text-gray-600">Name:</p>
@@ -25,7 +25,7 @@ const UsersList = ({ users }) => {
                             </svg>
                             <p className="ml-1">{user.followerCount} followers</p>
                         </div>
-                        <div className="col-span-4 lg:col-span-3 flex justify-end mb-2">
+                        <div className="col-span-4 lg:col-span-3 flex justify-end">
                             <Link
                                 to={`/profile/${user.id}`}
                                 className="bg-primary  text-white rounded py-2 px-4 hover:opacity-75 inline-block align-middle shadow"
