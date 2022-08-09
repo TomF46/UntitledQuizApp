@@ -120,7 +120,7 @@ const CommentsSection = ({ quizId, comments, onReloadQuiz }) => {
                     <div className="p-4">
                         {commentsPagination[paginationIndex - 1].map((comment) => {
                             return (
-                                <Comment key={comment.id} comment={comment} onDeleteComment={handleCommentDelete} />
+                                <Comment key={comment.id} comment={comment} onDeleteComment={handleCommentDelete} onReload={onReloadQuiz} />
                             )
                         })}
                         <PaginationControls from={from} to={to} of={comments.length} currentPage={paginationIndex} lastPage={commentsPagination.length} onNext={handleNext} onPrevious={handlePrevious} />

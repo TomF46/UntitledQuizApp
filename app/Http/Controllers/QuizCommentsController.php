@@ -32,6 +32,19 @@ class QuizCommentsController extends Controller
         return response()->json($paginator);
     }
 
+    public function update(Request $request, Comment $comment)
+    {
+        $currentUser = $request->user();
+        if (!$comment->isAuthor($currentUser)) return response()->json(['error' => 'unauthorized.'], 401);
+
+        $attributes = $this->validateComment($request);
+        $comment->text = $attributes['text'];
+        $comment->save();
+
+        $comment = $comment->fresh();
+        return response()->json($comment);
+    }
+
     public function remove(Request $request, Comment $comment)
     {
         $currentUser = $request->user();

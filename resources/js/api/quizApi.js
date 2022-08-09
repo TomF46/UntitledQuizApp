@@ -181,6 +181,17 @@ export function addComment(quizId, comment) {
         });
 }
 
+export function editComment(comment) {
+    return axiosClient
+        .put(`/api/comments/${comment.id}`, comment)
+        .then(response => {
+            return response.data;
+        })
+        .catch(error => {
+            throw error;
+        });
+}
+
 export function removeComment(commentId) {
     return axiosClient
         .delete(`/api/comments/${commentId}`)

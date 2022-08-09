@@ -46,8 +46,9 @@ class Comment extends Model
             'quiz_name' => $this->quiz->title,
             'quiz_id' => $this->quiz->id,
             'text' => $this->removed ? "[Comment removed]" : $this->text,
-            'created_at' => $this->created_at,
-            'canManage' => ($this->isAuthor($user) || $user->isAdmin()) && !$this->removed
+            'updated_at' => $this->updated_at,
+            'canDelete' => ($this->isAuthor($user) || $user->isAdmin()) && !$this->removed,
+            'canEdit' => $this->isAuthor($user) && !$this->removed
         ];
     }
 }

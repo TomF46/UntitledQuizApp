@@ -63,8 +63,7 @@ class CommentsTest extends TestCase
         $response = $this->withHeaders([
             'Accept' => 'application/json',
             'Authorization' => 'Bearer ' . TestHelper::getBearerTokenForUser($user1)
-        ])->delete(
-            '/api/comments/' . $comment['id']);
+        ])->delete('/api/comments/' . $comment['id']);
             
         $response->assertNoContent();
     }
@@ -81,9 +80,51 @@ class CommentsTest extends TestCase
         $response = $this->withHeaders([
             'Accept' => 'application/json',
             'Authorization' => 'Bearer ' . TestHelper::getBearerTokenForUser($user1)
-        ])->delete(
-            '/api/comments/' . $comment['id']);
-            
+        ])->delete('/api/comments/' . $comment['id']);
+        $response->assertStatus(401);
+    }
+
+    public function testCanUpdateOwnComment()
+    {
+        $user1 = TestHelper::createUser();
+        $text = "This is a updated comment";
+
+        $comment = Comment::factory()->create([
+            'user_id' => $user1->id,
+        ]);
+
+        $response = $this->withHeaders([
+            'Accept' => 'application/json',
+            'Authorization' => 'Bearer ' . TestHelper::getBearerTokenForUser($user1)
+        ])->putJson(
+            '/api/comments/' . $comment['id'], [
+                'text' => $text
+            ]
+        );
+        $response->assertOk();
+        $response->assertJson([
+            'text' => $text
+        ]);
+    }
+
+    public function testUserCantUpdateAnotherUsersComment()
+    {
+        $user1 = TestHelper::createUser();
+        $user2 = TestHelper::createUser();
+        $text = "This is a updated comment";
+
+        $comment = Comment::factory()->create([
+            'user_id' => $user1->id,
+        ]);
+
+        $response = $this->withHeaders([
+            'Accept' => 'application/json',
+            'Authorization' => 'Bearer ' . TestHelper::getBearerTokenForUser($user2)
+        ])->putJson(
+            '/api/comments/' . $comment['id'], [
+                'text' => $text
+            ]
+        );
         $response->assertStatus(401);
     }
 }
