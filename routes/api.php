@@ -46,6 +46,7 @@ Route::middleware(['auth:api', 'role', 'notBanned'])->group(function () {
     Route::delete('/quizzes/{quiz}/like', [App\Http\Controllers\QuizLikesController::class, 'remove']);
     Route::get('/quizzes/{quiz}/comments', [App\Http\Controllers\QuizCommentsController::class, 'show']);
     Route::post('/quizzes/{quiz}/comments', [App\Http\Controllers\QuizCommentsController::class, 'store']);
+    Route::delete('/comments/{comment}', [App\Http\Controllers\QuizCommentsController::class, 'remove']);
 
     Route::get('/users', [App\Http\Controllers\UsersController::class, 'index']);
     Route::get('/users/{user}', [App\Http\Controllers\UsersController::class, 'show']);

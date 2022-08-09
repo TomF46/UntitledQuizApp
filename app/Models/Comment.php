@@ -25,17 +25,29 @@ class Comment extends Model
         return $this->belongsTo(Quiz::class);
     }
 
-    public function map()
+    public function isAuthor(User $user)
+    {
+        return $this->user->id == $user->id;
+    }
+
+    public function remove()
+    {
+        $this->removed = true;
+        $this->save();
+    }
+
+    public function map(User $user)
     {
         return [
             'id' => $this->id,
-            'username' => $this->user->username,
-            'user_id' => $this->user->id,
-            'user_img' => $this->user->profile_image_url ? $this->user->profile_image_url : config('globalVariables.default_profile_pictures'),
+            'username' => $this->removed ? "[Removed]" : $this->user->username,
+            'user_id' => $this->removed ? null : $this->user->id,
+            'user_img' => !$this->removed && $this->user->profile_image_url ? $this->user->profile_image_url : config('globalVariables.default_profile_pictures'),
             'quiz_name' => $this->quiz->title,
             'quiz_id' => $this->quiz->id,
-            'text' => $this->text,
-            'created_at' => $this->created_at
+            'text' => $this->removed ? "[Comment removed]" : $this->text,
+            'created_at' => $this->created_at,
+            'canManage' => ($this->isAuthor($user) || $user->isAdmin()) && !$this->removed
         ];
     }
 }

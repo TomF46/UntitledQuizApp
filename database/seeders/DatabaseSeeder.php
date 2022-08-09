@@ -28,5 +28,9 @@ class DatabaseSeeder extends Seeder
             'role' => Roles::ADMINISTRATOR
         ]);
         $user->role()->save($role);
+
+        $this->call([
+            TagSeeder::class,
+        ]);
     }
 }

@@ -71,7 +71,7 @@ Pre requisite
 
 -   Set up docker for your operating system, information can be found in the [Laravel installation documentation](https://laravel.com/docs/8.x/installation)
 
-## Quick Setup
+### Quick Setup
 
 If you are using the docker environment with sail you can use one of two quick set up `.sh` scripts. These run clean migrations, run one of two seeders depending on which is run and then configures keys for laravel passport. First however you must configure your `.env` file using the example `.env.example` in the root of the project.
 

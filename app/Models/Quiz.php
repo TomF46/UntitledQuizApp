@@ -178,8 +178,8 @@ class Quiz extends Model
             }),
             'likedByUser' => $this->isLikedBy($user),
             'dislikedByUser' => $this->isDislikedBy($user),
-            'comments' => $this->comments()->get()->map(function ($comment) {
-                return $comment->map();
+            'comments' => $this->comments()->get()->map(function ($comment) use ($user) {
+                return $comment->map($user);
             }),
             'recommended' => $this->recommended,
             'isBanned' => $this->isBanned(),

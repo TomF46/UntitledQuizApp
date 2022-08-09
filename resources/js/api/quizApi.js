@@ -181,6 +181,17 @@ export function addComment(quizId, comment) {
         });
 }
 
+export function removeComment(commentId) {
+    return axiosClient
+        .delete(`/api/comments/${commentId}`)
+        .then(response => {
+            return response.data;
+        })
+        .catch(error => {
+            throw error;
+        });
+}
+
 export function getUsersHighScoreForQuiz(quizId) {
     return axiosClient
         .get(`/api/quizzes/${quizId}/myHighscore`)

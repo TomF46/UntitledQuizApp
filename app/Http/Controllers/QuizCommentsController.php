@@ -23,12 +23,24 @@ class QuizCommentsController extends Controller
 
     public function show(Quiz $quiz)
     {
+        $currentUser = $request->user();
         $paginator = $quiz->comments()->orderBy('created_at', 'desc')->paginate(10);
-        $paginator->getCollection()->transform(function ($comment) {
-            return $comment->map();
+        $paginator->getCollection()->transform(function ($comment) use ($currentUser) {
+            return $comment->map($currentUser);
         });
 
         return response()->json($paginator);
+    }
+
+    public function remove(Request $request, Comment $comment)
+    {
+        $currentUser = $request->user();
+        if ($comment->isAuthor($currentUser) || $currentUser->isAdmin()){
+            $comment->remove();
+            return response()->noContent();
+        } 
+
+        return response()->json(['error' => 'unauthorized.'], 401);
     }
 
     protected function validateComment(Request $request)

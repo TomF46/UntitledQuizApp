@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import CommentForm from "./CommentForm";
-import { addComment } from "../../../api/quizApi";
+import { addComment, removeComment } from "../../../api/quizApi";
 import { toast } from "react-toastify";
 import Comment from "./Comment";
 import PaginationControls from "../PaginationControls";
+import { confirmAlert } from "react-confirm-alert";
 
 const CommentsSection = ({ quizId, comments, onReloadQuiz }) => {
     const pageLength = 10;
@@ -56,6 +57,36 @@ const CommentsSection = ({ quizId, comments, onReloadQuiz }) => {
             });
     }
 
+    function handleCommentDelete(commentId) {
+        confirmAlert({
+            title: "Confirm action",
+            message: `Are you sure you want to remove this comment?`,
+            buttons: [
+                {
+                    label: "Yes",
+                    onClick: () => {
+                        deleteComment(commentId);
+                    },
+                },
+                {
+                    label: "No",
+                    onClick: () => { },
+                },
+            ],
+        });
+    }
+
+    function deleteComment(commentId) {
+        removeComment(commentId).then(response => {
+            toast.success("Comment removed");
+            onReloadQuiz();
+        }).catch(err => {
+            toast.error("Error removing comment", {
+                autoClose: false
+            });
+        })
+    }
+
     function chunkArray(array, size) {
         let result = []
         let arrayCopy = [...array]
@@ -89,7 +120,7 @@ const CommentsSection = ({ quizId, comments, onReloadQuiz }) => {
                     <div className="p-4">
                         {commentsPagination[paginationIndex - 1].map((comment) => {
                             return (
-                                <Comment key={comment.id} comment={comment} />
+                                <Comment key={comment.id} comment={comment} onDeleteComment={handleCommentDelete} />
                             )
                         })}
                         <PaginationControls from={from} to={to} of={comments.length} currentPage={paginationIndex} lastPage={commentsPagination.length} onNext={handleNext} onPrevious={handlePrevious} />
