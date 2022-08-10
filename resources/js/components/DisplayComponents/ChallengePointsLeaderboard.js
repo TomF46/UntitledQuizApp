@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 
 const ChallengePointsLeaderboard = ({ rows, startingPosition }) => {
     return rows.length > 0 ? (
@@ -17,7 +18,9 @@ const ChallengePointsLeaderboard = ({ rows, startingPosition }) => {
                         return (
                             <tr className="border-t border-gray-200 text-center" key={rows.id}>
                                 <td className="px-4 py-2">{startingPosition + index}</td>
-                                <td className="px-4 py-2">{row.username}</td>
+                                <Link to={`/profile/${row.id}`}>
+                                    <td className="px-4 py-2 font-bold text-secondary">{row.username}</td>
+                                </Link>
                                 <td className="px-4 py-2">{row.challengePoints}</td>
                             </tr>
                         )
@@ -26,8 +29,8 @@ const ChallengePointsLeaderboard = ({ rows, startingPosition }) => {
             </table>
         </div>
     ) : (
-            <p className="text-center">There is currently no data to show.</p>
-        )
+        <p className="text-center">There is currently no data to show.</p>
+    )
 };
 
 ChallengePointsLeaderboard.propTypes = {

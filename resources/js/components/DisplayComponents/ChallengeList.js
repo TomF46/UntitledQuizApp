@@ -10,25 +10,25 @@ const ChallengeList = ({ challenges }) => {
                     <div key={challenge.id} className="grid grid-cols-12  px-2 py-1 border-b border-gray-200 overflow-hidden">
                         <div className="col-span-6 md:col-span-2 text-center md:text-left">
                             <p className="text-sm text-gray-600">Challenger:</p>
-                            <Link className="font-medium items-center pointer" to={`/profile/${challenge.challengerId}`}>{challenge.challengerUsername}</Link>
+                            <Link className="font-bold text-secondary items-center pointer" to={`/profile/${challenge.challengerId}`}>{challenge.challengerUsername}</Link>
                         </div>
                         <div className="col-span-6 md:col-span-2 text-center md:text-left">
                             <p className="text-sm text-gray-600">Recipient:</p>
-                            <Link className="font-medium items-center pointer" to={`/profile/${challenge.recipientId}`}>{challenge.recipientUsername}</Link>
+                            <Link className="font-bold text-secondary items-center pointer" to={`/profile/${challenge.recipientId}`}>{challenge.recipientUsername}</Link>
                         </div>
                         <div className="col-span-4 md:col-span-2 text-center md:text-left">
                             <p className="text-sm text-gray-600">Quiz:</p>
-                            <Link className="font-medium items-center pointer" to={`/quiz/${challenge.quizId}`}>{challenge.quizName}</Link>
+                            <Link className="font-bold text-secondary items-center pointer" to={`/quiz/${challenge.quizId}`}>{challenge.quizName}</Link>
                         </div>
                         <div className="col-span-4 md:col-span-2 text-center md:text-left">
                             <p className="text-sm text-gray-600">Score:</p>
-                            <p className="font-medium items-center">{challenge.scorePercentToBeat}%</p>
+                            <p className="items-center">{challenge.scorePercentToBeat}%</p>
                         </div>
                         <div className="col-span-4 md:col-span-2 text-center md:text-left">
                             <p className="text-sm text-gray-600">Status:</p>
-                            <p className="font-medium items-center">{challenge.status}</p>
+                            <p className="items-center">{challenge.status}</p>
                         </div>
-                        <div className="col-span-12 md:col-span-2 flex justify-center my-2 sm:my-0">
+                        <div className="col-span-12 md:col-span-2 flex justify-end my-2 sm:my-0">
                             <div className="table vertical-centered">
                                 {challenge.userCanAttempt && (
                                     <Link

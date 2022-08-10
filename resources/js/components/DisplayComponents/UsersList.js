@@ -13,7 +13,7 @@ const UsersList = ({ users }) => {
                         </div>
                         <div className="col-span-6 lg:col-span-4">
                             <p className="text-sm text-gray-600">Name:</p>
-                            <Link to={`/profile/${user.id}`} className="font-medium text-lg items-center pointer">{user.username}</Link>
+                            <Link to={`/profile/${user.id}`} className="font-bold text-secondary items-center pointer">{user.username}</Link>
                         </div>
                         <div className="hidden lg:block col-span-2">
                             <p className="text-sm text-gray-600">Quizzes created:</p>
@@ -26,11 +26,20 @@ const UsersList = ({ users }) => {
                             <p className="ml-1">{user.followerCount} followers</p>
                         </div>
                         <div className="col-span-4 lg:col-span-3 flex justify-end">
-                            <Link
+                            {/* <Link
                                 to={`/profile/${user.id}`}
                                 className="bg-primary  text-white rounded py-2 px-4 hover:opacity-75 inline-block align-middle shadow"
                             >
                                 Profile
+                            </Link> */}
+                            <Link
+                                to={`/profile/${user.id}`}
+                                className="bg-primary  text-white rounded py-2 px-4 hover:opacity-75 shadow inline-flex items-center ml-2"
+                            >
+                                <svg className="text-white h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                                </svg>
+                                <p className="ml-1">Profile</p>
                             </Link>
                         </div>
                     </div>

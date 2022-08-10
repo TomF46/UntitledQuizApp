@@ -10,7 +10,7 @@ const QuizList = ({ quizzes }) => {
                     <div key={quiz.id} className="grid grid-cols-12 px-2 py-1 border-b border-gray-200 overflow-hidden">
                         <div className="col-span-6 pr-4 md:pr-0 md:col-span-4 lg:col-span-3">
                             <p className="text-sm text-gray-600">Name:</p>
-                            <Link className="font-medium items-center pointer" to={`/quiz/${quiz.id}`}>{quiz.title}</Link>
+                            <Link className="font-bold items-center pointer text-secondary" to={`/quiz/${quiz.id}`}>{quiz.title}</Link>
                         </div>
                         <div className="hidden lg:block col-span-2">
                             <p className="text-sm text-gray-600">Total Questions:</p>

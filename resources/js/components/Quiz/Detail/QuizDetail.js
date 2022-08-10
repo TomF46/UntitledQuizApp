@@ -134,21 +134,21 @@ const QuizDetail = ({ quiz, scoresPaginator, onScoresPageChange, onQuizReload, o
                 )}
             </div>
             <div className="col-span-12 lg:col-span-9">
-                <div className="overflow-hidden shadow card">
+                <div className="overflow-hidden shadow card mb-4">
                     <h2 className="hidden lg:block font-bold text-primary text-4xl py-4 text-center">
                         {quiz.title}
                     </h2>
                     <div className="grid grid-cols-3 p-4">
                         <div>
-                            <p className="text-small text-gray-600 text-center">Total Questions:</p>
+                            <p className="text-secondary text-center font-bold">Total Questions:</p>
                             <p className="text-center">{quiz.questions.length} questions</p>
                         </div>
                         <div>
-                            <p className="text-small text-gray-600 text-center">Plays:</p>
+                            <p className="text-secondary text-center font-bold">Plays:</p>
                             <p className="text-center">{quiz.totalPlays}</p>
                         </div>
                         <div>
-                            <p className="text-small text-gray-600 text-center">Likes:</p>
+                            <p className="text-secondary text-center font-bold">Likes:</p>
                             <p className="text-center">{quiz.totalLikes}</p>
                         </div>
                     </div>
@@ -161,11 +161,11 @@ const QuizDetail = ({ quiz, scoresPaginator, onScoresPageChange, onQuizReload, o
                                     <h2 className="font-bold text-primary text-2xl mb-4 text-center">Your high score</h2>
                                 </div>
                                 <div className="col-span-6 text-center">
-                                    <p className="text-sm text-gray-600">Score</p>
+                                    <p className="text-secondary font-bold">Score</p>
                                     <p className="font-medium items-center">{userHighScore.score}</p>
                                 </div>
                                 <div className="col-span-6 text-center">
-                                    <p className="text-sm text-gray-600">Score percentage</p>
+                                    <p className="text-secondary font-bold">Score percentage</p>
                                     <p className="font-medium items-center">{userHighScore.score_percent}%</p>
                                 </div>
 
