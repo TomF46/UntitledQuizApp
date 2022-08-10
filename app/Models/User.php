@@ -81,6 +81,11 @@ class User extends Authenticatable
         return $this->hasMany(Like::class);
     }
 
+    public function notifications()
+    {
+        return $this->hasMany(Notification::class, 'recipient_id');
+    }
+
     public function getChallenges()
     {
         return challenge::Where([['recipient_id', $this->id], ['status', ChallengeStatus::NotStarted]])->get();

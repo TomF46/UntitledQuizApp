@@ -11,7 +11,7 @@ class CollaboratorsController extends Controller
     {
         $currentUser = $request->User();
 
-        $list = $request->user()->friendsList();
+        $list = $currentUser->friendsList();
         $list->transform(function ($friendship) use ($currentUser){
             return $friendship->mapForCollaboratorList($currentUser);
         });
