@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Helpers\NotificationsHelper;
+use App\Enums\FriendshipStatus;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -25,6 +27,17 @@ class Friendship extends Model
     public function recipient()
     {
         return $this->belongsTo(User::class);
+    }
+
+    protected static function booted()
+    {
+        static::created(function ($friendship) {
+            NotificationsHelper::sendFriendRequestRecievedNotification($friendship->recipient, $friendship->sender);
+        });
+
+        self::updated(function($friendship){
+            if($friendship->status == FriendshipStatus::Accepted) NotificationsHelper::sendFriendRequestAcceptedNotification($friendship->sender, $friendship->recipient);
+        });
     }
 
     public function userIsRecipient(User $user)

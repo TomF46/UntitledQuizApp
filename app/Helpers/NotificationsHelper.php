@@ -46,7 +46,7 @@ class NotificationsHelper
             'recipient_id' => $to->id,
             'sender_id' => $from->id,
             'type' => NotificationType::FriendRequestRecieved,
-            'text' => 'You have recieved a friend request from ' . $from->username
+            'text' => 'You have recieved a friend request from ' . $from->username . '.'
         ]);
     }
 
@@ -75,7 +75,7 @@ class NotificationsHelper
         $notification = Notification::create([
             'recipient_id' => $to->id,
             'sender_id' => $from->id,
-            'type' => NotificationType::QuizUnanned,
+            'type' => NotificationType::QuizUnbanned,
             'text' => 'Your quiz ' . $quiz->title . ' has been unbanned.'
         ]);
     }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Filters\BannedQuizSearch;
 use App\Models\QuizBan;
 use App\Models\Quiz;
+use App\Helpers\NotificationsHelper;
 use Illuminate\Http\Request;
 
 class QuizBanController extends Controller
@@ -41,9 +42,10 @@ class QuizBanController extends Controller
         return response()->json(['success' => 'success'], 200);
     }
 
-    public function remove(Quiz $quiz)
+    public function remove(Quiz $quiz, Request $request)
     {
         $quiz->ban()->delete();
+        NotificationsHelper::sendQuizUnbannedNotification($quiz->user, $request->user(), $quiz);
         return response()->json(['success' => 'success'], 200);
     }
 

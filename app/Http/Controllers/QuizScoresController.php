@@ -7,6 +7,7 @@ use App\Models\Answer;
 use App\Models\Challenge;
 use App\Models\Score;
 use App\Models\Quiz;
+use App\Helpers\NotificationsHelper;
 use Illuminate\Http\Request;
 
 class QuizScoresController extends Controller
@@ -77,9 +78,11 @@ class QuizScoresController extends Controller
         if ($score->score_percent >= $challenge->score->score_percent) {
             $challenge->status = ChallengeStatus::Success;
             $challenge->recipient->incrementChallengePoints();
+            NotificationsHelper::sendChallengeLostNotification($challenge->challenger, $challenge->recipient, $score->quiz);
         } else {
             $challenge->status = ChallengeStatus::Failed;
             $challenge->challenger->incrementChallengePoints();
+            NotificationsHelper::sendChallengeWonNotification($challenge->challenger, $challenge->recipient, $score->quiz);
         }
 
         $challenge->save();

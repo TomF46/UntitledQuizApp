@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Enums\ChallengeStatus;
+use App\Helpers\NotificationsHelper;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -30,6 +31,13 @@ class Challenge extends Model
     public function score()
     {
         return $this->belongsTo(Score::class);
+    }
+
+    protected static function booted()
+    {
+        static::created(function ($notification) {
+            NotificationsHelper::sendChallengeRecievedNotification($notification->recipient, $notification->challenger, $notification->score->quiz);
+        });
     }
 
     public function map(User $user)

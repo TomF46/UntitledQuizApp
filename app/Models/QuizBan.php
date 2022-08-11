@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Helpers\NotificationsHelper;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -23,6 +24,20 @@ class QuizBan extends Model
     {
         return $this->quiz->user;
     }
+
+    public function admin()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    protected static function booted()
+    {
+        static::created(function ($ban) {
+            $admin = User::find($ban->admin_id);
+            NotificationsHelper::sendQuizBannedNotification($ban->quiz->user, $admin, $ban->quiz);
+        });
+    }
+
 
     public function map()
     {
