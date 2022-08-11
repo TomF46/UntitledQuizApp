@@ -50,6 +50,7 @@ Route::middleware(['auth:api', 'role', 'notBanned'])->group(function () {
     Route::put('/comments/{comment}', [App\Http\Controllers\QuizCommentsController::class, 'update']);
 
     Route::get('/notifications', [App\Http\Controllers\NotificationsController::class, 'index']);
+    Route::put('/notifications/{notification}/read', [App\Http\Controllers\NotificationsController::class, 'read']);
 
 
     Route::get('/users', [App\Http\Controllers\UsersController::class, 'index']);
@@ -83,6 +84,7 @@ Route::middleware(['auth:api', 'role', 'notBanned'])->group(function () {
     Route::get('/dashboard/quizzes/followed', [App\Http\Controllers\DashboardController::class, 'getQuizzesByFollowedUser']);
     Route::get('/dashboard/quizzes/popular', [App\Http\Controllers\DashboardController::class, 'getPopularQuizzes']);
     Route::get('/dashboard/users/followed', [App\Http\Controllers\DashboardController::class, 'getFollowedUsers']);
+    Route::get('/dashboard/notifications', [App\Http\Controllers\DashboardController::class, 'getUnreadNotifications']);
 
     Route::get('/challenges', [App\Http\Controllers\ChallengesController::class, 'index']);
     Route::post('/challenges', [App\Http\Controllers\ChallengesController::class, 'store']);

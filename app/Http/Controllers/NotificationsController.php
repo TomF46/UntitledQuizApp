@@ -11,7 +11,7 @@ class NotificationsController extends Controller
     public function index(Request $request)
     {
         $currentUser = $request->User();
-        $paginator = $currentUser->notifications()->paginate(20);
+        $paginator = $currentUser->notifications()->latest()->paginate(20);
         $paginator->getCollection()->transform(function ($notification){
             return $notification->map();
         });

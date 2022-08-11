@@ -41,6 +41,8 @@ class Notification extends Model
             'recipient' => $this->recipient->id,
             'text' => $this->text,
             'recieved' => $this->created_at,
+            'read' => $this->read,
+            'icon' => $this->sender->profile_image_url ? $this->sender->profile_image_url : config('globalVariables.default_profile_pictures')
         ];
     }
 

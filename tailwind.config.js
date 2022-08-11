@@ -13,6 +13,7 @@ module.exports = {
             ...theme('colors'),
             'primary': '#22577A',
             'secondary': '#38A3A5',
+            'secondaryLight': '#D7ECED',
             'danger': '#b41e00'
         })
     },

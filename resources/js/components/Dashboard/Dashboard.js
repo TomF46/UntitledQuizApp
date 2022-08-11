@@ -12,6 +12,7 @@ import { Link } from "react-router-dom";
 import ChallengesDashboard from "./Components/ChallengesDashboard";
 import { getRandomQuiz } from "../../api/quizApi";
 import FriendRequestsDashboard from "./Components/FriendRequestsDashboard";
+import NotificationsDashboard from "./Components/NotificationsDashboard";
 
 const DashboardPage = ({ userId, history }) => {
     const [user, setUser] = useState(null);
@@ -97,6 +98,9 @@ const DashboardPage = ({ userId, history }) => {
                     </div>
                     <div className="col-span-12 lg:col-span-9">
                         <FriendRequestsDashboard />
+                        <div className="mb-6 overflow-hidden shadow card">
+                            <NotificationsDashboard />
+                        </div>
                         <div className="mb-6 overflow-hidden shadow card">
                             <PopularQuizzesDashboard />
                         </div>

@@ -62,6 +62,5 @@ class NotificationTest extends TestCase
 
         $expectedText = $user2->username . ' has sent you a challenge on the ' . $quiz->title . ' quiz.';
         $this->assertEquals($expectedText, $notification->text);
-
     }
 }

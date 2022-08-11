@@ -61,4 +61,24 @@ class NotificationsTest extends TestCase
             'total' => 0
         ]);
     }
+
+    public function testCanReadNotification()
+    {
+        $user1 = TestHelper::createUser();
+
+        $notification = Notification::factory()->create([
+            'recipient_id' => $user1->id,
+        ]);
+        
+        $response = $this->withHeaders([
+            'Accept' => 'application/json',
+            'Authorization' => 'Bearer ' . TestHelper::getBearerTokenForUser($user1)
+        ])->put('/api/notifications/' . $notification->id . '/read' );
+        
+        $notification = $notification->fresh();
+
+        $response->assertStatus(204);
+        $this->assertEquals(true ,$notification->read);
+
+    }
 }

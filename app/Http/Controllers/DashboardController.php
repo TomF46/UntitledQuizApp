@@ -44,4 +44,15 @@ class DashboardController extends Controller
 
         return response()->json($quizzes);
     }
+
+    public function getUnreadNotifications(Request $request)
+    {
+        $currentUser = $request->User();
+        $paginator = $currentUser->notifications()->where('read', false)->latest()->paginate(5);
+        $paginator->getCollection()->transform(function ($notification){
+            return $notification->map();
+        });
+
+        return response()->json($paginator);
+    }
 }

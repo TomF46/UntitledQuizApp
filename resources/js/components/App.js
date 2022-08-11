@@ -28,6 +28,7 @@ import BannedPage from "./Banned";
 import QuizBanPage from "./Admin/QuizAdmin/QuizBanPage";
 import QuizBanListPage from "./Admin/QuizAdmin/QuizBanListPage";
 import FriendsPage from "./Friends/FriendsPage";
+import NotificationsPage from "./Notifications/NotificationsPage";
 
 const Main = ({ location }) => (
     <>
@@ -82,6 +83,10 @@ const Main = ({ location }) => (
                                 <AuthenticatedRoute
                                     path="/challenges"
                                     component={ChallengesPage}
+                                />
+                                <AuthenticatedRoute
+                                    path="/notifications"
+                                    component={NotificationsPage}
                                 />
                                 <AuthenticatedRoute
                                     path="/quiz/:quizId/edit"

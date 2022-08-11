@@ -62,7 +62,7 @@ class ChallengesTest extends TestCase
         );
 
         $this->assertEquals(1, $recipient->notifications->count());
-        $notification = $user->notifications->first();
+        $notification = $recipient->notifications->first();
         $this->assertEquals(NotificationType::ChallengeRecieved, $notification->type);
     }
 }
