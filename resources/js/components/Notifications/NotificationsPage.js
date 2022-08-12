@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
+import { connect } from "react-redux";
 import { toast } from "react-toastify";
 import { getNotificationsList, readNotification } from "../../api/notificationsApi";
 import LoadingMessage from "../DisplayComponents/LoadingMessage";
 import NotificationsListWithPagination from "../DisplayComponents/NotificationsListWithPagination";
 import { getPageWithPaginationUrl } from "../../api/paginationApi";
+import { decrementNotificationCount } from "../../redux/actions/notificationCountActions";
 
-const NotificationsPage = ({ history }) => {
+const NotificationsPage = ({ history, decrementNotificationCount, notificationCount }) => {
     const [notificationsPaginator, setNotificationsPaginator] = useState(null);
 
     useEffect(() => {
@@ -29,6 +31,7 @@ const NotificationsPage = ({ history }) => {
         if (notification.read) return;
 
         readNotification(notification.id).then(() => {
+            decrementNotificationCount();
             getNotifications();
         }).catch(error => {
             toast.error(`Error reading notification ${error.message}`, {
@@ -77,4 +80,14 @@ NotificationsPage.propTypes = {
     history: PropTypes.object.isRequired
 };
 
-export default NotificationsPage;
+const mapStateToProps = (state, ownProps) => {
+    return {
+        notificationCount: state.notificationCount
+    };
+};
+
+const mapDispatchToProps = {
+    decrementNotificationCount
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(NotificationsPage);

@@ -4,8 +4,9 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { useLocation } from 'react-router-dom'
 import { checkUserIsAdmin } from "../../redux/actions/isAdminActions"
+import { loadNotificationCount } from "../../redux/actions/notificationCountActions";
 
-const Header = ({ userIsAuthenticated, isAdmin, checkUserIsAdmin }) => {
+const Header = ({ userIsAuthenticated, isAdmin, checkUserIsAdmin, loadNotificationCount, notificationCount }) => {
     const [mobileIsOpen, setMobileIsOpen] = useState(null);
     const location = useLocation();
 
@@ -17,6 +18,7 @@ const Header = ({ userIsAuthenticated, isAdmin, checkUserIsAdmin }) => {
 
     useEffect(() => {
         setMobileIsOpen(false);
+        loadNotificationCount();
     }, [location]);
 
     function toggleMobileNavigation() {
@@ -98,11 +100,20 @@ const Header = ({ userIsAuthenticated, isAdmin, checkUserIsAdmin }) => {
                     )}
                     {userIsAuthenticated && (
                         <>
+                            <Link
+                                to="/notifications"
+                                className="text-sm md:px-4 md:py-2 md:leading-none rounded text-white md:hover:shadow hover:opacity-75 mt-4 md:mt-0 inline-flex items-center md:mr-2 bg-secondary"
+                            >
+                                <svg className="text-white h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+                                </svg>
+                                {notificationCount > 0 && (<span className="ml-1">{notificationCount}</span>)}
+                            </Link>
                             {isAdmin && (
                                 <>
                                     <Link
                                         to="/admin"
-                                        className="text-sm md:px-4 md:py-2 md:leading-none md:border rounded text-white md:border-white md:hover:shadow hover:opacity-75 mt-4 md:mt-0 inline-flex items-center md:mr-2"
+                                        className="text-sm md:px-4 md:py-2 md:leading-none md:border rounded text-white md:border-white md:hover:shadow hover:opacity-75 mt-4 md:mt-0 inline-flex items-center md:mr-2 hover:text-secondary"
                                     >
                                         <svg className="text-white h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
@@ -133,18 +144,21 @@ const Header = ({ userIsAuthenticated, isAdmin, checkUserIsAdmin }) => {
 Header.propTypes = {
     userIsAuthenticated: PropTypes.bool.isRequired,
     isAdmin: PropTypes.bool.isRequired,
-    checkUserIsAdmin: PropTypes.func.isRequired
+    checkUserIsAdmin: PropTypes.func.isRequired,
+    notificationCount: PropTypes.number.isRequired
 };
 
 const mapStateToProps = (state, ownProps) => {
     return {
         userIsAuthenticated: state.tokens != null,
-        isAdmin: state.isAdmin
+        isAdmin: state.isAdmin,
+        notificationCount: state.notificationCount
     };
 };
 
 const mapDispatchToProps = {
-    checkUserIsAdmin
+    checkUserIsAdmin,
+    loadNotificationCount
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);

@@ -51,6 +51,7 @@ Route::middleware(['auth:api', 'role', 'notBanned'])->group(function () {
 
     Route::get('/notifications', [App\Http\Controllers\NotificationsController::class, 'index']);
     Route::put('/notifications/{notification}/read', [App\Http\Controllers\NotificationsController::class, 'read']);
+    Route::get('/notifications/count', [App\Http\Controllers\NotificationsController::class, 'count']);
 
 
     Route::get('/users', [App\Http\Controllers\UsersController::class, 'index']);

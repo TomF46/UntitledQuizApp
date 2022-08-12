@@ -32,3 +32,14 @@ export function getNotificationsDashboard() {
             throw error;
         });
 }
+
+export function getNotificationsCount() {
+    return axiosClient
+        .get("/api/notifications/count")
+        .then(response => {
+            return response.data;
+        })
+        .catch(error => {
+            throw error;
+        });
+}

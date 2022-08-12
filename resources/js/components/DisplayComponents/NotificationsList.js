@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
+import Moment from "react-moment";
 
 const NotificationsList = ({ notifications, onSetRead }) => {
     return (
@@ -11,8 +12,11 @@ const NotificationsList = ({ notifications, onSetRead }) => {
                         <div className="col-span-1 inline-flex items-center">
                             <img src={notification.icon} alt="icon" className="rounded-full h-10 w-10" />
                         </div>
-                        <div className="col-span-11">
-                            <p>{notification.text}</p>
+                        <div className="col-span-10 flex">
+                            <p className="vertical-centered-text">{notification.text}</p>
+                        </div>
+                        <div className="col-span-1 flex">
+                            <p className="text-sm vertical-centered-text"><Moment fromNow>{notification.created_at}</Moment></p>
                         </div>
                     </div>
                 )

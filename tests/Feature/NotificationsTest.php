@@ -81,4 +81,52 @@ class NotificationsTest extends TestCase
         $this->assertEquals(true ,$notification->read);
 
     }
+
+    public function testCanGetNotificationCount()
+    {
+        $user1 = TestHelper::createUser();
+        $expectedTotal = 3;
+
+        $notifications = Notification::factory()->count($expectedTotal)->create([
+            'recipient_id' => $user1->id,
+        ]);
+        
+        $response = $this->withHeaders([
+            'Accept' => 'application/json',
+            'Authorization' => 'Bearer ' . TestHelper::getBearerTokenForUser($user1)
+        ])->get('/api/notifications/count' );
+        
+
+        $response->assertStatus(200);
+        $response->assertJson([
+            'count' => $expectedTotal
+        ]);
+    }
+
+    public function testNotificationCountDoesNotIncludeReadNotifications()
+    {
+        $user1 = TestHelper::createUser();
+        $expectedTotal = 5;
+        $read = 2;
+
+        $notifications = Notification::factory()->count($expectedTotal)->create([
+            'recipient_id' => $user1->id,
+        ]);
+
+        $readNotifications = Notification::factory()->count($read)->create([
+            'recipient_id' => $user1->id,
+            'read' => true
+        ]);
+        
+        $response = $this->withHeaders([
+            'Accept' => 'application/json',
+            'Authorization' => 'Bearer ' . TestHelper::getBearerTokenForUser($user1)
+        ])->get('/api/notifications/count' );
+        
+
+        $response->assertStatus(200);
+        $response->assertJson([
+            'count' => $expectedTotal
+        ]);
+    }
 }

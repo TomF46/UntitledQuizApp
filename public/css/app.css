@@ -21902,6 +21902,13 @@ section.route-section {
   left: 0;
 }
 
+.vertical-centered-text {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-direction: column;
+}
+
 @media (min-width: 640px){
   .sm\:container{
     width: 100%;

@@ -140,3 +140,10 @@ section.route-section {
     top: 0;
     left: 0;
 }
+
+.vertical-centered-text{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+}

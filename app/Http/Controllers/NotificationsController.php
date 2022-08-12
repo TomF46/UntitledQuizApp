@@ -26,4 +26,16 @@ class NotificationsController extends Controller
         $notification->setRead();
         return response()->noContent();
     }
+
+    public function count(Request $request)
+    {
+        $currentUser = $request->User();
+        $notificationCount = $currentUser->notifications()->where('read', false)->count();
+        return response()->json(
+            [
+                'count' => $notificationCount
+            ]
+        );
+        
+    }
 }
