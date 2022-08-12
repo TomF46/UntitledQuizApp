@@ -54,12 +54,12 @@ const QuizDetail = ({ quiz, scoresPaginator, onScoresPageChange, onQuizReload, o
                     <svg className="h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" /> <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
-                    <p className="ml-1">Play</p>
+                    <p className="ml-1 font-bold">Play</p>
                 </Link>
                 <div>
                     <h3 className="text-lg font-bold text-center mb-4">Creator</h3>
                     <img src={quiz.creator.profile_image} alt="profile-picture" className="rounded-full h-24 w-24 centered" />
-                    <p className="text-center my-4">{quiz.creator.username}</p>
+                    <p className="text-center my-4 font-bold text-lg">{quiz.creator.username}</p>
                     <div className="flex flex-col justify-center">
                         <Link
                             to={`/profile/${quiz.creator.id}`}
@@ -68,7 +68,7 @@ const QuizDetail = ({ quiz, scoresPaginator, onScoresPageChange, onQuizReload, o
                             <svg className="text-secondary h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                             </svg>
-                            <span className="ml-1">View Profile</span>
+                            <span className="ml-1 font-bold">View Profile</span>
                         </Link>
                     </div>
                 </div>
@@ -83,7 +83,7 @@ const QuizDetail = ({ quiz, scoresPaginator, onScoresPageChange, onQuizReload, o
                                 <svg className="text-secondary h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                                 </svg>
-                                <span className="ml-1">Edit Quiz</span>
+                                <span className="ml-1 font-bold">Edit Quiz</span>
                             </Link>
                             {quiz.userIsOwner && (
                                 <button
@@ -94,7 +94,7 @@ const QuizDetail = ({ quiz, scoresPaginator, onScoresPageChange, onQuizReload, o
                                     <svg className="h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                                     </svg>
-                                    <span className="ml-1">Delete</span>
+                                    <span className="ml-1 font-bold">Delete</span>
                                 </button>
                             )}
                         </div>
@@ -114,7 +114,7 @@ const QuizDetail = ({ quiz, scoresPaginator, onScoresPageChange, onQuizReload, o
                                             <svg className="text-red-400 hover:text-white h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
                                             </svg>
-                                            <span className="ml-1">{quiz.isBanned ? 'Unban' : 'Ban'}</span>
+                                            <span className="ml-1 font-bold">{quiz.isBanned ? 'Unban' : 'Ban'}</span>
                                         </button>
                                         <button
                                             type="button"
@@ -124,7 +124,7 @@ const QuizDetail = ({ quiz, scoresPaginator, onScoresPageChange, onQuizReload, o
                                             <svg className="text-gray-800 h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
                                             </svg>
-                                            <span className="ml-1">{quiz.recommended ? 'Remove Recommendation' : 'Recommend'}</span>
+                                            <span className="ml-1 font-bold">{quiz.recommended ? 'Remove Recommendation' : 'Recommend'}</span>
                                         </button>
                                     </div>
                                 </>

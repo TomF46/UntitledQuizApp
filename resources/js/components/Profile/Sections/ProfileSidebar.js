@@ -65,7 +65,7 @@ const ProfileSidebar = ({ user, currentUser, isAdmin, onToggleFollow, onLogout, 
                                     <svg className="text-secondary h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                                     </svg>
-                                    <span className="ml-1">Edit Profile</span>
+                                    <span className="ml-1 font-bold">Edit Profile</span>
                                 </Link>
                                 <button
                                     type="button"
@@ -75,7 +75,7 @@ const ProfileSidebar = ({ user, currentUser, isAdmin, onToggleFollow, onLogout, 
                                     <svg className="text-secondary h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
                                     </svg>
-                                    <span className="ml-1">Logout</span>
+                                    <span className="ml-1 font-bold">Logout</span>
                                 </button>
                             </>
                         ) : (
@@ -94,7 +94,7 @@ const ProfileSidebar = ({ user, currentUser, isAdmin, onToggleFollow, onLogout, 
                                             <svg className="text-secondary h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
                                             </svg>
-                                            <span className="ml-1">{user.hasFriendRequest ? "See request" : "Send Friend Request"}</span>
+                                            <span className="ml-1 font-bold">{user.hasFriendRequest ? "See request" : "Send Friend Request"}</span>
                                         </button>
                                     </>
                                 )
@@ -111,7 +111,7 @@ const ProfileSidebar = ({ user, currentUser, isAdmin, onToggleFollow, onLogout, 
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
                                         )}
                                     </svg>
-                                    <span className="ml-1">{user.following ? "Unfollow" : "Follow"}</span>
+                                    <span className="ml-1 font-bold">{user.following ? "Unfollow" : "Follow"}</span>
                                 </button>
                                 <Link
                                     to={`/profile/${user.id}/challenge`}
@@ -120,7 +120,7 @@ const ProfileSidebar = ({ user, currentUser, isAdmin, onToggleFollow, onLogout, 
                                     <svg className="text-secondary h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
                                     </svg>
-                                    <span className="ml-1">Challenge</span>
+                                    <span className="ml-1 font-bold">Challenge</span>
                                 </Link>
                                 {
                                     isAdmin && (
@@ -134,7 +134,7 @@ const ProfileSidebar = ({ user, currentUser, isAdmin, onToggleFollow, onLogout, 
                                                 <svg className="text-red-400 hover:text-white h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
                                                 </svg>
-                                                <span className="ml-1">{user.isBanned ? 'Unban' : 'Ban'}</span>
+                                                <span className="ml-1 font-bold">{user.isBanned ? 'Unban' : 'Ban'}</span>
                                             </button>
                                         </>
                                     )

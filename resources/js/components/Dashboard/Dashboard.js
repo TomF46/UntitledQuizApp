@@ -59,7 +59,7 @@ const DashboardPage = ({ userId, history }) => {
                                 <svg className="text-secondary h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16l2.879-2.879m0 0a3 3 0 104.243-4.242 3 3 0 00-4.243 4.242zM21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                                 </svg>
-                                <span className="ml-1">Explore</span>
+                                <span className="ml-1 font-bold">Explore</span>
                             </Link>
                             <Link
                                 to={`/quiz`}
@@ -68,7 +68,7 @@ const DashboardPage = ({ userId, history }) => {
                                 <svg className="text-secondary h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
                                 </svg>
-                                <span className="ml-1">Create</span>
+                                <span className="ml-1 font-bold">Create</span>
                             </Link>
                             <Link
                                 to={`/profile`}
@@ -77,7 +77,7 @@ const DashboardPage = ({ userId, history }) => {
                                 <svg className="text-secondary h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                                 </svg>
-                                <span className="ml-1">View Profile</span>
+                                <span className="ml-1 font-bold">View Profile</span>
                             </Link>
                             <Link
                                 to={`/friends`}
@@ -86,13 +86,13 @@ const DashboardPage = ({ userId, history }) => {
                                 <svg className="text-secondary h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
                                 </svg>
-                                <span className="ml-1">Manage Friends</span>
+                                <span className="ml-1 font-bold">Manage Friends</span>
                             </Link>
                             <button onClick={() => goToRandomQuiz()} className="border border-gray-800 text-gray-800 text-center rounded py-2 px-4 hover:opacity-75 hover:text-secondary shadow inline-flex items-center justify-center mb-4">
                                 <svg className="text-secondary h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                                 </svg>
-                                <span className="ml-1">Play Random Quiz</span>
+                                <span className="ml-1 font-bold">Play Random Quiz</span>
                             </button>
                         </div>
                     </div>
