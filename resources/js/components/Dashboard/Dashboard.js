@@ -80,6 +80,15 @@ const DashboardPage = ({ userId, history }) => {
                                 <span className="ml-1 font-bold">View Profile</span>
                             </Link>
                             <Link
+                                to={`/notifications`}
+                                className="border border-gray-800 text-gray-800 text-center rounded py-2 px-4 hover:opacity-75 hover:text-secondary shadow inline-flex items-center justify-center mb-4"
+                            >
+                                <svg className="text-secondary h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+                                </svg>
+                                <span className="ml-1 font-bold">Notifications</span>
+                            </Link>
+                            <Link
                                 to={`/friends`}
                                 className="border border-gray-800 text-gray-800 text-center rounded py-2 px-4 hover:opacity-75 hover:text-secondary shadow inline-flex items-center justify-center mb-4"
                             >
@@ -97,10 +106,10 @@ const DashboardPage = ({ userId, history }) => {
                         </div>
                     </div>
                     <div className="col-span-12 lg:col-span-9">
-                        <FriendRequestsDashboard />
                         <div className="mb-6 overflow-hidden shadow card">
                             <NotificationsDashboard />
                         </div>
+                        <FriendRequestsDashboard />
                         <div className="mb-6 overflow-hidden shadow card">
                             <PopularQuizzesDashboard />
                         </div>
