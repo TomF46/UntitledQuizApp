@@ -6,6 +6,7 @@ import CenterFormCard from "../../DisplayComponents/CenterFormCard";
 import { connect } from "react-redux";
 import { Link, Redirect } from "react-router-dom";
 import { toast } from "react-toastify";
+import IntroSection from "../../DisplayComponents/IntroSection";
 
 const RegisterPage = ({ userIsAuthenticated, history }) => {
     const [user, setUser] = useState({
@@ -71,27 +72,34 @@ const RegisterPage = ({ userIsAuthenticated, history }) => {
     return (
         <>
             {userIsAuthenticated && <Redirect to="/" />}
-            <CenterFormCard
-                content={
-                    <>
-                        <RegisterForm
-                            user={user}
-                            errors={errors}
-                            onChange={handleChange}
-                            onSave={handleSave}
-                            saving={saving}
-                        />
-                        <div className="flex justify-center mt-4">
-                            <Link
-                                to={`/login`}
-                                className="text-center hover:text-gray-600 hover:underline"
-                            >
-                                Already registered? Login now!
-                            </Link>
-                        </div>
-                    </>
-                }
-            />
+            <div className="grid grid-cols-12">
+                <div className="col-span-12 md:col-span-6">
+                    <IntroSection />
+                </div>
+                <div className="col-span-12 md:col-span-6">
+                    <CenterFormCard
+                        content={
+                            <>
+                                <RegisterForm
+                                    user={user}
+                                    errors={errors}
+                                    onChange={handleChange}
+                                    onSave={handleSave}
+                                    saving={saving}
+                                />
+                                <div className="flex justify-center mt-4">
+                                    <Link
+                                        to={`/login`}
+                                        className="text-center hover:text-gray-600 hover:underline"
+                                    >
+                                        Already registered? Login now!
+                                    </Link>
+                                </div>
+                            </>
+                        }
+                    />
+                </div>
+            </div>
         </>
     );
 };
