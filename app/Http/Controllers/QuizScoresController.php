@@ -45,7 +45,7 @@ class QuizScoresController extends Controller
             return $this->handleChallengeResponse($score, $request->get('challengeId'));
         };
 
-        return response()->json($score, 201);
+        return response()->json($score->map(), 201);
     }
 
     public function show(Quiz $quiz)

@@ -34,7 +34,7 @@ class Score extends Model
             'quiz_name' => $this->quiz->title,
             'quiz_id' => $this->quiz->id,
             'score' => $this->score,
-            'score_percent' => $this->score_percent
+            'score_percent' => round($this->score_percent,2)
         ];
     }
 }
