@@ -73,10 +73,10 @@ const RegisterPage = ({ userIsAuthenticated, history }) => {
         <>
             {userIsAuthenticated && <Redirect to="/" />}
             <div className="grid grid-cols-12">
-                <div className="col-span-12 md:col-span-6">
+                <div className="col-span-12 md:col-span-6 px-4">
                     <IntroSection />
                 </div>
-                <div className="col-span-12 md:col-span-6">
+                <div className="col-span-12 md:col-span-6 px-4 pb-4">
                     <CenterFormCard
                         content={
                             <>

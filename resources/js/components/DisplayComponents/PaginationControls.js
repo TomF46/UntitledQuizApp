@@ -7,7 +7,7 @@ const PaginationControls = ({ from, to, of, onNext, onPrevious, currentPage, las
             <div className="flex justify-between">
                 <div>
                     {of > 0 && (
-                        <p>{`Showing ${from ? from : 0} to ${to ? to : 0} of ${of}`}</p>
+                        <p className="text-sm">{`Showing ${from ? from : 0} to ${to ? to : 0} of ${of}`}</p>
                     )}
                 </div>
                 <div>

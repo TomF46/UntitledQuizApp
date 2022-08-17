@@ -2,7 +2,7 @@ import React from "react";
 
 const IntroSection = ({ message }) => {
     return (
-        <div className="grid grid-cols-12 mt-24 px-4 md:px-32">
+        <div className="grid grid-cols-12 md:mt-24 px-4 lg:px-32">
             <div className="col-span-12">
                 <img src="https://untitled-quiz-app-images.s3-eu-west-1.amazonaws.com/QAppDark.png" className="centered" />
             </div>

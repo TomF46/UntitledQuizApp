@@ -17,13 +17,13 @@ const FriendRequestsList = ({ requests, onAccept, onRemove }) => {
                             <p className="text-sm text-gray-600">Recipient:</p>
                             <Link className="font-bold items-center pointer text-secondary" to={`/profile/${request.recipient.id}`}>{request.recipient.username}</Link>
                         </div>
-                        <div className="hidden md:block col-span-4 text-center md:text-left">
+                        <div className="col-span-4 text-center md:text-left">
                             <p className="text-sm text-gray-600">Sent:</p>
-                            <p><Moment format="DD/MM/YYYY h:mm:ss a">{request.date}</Moment></p>
+                            <p><Moment fromNow>{request.date}</Moment></p>
                         </div>
                         {request.canAnswer ? (
                             <>
-                                <div className="col-span-4 md:col-span-4 flex justify-end  my-2 sm:my-0">
+                                <div className="col-span-12 md:col-span-4 flex justify-center md:justify-end  my-2 sm:my-0">
                                     <button
                                         onClick={() => { onAccept(request.id) }}
                                         className="bg-secondary text-white rounded py-2 px-4 hover:opacity-75 shadow inline-flex items-center"
@@ -45,7 +45,7 @@ const FriendRequestsList = ({ requests, onAccept, onRemove }) => {
                                 </div>
                             </>
                         ) : (
-                            <div className="col-span-4 text-center md:text-left">
+                            <div className="col-span-12 md:col-span-4 text-center md:text-left">
                                 <p className="text-sm text-gray-600">Status:</p>
                                 <p>Waiting for response</p>
                             </div>

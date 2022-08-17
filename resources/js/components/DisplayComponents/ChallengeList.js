@@ -28,7 +28,7 @@ const ChallengeList = ({ challenges }) => {
                             <p className="text-sm text-gray-600">Status:</p>
                             <p className="items-center">{challenge.status}</p>
                         </div>
-                        <div className="col-span-12 md:col-span-2 flex justify-end my-2 sm:my-0">
+                        <div className="col-span-12 md:col-span-2 flex justify-center md:justify-end my-2 sm:my-0">
                             <div className="table vertical-centered">
                                 {challenge.userCanAttempt && (
                                     <Link
