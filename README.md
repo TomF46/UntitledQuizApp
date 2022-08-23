@@ -89,7 +89,7 @@ Steps:
 3.  Copy the `.env.example` file in the root of the project and rename it to `.env`.
 4.  Now you can run sail by entering `/vendor/bin/sail up` or `/vendor/bin/sail up -d` for a detached process. This uses the docker file to create the environment required to run the application and run tests.
 5.  Run migrations using `sail artisan migrate` to create the database tables.
-6.  Run `sail artisan db:seed` to add a admin user to the project, see scripted setup for more information on what the seeder adds.
+6.  Run `sail artisan db:seed` or `sail artisan db:seed --class=AdvancedSeeder` to add a admin user to the project, see scripted setup for more information on what each seeder adds.
 7.  Run `sail artisan key:generate`
 8.  Run `sail artisan passport:install` without this you wont be able to login.
 9.  By default the Application will be running on localhost.
