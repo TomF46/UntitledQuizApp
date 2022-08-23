@@ -71,14 +71,15 @@ Pre requisite
 
 -   Set up docker for your operating system, information can be found in the [Laravel installation documentation](https://laravel.com/docs/8.x/installation)
 
-### Quick Setup
+### Scripted setup
 
 If you are using the docker environment with sail you can use one of two quick set up `.sh` scripts. These run clean migrations, run one of two seeders depending on which is run and then configures keys for laravel passport. First however you must configure your `.env` file using the example `.env.example` in the root of the project.
 
-Run `setup.sh` to run migrations and seeder.
-The seeder creates the database with a single admin user and some basic tags, the default admin users username and password can be set in the `.env` file by editing the values for `ADMIN_EMAIL` & `ADMIN_PASSWORD`.
+You have a choose between running `sh setup.sh` or `sh advancedSetup.sh` to run migrations and seeder, the difference between these is explained below.
+- The `setup.sh` seeder creates the database with a single admin user and some basic tags, the default admin users username and password can be set in the `.env` file by editing the values for `ADMIN_EMAIL` & `ADMIN_PASSWORD`.
+- The `advancedSetup.sh` creates everything the setup.sh script creates but also adds a snapshot of the database with a number of users, quizzes, and interactions such as comments, scores, and challenges between these users. This allows you to quickly see how the operating website would look, and aid development by having a quantity of pre seeded data.
 
-### Advanced Setup
+### Manual Setup
 
 Note: If using own environment and not sail replace all instances of `sail` with `php`
 Steps:
@@ -88,7 +89,7 @@ Steps:
 3.  Copy the `.env.example` file in the root of the project and rename it to `.env`.
 4.  Now you can run sail by entering `/vendor/bin/sail up` or `/vendor/bin/sail up -d` for a detached process. This uses the docker file to create the environment required to run the application and run tests.
 5.  Run migrations using `sail artisan migrate` to create the database tables.
-6.  Run `sail artisan db:seed` to add a admin user to the project, see quick setup for more information on what the seeder adds.
+6.  Run `sail artisan db:seed` to add a admin user to the project, see scripted setup for more information on what the seeder adds.
 7.  Run `sail artisan key:generate`
 8.  Run `sail artisan passport:install` without this you wont be able to login.
 9.  By default the Application will be running on localhost.

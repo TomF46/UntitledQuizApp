@@ -1,0 +1,744 @@
+-- MySQL dump 10.13  Distrib 8.0.18, for Win64 (x86_64)
+--
+-- Host: 127.0.0.1    Database: untitledquizapp
+-- ------------------------------------------------------
+-- Server version	8.0.23
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!50503 SET NAMES utf8mb4 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `answers`
+--
+
+DROP TABLE IF EXISTS `answers`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `answers` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `question_id` bigint unsigned NOT NULL,
+  `text` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `is_correct` tinyint(1) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `answers_question_id_foreign` (`question_id`),
+  CONSTRAINT `answers_question_id_foreign` FOREIGN KEY (`question_id`) REFERENCES `questions` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=62 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `answers`
+--
+
+LOCK TABLES `answers` WRITE;
+/*!40000 ALTER TABLE `answers` DISABLE KEYS */;
+INSERT INTO `answers` VALUES (3,2,'Man city',1,'2022-08-15 10:19:07','2022-08-15 10:19:07'),(4,2,'Liverpool',0,'2022-08-15 10:19:07','2022-08-15 10:19:07'),(5,3,'Frank DeBoar',0,'2022-08-15 10:19:07','2022-08-15 10:19:07'),(6,3,'Frank Lampard',0,'2022-08-15 10:19:07','2022-08-15 10:19:07'),(7,3,'Jurgen Klopp',0,'2022-08-15 10:19:07','2022-08-15 10:19:07'),(8,3,'Steven Gerrard',1,'2022-08-15 10:19:07','2022-08-15 10:19:07'),(9,4,'New England Patriots',0,'2022-08-15 10:19:07','2022-08-15 10:19:07'),(10,4,'Kansas City Chiefs',0,'2022-08-15 10:19:07','2022-08-15 10:19:07'),(11,4,'Cincinnati Bengals',0,'2022-08-15 10:19:07','2022-08-15 10:19:07'),(12,4,'LA Rams',1,'2022-08-15 10:19:07','2022-08-15 10:19:07'),(13,5,'Jaipur',0,'2022-08-15 10:28:26','2022-08-15 10:28:26'),(14,5,'Bangkok',1,'2022-08-15 10:28:26','2022-08-15 10:28:26'),(15,5,'Kuala Lumpur',0,'2022-08-15 10:28:26','2022-08-15 10:28:26'),(16,5,'Laos',0,'2022-08-15 10:28:26','2022-08-15 10:28:26'),(17,6,'Bolivia',1,'2022-08-15 10:28:26','2022-08-15 10:28:26'),(18,6,'Colombia',0,'2022-08-15 10:28:26','2022-08-15 10:28:26'),(19,6,'Peru',0,'2022-08-15 10:28:26','2022-08-15 10:28:26'),(20,6,'Venezuela',0,'2022-08-15 10:28:26','2022-08-15 10:28:26'),(21,7,'Melbourne',0,'2022-08-15 10:28:26','2022-08-15 10:28:26'),(22,7,'Alice Spring',0,'2022-08-15 10:28:27','2022-08-15 10:28:27'),(23,7,'Canberra',1,'2022-08-15 10:28:27','2022-08-15 10:28:27'),(24,7,'Sydney',0,'2022-08-15 10:28:27','2022-08-15 10:28:27'),(25,8,'Estonia',0,'2022-08-15 10:28:27','2022-08-15 10:28:27'),(26,8,'Latvia',0,'2022-08-15 10:28:27','2022-08-15 10:28:27'),(27,8,'Azerbaijan',0,'2022-08-15 10:28:27','2022-08-15 10:28:27'),(28,8,'Georgia',1,'2022-08-15 10:28:27','2022-08-15 10:28:27'),(29,9,'1990',0,'2022-08-15 10:35:36','2022-08-15 10:35:36'),(30,9,'1991',1,'2022-08-15 10:35:36','2022-08-15 10:35:36'),(31,9,'1992',0,'2022-08-15 10:35:36','2022-08-15 10:35:36'),(32,9,'1993',0,'2022-08-15 10:35:36','2022-08-15 10:35:36'),(33,10,'Day',0,'2022-08-15 10:35:36','2022-08-15 10:35:36'),(34,10,'Week',0,'2022-08-15 10:35:36','2022-08-15 10:35:36'),(35,10,'Month',0,'2022-08-15 10:35:36','2022-08-15 10:35:36'),(36,10,'Year',0,'2022-08-15 10:35:36','2022-08-15 10:35:36'),(37,10,'Life',1,'2022-08-15 10:35:36','2022-08-15 10:35:36'),(38,11,'The Housemartins',0,'2022-08-15 10:35:36','2022-08-15 10:35:36'),(39,11,'Oasis',0,'2022-08-15 10:35:36','2022-08-15 10:35:36'),(40,11,'Happy Mondays',1,'2022-08-15 10:35:36','2022-08-15 10:35:36'),(41,11,'Blur',0,'2022-08-15 10:35:36','2022-08-15 10:35:36'),(42,12,'6.5',0,'2022-08-15 10:52:16','2022-08-15 10:52:16'),(43,12,'7',0,'2022-08-15 10:52:16','2022-08-15 10:52:16'),(44,12,'9',0,'2022-08-15 10:52:16','2022-08-15 10:52:16'),(45,12,'11',1,'2022-08-15 10:52:16','2022-08-15 10:52:16'),(46,13,'18',0,'2022-08-15 10:52:16','2022-08-15 10:52:16'),(47,13,'24',1,'2022-08-15 10:52:16','2022-08-15 10:52:16'),(48,13,'28',0,'2022-08-15 10:52:16','2022-08-15 10:52:16'),(49,13,'34',0,'2022-08-15 10:52:16','2022-08-15 10:52:16'),(50,14,'1',1,'2022-08-15 11:00:14','2022-08-15 11:00:14'),(51,14,'2',0,'2022-08-15 11:00:14','2022-08-15 11:00:14'),(52,15,'22',1,'2022-08-15 11:00:14','2022-08-15 11:00:14'),(53,15,'33',0,'2022-08-15 11:00:14','2022-08-15 11:00:14'),(54,16,'3',1,'2022-08-15 11:00:14','2022-08-15 11:00:14'),(55,16,'33',0,'2022-08-15 11:00:14','2022-08-15 11:00:14'),(56,17,'Hydrogen',0,'2022-08-16 10:08:45','2022-08-16 10:08:45'),(57,17,'Oxygen',0,'2022-08-16 10:08:45','2022-08-16 10:08:45'),(58,17,'Calcium',0,'2022-08-16 10:08:45','2022-08-16 10:08:45'),(59,17,'Helium',1,'2022-08-16 10:08:45','2022-08-16 10:08:45'),(60,18,'Water',1,'2022-08-16 10:08:45','2022-08-16 10:08:45'),(61,18,'Oil',0,'2022-08-16 10:08:45','2022-08-16 10:08:45');
+/*!40000 ALTER TABLE `answers` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `challenges`
+--
+
+DROP TABLE IF EXISTS `challenges`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `challenges` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `challenger_id` bigint unsigned NOT NULL,
+  `recipient_id` bigint unsigned NOT NULL,
+  `score_id` bigint unsigned NOT NULL,
+  `status` tinyint unsigned NOT NULL DEFAULT '0',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `challenges_challenger_id_foreign` (`challenger_id`),
+  KEY `challenges_recipient_id_foreign` (`recipient_id`),
+  KEY `challenges_score_id_foreign` (`score_id`),
+  CONSTRAINT `challenges_challenger_id_foreign` FOREIGN KEY (`challenger_id`) REFERENCES `users` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `challenges_recipient_id_foreign` FOREIGN KEY (`recipient_id`) REFERENCES `users` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `challenges_score_id_foreign` FOREIGN KEY (`score_id`) REFERENCES `scores` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `challenges`
+--
+
+LOCK TABLES `challenges` WRITE;
+/*!40000 ALTER TABLE `challenges` DISABLE KEYS */;
+INSERT INTO `challenges` VALUES (1,2,3,1,1,'2022-08-11 11:08:59','2022-08-11 12:00:33'),(2,4,2,5,0,'2022-08-16 10:35:04','2022-08-16 10:35:04'),(3,2,6,1,0,'2022-08-17 13:06:00','2022-08-17 13:06:00'),(4,2,5,10,0,'2022-08-17 13:07:05','2022-08-17 13:07:05');
+/*!40000 ALTER TABLE `challenges` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `comments`
+--
+
+DROP TABLE IF EXISTS `comments`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `comments` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` bigint unsigned NOT NULL,
+  `quiz_id` bigint unsigned NOT NULL,
+  `text` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `removed` tinyint(1) NOT NULL DEFAULT '0',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `comments_user_id_foreign` (`user_id`),
+  KEY `comments_quiz_id_foreign` (`quiz_id`),
+  CONSTRAINT `comments_quiz_id_foreign` FOREIGN KEY (`quiz_id`) REFERENCES `quizzes` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `comments_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `comments`
+--
+
+LOCK TABLES `comments` WRITE;
+/*!40000 ALTER TABLE `comments` DISABLE KEYS */;
+INSERT INTO `comments` VALUES (1,2,1,'Great quiz',0,'2022-08-17 10:45:22','2022-08-17 10:45:22'),(2,2,3,'Great quiz!',0,'2022-08-17 13:13:33','2022-08-17 13:13:33');
+/*!40000 ALTER TABLE `comments` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `failed_jobs`
+--
+
+DROP TABLE IF EXISTS `failed_jobs`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `failed_jobs` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `uuid` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `connection` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `queue` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `payload` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `exception` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `failed_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `failed_jobs`
+--
+
+LOCK TABLES `failed_jobs` WRITE;
+/*!40000 ALTER TABLE `failed_jobs` DISABLE KEYS */;
+/*!40000 ALTER TABLE `failed_jobs` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `follows`
+--
+
+DROP TABLE IF EXISTS `follows`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `follows` (
+  `user_id` bigint unsigned NOT NULL,
+  `following_user_id` bigint unsigned NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`user_id`,`following_user_id`),
+  KEY `follows_following_user_id_foreign` (`following_user_id`),
+  CONSTRAINT `follows_following_user_id_foreign` FOREIGN KEY (`following_user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `follows_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `follows`
+--
+
+LOCK TABLES `follows` WRITE;
+/*!40000 ALTER TABLE `follows` DISABLE KEYS */;
+INSERT INTO `follows` VALUES (2,3,NULL,NULL),(2,4,NULL,NULL),(4,3,NULL,NULL);
+/*!40000 ALTER TABLE `follows` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `friendships`
+--
+
+DROP TABLE IF EXISTS `friendships`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `friendships` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `sender_id` bigint unsigned NOT NULL,
+  `recipient_id` bigint unsigned NOT NULL,
+  `status` tinyint unsigned NOT NULL DEFAULT '0',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `friendships`
+--
+
+LOCK TABLES `friendships` WRITE;
+/*!40000 ALTER TABLE `friendships` DISABLE KEYS */;
+INSERT INTO `friendships` VALUES (2,2,3,1,'2022-08-11 12:14:47','2022-08-11 12:28:51'),(3,2,4,0,'2022-08-15 10:36:19','2022-08-15 10:36:19');
+/*!40000 ALTER TABLE `friendships` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `likes`
+--
+
+DROP TABLE IF EXISTS `likes`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `likes` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` bigint unsigned NOT NULL,
+  `quiz_id` bigint unsigned NOT NULL,
+  `liked` tinyint(1) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `likes_user_id_quiz_id_unique` (`user_id`,`quiz_id`),
+  KEY `likes_quiz_id_foreign` (`quiz_id`),
+  CONSTRAINT `likes_quiz_id_foreign` FOREIGN KEY (`quiz_id`) REFERENCES `quizzes` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `likes_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `likes`
+--
+
+LOCK TABLES `likes` WRITE;
+/*!40000 ALTER TABLE `likes` DISABLE KEYS */;
+INSERT INTO `likes` VALUES (1,6,1,1,'2022-08-16 09:45:16','2022-08-16 09:45:16'),(2,2,3,1,'2022-08-17 13:12:45','2022-08-17 13:12:45'),(3,3,3,1,'2022-08-17 13:12:58','2022-08-17 13:12:58');
+/*!40000 ALTER TABLE `likes` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `migrations`
+--
+
+DROP TABLE IF EXISTS `migrations`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `migrations` (
+  `id` int unsigned NOT NULL AUTO_INCREMENT,
+  `migration` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `batch` int NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `migrations`
+--
+
+LOCK TABLES `migrations` WRITE;
+/*!40000 ALTER TABLE `migrations` DISABLE KEYS */;
+INSERT INTO `migrations` VALUES (1,'2014_10_12_000000_create_users_table',1),(2,'2014_10_12_100000_create_password_resets_table',1),(3,'2016_06_01_000001_create_oauth_auth_codes_table',1),(4,'2016_06_01_000002_create_oauth_access_tokens_table',1),(5,'2016_06_01_000003_create_oauth_refresh_tokens_table',1),(6,'2016_06_01_000004_create_oauth_clients_table',1),(7,'2016_06_01_000005_create_oauth_personal_access_clients_table',1),(8,'2019_08_19_000000_create_failed_jobs_table',1),(9,'2020_10_12_102617_create_quizzes_table',1),(10,'2020_10_12_121323_create_questions_table',1),(11,'2020_10_12_142522_create_answers_table',1),(12,'2020_10_12_164014_create_scores_table',1),(13,'2020_10_12_192238_create_tags_table',1),(14,'2020_10_15_150643_add_bio_to_users_table',1),(15,'2020_10_20_130525_create_follows_table',1),(16,'2020_10_20_135438_create_likes_table',1),(17,'2020_10_23_110207_add__profile__image__for__user',1),(18,'2020_10_23_144336_add_image_to_question',1),(19,'2020_12_21_162151_create_comments_table',1),(20,'2021_01_13_111322_create_challenges_table',1),(21,'2021_01_18_153908_add_challenge_points_to_users_table',1),(22,'2021_04_08_123335_create_roles_table',1),(23,'2021_04_22_115132_create_quiz_bans_table',1),(24,'2022_02_16_105248_create_friendships_table',1),(25,'2022_02_22_114810_create_quiz_collaborators_table',1),(26,'2022_08_10_110619_create_notifications_table',1);
+/*!40000 ALTER TABLE `migrations` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `notifications`
+--
+
+DROP TABLE IF EXISTS `notifications`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `notifications` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `recipient_id` bigint unsigned NOT NULL,
+  `sender_id` bigint unsigned NOT NULL,
+  `type` tinyint unsigned NOT NULL,
+  `text` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `read` tinyint(1) NOT NULL DEFAULT '0',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `notifications`
+--
+
+LOCK TABLES `notifications` WRITE;
+/*!40000 ALTER TABLE `notifications` DISABLE KEYS */;
+INSERT INTO `notifications` VALUES (1,3,2,0,'TomF94 has sent you a challenge on the Toms sports quiz quiz.',0,'2022-08-11 11:08:59','2022-08-11 11:08:59'),(2,2,3,1,'Congratulations you have won your challenge against BillyBitcoin on the Toms sports quiz quiz.',1,'2022-08-11 11:59:58','2022-08-11 14:50:24'),(3,2,3,2,'You have lost your challenge against BillyBitcoin on the Toms sports quiz quiz.',1,'2022-08-11 12:00:33','2022-08-11 14:50:24'),(4,3,2,3,'You have recieved a friend request from TomF94',0,'2022-08-11 12:14:47','2022-08-11 12:14:47'),(5,2,3,3,'BillyBitcoin has accepted your friend request.',1,'2022-08-11 12:28:51','2022-08-11 14:50:24'),(6,2,2,4,'Your quiz Toms sports quiz has been banned, see quiz detail page for details.',1,'2022-08-11 12:51:26','2022-08-12 10:24:15'),(7,2,1,4,'Your quiz Toms sports quiz has been banned, see quiz detail page for details.',1,'2022-08-11 12:56:31','2022-08-12 12:10:36'),(8,2,1,4,'Your quiz Toms sports quiz has been banned, see quiz detail page for details.',1,'2022-08-11 12:59:30','2022-08-12 10:46:07'),(9,2,1,4,'Your quiz Toms sports quiz has been banned, see quiz detail page for details.',1,'2022-08-11 13:00:17','2022-08-12 10:36:29'),(10,2,1,4,'Your quiz Toms sports quiz has been banned, see quiz detail page for details.',0,'2022-08-11 13:01:22','2022-08-12 10:41:10'),(11,2,1,4,'Your quiz Toms sports quiz has been banned, see quiz detail page for details.',1,'2022-08-11 13:02:05','2022-08-12 10:41:11'),(12,2,1,4,'Your quiz Toms sports quiz has been banned, see quiz detail page for details.',1,'2022-08-11 13:04:41','2022-08-12 11:03:09'),(13,2,1,4,'Your quiz Toms sports quiz has been banned, see quiz detail page for details.',1,'2022-08-11 13:05:25','2022-08-11 14:50:22'),(14,2,1,4,'Your quiz Toms sports quiz has been banned, see quiz detail page for details.',1,'2022-08-11 13:06:04','2022-08-11 14:50:21'),(15,2,1,4,'Your quiz Toms sports quiz has been banned, see quiz detail page for details.',1,'2022-08-11 13:06:41','2022-08-11 14:31:57'),(16,2,1,5,'Your quiz Toms sports quiz has been unbanned.',1,'2022-08-11 13:06:44','2022-08-11 14:30:41'),(17,4,2,3,'You have recieved a friend request from TomF94.',0,'2022-08-15 10:36:19','2022-08-15 10:36:19'),(18,2,4,0,'Darren1991 has sent you a challenge on the Capital cities quiz quiz.',0,'2022-08-16 10:35:04','2022-08-16 10:35:04'),(19,6,2,0,'TomF94 has sent you a challenge on the Toms sports quiz quiz.',0,'2022-08-17 13:06:00','2022-08-17 13:06:00'),(20,5,2,0,'TomF94 has sent you a challenge on the Hits of the 90\'s quiz.',0,'2022-08-17 13:07:05','2022-08-17 13:07:05');
+/*!40000 ALTER TABLE `notifications` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `oauth_access_tokens`
+--
+
+DROP TABLE IF EXISTS `oauth_access_tokens`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `oauth_access_tokens` (
+  `id` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `user_id` bigint unsigned DEFAULT NULL,
+  `client_id` bigint unsigned NOT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `scopes` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `revoked` tinyint(1) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `expires_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `oauth_access_tokens_user_id_index` (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `oauth_access_tokens`
+--
+
+LOCK TABLES `oauth_access_tokens` WRITE;
+/*!40000 ALTER TABLE `oauth_access_tokens` DISABLE KEYS */;
+INSERT INTO `oauth_access_tokens` VALUES ('0293f4cdf5156fbe4b4f11d4fde136311b31b69e619c6e08964baec4a2fd9c8bd5e5ef3a137a3a26',3,1,'Personal Access Token','[\"1\"]',0,'2022-08-11 11:05:47','2022-08-11 11:05:47','2022-08-18 11:05:47'),('16ca2ccd99622ed8090eb08e1869399fcac9e78de540210458264a5711c95b8c53a4e2b74ad688c9',2,1,'Personal Access Token','[\"1\"]',0,'2022-08-17 11:19:34','2022-08-17 11:19:34','2022-08-24 11:19:34'),('1ef2746d814d1075cc53fbb54432d4cf2460cae456cdebd9a9aa11d63e681f0eaabe214bb26892e9',2,1,'Personal Access Token','[\"1\"]',0,'2022-08-15 10:46:49','2022-08-15 10:46:49','2022-08-22 10:46:49'),('31f8dd1ba7fb9bc6ddfad365d64d6e01c1f69a89b1213eae983325bb4380b668892c5360708b83b8',2,1,'Personal Access Token','[\"1\"]',0,'2022-08-17 10:35:18','2022-08-17 10:35:18','2022-08-24 10:35:18'),('4d191a9dd82a41da1426ce471e695e058a200b20b5fd77e4a57c4d270d453cd66dcc25dc84c2a988',5,1,'Personal Access Token','[\"1\"]',0,'2022-08-17 13:09:42','2022-08-17 13:09:42','2022-08-24 13:09:42'),('605b5155bdd8f27ae607f93dcc3e0b3112c56b2841c32d4d96ed5726187a0678dfbd0d2c6584649e',2,1,'Personal Access Token','[\"1\"]',0,'2022-08-17 11:23:57','2022-08-17 11:23:57','2022-08-24 11:23:57'),('64c69ab61ad22a65bec9be3218a05da6caa1603059c13cd7c2561bc730f442aa5a6134983934e061',4,1,'Personal Access Token','[\"1\"]',0,'2022-08-16 10:34:44','2022-08-16 10:34:44','2022-08-23 10:34:44'),('6757aa65ba69f8ce560ef860fae78eae24f902982ba98c3b414ac7570fab79f0df28b5ab66e16884',2,1,'Personal Access Token','[\"1\"]',0,'2022-08-17 11:25:49','2022-08-17 11:25:49','2022-08-24 11:25:49'),('6b68f525843affa6213a8e54eac51cbd9a967eed6a1b3c20754233d2cecf0a9a4a8cc457f2b5f95f',2,1,'Personal Access Token','[\"1\"]',0,'2022-08-16 10:36:29','2022-08-16 10:36:29','2022-08-23 10:36:29'),('6cadb628d771ec1eb8f09c128bd3fac84cf80b9e54355947ea6d1bc96fd108747bd7e2897361c5f1',3,1,'Personal Access Token','[\"1\"]',0,'2022-08-15 10:46:10','2022-08-15 10:46:10','2022-08-22 10:46:10'),('74c3415b58d20bf28c63f79790fb2b983e7c42cc50d2bd391b8c607849805aa3f8e047f7c05b7119',2,1,'Personal Access Token','[\"1\"]',0,'2022-08-17 12:59:40','2022-08-17 12:59:40','2022-08-24 12:59:40'),('8243a4ae9c2244081f61692429609d29914905504f48d1b36c13514ce257723e67f398b60c295643',4,1,'Personal Access Token','[\"1\"]',0,'2022-08-17 10:31:47','2022-08-17 10:31:47','2022-08-24 10:31:47'),('8d35f59f8da9aab53b33e83c56586bd471c6d974f5f524382042c694fe471e3e0dee1d3b9c08208e',5,1,'Personal Access Token','[\"1\"]',0,'2022-08-15 10:48:58','2022-08-15 10:48:58','2022-08-22 10:48:58'),('8de122f8bf530003bc9796fa82ebe89501f46013d5a78be04498fd2c9317dc01c57dc8709938d9c2',2,1,'Personal Access Token','[\"1\"]',0,'2022-08-16 10:20:53','2022-08-16 10:20:53','2022-08-23 10:20:53'),('8e95e7a19d44998caaf0235c99e0bec1d92b2bf3d6cf9f1f7b72b4b800b1ff7c9592aa04d4f09bca',1,1,'Personal Access Token','[]',0,'2022-08-12 12:27:46','2022-08-12 12:27:46','2022-08-19 12:27:46'),('914540629daa3e4c306e0f6e81bf526a3123bee1d660db92b65fef2508f55ff5dd37d52c3715d355',4,1,'Personal Access Token','[\"1\"]',0,'2022-08-16 10:22:11','2022-08-16 10:22:11','2022-08-23 10:22:11'),('9eb45a4e65d918965e362decce2daba2e8f1e3f07de8adcebd910666a88efd7f9782035435b43e3b',2,1,'Personal Access Token','[\"1\"]',0,'2022-08-16 10:10:16','2022-08-16 10:10:16','2022-08-23 10:10:16'),('b85b0eeb28e93e67b72d1b4392be3aeb1e9799c2fafd5bf4b6c63ca568dfdfdd902fc619c5c6368c',6,1,'Personal Access Token','[\"1\"]',0,'2022-08-16 09:44:53','2022-08-16 09:44:53','2022-08-23 09:44:53'),('badef919cb7035c1c32c9af48658ae1c79d933aa970ed4c425dce7dab83569ae482d8173acb99573',2,1,'Personal Access Token','[\"1\"]',0,'2022-08-15 10:15:36','2022-08-15 10:15:36','2022-08-22 10:15:36'),('bb981c69d085118f9e1156f680073b9c8caae4c611de8fe7c09a796d03d8a903fb456f6182517d39',3,1,'Personal Access Token','[\"1\"]',0,'2022-08-17 13:12:16','2022-08-17 13:12:16','2022-08-24 13:12:16'),('c009f74354feabd61dfd6c21f8f0530d1c21d08ee707f998233243aeb69ad9bb52a04f63b4e23550',7,5,'Personal Access Token','[]',0,'2022-08-23 13:50:00','2022-08-23 13:50:00','2022-08-30 13:50:01'),('c125e200f4c05cca017f72c942f247d3f02f715082c3f0a30e1f808b2654273fae1e00b3addc0bd6',1,1,'Personal Access Token','[]',0,'2022-08-11 12:43:25','2022-08-11 12:43:25','2022-08-18 12:43:25'),('c71e6938d18aef3328125d422cf3b3ee790f0b9d2f969dd349b349fe93287e224ec3feabcd97b673',4,1,'Personal Access Token','[\"1\"]',0,'2022-08-15 10:31:31','2022-08-15 10:31:31','2022-08-22 10:31:31'),('cb0117e0b8e521984a07385b06536ccd5137e6499088de61d59ef95694486ba6c95ac8a6d45a9bac',2,1,'Personal Access Token','[\"1\"]',0,'2022-08-11 11:04:51','2022-08-11 11:04:51','2022-08-18 11:04:51'),('cba7d11f730bd1ba5e55663f4018661291f0af5bbec1ce7586a6c6c16154deef6908f64121dbdd46',1,1,'Personal Access Token','[]',0,'2022-08-16 10:13:27','2022-08-16 10:13:27','2022-08-23 10:13:27'),('d7acf84e5943cc841cc3b49b9d6a996c9abeb0c8e2e16b7306707ca622033e2a8a2eba3e283e21db',2,1,'Personal Access Token','[\"1\"]',0,'2022-08-17 12:56:46','2022-08-17 12:56:46','2022-08-24 12:56:46'),('ed34d28db4c5bc8aee845980b4ea36db3472937937a8cd75c5756605512fd8a61f742b21b2f592e3',2,1,'Personal Access Token','[\"1\"]',0,'2022-08-17 10:28:31','2022-08-17 10:28:31','2022-08-24 10:28:31'),('f246db09846cb0732aa1ca2c1ebf5bf73cb5b78d3bdfdabd3429f6d7e0114471c5378320ccdbb3d0',3,1,'Personal Access Token','[\"1\"]',0,'2022-08-15 10:21:41','2022-08-15 10:21:41','2022-08-22 10:21:41'),('fcb76cc16358d5e47bcbe1f651a8002fe0d414af0c9b75a9c9e91e00b53f27a4cfa3e659df493e90',4,1,'Personal Access Token','[\"1\"]',0,'2022-08-17 13:10:39','2022-08-17 13:10:39','2022-08-24 13:10:39');
+/*!40000 ALTER TABLE `oauth_access_tokens` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `oauth_auth_codes`
+--
+
+DROP TABLE IF EXISTS `oauth_auth_codes`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `oauth_auth_codes` (
+  `id` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `user_id` bigint unsigned NOT NULL,
+  `client_id` bigint unsigned NOT NULL,
+  `scopes` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `revoked` tinyint(1) NOT NULL,
+  `expires_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `oauth_auth_codes_user_id_index` (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `oauth_auth_codes`
+--
+
+LOCK TABLES `oauth_auth_codes` WRITE;
+/*!40000 ALTER TABLE `oauth_auth_codes` DISABLE KEYS */;
+/*!40000 ALTER TABLE `oauth_auth_codes` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `oauth_clients`
+--
+
+DROP TABLE IF EXISTS `oauth_clients`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `oauth_clients` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` bigint unsigned DEFAULT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `secret` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `provider` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `redirect` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `personal_access_client` tinyint(1) NOT NULL,
+  `password_client` tinyint(1) NOT NULL,
+  `revoked` tinyint(1) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `oauth_clients_user_id_index` (`user_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `oauth_clients`
+--
+
+LOCK TABLES `oauth_clients` WRITE;
+/*!40000 ALTER TABLE `oauth_clients` DISABLE KEYS */;
+INSERT INTO `oauth_clients` VALUES (1,NULL,'Laravel Personal Access Client','vAjUCdtuqFUZq271O6jzdKPPK8rniR88iXhLavLc',NULL,'http://localhost',1,0,0,'2022-08-10 12:37:09','2022-08-10 12:37:09'),(2,NULL,'Laravel Password Grant Client','zPgvAEuoQ3W3JVraKyMyQG1s72Zj6E7HQ90P5LMK','users','http://localhost',0,1,0,'2022-08-10 12:37:09','2022-08-10 12:37:09'),(3,NULL,'Laravel Personal Access Client','xUHclvGoBQkkH85hUQzu161b1zF9OX5R4Fkl6Tpo',NULL,'http://localhost',1,0,0,'2022-08-23 13:40:37','2022-08-23 13:40:37'),(4,NULL,'Laravel Password Grant Client','Fb4DtqHGG5CvVLbcdnWd8XFatMT79ov2wz9eBvzK','users','http://localhost',0,1,0,'2022-08-23 13:40:38','2022-08-23 13:40:38'),(5,NULL,'Laravel Personal Access Client','82lJthObydKpaDeDaUbT5VvOMsDKjVBp5bQY7B0V',NULL,'http://localhost',1,0,0,'2022-08-23 13:49:33','2022-08-23 13:49:33'),(6,NULL,'Laravel Password Grant Client','HH9woGhAzkKgC2r8uXRP979Fzrc3IpbVXnco9x83','users','http://localhost',0,1,0,'2022-08-23 13:49:34','2022-08-23 13:49:34');
+/*!40000 ALTER TABLE `oauth_clients` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `oauth_personal_access_clients`
+--
+
+DROP TABLE IF EXISTS `oauth_personal_access_clients`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `oauth_personal_access_clients` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `client_id` bigint unsigned NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `oauth_personal_access_clients`
+--
+
+LOCK TABLES `oauth_personal_access_clients` WRITE;
+/*!40000 ALTER TABLE `oauth_personal_access_clients` DISABLE KEYS */;
+INSERT INTO `oauth_personal_access_clients` VALUES (1,1,'2022-08-10 12:37:09','2022-08-10 12:37:09'),(2,3,'2022-08-23 13:40:37','2022-08-23 13:40:37'),(3,5,'2022-08-23 13:49:34','2022-08-23 13:49:34');
+/*!40000 ALTER TABLE `oauth_personal_access_clients` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `oauth_refresh_tokens`
+--
+
+DROP TABLE IF EXISTS `oauth_refresh_tokens`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `oauth_refresh_tokens` (
+  `id` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `access_token_id` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `revoked` tinyint(1) NOT NULL,
+  `expires_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `oauth_refresh_tokens_access_token_id_index` (`access_token_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `oauth_refresh_tokens`
+--
+
+LOCK TABLES `oauth_refresh_tokens` WRITE;
+/*!40000 ALTER TABLE `oauth_refresh_tokens` DISABLE KEYS */;
+/*!40000 ALTER TABLE `oauth_refresh_tokens` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `password_resets`
+--
+
+DROP TABLE IF EXISTS `password_resets`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `password_resets` (
+  `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  KEY `password_resets_email_index` (`email`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `password_resets`
+--
+
+LOCK TABLES `password_resets` WRITE;
+/*!40000 ALTER TABLE `password_resets` DISABLE KEYS */;
+/*!40000 ALTER TABLE `password_resets` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `questions`
+--
+
+DROP TABLE IF EXISTS `questions`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `questions` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `quiz_id` bigint unsigned NOT NULL,
+  `text` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `helpText` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `ordinal` int NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `image_url` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `questions_quiz_id_foreign` (`quiz_id`),
+  CONSTRAINT `questions_quiz_id_foreign` FOREIGN KEY (`quiz_id`) REFERENCES `quizzes` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `questions`
+--
+
+LOCK TABLES `questions` WRITE;
+/*!40000 ALTER TABLE `questions` DISABLE KEYS */;
+INSERT INTO `questions` VALUES (2,1,'Who won the league last year?',NULL,0,'2022-08-15 10:19:07','2022-08-15 10:19:07',NULL),(3,1,'Who started managing Aton Villa in November 2021?',NULL,1,'2022-08-15 10:19:07','2022-08-15 10:19:07',NULL),(4,1,'Which team won the 2022 Super Bowl?',NULL,2,'2022-08-15 10:19:07','2022-08-15 10:19:07',NULL),(5,2,'What is the capital of Thailand?',NULL,0,'2022-08-15 10:28:26','2022-08-15 10:28:26',NULL),(6,2,'Which country has the capital La Paz?',NULL,1,'2022-08-15 10:28:26','2022-08-15 10:28:26',NULL),(7,2,'What is the Capital of Australia?',NULL,2,'2022-08-15 10:28:26','2022-08-15 10:28:26',NULL),(8,2,'Which country is has the capital Tbilisi?',NULL,3,'2022-08-15 10:28:26','2022-08-15 10:28:26',NULL),(9,3,'In which year did the Nirvana album Nevermind come out?',NULL,0,'2022-08-15 10:35:36','2022-08-15 10:35:36',NULL),(10,3,'Complete this Spice girls song title Spice up your...',NULL,1,'2022-08-15 10:35:36','2022-08-15 10:35:36',NULL),(11,3,'Which band released the song \'Step On\' in 1990',NULL,2,'2022-08-15 10:35:36','2022-08-15 10:35:36',NULL),(12,4,'77 / 7',NULL,0,'2022-08-15 10:52:16','2022-08-15 10:52:16',NULL),(13,4,'45 x What is 1080',NULL,1,'2022-08-15 10:52:16','2022-08-15 10:52:16',NULL),(14,5,'111',NULL,0,'2022-08-15 11:00:14','2022-08-15 11:00:14',NULL),(15,5,'2',NULL,1,'2022-08-15 11:00:14','2022-08-15 11:00:14',NULL),(16,5,'3',NULL,2,'2022-08-15 11:00:14','2022-08-15 11:00:14',NULL),(17,6,'Which element has the atomic number 2?',NULL,0,'2022-08-16 10:08:45','2022-08-16 10:08:45',NULL),(18,6,'Which common chemical has the atomic structure H20',NULL,1,'2022-08-16 10:08:45','2022-08-16 10:08:45',NULL);
+/*!40000 ALTER TABLE `questions` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `quiz_bans`
+--
+
+DROP TABLE IF EXISTS `quiz_bans`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `quiz_bans` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `quiz_id` bigint unsigned NOT NULL,
+  `admin_id` bigint unsigned NOT NULL,
+  `reason` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `quiz_bans_quiz_id_foreign` (`quiz_id`),
+  KEY `quiz_bans_admin_id_foreign` (`admin_id`),
+  CONSTRAINT `quiz_bans_admin_id_foreign` FOREIGN KEY (`admin_id`) REFERENCES `users` (`id`),
+  CONSTRAINT `quiz_bans_quiz_id_foreign` FOREIGN KEY (`quiz_id`) REFERENCES `quizzes` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `quiz_bans`
+--
+
+LOCK TABLES `quiz_bans` WRITE;
+/*!40000 ALTER TABLE `quiz_bans` DISABLE KEYS */;
+/*!40000 ALTER TABLE `quiz_bans` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `quiz_collaborators`
+--
+
+DROP TABLE IF EXISTS `quiz_collaborators`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `quiz_collaborators` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `quiz_id` bigint unsigned NOT NULL,
+  `user_id` bigint unsigned NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `quiz_collaborators_quiz_id_user_id_unique` (`quiz_id`,`user_id`),
+  KEY `quiz_collaborators_user_id_foreign` (`user_id`),
+  CONSTRAINT `quiz_collaborators_quiz_id_foreign` FOREIGN KEY (`quiz_id`) REFERENCES `quizzes` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `quiz_collaborators_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `quiz_collaborators`
+--
+
+LOCK TABLES `quiz_collaborators` WRITE;
+/*!40000 ALTER TABLE `quiz_collaborators` DISABLE KEYS */;
+/*!40000 ALTER TABLE `quiz_collaborators` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `quiz_tag`
+--
+
+DROP TABLE IF EXISTS `quiz_tag`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `quiz_tag` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `quiz_id` bigint unsigned NOT NULL,
+  `tag_id` bigint unsigned NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `quiz_tag_quiz_id_tag_id_unique` (`quiz_id`,`tag_id`),
+  KEY `quiz_tag_tag_id_foreign` (`tag_id`),
+  CONSTRAINT `quiz_tag_quiz_id_foreign` FOREIGN KEY (`quiz_id`) REFERENCES `quizzes` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `quiz_tag_tag_id_foreign` FOREIGN KEY (`tag_id`) REFERENCES `tags` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `quiz_tag`
+--
+
+LOCK TABLES `quiz_tag` WRITE;
+/*!40000 ALTER TABLE `quiz_tag` DISABLE KEYS */;
+INSERT INTO `quiz_tag` VALUES (1,1,2,'2022-08-11 11:07:20','2022-08-11 11:07:20'),(2,2,6,'2022-08-15 10:28:27','2022-08-15 10:28:27'),(3,3,3,'2022-08-15 10:35:36','2022-08-15 10:35:36'),(4,6,4,'2022-08-16 10:08:45','2022-08-16 10:08:45');
+/*!40000 ALTER TABLE `quiz_tag` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `quizzes`
+--
+
+DROP TABLE IF EXISTS `quizzes`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `quizzes` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` bigint unsigned NOT NULL,
+  `title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `description` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `recommended` tinyint(1) NOT NULL DEFAULT '0',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `quizzes`
+--
+
+LOCK TABLES `quizzes` WRITE;
+/*!40000 ALTER TABLE `quizzes` DISABLE KEYS */;
+INSERT INTO `quizzes` VALUES (1,2,'Toms sports quiz','A sports based quiz',0,'2022-08-11 11:07:20','2022-08-11 11:07:20'),(2,3,'Capital cities quiz','Can you identify these capital cities?',1,'2022-08-15 10:28:26','2022-08-16 10:13:35'),(3,4,'Hits of the 90\'s','All about music from the 90\'s',1,'2022-08-15 10:35:36','2022-08-16 10:13:53'),(4,5,'Maths Quiz','A simple maths quiz',0,'2022-08-15 10:52:16','2022-08-15 10:52:16'),(5,5,'British history quiz','A quiz all about British history',0,'2022-08-15 11:00:14','2022-08-15 11:00:14'),(6,6,'Mikes Science Quiz','A science quiz',0,'2022-08-16 10:08:45','2022-08-16 10:08:45');
+/*!40000 ALTER TABLE `quizzes` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `roles`
+--
+
+DROP TABLE IF EXISTS `roles`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `roles` (
+  `user_id` bigint unsigned NOT NULL,
+  `role` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (`user_id`,`role`),
+  CONSTRAINT `roles_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `roles`
+--
+
+LOCK TABLES `roles` WRITE;
+/*!40000 ALTER TABLE `roles` DISABLE KEYS */;
+INSERT INTO `roles` VALUES (2,'1'),(3,'1'),(4,'1'),(5,'1'),(6,'1');
+/*!40000 ALTER TABLE `roles` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `scores`
+--
+
+DROP TABLE IF EXISTS `scores`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `scores` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` bigint unsigned NOT NULL,
+  `quiz_id` bigint unsigned NOT NULL,
+  `score` int NOT NULL,
+  `score_percent` decimal(5,2) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `scores_user_id_foreign` (`user_id`),
+  KEY `scores_quiz_id_foreign` (`quiz_id`),
+  CONSTRAINT `scores_quiz_id_foreign` FOREIGN KEY (`quiz_id`) REFERENCES `quizzes` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `scores_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `scores`
+--
+
+LOCK TABLES `scores` WRITE;
+/*!40000 ALTER TABLE `scores` DISABLE KEYS */;
+INSERT INTO `scores` VALUES (1,2,1,1,100.00,'2022-08-11 11:07:30','2022-08-11 11:07:30'),(2,3,1,0,0.00,'2022-08-11 11:59:58','2022-08-11 11:59:58'),(3,3,1,1,100.00,'2022-08-11 12:00:33','2022-08-11 12:00:33'),(5,4,2,2,50.00,'2022-08-15 10:41:02','2022-08-15 10:41:02'),(6,6,1,2,66.67,'2022-08-16 09:45:32','2022-08-16 09:45:32'),(7,6,5,2,66.67,'2022-08-16 09:54:45','2022-08-16 09:54:45'),(8,6,3,2,66.67,'2022-08-16 09:59:18','2022-08-16 09:59:18'),(9,6,4,2,100.00,'2022-08-16 10:03:09','2022-08-16 10:03:09'),(10,2,3,2,66.67,'2022-08-17 13:06:13','2022-08-17 13:06:13'),(11,5,3,1,33.33,'2022-08-17 13:10:01','2022-08-17 13:10:01'),(12,4,3,3,100.00,'2022-08-17 13:11:18','2022-08-17 13:11:18'),(13,3,3,0,0.00,'2022-08-17 13:12:28','2022-08-17 13:12:28');
+/*!40000 ALTER TABLE `scores` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tags`
+--
+
+DROP TABLE IF EXISTS `tags`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `tags` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tags`
+--
+
+LOCK TABLES `tags` WRITE;
+/*!40000 ALTER TABLE `tags` DISABLE KEYS */;
+INSERT INTO `tags` VALUES (1,'General','2022-08-10 12:37:07','2022-08-10 12:37:07'),(2,'Sports','2022-08-10 12:37:07','2022-08-10 12:37:07'),(3,'Music','2022-08-10 12:37:07','2022-08-10 12:37:07'),(4,'Science','2022-08-10 12:37:07','2022-08-10 12:37:07'),(5,'History','2022-08-10 12:37:07','2022-08-10 12:37:07'),(6,'Geography','2022-08-10 12:37:07','2022-08-10 12:37:07'),(7,'Pop culture','2022-08-10 12:37:07','2022-08-10 12:37:07'),(8,'Maths','2022-08-10 12:37:07','2022-08-10 12:37:07');
+/*!40000 ALTER TABLE `tags` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `users`
+--
+
+DROP TABLE IF EXISTS `users`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `users` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `username` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email_verified_at` timestamp NULL DEFAULT NULL,
+  `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `remember_token` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `bio` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `profile_image_url` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `challenge_points` int unsigned NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `users_username_unique` (`username`),
+  UNIQUE KEY `users_email_unique` (`email`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `users`
+--
+
+LOCK TABLES `users` WRITE;
+/*!40000 ALTER TABLE `users` DISABLE KEYS */;
+INSERT INTO `users` VALUES (2,'Tom55','tom@email.com',NULL,'$2y$10$Kd63JMQoQ/Uv55uEAauI7elcTikLxcLOtTJuTBVkB.Z7b9oxdec.K',NULL,'2022-08-11 11:04:42','2022-08-17 13:00:25',NULL,NULL,1),(3,'BillyBitcoin','billy@email.com',NULL,'$2y$10$p3X.Ike40FwVwBH6pEvFT.vZp7iVCDkr9xsiaCTMMhyTsB2ZgcAh2',NULL,'2022-08-11 11:05:39','2022-08-11 12:00:33',NULL,NULL,1),(4,'Darren1991','darren@email.com',NULL,'$2y$10$6atHbrPK6d82GXN06/e/Kei22QErlKAu5iQQ2Q/muVIOLpL9hXWFO',NULL,'2022-08-15 10:31:16','2022-08-15 10:31:16',NULL,NULL,0),(5,'Lalo','lalo@email.com',NULL,'$2y$10$/KSeWrCN3pLl1qF4wO3rhebCs3FSPLjvccBBidZDj9fXJjEAIZ0v2',NULL,'2022-08-15 10:48:45','2022-08-15 10:48:45',NULL,NULL,0),(6,'Mikey212','mike@email.com',NULL,'$2y$10$jx7MZfNzCJ8nY/HsHLhgg.uGPl9F38KcN18ClcN/3T3Ms983Q8Opi',NULL,'2022-08-16 09:44:44','2022-08-16 09:44:44',NULL,NULL,0);
+/*!40000 ALTER TABLE `users` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Dumping routines for database 'untitledquizapp'
+--
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2022-08-23 14:51:29
