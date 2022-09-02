@@ -94,6 +94,9 @@ Steps:
 8.  Run `sail artisan passport:install` without this you wont be able to login.
 9.  By default the Application will be running on localhost.
 
+#### Testing
+If you are running via Sail & Docker then the docker script will create a seperate database that is used for the automated tests, but first you need to create a `.env.testing` file, like the `.env` file you can use the `.env.testing.example` file to create this and is a copy of the `.env` file which sets  `DB_HOST=mysql_test`. After this is done you can run `sail test` to run all of the unit and feature tests. 
+
 ## Technical overview
 
 -   Laravel API
