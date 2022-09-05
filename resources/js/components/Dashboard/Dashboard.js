@@ -50,7 +50,6 @@ const DashboardPage = ({ userId, history }) => {
                         <div className="mb-4">
                             <img src={user.profile_image} alt="profile-picture" className="rounded-full profile-photo shadow" />
                         </div>
-                        <p className="text-center text-primary my-4 font-bold">Actions</p>
                         <div className="flex flex-col justify-center">
                             <Link
                                 to={`/explore`}
