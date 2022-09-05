@@ -29,6 +29,7 @@ const FiltersForm = ({ filters, tags, onFilterChange }) => {
                 <SelectInput
                     name="tag"
                     label="Tag"
+                    defaultText="All tags"
                     value={filters.tag}
                     options={tags}
                     onChange={onFilterChange}

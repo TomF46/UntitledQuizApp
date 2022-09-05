@@ -69,7 +69,7 @@ const ScoreDetail = ({ quiz, score, challenge, onReplay, onLikesUpdated }) => {
                     to={`/quiz/${score.quiz_id}`}
                     className="bg-primary  text-white rounded py-2 px-4 hover:opacity-75 ml-4"
                 >
-                    Leaderboard
+                    Quiz Details &amp; Leaderboard
                 </Link>
             </div>
         </div>
