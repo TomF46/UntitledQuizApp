@@ -1,14 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import ScoresTableWithPagination from "../../DisplayComponents/ScoresTableWithPagination";
-import LoadingMessage from "../../DisplayComponents/LoadingMessage";
 import LikeControls from "../../DisplayComponents/LikeControls";
 import CommentsSection from "../../DisplayComponents/Comments/CommentsSection"
 import _ from 'lodash';
 import BanInfo from "../../DisplayComponents/BanInfo";
+import QuizScoresSection from "../../DisplayComponents/QuizScoresSection";
 
-const QuizDetail = ({ quiz, scoresPaginator, onScoresPageChange, onQuizReload, onDelete, userHighScore, isAdmin, onQuizToggleBan, onToggleRecommended }) => {
+const QuizDetail = ({ quiz, onQuizReload, onDelete, userHighScore, isAdmin, onQuizToggleBan, onToggleRecommended }) => {
     return (
         <div className="grid grid-cols-12 pb-4">
             <div className="col-span-12 lg:col-span-3 lg:mr-4 mb-4 lg:mb-0 px-4 overflow-hidden shadow page">
@@ -173,14 +172,7 @@ const QuizDetail = ({ quiz, scoresPaginator, onScoresPageChange, onQuizReload, o
                         )}
                         <div>
                             <div className="flex justify-center overflow-hidden shadow card">
-                                <div className="inline-block p-4 min-w-full">
-                                    <h2 className="font-bold text-primary text-2xl mb-4 text-center">Scores</h2>
-                                    {!scoresPaginator ? (
-                                        <LoadingMessage message={'Loading scores'} />
-                                    ) : (
-                                        <ScoresTableWithPagination paginationData={scoresPaginator} onPageChange={onScoresPageChange} showUser={true} showQuiz={false} />
-                                    )}
-                                </div>
+                                <QuizScoresSection quiz={quiz} />
                             </div>
                         </div>
                         <CommentsSection quizId={quiz.id} comments={quiz.comments} onReloadQuiz={onQuizReload} />
@@ -196,10 +188,8 @@ const QuizDetail = ({ quiz, scoresPaginator, onScoresPageChange, onQuizReload, o
 QuizDetail.propTypes = {
     quiz: PropTypes.object.isRequired,
     userHighScore: PropTypes.object,
-    scoresPaginator: PropTypes.object,
     onQuizReload: PropTypes.func.isRequired,
     onDelete: PropTypes.func.isRequired,
-    onScoresPageChange: PropTypes.func.isRequired,
     isAdmin: PropTypes.bool.isRequired,
     onQuizToggleBan: PropTypes.func.isRequired,
     onToggleRecommended: PropTypes.func.isRequired

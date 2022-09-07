@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import LikeControls from "../../DisplayComponents/LikeControls";
+import QuizScoresSection from "../../DisplayComponents/QuizScoresSection";
 
 const ScoreDetail = ({ quiz, score, challenge, onReplay, onLikesUpdated }) => {
 
@@ -25,54 +26,63 @@ const ScoreDetail = ({ quiz, score, challenge, onReplay, onLikesUpdated }) => {
     }
 
     return (
-        <div className="mt-6">
-            <h1 className="font-bold text-primary text-4xl mb-4 text-center">{quiz.title}</h1>
-            <LikeControls quiz={quiz} onLikesUpdated={onLikesUpdated} />
-            <h1 className="font-bold text-primary text-2xl my-4 text-center">{getScoreText(score.score, score.score_percent)}</h1>
-            <h1 className="font-bold text-primary text-2xl mb-4 text-center">Percentage: {score.score_percent}%</h1>
-            {!challenge ? (
-                <div className="flex justify-center my-4">
-                    <button
-                        onClick={onReplay}
-                        className="bg-primary  text-white rounded py-2 px-4 hover:opacity-75 ml-4 inline-flex items-center"
-                    >
-                        <svg className="text-white h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-                        </svg>
-                        <span className="ml-1">Replay</span>
-                    </button>
+        <>
+            <div className="overflow-hidden shadow page container mx-auto">
+                <div className="mt-6">
+                    <h1 className="font-bold text-primary text-4xl mb-4 text-center">{quiz.title}</h1>
+                    <LikeControls quiz={quiz} onLikesUpdated={onLikesUpdated} />
+                    <h1 className="font-bold text-primary text-2xl my-4 text-center">{getScoreText(score.score, score.score_percent)}</h1>
+                    <h1 className="font-bold text-primary text-2xl mb-4 text-center">Percentage: {score.score_percent}%</h1>
+                    {!challenge ? (
+                        <div className="flex justify-center my-4">
+                            <button
+                                onClick={onReplay}
+                                className="bg-primary  text-white rounded py-2 px-4 hover:opacity-75 ml-4 inline-flex items-center"
+                            >
+                                <svg className="text-white h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                                </svg>
+                                <span className="ml-1">Replay</span>
+                            </button>
+                        </div>
+                    ) : (
+                        <div className="grid grid-cols-12 px-2 py-1 overflow-hidden">
+                            <div className="hidden lg:block lg:col-span-2"></div>
+                            <div className="col-span-3 lg:col-span-2 text-center">
+                                <p className="text-sm text-gray-600">Challenger</p>
+                                <p className="font-medium items-center">{challenge.challengerUsername}</p>
+                            </div>
+                            <div className="col-span-3 lg:col-span-2 text-center">
+                                <p className="text-sm text-gray-600">Score required</p>
+                                <p className="font-medium items-center">{challenge.scorePercentToBeat}%</p>
+                            </div>
+                            <div className="col-span-3 lg:col-span-2 text-center">
+                                <p className="text-sm text-gray-600">Your score</p>
+                                <p className="font-medium items-center">{score.score_percent}%</p>
+                            </div>
+                            <div className="col-span-3 lg:col-span-2 text-center">
+                                <p className="text-sm text-gray-600">Status</p>
+                                <p className="font-medium items-center">{getChallengeText(challenge.scorePercentToBeat, score.score_percent)}</p>
+                            </div>
+                            <div className="hidden lg:block lg:col-span-2"></div>
+                        </div>
+                    )}
+                    <div className="flex justify-center my-4">
+                        <Link
+                            to={`/quiz/${score.quiz_id}`}
+                            className="bg-primary  text-white rounded py-2 px-4 hover:opacity-75 ml-4"
+                        >
+                            Quiz Details
+                        </Link>
+                    </div>
                 </div>
-            ) : (
-                <div className="grid grid-cols-12 px-2 py-1 overflow-hidden">
-                    <div className="hidden lg:block lg:col-span-2"></div>
-                    <div className="col-span-3 lg:col-span-2 text-center">
-                        <p className="text-sm text-gray-600">Challenger</p>
-                        <p className="font-medium items-center">{challenge.challengerUsername}</p>
-                    </div>
-                    <div className="col-span-3 lg:col-span-2 text-center">
-                        <p className="text-sm text-gray-600">Score required</p>
-                        <p className="font-medium items-center">{challenge.scorePercentToBeat}%</p>
-                    </div>
-                    <div className="col-span-3 lg:col-span-2 text-center">
-                        <p className="text-sm text-gray-600">Your score</p>
-                        <p className="font-medium items-center">{score.score_percent}%</p>
-                    </div>
-                    <div className="col-span-3 lg:col-span-2 text-center">
-                        <p className="text-sm text-gray-600">Status</p>
-                        <p className="font-medium items-center">{getChallengeText(challenge.scorePercentToBeat, score.score_percent)}</p>
-                    </div>
-                    <div className="hidden lg:block lg:col-span-2"></div>
-                </div>
-            )}
-            <div className="flex justify-center my-4">
-                <Link
-                    to={`/quiz/${score.quiz_id}`}
-                    className="bg-primary  text-white rounded py-2 px-4 hover:opacity-75 ml-4"
-                >
-                    Quiz Details &amp; Leaderboard
-                </Link>
             </div>
-        </div>
+            <div className="overflow-hidden shadow page container mx-auto mt-4">
+                <div className="flex justify-center my-4">
+                    <QuizScoresSection quiz={quiz} />
+                </div>
+            </div>
+        </>
     );
 };
 

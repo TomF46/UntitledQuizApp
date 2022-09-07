@@ -157,13 +157,9 @@ const QuizPlayPage = ({ quizId, challengeId, history }) => {
             </div>
         ) : (
             !score ? (
-                <div>
-                    <QuizPlayForm quiz={quiz} submission={submission} challenge={challenge} onAnswerChange={handleAnswerChange} onSubmit={handleSubmit} onReset={handleReplay} currentQuestionNumber={currentQuestionNumber} onNext={handleNext} onPrevious={handlePrevious} errors={errors} />
-                </div>
+                <QuizPlayForm quiz={quiz} submission={submission} challenge={challenge} onAnswerChange={handleAnswerChange} onSubmit={handleSubmit} onReset={handleReplay} currentQuestionNumber={currentQuestionNumber} onNext={handleNext} onPrevious={handlePrevious} errors={errors} />
             ) : (
-                <div className="overflow-hidden shadow page container mx-auto">
-                    <ScoreDetail quiz={quiz} score={score} onReplay={handleReplay} onLikesUpdated={handleLikesUpdated} challenge={challenge} />
-                </div>
+                <ScoreDetail quiz={quiz} score={score} onReplay={handleReplay} onLikesUpdated={handleLikesUpdated} challenge={challenge} />
             ))
     )
 };

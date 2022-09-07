@@ -1,20 +1,16 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { getQuiz, getScoresForQuiz, getUsersHighScoreForQuiz, unban, deleteQuiz, toggleRecommended } from "../../../api/quizApi";
+import { getQuiz, getUsersHighScoreForQuiz, unban, deleteQuiz, toggleRecommended } from "../../../api/quizApi";
 import QuizDetail from "./QuizDetail";
 import { confirmAlert } from "react-confirm-alert";
 import { toast } from "react-toastify";
 import LoadingMessage from "../../DisplayComponents/LoadingMessage";
 import _ from 'lodash';
-import { getPageWithPaginationUrl } from "../../../api/paginationApi";
-
 
 const QuizDetailPage = ({ quizId, currentUser, isAdmin, history }) => {
     const [quiz, setQuiz] = useState(null);
     const [highScore, setHighScore] = useState(null);
-    const [scoresPaginator, setScores] = useState(null);
-
 
     useEffect(() => {
         if (!quiz) {
@@ -27,7 +23,6 @@ const QuizDetailPage = ({ quizId, currentUser, isAdmin, history }) => {
             setQuiz(quizData);
             if (!quizData.isBanned) {
                 getHighScores(quizData.id);
-                getScores(quizData.id);
             }
         }).catch(error => {
             toast.error(`Error getting quiz ${error.message}`, {
@@ -41,26 +36,6 @@ const QuizDetailPage = ({ quizId, currentUser, isAdmin, history }) => {
             setHighScore(highScoreData);
         }).catch(error => {
             toast.error(`Error getting high score ${error.message}`, {
-                autoClose: false,
-            });
-        });
-    }
-
-    function getScores(id) {
-        getScoresForQuiz(id).then(scores => {
-            setScores(scores);
-        }).catch(error => {
-            toast.error(`Error getting scores ${error.message}`, {
-                autoClose: false,
-            });
-        });
-    }
-
-    function getScoresPage(url) {
-        getPageWithPaginationUrl(url).then(scoreData => {
-            setScores(scoreData);
-        }).catch(error => {
-            toast.error(`Error getting user scores ${error.message}`, {
                 autoClose: false,
             });
         });
@@ -135,7 +110,7 @@ const QuizDetailPage = ({ quizId, currentUser, isAdmin, history }) => {
                 <LoadingMessage message={"Loading quiz"} />
             ) : (
                 <>
-                    <QuizDetail quiz={quiz} scoresPaginator={scoresPaginator} onScoresPageChange={getScoresPage} onQuizReload={handleQuizReload} onDelete={handleDeleteQuiz} userHighScore={highScore} isAdmin={isAdmin} onQuizToggleBan={handleToggleBan} onToggleRecommended={handleToggleRecommended} />
+                    <QuizDetail quiz={quiz} onQuizReload={handleQuizReload} onDelete={handleDeleteQuiz} userHighScore={highScore} isAdmin={isAdmin} onQuizToggleBan={handleToggleBan} onToggleRecommended={handleToggleRecommended} />
                 </>
             )}
         </>
