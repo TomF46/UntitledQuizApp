@@ -2,7 +2,7 @@
 --
 -- Host: 127.0.0.1    Database: untitledquizapp
 -- ------------------------------------------------------
--- Server version	8.0.27
+-- Server version	8.0.23
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -367,7 +367,7 @@ CREATE TABLE `oauth_clients` (
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `oauth_clients_user_id_index` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -376,7 +376,7 @@ CREATE TABLE `oauth_clients` (
 
 LOCK TABLES `oauth_clients` WRITE;
 /*!40000 ALTER TABLE `oauth_clients` DISABLE KEYS */;
-INSERT INTO `oauth_clients` VALUES (1,NULL,'Laravel Personal Access Client','vAjUCdtuqFUZq271O6jzdKPPK8rniR88iXhLavLc',NULL,'http://localhost',1,0,0,'2022-08-10 12:37:09','2022-08-10 12:37:09'),(2,NULL,'Laravel Password Grant Client','zPgvAEuoQ3W3JVraKyMyQG1s72Zj6E7HQ90P5LMK','users','http://localhost',0,1,0,'2022-08-10 12:37:09','2022-08-10 12:37:09'),(3,NULL,'Laravel Personal Access Client','xUHclvGoBQkkH85hUQzu161b1zF9OX5R4Fkl6Tpo',NULL,'http://localhost',1,0,0,'2022-08-23 13:40:37','2022-08-23 13:40:37'),(4,NULL,'Laravel Password Grant Client','Fb4DtqHGG5CvVLbcdnWd8XFatMT79ov2wz9eBvzK','users','http://localhost',0,1,0,'2022-08-23 13:40:38','2022-08-23 13:40:38'),(5,NULL,'Laravel Personal Access Client','82lJthObydKpaDeDaUbT5VvOMsDKjVBp5bQY7B0V',NULL,'http://localhost',1,0,0,'2022-08-23 13:49:33','2022-08-23 13:49:33'),(6,NULL,'Laravel Password Grant Client','HH9woGhAzkKgC2r8uXRP979Fzrc3IpbVXnco9x83','users','http://localhost',0,1,0,'2022-08-23 13:49:34','2022-08-23 13:49:34'),(7,NULL,'Laravel Personal Access Client','NEeUUUM3g0boKDE8zxdTDxFbMtDpo1MwJbvLp9B1',NULL,'http://localhost',1,0,0,'2022-08-23 13:54:00','2022-08-23 13:54:00'),(8,NULL,'Laravel Password Grant Client','3SlSSMxorEZbYEeOT2jHwhs6kqIl2bE2dOJzRSZR','users','http://localhost',0,1,0,'2022-08-23 13:54:00','2022-08-23 13:54:00'),(9,NULL,'Laravel Personal Access Client','k0BKlbhF7mq02iqAwx5GRNV0b34R2PH5hqrqrUGE',NULL,'http://localhost',1,0,0,'2022-08-24 09:37:38','2022-08-24 09:37:38'),(10,NULL,'Laravel Password Grant Client','q2dDrD8oS6aMVR2hIfdiLOE78wVPkY7keAjWtBeT','users','http://localhost',0,1,0,'2022-08-24 09:37:38','2022-08-24 09:37:38'),(11,NULL,'Laravel Personal Access Client','8uWltiA6EbqzdX8im9YG1FCf68oalYJ4IQZO8WRv',NULL,'http://localhost',1,0,0,'2022-08-24 09:41:31','2022-08-24 09:41:31'),(12,NULL,'Laravel Password Grant Client','TNxFUEqe0slJVJM1n71nndjDutjNxgrpOJW0O3fX','users','http://localhost',0,1,0,'2022-08-24 09:41:32','2022-08-24 09:41:32'),(13,NULL,'Laravel Personal Access Client','4cNngvHZf06hX0iVHeFfr93cXMUEl1d98SZhkDo4',NULL,'http://localhost',1,0,0,'2022-09-05 12:57:24','2022-09-05 12:57:24'),(14,NULL,'Laravel Password Grant Client','o01vDKgi4JmOje0xwva1V0ObU6hnt9RtCJG0tZqt','users','http://localhost',0,1,0,'2022-09-05 12:57:24','2022-09-05 12:57:24');
+INSERT INTO `oauth_clients` VALUES (1,NULL,'Laravel Personal Access Client','vAjUCdtuqFUZq271O6jzdKPPK8rniR88iXhLavLc',NULL,'http://localhost',1,0,0,'2022-08-10 12:37:09','2022-08-10 12:37:09'),(2,NULL,'Laravel Password Grant Client','zPgvAEuoQ3W3JVraKyMyQG1s72Zj6E7HQ90P5LMK','users','http://localhost',0,1,0,'2022-08-10 12:37:09','2022-08-10 12:37:09'),(3,NULL,'Laravel Personal Access Client','xUHclvGoBQkkH85hUQzu161b1zF9OX5R4Fkl6Tpo',NULL,'http://localhost',1,0,0,'2022-08-23 13:40:37','2022-08-23 13:40:37'),(4,NULL,'Laravel Password Grant Client','Fb4DtqHGG5CvVLbcdnWd8XFatMT79ov2wz9eBvzK','users','http://localhost',0,1,0,'2022-08-23 13:40:38','2022-08-23 13:40:38'),(5,NULL,'Laravel Personal Access Client','82lJthObydKpaDeDaUbT5VvOMsDKjVBp5bQY7B0V',NULL,'http://localhost',1,0,0,'2022-08-23 13:49:33','2022-08-23 13:49:33'),(6,NULL,'Laravel Password Grant Client','HH9woGhAzkKgC2r8uXRP979Fzrc3IpbVXnco9x83','users','http://localhost',0,1,0,'2022-08-23 13:49:34','2022-08-23 13:49:34'),(7,NULL,'Laravel Personal Access Client','NEeUUUM3g0boKDE8zxdTDxFbMtDpo1MwJbvLp9B1',NULL,'http://localhost',1,0,0,'2022-08-23 13:54:00','2022-08-23 13:54:00'),(8,NULL,'Laravel Password Grant Client','3SlSSMxorEZbYEeOT2jHwhs6kqIl2bE2dOJzRSZR','users','http://localhost',0,1,0,'2022-08-23 13:54:00','2022-08-23 13:54:00'),(9,NULL,'Laravel Personal Access Client','k0BKlbhF7mq02iqAwx5GRNV0b34R2PH5hqrqrUGE',NULL,'http://localhost',1,0,0,'2022-08-24 09:37:38','2022-08-24 09:37:38'),(10,NULL,'Laravel Password Grant Client','q2dDrD8oS6aMVR2hIfdiLOE78wVPkY7keAjWtBeT','users','http://localhost',0,1,0,'2022-08-24 09:37:38','2022-08-24 09:37:38'),(11,NULL,'Laravel Personal Access Client','8uWltiA6EbqzdX8im9YG1FCf68oalYJ4IQZO8WRv',NULL,'http://localhost',1,0,0,'2022-08-24 09:41:31','2022-08-24 09:41:31'),(12,NULL,'Laravel Password Grant Client','TNxFUEqe0slJVJM1n71nndjDutjNxgrpOJW0O3fX','users','http://localhost',0,1,0,'2022-08-24 09:41:32','2022-08-24 09:41:32'),(13,NULL,'Laravel Personal Access Client','4cNngvHZf06hX0iVHeFfr93cXMUEl1d98SZhkDo4',NULL,'http://localhost',1,0,0,'2022-09-05 12:57:24','2022-09-05 12:57:24'),(14,NULL,'Laravel Password Grant Client','o01vDKgi4JmOje0xwva1V0ObU6hnt9RtCJG0tZqt','users','http://localhost',0,1,0,'2022-09-05 12:57:24','2022-09-05 12:57:24'),(15,NULL,'Laravel Personal Access Client','BulQo45pTR8EI6bXGheVa0qRXFvSuadS3edGTh7z',NULL,'http://localhost',1,0,0,'2022-09-30 09:33:45','2022-09-30 09:33:45'),(16,NULL,'Laravel Password Grant Client','aM1Ck3jdkXgoCkIyDd1iKfmFU08kwVYpFRnK51IR','users','http://localhost',0,1,0,'2022-09-30 09:33:45','2022-09-30 09:33:45'),(17,NULL,'Laravel Personal Access Client','lYqi2SkqYS1WLzvRacIXDl7yJFh2zUWYCswiyscm',NULL,'http://localhost',1,0,0,'2022-09-30 09:38:25','2022-09-30 09:38:25'),(18,NULL,'Laravel Password Grant Client','PEoVfBDM46iDZTaJbQfFDo26VBLOn999vzppzHF0','users','http://localhost',0,1,0,'2022-09-30 09:38:25','2022-09-30 09:38:25');
 /*!40000 ALTER TABLE `oauth_clients` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -393,7 +393,7 @@ CREATE TABLE `oauth_personal_access_clients` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -402,7 +402,7 @@ CREATE TABLE `oauth_personal_access_clients` (
 
 LOCK TABLES `oauth_personal_access_clients` WRITE;
 /*!40000 ALTER TABLE `oauth_personal_access_clients` DISABLE KEYS */;
-INSERT INTO `oauth_personal_access_clients` VALUES (1,1,'2022-08-10 12:37:09','2022-08-10 12:37:09'),(2,3,'2022-08-23 13:40:37','2022-08-23 13:40:37'),(3,5,'2022-08-23 13:49:34','2022-08-23 13:49:34'),(4,7,'2022-08-23 13:54:00','2022-08-23 13:54:00'),(5,9,'2022-08-24 09:37:38','2022-08-24 09:37:38'),(6,11,'2022-08-24 09:41:31','2022-08-24 09:41:31'),(7,13,'2022-09-05 12:57:24','2022-09-05 12:57:24');
+INSERT INTO `oauth_personal_access_clients` VALUES (1,1,'2022-08-10 12:37:09','2022-08-10 12:37:09'),(2,3,'2022-08-23 13:40:37','2022-08-23 13:40:37'),(3,5,'2022-08-23 13:49:34','2022-08-23 13:49:34'),(4,7,'2022-08-23 13:54:00','2022-08-23 13:54:00'),(5,9,'2022-08-24 09:37:38','2022-08-24 09:37:38'),(6,11,'2022-08-24 09:41:31','2022-08-24 09:41:31'),(7,13,'2022-09-05 12:57:24','2022-09-05 12:57:24'),(8,15,'2022-09-30 09:33:45','2022-09-30 09:33:45'),(9,17,'2022-09-30 09:38:25','2022-09-30 09:38:25');
 /*!40000 ALTER TABLE `oauth_personal_access_clients` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -593,6 +593,7 @@ CREATE TABLE `quizzes` (
   `title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `description` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `recommended` tinyint(1) NOT NULL DEFAULT '0',
+  `published` tinyint(1) NOT NULL DEFAULT '0',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
@@ -605,7 +606,7 @@ CREATE TABLE `quizzes` (
 
 LOCK TABLES `quizzes` WRITE;
 /*!40000 ALTER TABLE `quizzes` DISABLE KEYS */;
-INSERT INTO `quizzes` VALUES (1,2,'Toms sports quiz','A sports based quiz',0,'2022-08-11 11:07:20','2022-08-11 11:07:20'),(2,3,'Capital cities quiz','Can you identify these capital cities?',1,'2022-08-15 10:28:26','2022-08-16 10:13:35'),(3,4,'Hits of the 90\'s','All about music from the 90\'s',1,'2022-08-15 10:35:36','2022-08-16 10:13:53'),(4,5,'Maths Quiz','A simple maths quiz',0,'2022-08-15 10:52:16','2022-08-15 10:52:16'),(5,5,'British history quiz','A quiz all about British history',0,'2022-08-15 11:00:14','2022-08-15 11:00:14'),(6,6,'Mikes Science Quiz','A science quiz',0,'2022-08-16 10:08:45','2022-08-16 10:08:45'),(7,12,'Arsenal players past & present','A quiz all about Arsenal',0,'2022-09-05 13:12:47','2022-09-05 13:12:47'),(8,12,'Aviation Quiz','A quiz all about aviaion?',0,'2022-09-05 13:41:54','2022-09-05 13:41:54'),(9,13,'Identify the toy','Can you identify all these toys?',0,'2022-09-05 14:03:14','2022-09-05 14:03:14');
+INSERT INTO `quizzes` VALUES (1,2,'Toms sports quiz','A sports based quiz',0,1,'2022-08-11 11:07:20','2022-08-11 11:07:20'),(2,3,'Capital cities quiz','Can you identify these capital cities?',1,1,'2022-08-15 10:28:26','2022-08-16 10:13:35'),(3,4,'Hits of the 90\'s','All about music from the 90\'s',1,1,'2022-08-15 10:35:36','2022-08-16 10:13:53'),(4,5,'Maths Quiz','A simple maths quiz',0,1,'2022-08-15 10:52:16','2022-08-15 10:52:16'),(5,5,'British history quiz','A quiz all about British history',0,1,'2022-08-15 11:00:14','2022-08-15 11:00:14'),(6,6,'Mikes Science Quiz','A science quiz',0,1,'2022-08-16 10:08:45','2022-08-16 10:08:45'),(7,12,'Arsenal players past & present','A quiz all about Arsenal',0,1,'2022-09-05 13:12:47','2022-09-05 13:12:47'),(8,12,'Aviation Quiz','A quiz all about aviaion?',0,1,'2022-09-05 13:41:54','2022-09-05 13:41:54'),(9,13,'Identify the toy','Can you identify all these toys?',0,1,'2022-09-05 14:03:14','2022-09-05 14:03:14');
 /*!40000 ALTER TABLE `quizzes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -715,7 +716,7 @@ CREATE TABLE `users` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `users_username_unique` (`username`),
   UNIQUE KEY `users_email_unique` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -741,4 +742,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-09-06 11:44:50
+-- Dump completed on 2022-09-30 10:39:55

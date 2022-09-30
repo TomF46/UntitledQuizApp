@@ -15,6 +15,7 @@ class Quiz extends Model
         'user_id',
         'title',
         'description',
+        'published'
     ];
 
     public function user()
@@ -104,6 +105,7 @@ class Quiz extends Model
                 return $user->username;
             }),
             'recommended' => $this->recommended,
+            'published' => $this->published,
             'isBanned' => $this->isBanned(),
             'banId' => $this->isBanned() ? $this->ban->id : null
         ];
@@ -148,6 +150,7 @@ class Quiz extends Model
                 'profile_image' => $this->user->profile_image_url ? $this->user->profile_image_url : config('globalVariables.default_profile_pictures'),
             ],
             'recommended' => $this->recommended,
+            'published' => $this->published,
             'isBanned' => $this->isBanned(),
             'banId' => $this->isBanned() ? $this->ban->id : null,
             'userCanManage' => $this->userCanManage($user),
@@ -182,6 +185,7 @@ class Quiz extends Model
                 return $comment->map($user);
             }),
             'recommended' => $this->recommended,
+            'published' => $this->published,
             'isBanned' => $this->isBanned(),
             'banId' => $this->isBanned() ? $this->ban->id : null,
             'userCanManage' => $this->userCanManage($user),
@@ -202,5 +206,11 @@ class Quiz extends Model
         foreach ($question->answers as $answer) {
             unset($answer->is_correct);
         }
+    }
+
+    public function publish()
+    {
+        $this->published = true;
+        $this->save();
     }
 }

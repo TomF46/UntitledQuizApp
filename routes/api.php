@@ -44,6 +44,7 @@ Route::middleware(['auth:api', 'role', 'notBanned'])->group(function () {
     Route::post('/quizzes/{quiz}/like', [App\Http\Controllers\QuizLikesController::class, 'like']);
     Route::post('/quizzes/{quiz}/dislike', [App\Http\Controllers\QuizLikesController::class, 'dislike']);
     Route::delete('/quizzes/{quiz}/like', [App\Http\Controllers\QuizLikesController::class, 'remove']);
+    Route::post('/quizzes/{quiz}/publish', [App\Http\Controllers\QuizController::class, 'publish']);
     Route::get('/quizzes/{quiz}/comments', [App\Http\Controllers\QuizCommentsController::class, 'show']);
     Route::post('/quizzes/{quiz}/comments', [App\Http\Controllers\QuizCommentsController::class, 'store']);
     Route::delete('/comments/{comment}', [App\Http\Controllers\QuizCommentsController::class, 'remove']);
@@ -86,6 +87,7 @@ Route::middleware(['auth:api', 'role', 'notBanned'])->group(function () {
     Route::get('/dashboard/quizzes/popular', [App\Http\Controllers\DashboardController::class, 'getPopularQuizzes']);
     Route::get('/dashboard/users/followed', [App\Http\Controllers\DashboardController::class, 'getFollowedUsers']);
     Route::get('/dashboard/notifications', [App\Http\Controllers\DashboardController::class, 'getUnreadNotifications']);
+    Route::get('/dashboard/quizzes/unpublished', [App\Http\Controllers\DashboardController::class, 'getUsersUnpublishedQuizzes']);
 
     Route::get('/challenges', [App\Http\Controllers\ChallengesController::class, 'index']);
     Route::post('/challenges', [App\Http\Controllers\ChallengesController::class, 'store']);

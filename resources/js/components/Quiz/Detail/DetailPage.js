@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { getQuiz, getUsersHighScoreForQuiz, unban, deleteQuiz, toggleRecommended } from "../../../api/quizApi";
+import { getQuiz, getUsersHighScoreForQuiz, unban, deleteQuiz, toggleRecommended, publishQuiz } from "../../../api/quizApi";
 import QuizDetail from "./QuizDetail";
 import { confirmAlert } from "react-confirm-alert";
 import { toast } from "react-toastify";
@@ -104,13 +104,40 @@ const QuizDetailPage = ({ quizId, currentUser, isAdmin, history }) => {
         })
     }
 
+    function confirmPublish(){
+        confirmAlert({
+            title: "Confirm deletion",
+            message: `Are you sure you want to publish ${quiz.title}? (This is a one time action once published you can't unpublish)`,
+            buttons: [
+                {
+                    label: "Yes",
+                    onClick: () => handlePublish(),
+                },
+                {
+                    label: "No",
+                    onClick: () => { },
+                },
+            ],
+        });
+    }
+
+    function handlePublish(){
+        publishQuiz(quiz.id).then(res => {
+            toast.success("Quiz published")
+            handleQuizReload();
+        }).catch(error => {
+            toast.error(`Error publishing quiz ${error.message}`, {
+                autoClose: false,
+            });
+        })
+    }
     return (
         <>
             {!quiz ? (
                 <LoadingMessage message={"Loading quiz"} />
             ) : (
                 <>
-                    <QuizDetail quiz={quiz} onQuizReload={handleQuizReload} onDelete={handleDeleteQuiz} userHighScore={highScore} isAdmin={isAdmin} onQuizToggleBan={handleToggleBan} onToggleRecommended={handleToggleRecommended} />
+                    <QuizDetail quiz={quiz} onQuizReload={handleQuizReload} onDelete={handleDeleteQuiz} userHighScore={highScore} isAdmin={isAdmin} onQuizToggleBan={handleToggleBan} onToggleRecommended={handleToggleRecommended} onPublish={confirmPublish} />
                 </>
             )}
         </>

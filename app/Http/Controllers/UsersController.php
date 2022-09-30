@@ -37,7 +37,7 @@ class UsersController extends Controller
 
     public function quizzes(User $user)
     {
-        $paginator = $user->quizzes()->doesntHave('ban')->with('tags')->latest()->paginate(10);
+        $paginator = $user->quizzes()->where('published', true)->doesntHave('ban')->with('tags')->latest()->paginate(10);
         $paginator->getCollection()->transform(function ($quiz) {
             return $quiz->mapOverview();
         });

@@ -48,9 +48,10 @@ class QuizScoresController extends Controller
         return response()->json($score->map(), 201);
     }
 
-    public function show(Quiz $quiz)
+    public function show(Request $request, Quiz $quiz)
     {
-        if ($quiz->isBanned()) return response()->json(['message' => 'Not Found!'], 404);
+        $currentUser = $request->User();
+        if (($quiz->isBanned() || !$quiz->published) && !$quiz->isOwner($currentUser)) return response()->json(['message' => 'Not Found!'], 404);
         $paginator = $quiz->scores()->orderBy('score_percent', 'desc')->paginate(10);
         $paginator->getCollection()->transform(function ($score) {
             return $score->map();
@@ -61,7 +62,9 @@ class QuizScoresController extends Controller
 
     public function showMyHighScore(Request $request, Quiz $quiz)
     {
-        if ($quiz->isBanned()) return response()->json(['message' => 'Not Found!'], 404);
+        $currentUser = $request->User();
+
+        if (($quiz->isBanned() || !$quiz->published) && !$quiz->isOwner($currentUser)) return response()->json(['message' => 'Not Found!'], 404);
         $currentUser = $request->User();
         $highScore = $quiz->scores()->where('user_id', $currentUser->id)->orderBy('score_percent', 'desc')->first();
         if ($highScore == null) return response()->json($highScore);

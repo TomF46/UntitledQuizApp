@@ -5,7 +5,7 @@ import MultiSelectInput from "../../FormComponents/MultiSelectInput";
 import * as QuizManagementService from "../../../tools/QuizManagementService";
 import QuestionManagement from "./QuestionManagement";
 
-const QuizForm = ({ quiz, tags, collaborators, updateQuiz, updateErrors, onSave, onReset, saving = false, errors = {} }) => {
+const QuizForm = ({ quiz, tags, collaborators, updateQuiz, updateErrors, onSave, onReset, saving = false, editing,errors = {} }) => {
     const [uploadingImage, setUploadingImage] = useState(false);
 
 
@@ -28,7 +28,7 @@ const QuizForm = ({ quiz, tags, collaborators, updateQuiz, updateErrors, onSave,
     }
 
     return (
-        <form onSubmit={onSave}>
+        <form>
             <div className="shadow page">
 
                 <h2 className="font-bold text-primary text-4xl py-4 text-center">{quiz.id ? "Edit" : "Add"} Quiz</h2>
@@ -127,15 +127,29 @@ const QuizForm = ({ quiz, tags, collaborators, updateQuiz, updateErrors, onSave,
                             </svg>
                             <span className="ml-1">Reset</span>
                         </button>
+                        {!quiz.published && (
+                            <button
+                                type="button"
+                                onClick={() =>{onSave(false)}}
+                                disabled={saving}
+                                className="bg-primary  text-white rounded text-center py-2 px-4 hover:opacity-75 md:mr-2 shadow inline-flex items-center justify-center"
+                            >
+                                <svg className="text-white h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4" />
+                                </svg>
+                                <span className="ml-1">{saving ? "Saving..." : "Save"}</span>
+                            </button>
+                        )}
                         <button
-                            type="submit"
+                            type="button"
+                            onClick={() =>{onSave(true)}}
                             disabled={saving}
                             className="bg-primary  text-white rounded text-center py-2 px-4 hover:opacity-75 shadow inline-flex items-center justify-center"
                         >
                             <svg className="text-white h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4" />
                             </svg>
-                            <span className="ml-1">{saving ? "Saving..." : "Save"}</span>
+                            <span className="ml-1">{saving ? "Publishing..." : "Save & Publish"}</span>
                         </button>
                     </div>
                 </div>
@@ -153,7 +167,8 @@ QuizForm.propTypes = {
     onReset: PropTypes.func.isRequired,
     updateQuiz: PropTypes.func.isRequired,
     updateErrors: PropTypes.func.isRequired,
-    saving: PropTypes.bool
+    saving: PropTypes.bool.isRequired,
+    editing: PropTypes.bool.isRequired
 };
 
 export default QuizForm;

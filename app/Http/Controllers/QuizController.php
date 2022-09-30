@@ -12,7 +12,7 @@ class QuizController extends Controller
     public function index()
     {
 
-        $paginator = Quiz::latest()->doesntHave('ban')->paginate(10);
+        $paginator = Quiz::latest()->where('published', true)->doesntHave('ban')->paginate(10);
         $paginator->getCollection()->transform(function ($quiz) {
             return $quiz->mapOverview();
         });
@@ -31,6 +31,7 @@ class QuizController extends Controller
             'user_id' => $request->user()->id,
             'title' => $attributes['title'],
             'description' => $attributes['description'],
+            'published' => $attributes['publish']
         ]);
 
         $quiz->questions()->saveMany($questions);
@@ -51,7 +52,7 @@ class QuizController extends Controller
     public function show(Request $request, Quiz $quiz)
     {
         $currentUser = $request->user();
-        if ($quiz->isBanned() && !$quiz->isOwner($currentUser) && !$currentUser->isAdmin()) return response()->json(['message' => 'Not Found!'], 404);
+        if (($quiz->isBanned() || !$quiz->published) && !$quiz->isOwner($currentUser) && !$currentUser->isAdmin()) return response()->json(['message' => 'Not Found!'], 404);
 
         $mappedQuiz = $quiz->mapDetailWithoutAnswers($request->User());
         return response()->json($mappedQuiz);
@@ -87,6 +88,8 @@ class QuizController extends Controller
 
         $this->saveAnswers($quiz, $attributes['questions']);
 
+        if($attributes['publish'] == true) $quiz->publish();
+
         $quiz = $quiz->fresh();
         return response()->json($quiz);
     }
@@ -105,6 +108,13 @@ class QuizController extends Controller
         return response()->json([
             'id' => $quiz->id
         ], 200);
+    }
+
+    public function publish(Request $request, Quiz $quiz)
+    {
+        if (!$quiz->isOwner($request->user())) return response()->json(['error' => 'unauthorized.'], 401);
+        $quiz->publish();
+        return response()->noContent();
     }
 
     protected function saveAnswers($quiz, $requestQuestions)
@@ -157,6 +167,7 @@ class QuizController extends Controller
             'description' => 'required|max:255',
             'tags' => 'exists:tags,id',
             'collaborators' => 'exists:users,id',
+            'publish' => 'required|boolean',
             'questions.*.text' => 'required|max:255',
             'questions.*.helpText' => 'nullable|max:255',
             'questions.*.image_url' => 'string|nullable',

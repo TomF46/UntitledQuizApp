@@ -10,6 +10,7 @@ class UserScoresController extends Controller
     {
         $paginator = $user->scores()
             ->whereHas('quiz', function ($query) {
+                $query->where('published', true);
                 $query->doesntHave('ban');
             })
             ->orderBy('score_percent', 'desc')->paginate(10);

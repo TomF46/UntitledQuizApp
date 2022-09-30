@@ -19,6 +19,7 @@ class CreateQuizzesTable extends Migration
             $table->string('title');
             $table->string('description');
             $table->boolean('recommended')->default(false);
+            $table->boolean('published')->default(false);
             $table->timestamps();
         });
     }

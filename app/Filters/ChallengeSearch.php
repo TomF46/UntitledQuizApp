@@ -15,6 +15,7 @@ class ChallengeSearch
 
         $challenge->whereHas('score', function ($query) {
             $query->whereHas('quiz', function ($query) {
+                $query->where('published', true);
                 $query->doesntHave('ban');
             });
         });

@@ -257,3 +257,25 @@ export function getRecommendedQuizzes() {
             throw error;
         });
 }
+
+export function publishQuiz(quizId){
+    return axiosClient
+        .post(`/api/quizzes/${quizId}/publish`, {})
+        .then(response => {
+            return response.data;
+        })
+        .catch(error => {
+            throw error;
+        });
+}
+
+export function getUsersUnpublishedQuizzes(){
+    return axiosClient
+        .get(`/api/dashboard/quizzes/unpublished`)
+        .then(response => {
+            return response.data;
+        })
+        .catch(error => {
+            throw error;
+        });
+}

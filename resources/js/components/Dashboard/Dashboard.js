@@ -13,6 +13,7 @@ import ChallengesDashboard from "./Components/ChallengesDashboard";
 import { getRandomQuiz } from "../../api/quizApi";
 import FriendRequestsDashboard from "./Components/FriendRequestsDashboard";
 import NotificationsDashboard from "./Components/NotificationsDashboard";
+import UnpublishedQuizDashboard from "./Components/UnpublishedQuizDashboard";
 
 const DashboardPage = ({ userId, history }) => {
     const [user, setUser] = useState(null);
@@ -109,6 +110,7 @@ const DashboardPage = ({ userId, history }) => {
                             <NotificationsDashboard />
                         </div>
                         <FriendRequestsDashboard />
+                        <UnpublishedQuizDashboard />
                         <div className="mb-6 overflow-hidden shadow card">
                             <PopularQuizzesDashboard />
                         </div>

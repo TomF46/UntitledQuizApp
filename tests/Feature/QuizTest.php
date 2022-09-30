@@ -56,6 +56,35 @@ class QuizTest extends TestCase
         $response->assertStatus(200);
     }
 
+    public function testQuizOwnerCanPublishQuiz()
+    {
+        $quiz = Quiz::factory()->create([
+            'user_id' => $this->user->id,
+            'published' => false,
+        ]);
+
+        $response = $this->withHeaders([
+            'Accept' => 'application/json',
+            'Authorization' => 'Bearer ' . TestHelper::getBearerTokenForUser($this->user)
+        ])->post('/api/quizzes/' . $quiz['id'] . '/publish');
+        $response->assertNoContent();
+    }
+
+    public function testUnauthorisedCantPublishQuiz()
+    {
+        $user2 = TestHelper::createUser();
+        $quiz = Quiz::factory()->create([
+            'user_id' => $user2->id,
+            'published' => false,
+        ]);
+
+        $response = $this->withHeaders([
+            'Accept' => 'application/json',
+            'Authorization' => 'Bearer ' . TestHelper::getBearerTokenForUser($this->user)
+        ])->post('/api/quizzes/' . $quiz['id'] . '/publish');
+        $response->assertStatus(401);
+    }
+
     public function testCanAddQuiz()
     {
         $response = $this->withHeaders([
@@ -69,6 +98,7 @@ class QuizTest extends TestCase
                 "description" => "A simple test quiz",
                 "tags" => [],
                 "collaborators" => [],
+                "publish" => true,
                 "questions" =>
                 [
                     [

@@ -17,6 +17,7 @@ class ChallengesController extends Controller
 
         $paginator = Challenge::whereHas('score', function ($query) {
             $query->whereHas('quiz', function ($query) {
+                $query->where('published', true);
                 $query->doesntHave('ban');
             });
         })
@@ -62,7 +63,7 @@ class ChallengesController extends Controller
 
     public function show(Challenge $challenge, Request $request)
     {
-        if ($challenge->score->quiz->isBanned()) return response()->json(['message' => 'Not Found!'], 404);
+        if ($challenge->score->quiz->isBanned() || !$challenge->score->quiz->published) return response()->json(['message' => 'Not Found!'], 404);
         $currentUser = $request->User();
         return response()->json($challenge->map($currentUser));
     }

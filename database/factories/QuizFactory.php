@@ -27,6 +27,7 @@ class QuizFactory extends Factory
             'title' => $this->faker->text(20),
             'description' => $this->faker->text,
             'recommended' => $this->faker->boolean,
+            'published' => true,
         ];
     }
 }

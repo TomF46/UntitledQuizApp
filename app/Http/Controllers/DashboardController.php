@@ -13,7 +13,7 @@ class DashboardController extends Controller
     {
         $currentUser = $request->User();
         $following = $currentUser->follows()->pluck('id');
-        $response = Quiz::WhereIn('user_id', $following)->doesntHave('ban')->paginate(10);
+        $response = Quiz::WhereIn('user_id', $following)->where('published', true)->doesntHave('ban')->paginate(10);
         $response->getCollection()->transform(function ($quiz) {
             return $quiz->mapOverview();
         });
@@ -36,7 +36,7 @@ class DashboardController extends Controller
 
     public function getPopularQuizzes()
     {
-        $quizzes = Quiz::with('likes')->doesntHave('ban')->get()->sortByDesc(function ($quiz) {
+        $quizzes = Quiz::with('likes')->where('published', true)->doesntHave('ban')->get()->sortByDesc(function ($quiz) {
             return $quiz->totalNetLikes();
         })->take(10)->values()->map(function ($quiz) {
             return $quiz->mapOverview();
@@ -54,5 +54,16 @@ class DashboardController extends Controller
         });
 
         return response()->json($paginator);
+    }
+
+    public function getUsersUnpublishedQuizzes(Request $request)
+    {
+        $currentUser = $request->User();
+        $quizzes = Quiz::Where('user_id', $currentUser->id)->where('published', false)->paginate(5);
+        $quizzes->getCollection()->transform(function ($quiz) {
+            return $quiz->mapOverview();
+        });
+
+        return response()->json($quizzes);
     }
 }

@@ -18,12 +18,14 @@ const QuizManagementPage = ({ quizId, userId, history }) => {
     const [collaborators, setCollaborators] = useState(null);
     const [errors, setErrors] = useState({ questions: [] });
     const [saving, setSaving] = useState(false);
+    const [editing, setEditing] = useState(false);
 
     useEffect(() => {
         if (quizId) {
             getQuizForEdit(quizId)
                 .then(data => {
                     setQuiz({ ...data });
+                    setEditing(true);
                 })
                 .catch(error => {
                     toast.error(`Error fetching quiz to edit ${error.message}`, {
@@ -59,24 +61,24 @@ const QuizManagementPage = ({ quizId, userId, history }) => {
         return validated.isValid;
     }
 
-    function handleSave(event) {
-        event.preventDefault();
+    function handleSave(publish) {
         if (!formIsValid()) return;
         setSaving(true);
 
         let quizToPost = { ...quiz };
+        quizToPost.publish = publish;
 
         quizToPost.tags = quizToPost.tags.map(tag => tag.value);
         quizToPost.collaborators = quizToPost.collaborators.map(collaborator => collaborator.value);
 
         saveQuiz(quizToPost)
             .then(response => {
-                toast.success("Quiz saved");
+                toast.success(`Quiz ${publish ? 'published' : 'saved'}`);
                 history.push(`/quiz/${response.id}`);
             })
             .catch(err => {
                 setSaving(false);
-                toast.error("Error saving quiz", {
+                toast.error(`Error ${publish ? 'publishing' : 'saving'} quiz`, {
                     autoClose: false
                 });
                 let tempErrors = { ...errors };
@@ -125,6 +127,7 @@ const QuizManagementPage = ({ quizId, userId, history }) => {
                     onReset={handleReset}
                     onSave={handleSave}
                     saving={saving}
+                    editing={editing}
                 />
             ) : (
                 <div className="shadow page">

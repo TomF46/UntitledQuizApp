@@ -13,6 +13,8 @@ class QuizSearch
 
         //Dont return banned quizzes
         $quiz->doesntHave('ban');
+        $quiz->where('published', true);
+
 
         if ($filters->input('onlyShowRecommended') == true) {
             $quiz->where('recommended', true);
