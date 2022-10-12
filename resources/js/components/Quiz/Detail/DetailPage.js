@@ -106,7 +106,7 @@ const QuizDetailPage = ({ quizId, currentUser, isAdmin, history }) => {
 
     function confirmPublish(){
         confirmAlert({
-            title: "Confirm deletion",
+            title: "Confirm publish",
             message: `Are you sure you want to publish ${quiz.title}? (This is a one time action once published you can't unpublish)`,
             buttons: [
                 {
