@@ -106,21 +106,21 @@ const DashboardPage = ({ userId, history }) => {
                         </div>
                     </div>
                     <div className="col-span-12 lg:col-span-9">
-                        <div className="mb-6 overflow-hidden shadow card">
+                        <div className="mb-4 overflow-hidden shadow card">
                             <NotificationsDashboard />
                         </div>
                         <FriendRequestsDashboard />
                         <UnpublishedQuizDashboard />
-                        <div className="mb-6 overflow-hidden shadow card">
+                        <div className="mb-4 overflow-hidden shadow card">
                             <PopularQuizzesDashboard />
                         </div>
-                        <div className="mb-6 overflow-hidden shadow card">
+                        <div className="mb-4 overflow-hidden shadow card">
                             <RecommendedQuizzesDashboard />
                         </div>
-                        <div className="mb-6 overflow-hidden shadow card">
+                        <div className="mb-4 overflow-hidden shadow card">
                             <FollowingUsersDashboard />
                         </div>
-                        <div className="mb-6 overflow-hidden shadow card">
+                        <div className="mb-4 overflow-hidden shadow card">
                             <FollowingQuizDashboard />
                         </div>
                         <div className="overflow-hidden shadow card">

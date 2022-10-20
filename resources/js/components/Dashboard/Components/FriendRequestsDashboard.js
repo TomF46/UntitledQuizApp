@@ -73,7 +73,7 @@ const FriendRequestsDashboard = () => {
 
     return (
         friendRequestsPaginator && friendRequestsPaginator.total > 0 && (
-            <div className="mb-6 overflow-hidden shadow card">
+            <div className="mb-4 overflow-hidden shadow card">
                 <div className="users-following-dashboard px-4 py-2">
                     <h1 className="font-bold text-primary text-2xl text-center md:text-left">Friend requests</h1>
                     <FriendRequestsListWithPagination paginationData={friendRequestsPaginator} onPageChange={handleFriendRequestsListPageChange} onAccept={handleAcceptFriendRequest} onRemove={handleRemoveOrRejectFriend} />
