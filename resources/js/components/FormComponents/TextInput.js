@@ -21,7 +21,7 @@ const TextInput = ({ name, label, onChange, placeholder, value, required, error 
                     value={value}
                     onChange={onChange}
                     required={required}
-                    autocomplete="off"
+                    autoComplete="off"
                 />
                 {error && (
                     <div className="text-red-500 text-xs p-1 mt-2">{error}</div>
