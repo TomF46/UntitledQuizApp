@@ -33,7 +33,7 @@ import NotificationsPage from "./Notifications/NotificationsPage";
 const Main = ({ location }) => (
     <>
         <Header />
-        <div className="relative mt-4">
+        <div className="relative mt-4 app-container mx-auto">
             <div className="sm:px-4 md:px-8">
                 <TransitionGroup className="transition-group">
                     <CSSTransition

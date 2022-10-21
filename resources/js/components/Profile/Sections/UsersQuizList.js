@@ -34,7 +34,7 @@ const UsersQuizList = ({ user }) => {
     }
 
     return (
-        <div className="mb-6 px-4 py-2 overflow-hidden shadow card">
+        <div className="mb-4 px-4 py-2 overflow-hidden shadow card">
             <h3 className="font-bold text-primary text-2xl text-center md:text-left">
                 Created quizzes
             </h3>

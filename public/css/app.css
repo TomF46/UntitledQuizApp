@@ -22344,6 +22344,10 @@ nav {
   z-index: 999;
 }
 
+.app-container {
+  max-width: 1440px;
+}
+
 .centerFormCardContainer {
   width: 100%;
 }
