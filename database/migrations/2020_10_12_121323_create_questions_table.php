@@ -17,6 +17,8 @@ class CreateQuestionsTable extends Migration
             $table->id();
             $table->foreignId('quiz_id')->constrained()->onDelete('cascade');
             $table->string('text');
+            $table->string('image_url')->nullable();
+            $table->string('video_url')->nullable();
             $table->string('helpText')->nullable();
             $table->integer('ordinal');
             $table->timestamps();

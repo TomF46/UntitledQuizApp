@@ -13,7 +13,8 @@ class Question extends Model
         'text',
         'helpText',
         'ordinal',
-        'image_url'
+        'image_url',
+        'video_url'
     ];
 
     public function quiz()

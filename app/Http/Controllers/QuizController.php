@@ -152,6 +152,7 @@ class QuizController extends Controller
                 'text' => $question['text'],
                 'helpText' => $question['helpText'],
                 'image_url' => $question['image_url'],
+                'video_url' => $question['video_url'],
                 'ordinal' => $ordinal
             ]);
             $formattedQuestions[] = $formattedQuestion;
@@ -171,6 +172,7 @@ class QuizController extends Controller
             'questions.*.text' => 'required|max:255',
             'questions.*.helpText' => 'nullable|max:255',
             'questions.*.image_url' => 'string|nullable',
+            'questions.*.video_url' => 'string|nullable',
             'questions.*.answers.*.text' => 'required',
             'questions.*.answers.*.is_correct' => 'required',
         ]);
