@@ -35,22 +35,23 @@ const QuizPlayForm = ({ quiz, submission, challenge, onAnswerChange, currentQues
                                                         <img src={question.image_url} alt="question-image" className="question-image py-16 max-w-xs md:max-w-md lg:max-w-lg" />
                                                     </div>
                                                 }
+                                                {question.video_url && 
+                                                    <div className="video-container grid grid-cols-12 justify-center">
+                                                        <iframe className="video col-span-12 lg:col-start-4 lg:col-span-6" src={question.video_url} frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
+                                                    </div>
+                                                }
                                                 <div className="grid grid-cols-12 mt-4 md:flex-row">
                                                     {quiz.questions[question.ordinal].answers.map((answer) => {
                                                         return (
-                                                            <>
-                                                                <div className="hidden md:block md:col-span-3"></div>
                                                                 <button
-                                                                    key={answer.id}
                                                                     type="button"
+                                                                    key={answer}
                                                                     onClick={(e) => onAnswerChange(question.id, answer.id, e)}
-                                                                    className={`text-white py-3 px-6 hover:bg-secondary mx-4 my-2 col-span-12 md:col-span-6 shadow 
+                                                                    className={`text-white py-3 px-6 hover:bg-secondary mx-4 my-2 col-span-12 md:col-start-4 md:col-span-6 shadow 
                                                      ${submission.answers[question.ordinal].answer_id == answer.id ? "bg-secondary" : "bg-primary "}`}
                                                                 >
                                                                     {answer.text}
                                                                 </button>
-                                                                <div className="hidden md:block md:col-span-3"></div>
-                                                            </>
                                                         )
                                                     })}
                                                 </div>

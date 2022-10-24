@@ -34,6 +34,7 @@
         "moment": "^2.29.1",
         "multiselect-react-dropdown": "^1.6.1",
         "react-confirm-alert": "^2.6.2",
+        "react-modal": "^3.16.1",
         "react-moment": "^1.1.1",
         "react-toastify": "^6.0.9",
         "react-transition-group-v2": "^4.3.0",

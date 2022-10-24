@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import TextInput from "../../FormComponents/TextInput";
 import CheckboxInput from "../../FormComponents/CheckboxInput";
@@ -6,8 +6,33 @@ import * as QuizManagementService from "../../../tools/QuizManagementService";
 import { confirmAlert } from "react-confirm-alert";
 import { storeImage } from "../../../api/imagesApi";
 import { toast } from "react-toastify";
+import Modal from 'react-modal';
+
+
+const customStyles = {
+    content: {
+      top: '50%',
+      left: '50%',
+      right: 'auto',
+      bottom: 'auto',
+      marginRight: '-50%',
+      transform: 'translate(-50%, -50%)',
+      minWidth: '60%',
+    },
+};
+
+Modal.setAppElement('#index');
 
 const QuestionManagement = ({ quiz, updateQuiz, errors = {}, setIsUpploadingImage }) => {
+    const [modalIsOpen, setIsOpen] = useState(false);
+
+    function openModal() {
+        setIsOpen(true);
+    }
+
+    function closeModal() {
+        setIsOpen(false);
+    }
 
     function onAddAnswer(questionIndex) {
         updateQuiz(QuizManagementService.addBlankAnswerToQuestion(quiz, questionIndex));
@@ -31,6 +56,16 @@ const QuestionManagement = ({ quiz, updateQuiz, errors = {}, setIsUpploadingImag
     function onAnswerCheckboxChange(questionIndex, answerIndex, event) {
         const { checked } = event.target;
         updateQuiz(QuizManagementService.setIsCorrectForAnswer(quiz, questionIndex, answerIndex, checked));
+    }
+
+    function onQuestionVideoChange(questionIndex, event){
+        const { value } = event.target;
+        updateQuiz(QuizManagementService.changeQuestionVideo(quiz, questionIndex, value));
+    }
+
+    function onQuestionVideoRemoved(questionIndex){
+        updateQuiz(QuizManagementService.changeQuestionVideo(quiz, questionIndex, null));
+        closeModal();
     }
 
     function onQuestionImageChange(questionIndex, event) {
@@ -115,14 +150,17 @@ const QuestionManagement = ({ quiz, updateQuiz, errors = {}, setIsUpploadingImag
                                 required={false}
                             />
                         </div>
-                        <div>
+                        <div className="flex">
+                            <div>
                             {quiz.questions[questionIndex].image_url != null ? (
-                                <div>
-                                    <img src={quiz.questions[questionIndex].image_url} alt="image-preview" className="question-image-preview mt-4" />
-                                    <p className="text-red-400 font-bold pointer inline hover:text-red-500" onClick={() => onRemoveImage(questionIndex)}>Remove image</p>
-                                </div>
+                                <button
+                                    type="button"
+                                    onClick={() => onRemoveImage(questionIndex)}
+                                    className="bg-red-400 text-white rounded py-2 px-4 hover:bg-red-500 shadow inline-flex items-center" 
+                                >Remove image</button>
                             ) : (
-                                <label className="pointer inline text-gray-600 font-bold hover:text-gray-800 pb-4">
+                                <button type="button" className="bg-primary pointer text-white rounded py-2 px-4 hover:opacity-75 shadow inline-flex items-center">
+                                    <label className="pointer">
                                     Add image
                                     <input
                                         type="file"
@@ -132,8 +170,70 @@ const QuestionManagement = ({ quiz, updateQuiz, errors = {}, setIsUpploadingImag
 
                                     />
                                 </label>
+                                </button>
                             )}
+                            </div>
+                            <div>
+                                <button type="button" onClick={openModal} className="bg-primary text-white rounded py-2 px-4 ml-2 hover:opacity-75 shadow inline-flex items-center">
+                                    {question.video_url ? "Manage video" : "Add video"}
+                                </button>
+                                <Modal
+                                    isOpen={modalIsOpen}
+                                    onRequestClose={closeModal}
+                                    style={customStyles}
+                                    contentLabel="Example Modal"
+                                >
+                                    <div className="grid grid-cols-12">
+                                        <div className="col-span-12">
+                                            <h3 className="font-bold text-center">Manage video</h3>
+                                        </div>
+                                        <div className="col-span-12">
+                                            <p>Please add a valid embed link for your video on your format of choice in the input below, if you add a valid link then a preview of the video will appear below.</p><br/>
+                                            <p>Example links include</p>
+                                            <ul>
+                                                <li>Youtube: https://www.youtube.com/embed/5mGuCdlCcNM</li>
+                                                <li>Vimeo: https://player.vimeo.com/video/759911151</li>
+                                            </ul>
+                                        </div>
+                                        <div className="col-span-12 mt-4">
+                                        <TextInput
+                                            name={`questions[${questionIndex}].video_url`}
+                                            label="Video URL"
+                                            value={quiz.questions[questionIndex].video_url}
+                                            onChange={(e) => onQuestionVideoChange(questionIndex, e)}
+                                            required={true}
+                                        />
+                                        </div>
+                                        <div className="col-span-12 mt-4">
+                                            <p className="text-center font-bold">Preview</p>
+                                            <div className="video-container grid grid-cols-12 justify-center">
+                                                <iframe className="video col-span-12 lg:col-start-4 lg:col-span-6" src={question.video_url} frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
+                                            </div>
+                                        </div>
+                                        <div className="col-span-12 text-right">
+                                        <button
+                                    type="button"
+                                    onClick={() => {onQuestionVideoRemoved(questionIndex)}}
+                                    className="bg-red-400 text-white rounded py-2 px-4 mt-4 hover:opacity-75 shadow inline-flex items-center" 
+                                >Remove video</button>
+                                        <button
+                                    type="button"
+                                    onClick={closeModal}
+                                    className="bg-primary text-white rounded py-2 px-4 mt-4 ml-2 hover:opacity-75 shadow inline-flex items-center" 
+                                >Finish</button>
+                                        </div>
+                                    </div>
+                                </Modal>
+                            </div>
                         </div>
+                        {quiz.questions[questionIndex].image_url != null && (
+                            <img src={quiz.questions[questionIndex].image_url} alt="image-preview" className="question-image-preview mt-4" />
+                        )}
+                        {quiz.questions[questionIndex].video_url != null && (
+                            <div className="video-container grid grid-cols-12">
+                                <iframe className="video col-span-12 lg:col-start-4 lg:col-span-6" src={question.video_url} frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
+                            </div>
+                        )}
                         {quiz.questions[questionIndex].answers.length > 0 && <h2 className="font-bold text-primary text-lg my-2">Answers:</h2>}
                         {quiz.questions[questionIndex].answers.map((answer, answerIndex) => {
                             return (
@@ -182,9 +282,9 @@ const QuestionManagement = ({ quiz, updateQuiz, errors = {}, setIsUpploadingImag
                             </div>
                             <div className="flex justify-end mt-auto">
                                 <button
-                                    type="button"
+                                   type="button"
                                     onClick={() => onRemoveQuestion(questionIndex)}
-                                    className="bg-red-400 text-white rounded py-2 px-4 hover:bg-red-500 shadow inline-flex items-center"
+                                    className="bg-red-400 text-white rounded py-2 px-4 hover:bg-red-500 shadow inline-flex items-center" 
                                 >
                                     <svg className="text-white h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />

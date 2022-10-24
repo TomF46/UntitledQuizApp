@@ -18,7 +18,8 @@ const newQuiz = {
                     is_correct: false
                 }
             ],
-            image_url: null
+            image_url: null,
+            video_url: null
         }
     ]
 };
@@ -36,7 +37,8 @@ const newQuestion = {
             is_correct: false
         }
     ],
-    image_url: null
+    image_url: null,
+    video_url: null
 }
 
 const newAnswer = {

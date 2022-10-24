@@ -22477,6 +22477,15 @@ section.route-section {
   flex-direction: column;
 }
 
+.video-container {
+  padding: 8px;
+}
+
+.video-container .video {
+  aspect-ratio: 16/9;
+  width: 100%;
+}
+
 @media (min-width: 640px){
   .sm\:container{
     width: 100%;

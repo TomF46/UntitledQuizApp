@@ -151,3 +151,13 @@ section.route-section {
     align-content: center;
     flex-direction: column;
 }
+
+.video-container{
+    .video{
+      aspect-ratio: 16 / 9;
+      width: 100%;
+    }
+    padding: 8px;
+  }
+  
+  
