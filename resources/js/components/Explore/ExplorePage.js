@@ -11,7 +11,7 @@ import { getPageWithPaginationUrlAndFilters } from "../../api/paginationApi";
 
 const ExplorePage = ({ history }) => {
     const [quizzesPaginator, setQuizzesPaginator] = useState(null);
-    const [filters, setFilters] = useState({ searchTerm: "", user: "", tag: null, onlyShowRecommended: false });
+    const [filters, setFilters] = useState({ searchTerm: "", user: "", tag: null, onlyShowRecommended: false, showNewestFirst: false });
     const [tags, setTags] = useState(null);
 
 
@@ -64,7 +64,7 @@ const ExplorePage = ({ history }) => {
 
         input = name == "tag" ? Number(value) : input;
 
-        input = name == "onlyShowRecommended" ? checked : input;
+        input = name == "onlyShowRecommended" || name == "showNewestFirst" ? checked : input;
 
         setFilters(prevFilters => ({
             ...prevFilters,

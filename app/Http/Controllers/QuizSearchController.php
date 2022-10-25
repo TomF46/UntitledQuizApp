@@ -9,7 +9,13 @@ class QuizSearchController extends Controller
 {
     public function filter(Request $request)
     {
-        $paginator = QuizSearch::apply($request)->paginate(10);
+        $quizzes = QuizSearch::apply($request);
+        
+        if($request->input('showNewestFirst')){
+           $quizzes = $quizzes->latest();
+        }
+        
+        $paginator = $quizzes->paginate(10);
         $paginator->getCollection()->transform(function ($quiz) {
             return $quiz->mapOverview();
         });

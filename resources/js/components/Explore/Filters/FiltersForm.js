@@ -35,12 +35,21 @@ const FiltersForm = ({ filters, tags, onFilterChange }) => {
                     onChange={onFilterChange}
                 />
             </div>
-            <div>
+            <div className="mb-2">
                 <CheckboxInput
                     name="onlyShowRecommended"
                     label="Only show QuizApp recommended"
                     value={filters.onlyShowRecommended}
                     checked={filters.onlyShowRecommended}
+                    onChange={onFilterChange}
+                />
+            </div>
+            <div>
+                <CheckboxInput
+                    name="showNewestFirst"
+                    label="Show newest first"
+                    value={filters.showNewestFirst}
+                    checked={filters.showNewestFirst}
                     onChange={onFilterChange}
                 />
             </div>
