@@ -22421,8 +22421,8 @@ nav {
 .profile-photo.profile-photo-preview {
   -o-object-fit: cover;
      object-fit: cover;
-  width: 100px;
-  height: 100px;
+  width: 160px;
+  height: 160px;
 }
 
 .question-image {

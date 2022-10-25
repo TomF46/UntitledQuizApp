@@ -57,7 +57,7 @@ const Comment = ({ comment, onDeleteComment, onReload }) => {
 
     return (
         <div className="grid grid-cols-12 mb border-b py-4">
-            <div className="col-span-12 lg:col-span-2 px-4">
+            <div className="col-span-12 lg:col-span-2">
                 <div className="flex flex-row">
                     <div className="flex">
                         <img src={comment.user_img} onClick={viewUser} alt="profile-picture" className={`rounded-full h-12 w-12 ${comment.user_id ? 'pointer' : ''}`} />

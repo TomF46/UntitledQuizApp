@@ -6,7 +6,7 @@ const MultiSelectInput = ({ name, label, onChange, placeholder, value, options, 
     return (
         <div className="field">
             <label
-                className="block mb-2 font-bold text-xs text-gray-700"
+                className="block mb-1 font-bold text-xs text-gray-700"
                 htmlFor={name}
             >
                 {label}

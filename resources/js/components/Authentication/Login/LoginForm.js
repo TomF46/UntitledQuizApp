@@ -13,7 +13,7 @@ const LoginForm = ({ user, onSave, onChange, saving = false, errors = {} }) => {
                     {errors.onSave}
                 </div>
             )}
-            <div className="mb-6">
+            <div className="mb-2">
                 <EmailInput
                     name="email"
                     label="Email"
@@ -22,7 +22,7 @@ const LoginForm = ({ user, onSave, onChange, saving = false, errors = {} }) => {
                     error={errors.email}
                 />
             </div>
-            <div className="mb-6">
+            <div className="mb-2">
                 <PasswordInput
                     name="password"
                     label="Password"
@@ -31,7 +31,7 @@ const LoginForm = ({ user, onSave, onChange, saving = false, errors = {} }) => {
                     error={errors.password}
                 />
             </div>
-            <div className="mb-6">
+            <div className="mb-2">
                 <CheckboxInput
                     name="remember_me"
                     label="Remember me?"

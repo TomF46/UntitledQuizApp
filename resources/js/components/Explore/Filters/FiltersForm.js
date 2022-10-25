@@ -7,7 +7,7 @@ import CheckboxInput from "../../FormComponents/CheckboxInput";
 const FiltersForm = ({ filters, tags, onFilterChange }) => {
     return (
         <div>
-            <div className="mb-4">
+            <div className="mb-2">
                 <TextInput
                     name="searchTerm"
                     label="Title"
@@ -16,7 +16,7 @@ const FiltersForm = ({ filters, tags, onFilterChange }) => {
                     required={false}
                 />
             </div>
-            <div className="mb-4">
+            <div className="mb-2">
                 <TextInput
                     name="user"
                     label="User"
@@ -25,7 +25,7 @@ const FiltersForm = ({ filters, tags, onFilterChange }) => {
                     required={false}
                 />
             </div>
-            <div className="mb-4">
+            <div className="mb-2">
                 <SelectInput
                     name="tag"
                     label="Tag"

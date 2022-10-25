@@ -5,7 +5,7 @@ import MultiSelectInput from "../../FormComponents/MultiSelectInput";
 import * as QuizManagementService from "../../../tools/QuizManagementService";
 import QuestionManagement from "./QuestionManagement";
 
-const QuizForm = ({ quiz, tags, collaborators, updateQuiz, updateErrors, onSave, onReset, saving = false, editing,errors = {} }) => {
+const QuizForm = ({ quiz, tags, collaborators, updateQuiz, updateErrors, onSave, onReset, saving = false, editing, errors = {} }) => {
     const [uploadingImage, setUploadingImage] = useState(false);
 
 
@@ -33,7 +33,7 @@ const QuizForm = ({ quiz, tags, collaborators, updateQuiz, updateErrors, onSave,
 
                 <h2 className="font-bold text-primary text-4xl py-4 text-center">{quiz.id ? "Edit" : "Add"} Quiz</h2>
                 <div className="p-4">
-                    <div className="mb-6">
+                    <div className="mb-2">
                         <TextInput
                             name="title"
                             label="Title"
@@ -43,7 +43,7 @@ const QuizForm = ({ quiz, tags, collaborators, updateQuiz, updateErrors, onSave,
                             required={true}
                         />
                     </div>
-                    <div className="mb-6">
+                    <div className="mb-2">
                         <TextInput
                             name="description"
                             label="Description"
@@ -54,7 +54,7 @@ const QuizForm = ({ quiz, tags, collaborators, updateQuiz, updateErrors, onSave,
                         />
                     </div>
                     {tags && tags.length > 0 && (
-                        <div className="mb-6">
+                        <div className="mb-2">
                             <MultiSelectInput
                                 name="tags"
                                 label="Tags"
@@ -68,7 +68,7 @@ const QuizForm = ({ quiz, tags, collaborators, updateQuiz, updateErrors, onSave,
                     )}
 
                     {(collaborators && collaborators.length > 0) && (quiz.userIsOwner || !quiz.id) && (
-                        <div className="mb-6">
+                        <div className="mb-2">
                             <MultiSelectInput
                                 name="collaborators"
                                 label="Collaborators"
@@ -130,7 +130,7 @@ const QuizForm = ({ quiz, tags, collaborators, updateQuiz, updateErrors, onSave,
                         {!quiz.published && (
                             <button
                                 type="button"
-                                onClick={() =>{onSave(false)}}
+                                onClick={() => { onSave(false) }}
                                 disabled={saving}
                                 className="bg-primary  text-white rounded text-center py-2 px-4 hover:opacity-75 md:mr-2 shadow inline-flex items-center justify-center"
                             >
@@ -142,7 +142,7 @@ const QuizForm = ({ quiz, tags, collaborators, updateQuiz, updateErrors, onSave,
                         )}
                         <button
                             type="button"
-                            onClick={() =>{onSave(true)}}
+                            onClick={() => { onSave(true) }}
                             disabled={saving}
                             className="bg-primary  text-white rounded text-center py-2 px-4 hover:opacity-75 shadow inline-flex items-center justify-center"
                         >

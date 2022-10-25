@@ -21,7 +21,7 @@ const RegisterForm = ({
                 </div>
             )}
 
-            <div className="mb-6">
+            <div className="mb-2">
                 <TextInput
                     name="username"
                     label="Username"
@@ -31,7 +31,7 @@ const RegisterForm = ({
                     required={true}
                 />
             </div>
-            <div className="mb-6">
+            <div className="mb-2">
                 <EmailInput
                     name="email"
                     label="Email"
@@ -40,7 +40,7 @@ const RegisterForm = ({
                     error={errors.email}
                 />
             </div>
-            <div className="mb-6">
+            <div className="mb-2">
                 <PasswordInput
                     name="password"
                     label="Password"
@@ -49,7 +49,7 @@ const RegisterForm = ({
                     error={errors.password}
                 />
             </div>
-            <div className="mb-6">
+            <div className="mb-4">
                 <PasswordInput
                     name="password_confirmation"
                     label="Password confirmation"

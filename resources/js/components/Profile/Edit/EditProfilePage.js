@@ -72,7 +72,7 @@ const EditProfilePage = ({ userId, history }) => {
     }
 
     return (
-        <div className="pt-6 overflow-hidden shadow page container mx-auto">
+        <div className="shadow page">
             {user == null ? (
                 <LoadingMessage message={'Loading user'} />
             ) : (
