@@ -36,7 +36,7 @@ const UsersBestScoresList = ({ user }) => {
     return (
         <div className="px-4 py-2 overflow-hidden shadow card">
             <h3 className="font-bold text-primary text-2xl text-center md:text-left">
-                Your Best Scores
+                {user.username} Best Scores
             </h3>
             {scoresPaginator ? (
                 <div>
