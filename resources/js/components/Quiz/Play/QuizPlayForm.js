@@ -22,7 +22,7 @@ const QuizPlayForm = ({ quiz, submission, challenge, onAnswerChange, currentQues
                                     key={question.id}
                                     in={question.ordinal + 1 == currentQuestionNumber}
                                     timeout={{ enter: 300, exit: 300 }}
-                                    classNames={'fadein'}
+                                    classNames={'fade'}
                                 >
                                     <div>
                                         {question.ordinal + 1 == currentQuestionNumber &&
