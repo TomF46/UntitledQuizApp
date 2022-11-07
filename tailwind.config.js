@@ -8,7 +8,8 @@ module.exports = {
                 'secondary': '#38A3A5',
                 'secondaryLight': '#D7ECED',
                 'primaryDark': '#1e4c6b',
-                'danger': '#b41e00'
+                'danger': '#E84855',
+                'success' : "#2BC016"
             }
         }
     },

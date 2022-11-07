@@ -78,9 +78,11 @@ const ExplorePage = ({ history }) => {
                 <LoadingMessage message={'Loading quizzes to explore'} />
             ) : (
                 <div className="grid grid-cols-12">
-                    <div className="col-span-12 lg:col-span-3 lg:mr-4 mb-4 lg:mb-0 px-4 pb-4 overflow-hidden shadow page">
-                        <h1 className="font-bold text-primary text-4xl my-4 text-center">Search</h1>
-                        <FiltersForm filters={filters} tags={tags} onFilterChange={handleFilterChange} />
+                    <div className="col-span-12 lg:col-span-3 lg:mr-4 mb-4 lg:mb-0">
+                        <div className="px-4 pb-4 overflow-hidden shadow page">
+                            <h1 className="font-bold text-primary text-4xl my-4 text-center">Search</h1>
+                            <FiltersForm filters={filters} tags={tags} onFilterChange={handleFilterChange} />
+                        </div>
                     </div>
                     <div className="col-span-12 lg:col-span-9 px-4 overflow-hidden shadow page">
                         <h1 className="font-bold text-primary text-4xl my-4 text-center">Explore</h1>
