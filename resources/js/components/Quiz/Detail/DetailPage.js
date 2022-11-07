@@ -119,7 +119,7 @@ const QuizDetailPage = ({ quizId, currentUser, isAdmin, history }) => {
                 },
             ],
         });
-    }
+}
 
     function handlePublish(){
         publishQuiz(quiz.id).then(res => {
