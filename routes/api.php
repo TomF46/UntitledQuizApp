@@ -97,6 +97,9 @@ Route::middleware(['auth:api', 'role', 'notBanned'])->group(function () {
     Route::delete('/challenges/{challenge}', [App\Http\Controllers\ChallengesController::class, 'destroy']);
 
     Route::get('/bans/quizzes/{quizBan}', [App\Http\Controllers\QuizBanController::class, 'show']);
+
+    Route::get('/events', [App\Http\Controllers\EventController::class, 'index']);
+
 });
 
 
@@ -114,4 +117,7 @@ Route::middleware(['auth:api', 'admin', 'role'])->group(function () {
     Route::post('/quizzes/{quiz}/ban', [App\Http\Controllers\QuizBanController::class, 'store']);
     Route::post('/quizzes/{quiz}/unban', [App\Http\Controllers\QuizBanController::class, 'remove']);
     Route::post('/quizzes/{quiz}/recommended/toggle', [App\Http\Controllers\QuizRecommendController::class, 'toggle']);
+
+    Route::post('/events', [App\Http\Controllers\EventController::class, 'store']);
+
 });
