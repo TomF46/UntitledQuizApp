@@ -14,7 +14,12 @@ class Event extends Model
         'name',
         'description',
         'universal',
-        'status'
+        'status',
+        'score_group_1',
+        'score_group_2',
+        'score_group_3',
+        'score_group_4',
+        'score_max',
     ];
 
     public function includedTags()
@@ -42,7 +47,12 @@ class Event extends Model
             'description' => $this->description,
             'isUniversal' => $this->universal,
             'includedTags' => $this->mapIncludedTags(),
-            'status' => $this->status
+            'status' => $this->status,
+            'scoreGroup1' => $this->score_group_1,
+            'scoreGroup2' => $this->score_group_2,
+            'scoreGroup3' => $this->score_group_3,
+            'scoreGroup4' => $this->score_group_4,
+            'scoreMax' => $this->score_max
         ];
     }
 

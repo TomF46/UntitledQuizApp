@@ -50,7 +50,12 @@ class EventsTest extends TestCase
                 "description" => "A simple test Event",
                 "universal" => true,
                 "tags" => [],
-                "publish" => true
+                "publish" => true,
+                'score_group_1' => 0,
+                'score_group_2' => 5,
+                'score_group_3' => 10,
+                'score_group_4' => 15,
+                'score_max' => 25,
             ]
         );
 

@@ -26,7 +26,12 @@ class EventFactory extends Factory
             'name' => $this->faker->text(20),
             'description' => $this->faker->text,
             'universal' => true,
-            'status' => EventStatus::Active
+            'status' => EventStatus::Active,
+            'score_group_1' => 0,
+            'score_group_2' => 1,
+            'score_group_3' => 2,
+            'score_group_4' => 3,
+            'score_max' => 4,
         ];
     }
 }

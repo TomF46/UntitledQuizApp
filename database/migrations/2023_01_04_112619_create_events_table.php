@@ -20,6 +20,11 @@ class CreateEventsTable extends Migration
             $table->text('description');
             $table->boolean('universal');
             $table->tinyInteger('status')->unsigned()->default(EventStatus::NotPublished);
+            $table->integer('score_group_1');
+            $table->integer('score_group_2');
+            $table->integer('score_group_3');
+            $table->integer('score_group_4');
+            $table->integer('score_max');
             $table->timestamps();
         });
 

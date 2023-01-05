@@ -26,7 +26,12 @@ class EventController extends Controller
         $event = Event::create([
             'name' => $attributes['name'],
             'description' => $attributes['description'],
-            'universal' => $attributes['universal']
+            'universal' => $attributes['universal'],
+            'score_group_1' => $attributes['score_group_1'],
+            'score_group_2' => $attributes['score_group_2'],
+            'score_group_3' => $attributes['score_group_3'],
+            'score_group_4' => $attributes['score_group_4'],
+            'score_max' => $attributes['score_max'],
         ]);
 
         
@@ -50,7 +55,12 @@ class EventController extends Controller
             'description' => 'required|max:255',
             'universal' => 'required|boolean',
             'tags' => 'exists:tags,id',
-            'publish' => 'required|boolean'
+            'publish' => 'required|boolean',
+            'score_group_1' => 'required',
+            'score_group_2' => 'required',
+            'score_group_3' => 'required',
+            'score_group_4' => 'required',
+            'score_max' => 'required',
         ]);
     }
 }

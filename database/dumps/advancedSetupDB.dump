@@ -126,11 +126,16 @@ CREATE TABLE `events` (
   `description` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `universal` tinyint(1) NOT NULL,
   `status` tinyint unsigned NOT NULL DEFAULT '0',
+  `score_group_1` int NOT NULL,
+  `score_group_2` int NOT NULL,
+  `score_group_3` int NOT NULL,
+  `score_group_4` int NOT NULL,
+  `score_max` int NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `events_name_unique` (`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -329,7 +334,7 @@ CREATE TABLE `migrations` (
   `migration` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `batch` int NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -338,7 +343,7 @@ CREATE TABLE `migrations` (
 
 LOCK TABLES `migrations` WRITE;
 /*!40000 ALTER TABLE `migrations` DISABLE KEYS */;
-INSERT INTO `migrations` VALUES (1,'2014_10_12_000000_create_users_table',1),(2,'2014_10_12_100000_create_password_resets_table',1),(3,'2016_06_01_000001_create_oauth_auth_codes_table',1),(4,'2016_06_01_000002_create_oauth_access_tokens_table',1),(5,'2016_06_01_000003_create_oauth_refresh_tokens_table',1),(6,'2016_06_01_000004_create_oauth_clients_table',1),(7,'2016_06_01_000005_create_oauth_personal_access_clients_table',1),(8,'2019_08_19_000000_create_failed_jobs_table',1),(9,'2020_10_12_102617_create_quizzes_table',1),(10,'2020_10_12_121323_create_questions_table',1),(11,'2020_10_12_142522_create_answers_table',1),(12,'2020_10_12_164014_create_scores_table',1),(13,'2020_10_12_192238_create_tags_table',1),(14,'2020_10_15_150643_add_bio_to_users_table',1),(15,'2020_10_20_130525_create_follows_table',1),(16,'2020_10_20_135438_create_likes_table',1),(17,'2020_10_23_110207_add__profile__image__for__user',1),(18,'2020_10_23_144336_add_image_to_question',1),(19,'2020_12_21_162151_create_comments_table',1),(20,'2021_01_13_111322_create_challenges_table',1),(21,'2021_01_18_153908_add_challenge_points_to_users_table',1),(22,'2021_04_08_123335_create_roles_table',1),(23,'2021_04_22_115132_create_quiz_bans_table',1),(24,'2022_02_16_105248_create_friendships_table',1),(25,'2022_02_22_114810_create_quiz_collaborators_table',1),(26,'2022_08_10_110619_create_notifications_table',1),(28,'2023_01_04_112619_create_events_table',2);
+INSERT INTO `migrations` VALUES (1,'2014_10_12_000000_create_users_table',1),(2,'2014_10_12_100000_create_password_resets_table',1),(3,'2016_06_01_000001_create_oauth_auth_codes_table',1),(4,'2016_06_01_000002_create_oauth_access_tokens_table',1),(5,'2016_06_01_000003_create_oauth_refresh_tokens_table',1),(6,'2016_06_01_000004_create_oauth_clients_table',1),(7,'2016_06_01_000005_create_oauth_personal_access_clients_table',1),(8,'2019_08_19_000000_create_failed_jobs_table',1),(9,'2020_10_12_102617_create_quizzes_table',1),(10,'2020_10_12_121323_create_questions_table',1),(11,'2020_10_12_142522_create_answers_table',1),(12,'2020_10_12_164014_create_scores_table',1),(13,'2020_10_12_192238_create_tags_table',1),(14,'2020_10_15_150643_add_bio_to_users_table',1),(15,'2020_10_20_130525_create_follows_table',1),(16,'2020_10_20_135438_create_likes_table',1),(17,'2020_10_23_110207_add__profile__image__for__user',1),(18,'2020_10_23_144336_add_image_to_question',1),(19,'2020_12_21_162151_create_comments_table',1),(20,'2021_01_13_111322_create_challenges_table',1),(21,'2021_01_18_153908_add_challenge_points_to_users_table',1),(22,'2021_04_08_123335_create_roles_table',1),(23,'2021_04_22_115132_create_quiz_bans_table',1),(24,'2022_02_16_105248_create_friendships_table',1),(25,'2022_02_22_114810_create_quiz_collaborators_table',1),(26,'2022_08_10_110619_create_notifications_table',1),(29,'2023_01_04_112619_create_events_table',2);
 /*!40000 ALTER TABLE `migrations` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -829,4 +834,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-01-04 15:19:45
+-- Dump completed on 2023-01-05 12:19:49
