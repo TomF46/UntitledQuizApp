@@ -13,4 +13,7 @@ final class NotificationType extends Enum
     const FriendRequestAccepted = 3;
     const QuizBanned = 4;
     const QuizUnbanned = 5;
+    const EventPublished = 6;
+    const EventClosed = 7;
+
 }

@@ -8,11 +8,12 @@ use App\Models\Challenge;
 use App\Models\Score;
 use App\Models\Quiz;
 use App\Helpers\NotificationsHelper;
+use App\Services\EventService;
 use Illuminate\Http\Request;
 
 class QuizScoresController extends Controller
 {
-    public function store(Quiz $quiz, Request $request)
+    public function store(Quiz $quiz, Request $request, EventService $eventService)
     {
         $attributes = $this->validateAnswers($request);
         $questionAnswers = $attributes['answers'];
@@ -40,10 +41,13 @@ class QuizScoresController extends Controller
             'score' => $currentScore,
             "score_percent" => $percentScore
         ]);
+        
+        $eventService->checkIfCountsTowardsEvent($score);
 
         if ($request->get('challengeId')) {
             return $this->handleChallengeResponse($score, $request->get('challengeId'));
         };
+        
 
         return response()->json($score->map(), 201);
     }

@@ -51,9 +51,22 @@ const newTag = {
     name: ""
 }
 
+const newEvent = {
+   name: "",
+   description: "",
+   universal: false,
+   tags: [],
+   score_group_1: 0,
+   score_group_2: 0,
+   score_group_3: 0,
+   score_group_4: 0,
+   score_max: 0,
+}
+
 module.exports = {
     newQuiz,
     newQuestion,
     newAnswer,
-    newTag
+    newTag,
+    newEvent
 };

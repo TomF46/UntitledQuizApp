@@ -29,6 +29,9 @@ import QuizBanPage from "./Admin/QuizAdmin/QuizBanPage";
 import QuizBanListPage from "./Admin/QuizAdmin/QuizBanListPage";
 import FriendsPage from "./Friends/FriendsPage";
 import NotificationsPage from "./Notifications/NotificationsPage";
+import EventsAdminPage from "./Admin/EventAdmin/EventAdminPage";
+import EventManagementPage from "./Admin/EventAdmin/EventManagementPage";
+import EventPage from "./Admin/EventAdmin/EventPage";
 
 const Main = ({ location }) => (
     <>
@@ -107,6 +110,22 @@ const Main = ({ location }) => (
                                 <AuthenticatedRoute
                                     path="/quiz"
                                     component={QuizManagementPage}
+                                />
+                                <AdminRoute
+                                    path="/admin/events/create"
+                                    component={EventManagementPage}
+                                />
+                                <AdminRoute
+                                    path="/admin/events/:eventId/edit"
+                                    component={EventManagementPage}
+                                />
+                                <AdminRoute
+                                    path="/admin/events/:eventId"
+                                    component={EventPage}
+                                />
+                                <AdminRoute
+                                    path="/admin/events"
+                                    component={EventsAdminPage}
                                 />
                                 <AdminRoute
                                     path="/admin/tags/create"

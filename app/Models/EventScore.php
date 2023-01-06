@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class EventScore extends Model
 {
     use HasFactory;
+    protected $table = 'events_scores';
+
     protected $fillable = [
         'user_id',
         'event_id',

@@ -4,6 +4,7 @@ namespace App\Helpers;
 
 use App\Models\User;
 use App\Models\Quiz;
+use App\Models\Event;
 use App\Models\Notification;
 use App\Enums\NotificationType;
 
@@ -78,5 +79,29 @@ class NotificationsHelper
             'type' => NotificationType::QuizUnbanned,
             'text' => 'Your quiz ' . $quiz->title . ' has been unbanned.'
         ]);
+    }
+
+    public static function sendEventPublishedNotification(User $from, Event $event)
+    {
+        foreach(User::all() as $user){
+            $notification = Notification::create([
+                'recipient_id' => $user->id,
+                'sender_id' => $from->id,
+                'type' => NotificationType::EventPublished,
+                'text' => 'The new event ' . $event->name . ' is now open.'
+            ]);
+        }
+    }
+
+    public static function sendEventClosedNotification(User $from, Event $event)
+    {
+        foreach(User::all() as $user){
+            $notification = Notification::create([
+                'recipient_id' => $user->id,
+                'sender_id' => $from->id,
+                'type' => NotificationType::EventClosed,
+                'text' => 'The event ' . $event->name . ' is now closed.'
+            ]);
+        }
     }
 }

@@ -48,6 +48,36 @@ class EventController extends Controller
         return response()->json($event, 201);
     }
 
+    public function show(Event $event, Request $request)
+    {
+        return response()->json($event->map());
+    }
+
+    public function edit(Request $request, Event $event)
+    {
+        return response()->json($event->mapForEdit());
+    }
+
+    public function update(Request $request, Event $event)
+    {
+        $attributes = $this->validateEvent($request);
+        $event->update($attributes);
+        $event->includedTags()->sync($attributes['tags']);
+        return response()->json($event->fresh());
+    }
+
+    public function publish(Event $event, Request $request)
+    {
+        $event->publish($request->user());
+        return response()->noContent();
+    }
+
+    public function endEvent(Event $event, Request $request)
+    {
+        $event->endEvent($request->user());
+        return response()->noContent();
+    }
+
     protected function validateEvent(Request $request)
     {
         return $request->validate([

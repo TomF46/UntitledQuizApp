@@ -99,6 +99,7 @@ Route::middleware(['auth:api', 'role', 'notBanned'])->group(function () {
     Route::get('/bans/quizzes/{quizBan}', [App\Http\Controllers\QuizBanController::class, 'show']);
 
     Route::get('/events', [App\Http\Controllers\EventController::class, 'index']);
+    Route::get('/events/{event}', [App\Http\Controllers\EventController::class, 'show']);
 
 });
 
@@ -119,5 +120,8 @@ Route::middleware(['auth:api', 'admin', 'role'])->group(function () {
     Route::post('/quizzes/{quiz}/recommended/toggle', [App\Http\Controllers\QuizRecommendController::class, 'toggle']);
 
     Route::post('/events', [App\Http\Controllers\EventController::class, 'store']);
-
+    Route::post('/events/{event}/publish', [App\Http\Controllers\EventController::class, 'publish']);
+    Route::post('/events/{event}/end', [App\Http\Controllers\EventController::class, 'endEvent']);
+    Route::get('/events/{event}/edit', [App\Http\Controllers\EventController::class, 'edit']);
+    Route::put('/events/{event}', [App\Http\Controllers\EventController::class, 'update']);
 });

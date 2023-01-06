@@ -36,7 +36,7 @@ class CreateEventsTable extends Migration
         });
 
         Schema::create('events_scores', function (Blueprint $table) {
-            $table->primary(['user_id', 'event_id']);
+            $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->foreignId('event_id')->constrained()->onDelete('cascade');
             $table->integer('score');
