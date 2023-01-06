@@ -100,6 +100,7 @@ Route::middleware(['auth:api', 'role', 'notBanned'])->group(function () {
 
     Route::get('/events', [App\Http\Controllers\EventController::class, 'index']);
     Route::get('/events/{event}', [App\Http\Controllers\EventController::class, 'show']);
+    Route::get('/events/{event}/leaderboard', [App\Http\Controllers\EventController::class, 'leaderboard']);
 
 });
 

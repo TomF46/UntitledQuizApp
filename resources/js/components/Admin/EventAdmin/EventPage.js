@@ -6,6 +6,7 @@ import { endEvent, getEvent, publishEvent } from "../../../api/eventApi";
 import LoadingMessage from "../../DisplayComponents/LoadingMessage";
 import { confirmAlert } from "react-confirm-alert";
 import { Link } from "react-router-dom";
+import EventLeaderboard from "../../DisplayComponents/EventLeaderboard/EventLeaderboard";
 
 const EventPage = ({ eventId }) => {
     const [event, setEvent] = useState(null);
@@ -134,7 +135,9 @@ const EventPage = ({ eventId }) => {
                             </div>
                         </div>
                         <div className="col-span-12 lg:col-span-9">
-                            {/* Add leaderboards etc */}
+                            <div className="px-4 py-2 overflow-hidden shadow card">
+                                <EventLeaderboard event={event} />
+                            </div>
                         </div>
                     </div>
                 </>

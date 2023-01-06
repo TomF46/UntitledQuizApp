@@ -59,6 +59,18 @@ export function getEventForEdit(id) {
         });
 }
 
+export function getEventLeaderboard(id) {
+    return axiosClient
+        .get(`/api/events/${id}/leaderboard`)
+        .then(response => {
+            return response.data;
+        })
+        .catch(error => {
+            throw error;
+        });
+}
+
+
 export function publishEvent(id){
     return axiosClient
         .post(`/api/events/${id}/publish`, {})

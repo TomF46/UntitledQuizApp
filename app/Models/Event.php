@@ -47,7 +47,13 @@ class Event extends Model
         return $this->hasMany(EventScore::class);
     }
 
-    public function map()
+    protected function getCurrentUsersEventScore(User $user)
+    {
+        $result = $this->scores()->where('user_id', $user->id)->first();
+        return $result ? $result->score : 0;
+    }
+
+    public function map(User $user)
     {
         return [
             'id' => $this->id,
@@ -61,7 +67,8 @@ class Event extends Model
             'scoreGroup2' => $this->score_group_2,
             'scoreGroup3' => $this->score_group_3,
             'scoreGroup4' => $this->score_group_4,
-            'scoreMax' => $this->score_max
+            'scoreMax' => $this->score_max,
+            'yourTotalPoints' => $this->getCurrentUsersEventScore($user)
         ];
     }
 

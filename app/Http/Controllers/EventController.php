@@ -8,12 +8,12 @@ use Illuminate\Http\Request;
 
 class EventController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
 
         $paginator = Event::latest()->paginate(10);
-        $paginator->getCollection()->transform(function ($event) {
-            return $event->map();
+        $paginator->getCollection()->transform(function ($event) use ($request) {
+            return $event->map($request->user());
         });
 
         return response()->json($paginator);
@@ -50,7 +50,7 @@ class EventController extends Controller
 
     public function show(Event $event, Request $request)
     {
-        return response()->json($event->map());
+        return response()->json($event->map($request->user()));
     }
 
     public function edit(Request $request, Event $event)
@@ -76,6 +76,16 @@ class EventController extends Controller
     {
         $event->endEvent($request->user());
         return response()->noContent();
+    }
+
+    public function leaderboard(Event $event, Request $request)
+    {
+        $paginator = $event->scores()->orderBy('score', 'desc')->paginate(20);
+        $paginator->getCollection()->transform(function ($score) {
+            return $score->map();
+        });
+
+        return response()->json($paginator);
     }
 
     protected function validateEvent(Request $request)

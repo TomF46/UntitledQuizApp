@@ -31,7 +31,8 @@ import FriendsPage from "./Friends/FriendsPage";
 import NotificationsPage from "./Notifications/NotificationsPage";
 import EventsAdminPage from "./Admin/EventAdmin/EventAdminPage";
 import EventManagementPage from "./Admin/EventAdmin/EventManagementPage";
-import EventPage from "./Admin/EventAdmin/EventPage";
+import AdminEventPage from "./Admin/EventAdmin/EventPage";
+import EventPage from "./Events/EventPage";
 
 const Main = ({ location }) => (
     <>
@@ -111,6 +112,10 @@ const Main = ({ location }) => (
                                     path="/quiz"
                                     component={QuizManagementPage}
                                 />
+                                <AuthenticatedRoute
+                                    path="/events/:eventId"
+                                    component={EventPage}
+                                />
                                 <AdminRoute
                                     path="/admin/events/create"
                                     component={EventManagementPage}
@@ -121,7 +126,7 @@ const Main = ({ location }) => (
                                 />
                                 <AdminRoute
                                     path="/admin/events/:eventId"
-                                    component={EventPage}
+                                    component={AdminEventPage}
                                 />
                                 <AdminRoute
                                     path="/admin/events"
