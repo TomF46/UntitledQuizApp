@@ -63,10 +63,16 @@ const EventManagementPage = ({ eventId, history }) => {
     }
 
     function formIsValid() {
-        const { name, description } = event;
+        const { name, description, score_group_1, score_group_2,score_group_3, score_group_4, score_max } = event;
         const errors = {};
-        if (!name) errors.event = "Name is required";
-        if (!description) errors.event = "Description is required";
+        if (!name || name.length == 0) errors.name = "Name is required";
+        if (!description || description.length == 0) errors.description = "Description is required";
+        if (!description || description.length == 0) errors.description = "Description is required";
+        if (!score_group_1) errors.score_group_1 = "Score group 1 value is required";
+        if (!score_group_2) errors.score_group_2 = "Score group 2 value is required";
+        if (!score_group_3) errors.score_group_3 = "Score group 3 value is required";
+        if (!score_group_4) errors.score_group_4 = "Score group 4 value is required";
+        if (!score_max) errors.score_max = "Score max value is required";
 
         setErrors(errors);
         return Object.keys(errors).length === 0;

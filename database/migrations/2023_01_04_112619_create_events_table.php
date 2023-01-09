@@ -40,6 +40,7 @@ class CreateEventsTable extends Migration
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->foreignId('event_id')->constrained()->onDelete('cascade');
             $table->integer('score');
+            $table->integer('submissions')->default(0);;
             $table->timestamps();
         });
     }

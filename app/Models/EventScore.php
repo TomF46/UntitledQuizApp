@@ -13,7 +13,8 @@ class EventScore extends Model
     protected $fillable = [
         'user_id',
         'event_id',
-        'score'
+        'score',
+        'submissions'
     ];
 
     public function user()
@@ -39,7 +40,8 @@ class EventScore extends Model
             'user_id' => $this->user->id,
             'event_name' => $this->event->name,
             'event_id' => $this->event->id,
-            'score' => $this->score
+            'score' => $this->score,
+            'submissions' => $this->submissions
         ];
     }
 }

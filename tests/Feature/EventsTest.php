@@ -39,6 +39,29 @@ class EventsTest extends TestCase
         ]);
     }
 
+    public function testCanGetOnlyLiveEvents()
+    {
+        $liveEventCount = 2;
+        $nonLiveCount = 3;
+        
+        Event::factory()->count($liveEventCount)->create([
+            'status' => EventStatus::Active
+        ]);
+
+        Event::factory()->count($nonLiveCount)->create([
+            'status' => EventStatus::NotPublished
+        ]);
+
+        $response = $this->withHeaders([
+            'Accept' => 'application/json',
+            'Authorization' => 'Bearer ' . TestHelper::getBearerTokenForUser($this->user)
+        ])->get('/api/events?live=true');
+        $response->assertStatus(200);
+        $response->assertJson([
+            'total' => $liveEventCount
+        ]);
+    }
+
     public function testCanGetEvent()
     {
         $event = Event::factory()->create();

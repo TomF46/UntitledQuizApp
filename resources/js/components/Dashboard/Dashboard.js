@@ -15,6 +15,7 @@ import FriendRequestsDashboard from "./Components/FriendRequestsDashboard";
 import NotificationsDashboard from "./Components/NotificationsDashboard";
 import UnpublishedQuizDashboard from "./Components/UnpublishedQuizDashboard";
 import FollowedUsersList from "./Sidebar/FollowedUsersList";
+import LiveEventsList from "./Sidebar/LiveEventsList";
 
 const DashboardPage = ({ userId, history }) => {
     const [user, setUser] = useState(null);
@@ -106,6 +107,9 @@ const DashboardPage = ({ userId, history }) => {
                                     <span className="ml-1 font-bold">Play Random Quiz</span>
                                 </button>
                             </div>
+                        </div>
+                        <div className="px-4 pb-4 overflow-hidden shadow card mb-4">
+                            <LiveEventsList />
                         </div>
                         <div className="px-4 pb-4 overflow-hidden shadow card">
                             <FollowedUsersList />

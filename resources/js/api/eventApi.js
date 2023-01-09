@@ -37,6 +37,17 @@ export function getEvents() {
         });
 }
 
+export function getLiveEvents() {
+    return axiosClient
+        .get('/api/events?live=true')
+        .then(response => {
+            return response.data;
+        })
+        .catch(error => {
+            throw error;
+        });
+}
+
 export function getEvent(id) {
     return axiosClient
         .get(`/api/events/${id}`)

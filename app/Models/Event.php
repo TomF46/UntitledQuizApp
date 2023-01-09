@@ -50,7 +50,31 @@ class Event extends Model
     protected function getCurrentUsersEventScore(User $user)
     {
         $result = $this->scores()->where('user_id', $user->id)->first();
+        
         return $result ? $result->score : 0;
+    }
+
+    public function mapLeaderboard(){
+        $paginator = $this->scores()->orderBy('score', 'desc')
+        ->orderBy('submissions', 'asc')
+        ->orderBy('updated_at', 'asc')
+        ->paginate(20);
+        $paginator->getCollection()->transform(function ($score) {
+            return $score->map();
+        });
+
+        return $paginator;
+    }
+
+    public function getTop3(){
+        $scores = $this->scores()->orderBy('score', 'desc')
+        ->orderBy('submissions', 'asc')
+        ->orderBy('updated_at', 'asc')
+        ->take(3)->get()->map(function ($score) {
+            return $score->map();
+        });
+
+        return $scores;
     }
 
     public function map(User $user)
@@ -68,7 +92,8 @@ class Event extends Model
             'scoreGroup3' => $this->score_group_3,
             'scoreGroup4' => $this->score_group_4,
             'scoreMax' => $this->score_max,
-            'yourTotalPoints' => $this->getCurrentUsersEventScore($user)
+            'yourTotalPoints' => $this->getCurrentUsersEventScore($user),
+            'top3' => $this->getTop3()
         ];
     }
 

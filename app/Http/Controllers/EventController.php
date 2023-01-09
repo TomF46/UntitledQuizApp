@@ -4,14 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Models\Event;
 use App\Enums\EventStatus;
+use App\Helpers\NotificationsHelper;
 use Illuminate\Http\Request;
 
 class EventController extends Controller
 {
     public function index(Request $request)
     {
+        $events = Event::latest();
+        if($request->query('live')) $events = $events->where('status', EventStatus::Active);
 
-        $paginator = Event::latest()->paginate(10);
+        $paginator = $events->paginate(10);
         $paginator->getCollection()->transform(function ($event) use ($request) {
             return $event->map($request->user());
         });
@@ -39,6 +42,7 @@ class EventController extends Controller
 
         if($attributes['publish']){
             $event->status = EventStatus::Active;
+            NotificationsHelper::sendEventPublishedNotification($request->user(), $event);
         } else {
             $event->status = EventStatus::NotPublished;
         }
@@ -80,12 +84,7 @@ class EventController extends Controller
 
     public function leaderboard(Event $event, Request $request)
     {
-        $paginator = $event->scores()->orderBy('score', 'desc')->paginate(20);
-        $paginator->getCollection()->transform(function ($score) {
-            return $score->map();
-        });
-
-        return response()->json($paginator);
+        return response()->json($event->mapLeaderboard());
     }
 
     protected function validateEvent(Request $request)

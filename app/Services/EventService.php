@@ -31,12 +31,14 @@ class EventService
 
             if($record){
                 $record->score = $record->score + $points;
+                $record->submissions++;
                 $record->save();
             } else {
                 EventScore::create([
                     'user_id' => $score->user->id,
                     'event_id' => $event->id,
-                    'score' => $points
+                    'score' => $points,
+                    'submissions' => 1
                 ]);
             }
         }

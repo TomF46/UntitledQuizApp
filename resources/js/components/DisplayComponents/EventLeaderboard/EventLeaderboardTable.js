@@ -11,6 +11,7 @@ const EventLeaderboardTable = ({ scores, startingPosition }) => {
                         <th className="px-4 py-2">Position</th>
                         <th className="px-4 py-2">User</th>
                         <th className="px-4 py-2">Score</th>
+                        <th className="px-4 py-2">Submissions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -20,6 +21,7 @@ const EventLeaderboardTable = ({ scores, startingPosition }) => {
                                 <td className="px-4 py-2">{startingPosition + index}</td>
                                 <td className="px-4 py-2 font-bold text-secondary"><Link to={`/profile/${score.user_id}`}>{score.username}</Link></td>
                                 <td className="px-4 py-2">{score.score}</td>
+                                <td className="px-4 py-2">{score.submissions}</td>
                             </tr>
                         )
                     })}
