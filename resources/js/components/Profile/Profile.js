@@ -8,6 +8,7 @@ import { logout } from "../../redux/actions/authenticationActions";
 import UsersQuizList from "./Sections/UsersQuizList";
 import UsersBestScoresList from "./Sections/UsersBestScoresList";
 import ProfileSidebar from "./Sections/ProfileSidebar";
+import TrophyCabinet from "./Sections/TrophyCabinet/TrophyCabinet";
 
 const ProfilePage = ({ userId, history, logout, isAdmin, ...props }) => {
     const [user, setUser] = useState(null);
@@ -70,6 +71,7 @@ const ProfilePage = ({ userId, history, logout, isAdmin, ...props }) => {
                         <div className="col-span-12 lg:col-span-9">
                             {!user.isBanned || isAdmin ? (
                                 <>
+                                    <TrophyCabinet trophies={user.trophies} />
                                     <UsersQuizList user={user} />
                                     <UsersBestScoresList user={user} />
                                 </>

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Enums\EventStatus;
 use App\Helpers\NotificationsHelper;
+use App\Helpers\TrophyHelper;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -26,6 +27,11 @@ class Event extends Model
     public function includedTags()
     {
         return $this->belongsToMany(Tag::class, 'events_tags');
+    }
+
+    public function trophies()
+    {
+        return $this->hasMany(Trophy::class);
     }
 
     protected function mapIncludedTags()
@@ -70,9 +76,7 @@ class Event extends Model
         $scores = $this->scores()->orderBy('score', 'desc')
         ->orderBy('submissions', 'asc')
         ->orderBy('updated_at', 'asc')
-        ->take(3)->get()->map(function ($score) {
-            return $score->map();
-        });
+        ->take(3)->get();
 
         return $scores;
     }
@@ -93,7 +97,9 @@ class Event extends Model
             'scoreGroup4' => $this->score_group_4,
             'scoreMax' => $this->score_max,
             'yourTotalPoints' => $this->getCurrentUsersEventScore($user),
-            'top3' => $this->getTop3()
+            'top3' => $this->getTop3()->map(function ($score) {
+                return $score->map();
+            })
         ];
     }
 
@@ -139,6 +145,7 @@ class Event extends Model
     public function endEvent($user){
         $this->status = EventStatus::Completed;
         $this->save();
+        TrophyHelper::createTrophies($this);
         NotificationsHelper::sendEventClosedNotification($user, $this);
     }
 }

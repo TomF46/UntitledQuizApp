@@ -82,8 +82,19 @@ class User extends Authenticatable
     }
 
     public function notifications()
-    {
+    {   
         return $this->hasMany(Notification::class, 'recipient_id');
+    }
+
+    public function trophies()
+    {
+        return $this->belongsToMany(Trophy::class, 'user_trophies')->withTimestamps();
+    }
+
+    public function getTrophies()
+    {
+        return $this->trophies()->orderBy('tier','asc')
+        ->orderBy('updated_at', 'asc')->get();
     }
 
     public function getChallenges()
@@ -96,6 +107,7 @@ class User extends Authenticatable
         $this->challenge_points++;
         $this->save();
     }
+    
 
     public function mapForEditing()
     {
@@ -126,7 +138,8 @@ class User extends Authenticatable
             'hasFriendRequest' => $this->hasFriendRequest($user),
             'collaboratedQuizzes' => $this->collaboratedQuizzes()->get()->map(function ($quiz) {
                 return $quiz->title;
-            })
+            }),
+            'trophies' => $this->getTrophies()
         ];
     }
 
