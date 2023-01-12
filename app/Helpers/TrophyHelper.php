@@ -2,6 +2,7 @@
 
 namespace App\Helpers;
 
+use App\Helpers\NotificationsHelper;
 use App\Models\User;
 use App\Models\Trophy;
 use App\Models\Event;
@@ -10,7 +11,7 @@ use App\Enums\TrophyTier;
 
 class TrophyHelper
 {
-    public static function createTrophies(Event $event)
+    public static function createTrophies(Event $event, User $admin)
     {
         $participationTrophy = Trophy::create([
             'event_id' => $event->id,
@@ -23,6 +24,7 @@ class TrophyHelper
             $user = $score->user;
             $user->trophies()->attach($participationTrophy);
             $user->save();
+            NotificationsHelper::sendTrophyWonNotification($user, $admin, $participationTrophy);
         }
 
         list( $first, $second, $third) = $event->getTop3();
@@ -35,6 +37,7 @@ class TrophyHelper
         ]);
 
         $third->user->trophies()->attach($bronzeTrophy);
+        NotificationsHelper::sendTrophyWonNotification($third->user, $admin, $bronzeTrophy);
 
         $silverTrophy = Trophy::create([
             'event_id' => $event->id,
@@ -44,6 +47,7 @@ class TrophyHelper
         ]);
 
         $second->user->trophies()->attach($silverTrophy);
+        NotificationsHelper::sendTrophyWonNotification($second->user, $admin, $silverTrophy);
 
         $goldTrophy = Trophy::create([
             'event_id' => $event->id,
@@ -53,5 +57,6 @@ class TrophyHelper
         ]);
 
         $first->user->trophies()->attach($goldTrophy);
+        NotificationsHelper::sendTrophyWonNotification($first->user, $admin, $goldTrophy);
     }
 }

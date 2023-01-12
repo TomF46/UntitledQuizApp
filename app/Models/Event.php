@@ -99,7 +99,8 @@ class Event extends Model
             'yourTotalPoints' => $this->getCurrentUsersEventScore($user),
             'top3' => $this->getTop3()->map(function ($score) {
                 return $score->map();
-            })
+            }),
+            'participantCount' => Count($this->scores)
         ];
     }
 
@@ -145,7 +146,7 @@ class Event extends Model
     public function endEvent($user){
         $this->status = EventStatus::Completed;
         $this->save();
-        TrophyHelper::createTrophies($this);
+        if(Count($this->scores) >= 3) TrophyHelper::createTrophies($this, $user);
         NotificationsHelper::sendEventClosedNotification($user, $this);
     }
 }

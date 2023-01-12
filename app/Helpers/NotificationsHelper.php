@@ -5,6 +5,7 @@ namespace App\Helpers;
 use App\Models\User;
 use App\Models\Quiz;
 use App\Models\Event;
+use App\Models\Trophy;
 use App\Models\Notification;
 use App\Enums\NotificationType;
 
@@ -103,5 +104,15 @@ class NotificationsHelper
                 'text' => 'The event ' . $event->name . ' is now closed.'
             ]);
         }
+    }
+
+    public static function sendTrophyWonNotification(User $to, User $from, Trophy $trophy)
+    {
+        $notification = Notification::create([
+            'recipient_id' => $to->id,
+            'sender_id' => $from->id,
+            'type' => NotificationType::TrophyWon,
+            'text' => 'Congratulations you have won a ' . $trophy->name . ' trophy'
+        ]);
     }
 }

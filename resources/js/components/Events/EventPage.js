@@ -6,6 +6,7 @@ import { endEvent, getEvent, publishEvent } from "../../api/eventApi";
 import LoadingMessage from "../DisplayComponents/LoadingMessage";
 import { confirmAlert } from "react-confirm-alert";
 import EventLeaderboard from "../DisplayComponents/EventLeaderboard/EventLeaderboard";
+import { Link } from "react-router-dom";
 
 const EventPage = ({ eventId }) => {
     const [event, setEvent] = useState(null);
@@ -182,7 +183,7 @@ const EventPage = ({ eventId }) => {
                                     {event.top3.map((score, index) => {
                                         return (
                                             <div className="col-span-4">
-                                                <h2 className="font-bold text-primary text-xl py-4 text-center">
+                                                <h2 className="font-bold text-secondary text-xl py-4 text-center">
                                                     {index + 1}
                                                 </h2>
                                                 <div className="mb-4">
@@ -202,9 +203,9 @@ const EventPage = ({ eventId }) => {
                                                     </svg>
                                                 </div>
                                                 <p className="text-secondary text-center font-bold text-lg">
-                                                    {score.username}
+                                                    <Link to={`/profile/${score.user_id}`}>{score.username}</Link>
                                                 </p>
-                                                <p className="text-secondary text-center font-bold text-lg">
+                                                <p className="text-secondary text-center text-lg">
                                                     {score.score}
                                                 </p>
                                             </div>
