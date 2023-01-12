@@ -37,6 +37,15 @@ Deployed onto EC2 with various AWS services (e.g. RDS) via Laravel Forge.
 -   If you send a challenge and they fail to beat it, or you receive a challenge and beat or match it then you get a challenge point.
 -   View challenge point leaderboard.
 
+#### Events & Trophies
+
+-   Admins can create events covering all quizzes or specific categories.
+-   Earn points depending on how you do in quizzes in the coverd categories.
+-   See leaderboards.
+-   Top 3 users get Gold / Silver / Bronze trophies when the event ends.
+-   Everyone who takes part gets a participation trophy.
+-   See your trophy cabinet on your profile page.
+
 #### Explore page
 
 -   Page designed to make finding quizzes as easy as possible.

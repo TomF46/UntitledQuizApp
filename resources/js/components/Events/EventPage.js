@@ -143,7 +143,7 @@ const EventPage = ({ eventId }) => {
                                     </div>
                                 </div>
                             </div>
-                            <div className="px-4 pb-4 overflow-hidden shadow card">
+                            <div className="px-4 pb-4 overflow-hidden shadow card mb-4">
                                 <h2 className="font-bold text-primary text-xl py-4 text-center">
                                     My Points
                                 </h2>
@@ -166,6 +166,28 @@ const EventPage = ({ eventId }) => {
                                 <p className="text-secondary text-center font-bold text-lg">
                                     {event.yourTotalPoints}
                                 </p>
+                            </div>
+                            <div className="px-4 pb-4 overflow-hidden shadow card">
+                                <h2 className="font-bold text-primary text-xl py-4 text-center">
+                                    Rules
+                                </h2>
+                                <div className="text-sm">
+                                    <p className="font-bold">Complete quizzes in the categories shown.</p>
+                                    <p className="font-bold">Score points depending on how well you do:</p>
+                                    <ul>
+                                        <li>100%: {event.scoreMax} points</li>
+                                        <li> &#62; 75%: {event.scoreGroup4} points</li>
+                                        <li> &#62; 50%: {event.scoreGroup3} points</li>
+                                        <li> &#62; 25%: {event.scoreGroup2} points</li>
+                                        <li> &#60; 25%: {event.scoreGroup1} points</li>
+                                    </ul>
+                                    <p className="font-bold">If scores are tied the tie breaker is in the following order:</p>
+                                    <ol>
+                                        <li>1. Total points</li>
+                                        <li>2. Submissions to get to that total, least attempts wins</li>
+                                        <li>3. User who achieved their points total first</li>
+                                    </ol>
+                                </div> 
                             </div>
                         </div>
                         <div className="col-span-12 lg:col-span-9">
