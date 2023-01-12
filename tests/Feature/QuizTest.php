@@ -122,7 +122,8 @@ class QuizTest extends TestCase
                                 "is_correct" => false
                             ]
                         ],
-                        "image_url" => null
+                        "image_url" => null,
+                        "video_url" => null
                     ]
                 ]
             ]
