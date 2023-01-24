@@ -33,6 +33,7 @@ import EventsAdminPage from "./Admin/EventAdmin/EventAdminPage";
 import EventManagementPage from "./Admin/EventAdmin/EventManagementPage";
 import AdminEventPage from "./Admin/EventAdmin/EventPage";
 import EventPage from "./Events/EventPage";
+import AboutPage from "./About/AboutPage";
 
 const Main = ({ location }) => (
     <>
@@ -55,7 +56,7 @@ const Main = ({ location }) => (
                                 <Route path="/login" component={Login} />
                                 <Route path="/register" component={Register} />
                                 <Route path="/banned" component={BannedPage} />
-
+                                <Route path="/about" component={AboutPage} />
                                 <AuthenticatedRoute
                                     path="/profile/:userId/edit"
                                     component={EditProfilePage}

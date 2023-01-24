@@ -7,6 +7,7 @@ import { connect } from "react-redux";
 import { Link, Redirect } from "react-router-dom";
 import { toast } from "react-toastify";
 import IntroSection from "../../DisplayComponents/IntroSection";
+import IntroHeader from "../../DisplayComponents/IntroHeader";
 
 const RegisterPage = ({ userIsAuthenticated, history }) => {
     const [user, setUser] = useState({
@@ -72,11 +73,17 @@ const RegisterPage = ({ userIsAuthenticated, history }) => {
     return (
         <>
             {userIsAuthenticated && <Redirect to="/" />}
-            <div className="grid grid-cols-12">
-                <div className="col-span-12 md:col-span-6 px-4">
+            <div className="grid grid-cols-12 intro-page">
+                <div className="col-span-12 px-4">
+                    <IntroHeader />
+                </div>
+                <div className="col-span-12 px-4">
                     <IntroSection />
                 </div>
-                <div className="col-span-12 md:col-span-6 px-4 pb-4">
+                <div className="col-span-12 px-4 text-center mb-8">
+                    <Link className="border border-primary text-primary rounded py-2 font-bold px-4 hover:border-secondary hover:text-secondary hover:opacity-75 shadow text-xl" to={`/about`}>About QApp</Link>
+                </div>
+                <div className="col-span-12 px-4 pb-4">
                     <CenterFormCard
                         content={
                             <>

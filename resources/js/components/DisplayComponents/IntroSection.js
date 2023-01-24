@@ -1,22 +1,10 @@
 import React from "react";
 
-const IntroSection = ({ message }) => {
+const IntroSection = () => {
     return (
-        <div className="grid grid-cols-12 md:mt-12 rounded px-4 pb-4 lg:px-16 border-t-8 border-primary card shadow">
-            <div className="col-span-12">
-                <img src="https://untitled-quiz-app-images.s3-eu-west-1.amazonaws.com/QAppDark.png" className="centered" />
-            </div>
-            <div className="col-span-12 my-4">
-                <p className="font-bold text-md text-primary">QuizApp is a social quiz site that lets you create, and play quizzes, challenge others to beat your scores, make friends, see what others are creating, and collaborate with friends</p>
-            </div>
-            <div className="col-span-12">
-                <ul className="list-disc font-bold text-md text-primary pl-6">
-                    <li>Intuitive creation tools</li>
-                    <li>Extensive search</li>
-                    <li>Recommended quizzes</li>
-                    <li>Feedback tools &#40;Likes and comments&#41;</li>
-                    <li>More</li>
-                </ul>
+        <div className="grid grid-cols-12 md:mt-4 rounded px-4 pb-4 lg:px-16">
+            <div className="col-span-12 my-4 text-center">
+                <p className="font-bold text-2xl text-primary">Quizzes, challenges, events, friends &#38; more...</p>
             </div>
         </div>
     );
