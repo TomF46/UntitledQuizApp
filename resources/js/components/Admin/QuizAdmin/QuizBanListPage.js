@@ -76,17 +76,21 @@ const QuizBanListPage = ({ history }) => {
                 <LoadingMessage message={'Loading banned quizzes to explore'} />
             ) : (
                 <div className="grid grid-cols-12">
-                    <div className="col-span-12 lg:col-span-3 lg:mr-4 mb-4 lg:mb-0 px-4 pb-4 overflow-hidden shadow page">
-                        <h1 className="font-bold text-primary text-primary text-4xl my-4 text-center">Search</h1>
-                        <BannedQuizFiltersForm filters={filters} onFilterChange={handleFilterChange} />
+                    <div className="col-span-12 lg:col-span-3 lg:mr-4 mb-4 lg:mb-0">
+                        <div className="px-4 pb-4 overflow-hidden shadow card">
+                            <h1 className="font-bold text-primary text-primary text-4xl my-4 text-center">Search</h1>
+                            <BannedQuizFiltersForm filters={filters} onFilterChange={handleFilterChange} />
+                        </div>
                     </div>
-                    <div className="col-span-12 lg:col-span-9 px-4 overflow-hidden shadow page">
-                        <h1 className="font-bold text-primary text-primary text-4xl my-4 text-center">Banned Quizzes</h1>
-                        {quizzesPaginator.total > 0 ? (
-                            <BannedQuizListWithPagination paginationData={quizzesPaginator} onPageChange={getQuizPage} onQuizUnban={handleQuizUnban} />
-                        ) : (
-                            <p className="text-center">No banned quizzes match your search</p>
-                        )}
+                    <div className="col-span-12 lg:col-span-9">
+                        <div className="px-4 overflow-hidden shadow card">
+                            <h1 className="font-bold text-primary text-primary text-4xl my-4 text-center">Banned Quizzes</h1>
+                            {quizzesPaginator.total > 0 ? (
+                                <BannedQuizListWithPagination paginationData={quizzesPaginator} onPageChange={getQuizPage} onQuizUnban={handleQuizUnban} />
+                            ) : (
+                                <p className="text-center pb-4">No banned quizzes match your search</p>
+                            )}
+                        </div>
                     </div>
                 </div>
             )}

@@ -65,7 +65,7 @@ const ProfilePage = ({ userId, history, logout, isAdmin, ...props }) => {
             ) : (
                 <>
                     <div className="grid grid-cols-12 pb-4">
-                        <div className="col-span-12 lg:col-span-3 lg:mr-4 mb-4 lg:mb-0 px-4 pb-4 overflow-hidden shadow card">
+                        <div className="col-span-12 lg:col-span-3 lg:mr-4 mb-4 lg:mb-0">
                             <ProfileSidebar user={user} onLogout={handleLogout} onToggleBanned={toggleBanned} onToggleFollow={toggleFollow} reloadUser={loadUser} />
                         </div>
                         <div className="col-span-12 lg:col-span-9">

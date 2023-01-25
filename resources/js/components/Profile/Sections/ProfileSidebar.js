@@ -23,38 +23,42 @@ const ProfileSidebar = ({ user, currentUser, isAdmin, onToggleFollow, onLogout, 
 
     return (
         <>
-            <h2 className="font-bold text-primary text-4xl py-4 text-center">
-                {user.username}
-            </h2>
-            <div>
-                <img src={user.profile_image} alt="profile-picture" className="rounded-full profile-photo" />
-            </div>
+            <div className="px-4 pb-4 overflow-hidden shadow card mb-4">
+                <h2 className="font-bold text-primary text-4xl py-4 text-center">
+                    {user.username}
+                </h2>
+                <div>
+                    <img src={user.profile_image} alt="profile-picture" className="rounded-full profile-photo" />
+                </div>
 
-            <div className="text-center my-4">
-                {user.id != currentUser && user.isFriend && (
-                    <div className="p-4 flex justify-center items-center">
-                        <div className="rounded-full py-1 px-4 bg-primary hover:opacity-75 my-1 text-white shadow">Friend</div>
-                    </div>
-                )}
-                <h3 className="text-lg font-bold">User Info</h3>
-                {user.isAdmin && <p className="font-bold">Administrator</p>}
-                {user.isBanned && <p className="font-bold text-red-400">Banned</p>}
-                {(!user.isBanned || isAdmin) && (
-                    <>
-                        <p>Username: {user.username}</p>
-                        <p>Email: {user.email}</p>
-                        <p>Quizzes created: {user.totalQuizzesCreated}</p>
-                        <p>Quiz Attempts: {user.quizAttempts}</p>
-                        <p>Challenge points: {user.challengePoints}</p>
-                    </>
-                )}
+                <div className="text-center my-4">
+                    {user.id != currentUser && user.isFriend && (
+                        <div className="p-4 flex justify-center items-center">
+                            <div className="rounded-full py-1 px-4 bg-primary hover:opacity-75 my-1 text-white shadow">Friend</div>
+                        </div>
+                    )}
+                    <h3 className="text-lg font-bold">User Info</h3>
+                    {user.isAdmin && <p className="font-bold">Administrator</p>}
+                    {user.isBanned && <p className="font-bold text-red-400">Banned</p>}
+                    {(!user.isBanned || isAdmin) && (
+                        <>
+                            <p>Username: {user.username}</p>
+                            <p>Email: {user.email}</p>
+                            <p>Quizzes created: {user.totalQuizzesCreated}</p>
+                            <p>Quiz Attempts: {user.quizAttempts}</p>
+                            <p>Challenge points: {user.challengePoints}</p>
+                            <div className="text-center mb-4">
+                                <h3 className="text-lg font-bold">User Bio</h3>
+                                {user.bio ? (<p>{user.bio}</p>) : (<p>No user biography set, please add one so we can get to know you better</p>)}
+                            </div>
+                        </>
+                    )}
+                </div>
             </div>
+            <div className="px-4 pb-4 overflow-hidden shadow card">
             {(!user.isBanned || isAdmin) && (
                 <>
-                    <div className="text-center mb-4">
-                        <h3 className="text-lg font-bold">User Bio</h3>
-                        {user.bio ? (<p>{user.bio}</p>) : (<p>No user biography set, please add one so we can get to know you better</p>)}
-                    </div>
+                    <h3 className="text-lg font-bold text-center my-4">Actions</h3>
                     <div className="flex flex-col justify-center text-center">
                         {user.id == currentUser ? (
                             <>
@@ -144,6 +148,7 @@ const ProfileSidebar = ({ user, currentUser, isAdmin, onToggleFollow, onLogout, 
                     </div>
                 </>
             )}
+            </div>
         </>
     );
 };

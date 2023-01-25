@@ -53,13 +53,15 @@ const NotificationsPage = ({ history, decrementNotificationCount, notificationCo
     return (
         <div className="Notifications-page">
             <div className="grid grid-cols-12">
-                <div className="col-span-12 lg:col-span-3 lg:mr-4 mb-4 lg:mb-0 px-4 pb-4 overflow-hidden shadow page">
-                    <h1 className="font-bold text-primary text-4xl my-4 text-center">Details</h1>
-                    <p>On this page you can view your notifications</p>
+                <div className="col-span-12 lg:col-span-3 lg:mr-4 mb-4 lg:mb-0">
+                    <div className="px-4 pb-4 overflow-hidden shadow page">
+                        <h1 className="font-bold text-primary text-4xl my-4 text-center">Details</h1>
+                        <p>On this page you can view your notifications</p>
+                    </div>
                 </div>
                 <div className="col-span-12 lg:col-span-9">
-                    <div className="mb-6 overflow-hidden shadow card px-4 py-2">
-                        <h1 className="font-bold text-primary text-primary text-2xl text-center md:text-left">Notifications</h1>
+                    <div className="overflow-hidden shadow card px-4">
+                        <h1 className="font-bold text-primary text-primary text-2xl text-center md:text-left my-4">Notifications</h1>
                         {!notificationsPaginator ? (
                             <LoadingMessage message={'Loading Notification requests'} />
                         ) : (

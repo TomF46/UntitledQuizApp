@@ -54,25 +54,31 @@ const UsersAdminPage = ({ history }) => {
     return (
         <div className="users-admin-page">
             <div className="grid grid-cols-12 pb-4">
-                <div className="col-span-12 lg:col-span-3 lg:mr-4 mb-4 lg:mb-0 px-4 overflow-hidden shadow page">
-                    <h1 className="font-bold text-primary text-4xl my-4 text-center">Admin controls</h1>
-                    <p className="my-4">Search, view, and administer registered users.</p>
-                    <h1 className="font-bold text-primary text-4xl my-4 text-center">Search</h1>
-                    <UserSearchForm searchTerm={searchTerm} onSearchTermChange={handleSearchTermChange} />
+                <div className="col-span-12 lg:col-span-3 lg:mr-4 mb-4 lg:mb-0">
+                    <div className="px-4 overflow-hidden shadow page mb-4">
+                        <h1 className="font-bold text-primary text-4xl my-4 text-center">Admin controls</h1>
+                        <p className="my-4">Search, view, and administer registered users.</p>
+                    </div>
+                    <div className="px-4 overflow-hidden shadow page">
+                        <h1 className="font-bold text-primary text-4xl my-4 text-center">Search</h1>
+                        <UserSearchForm searchTerm={searchTerm} onSearchTermChange={handleSearchTermChange} />
+                    </div>
                 </div>
-                <div className="col-span-12 lg:col-span-9 overflow-hidden shadow page px-4">
-                    {!usersPaginator ? (
-                        <LoadingMessage message={'Loading users'} />
-                    ) : (
-                        <>
-                            <h1 className="font-bold text-primary text-4xl my-4 text-center">Users</h1>
-                            {usersPaginator.total > 0 ? (
-                                <UsersListWithPagination paginationData={usersPaginator} onPageChange={getUsersWithUrl} />
-                            ) : (
-                                <p className="text-center">There are currently no users added.</p>
-                            )}
-                        </>
-                    )}
+                <div className="col-span-12 lg:col-span-9">
+                    <div className="overflow-hidden shadow page px-4">
+                        {!usersPaginator ? (
+                            <LoadingMessage message={'Loading users'} />
+                        ) : (
+                            <>
+                                <h1 className="font-bold text-primary text-4xl my-4 text-center">Users</h1>
+                                {usersPaginator.total > 0 ? (
+                                    <UsersListWithPagination paginationData={usersPaginator} onPageChange={getUsersWithUrl} />
+                                ) : (
+                                    <p className="text-center">There are currently no users added.</p>
+                                )}
+                            </>
+                        )}
+                    </div>
                 </div>
             </div>
         </div>
