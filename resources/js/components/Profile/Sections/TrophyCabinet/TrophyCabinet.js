@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import PaginationControls from "../../../DisplayComponents/PaginationControls";
+import history from "../../../../history";
 
 const TrophyCabinet = ({ trophies }) => {
     const [groups, setGroups] = useState(null);
@@ -42,6 +43,10 @@ const TrophyCabinet = ({ trophies }) => {
         setViewingIndex(newIndex);
     }
 
+    function viewEvent(eventId) {
+        history.push(`/events/${eventId}`);
+    }
+
     return (
         <div className="trophyCabinet">
             {groups && (
@@ -52,7 +57,7 @@ const TrophyCabinet = ({ trophies }) => {
                     <div className="grid grid-cols-12">
                         {groups[viewingIndex].map((trophy) => {
                             return (
-                                <div key={trophy.id} className="col-span-3">
+                                <div key={trophy.id} className="col-span-3 pointer" onClick={() => {viewEvent(trophy.event_id)}}>
                                     <div className="my-4">
                                         <svg
                                             className={`${getTrophyColorClass(
@@ -81,17 +86,17 @@ const TrophyCabinet = ({ trophies }) => {
                     <div className="pagination-controls p-2">
                         <div className="flex justify-between">
                         <div>
-                            <p className="text-sm">{`Showing page ${viewingIndex + 1} of ${groups.length}`}</p>
+                            <p className="text-sm text-secondary">{`Showing page ${viewingIndex + 1} of ${groups.length}`}</p>
                         </div>
                             <div>
                                 {viewingIndex > 0 && (
                                     <button
                                         type="button"
                                         onClick={handleGoBack}
-                                        className="rounded mr-2 inline-flex items-center pointer"
+                                        className="rounded mr-2 inline-flex items-center pointer text-secondary hover:opacity-75"
                                     >
                                         <svg
-                                            className="text-black h-5 w-5"
+                                            className="h-5 w-5"
                                             xmlns="http://www.w3.org/2000/svg"
                                             fill="none"
                                             viewBox="0 0 24 24"
@@ -111,10 +116,10 @@ const TrophyCabinet = ({ trophies }) => {
                                     <button
                                         type="button"
                                         onClick={handleGoForward}
-                                        className="rounded inline-flex items-center pointer"
+                                        className="rounded inline-flex items-center pointer text-secondary hover:opacity-75"
                                     >
                                         <svg
-                                            className="text-black h-5 w-5"
+                                            className="h-5 w-5"
                                             xmlns="http://www.w3.org/2000/svg"
                                             fill="none"
                                             viewBox="0 0 24 24"

@@ -34,8 +34,8 @@ const QuizScoresSection = ({ quiz }) => {
     }
 
     return (
-        <div className="inline-block p-4 min-w-full">
-            <h2 className="font-bold text-primary text-2xl mb-4 text-center">Scores</h2>
+        <div className="inline-block pb-4 min-w-full">
+            <h2 className="font-bold text-white text-3xl py-4 text-center bg-secondary">Scores</h2>
             {!scoresPaginator ? (
                 <LoadingMessage message={'Loading scores'} />
             ) : (
