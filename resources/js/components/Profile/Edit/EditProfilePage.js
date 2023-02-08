@@ -6,6 +6,7 @@ import EditProfileForm from "./EditProfileForm";
 import { toast } from "react-toastify";
 import LoadingMessage from "../../DisplayComponents/LoadingMessage";
 import { storeImage } from "../../../api/imagesApi";
+import { Prompt } from "react-router-dom";
 
 const EditProfilePage = ({ userId, history }) => {
     const [user, setUser] = useState(null);
@@ -76,7 +77,10 @@ const EditProfilePage = ({ userId, history }) => {
             {user == null ? (
                 <LoadingMessage message={'Loading user'} />
             ) : (
-                <EditProfileForm user={user} onChange={handleChange} onFileChange={handleFileChange} errors={errors} saving={saving} onSave={handleSave} />
+                <>
+                    <Prompt when={!saving} message="Are you sure you want to leave? All changes will be lost." />
+                    <EditProfileForm user={user} onChange={handleChange} onFileChange={handleFileChange} errors={errors} saving={saving} onSave={handleSave} />
+                </>
             )}
         </div>
     );

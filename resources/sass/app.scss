@@ -11,7 +11,7 @@
 @import "tailwindcss/utilities";
 
 body {
-    background-color: #f9f9f9;
+    background-color: $body-bg;
 }
 
 .pointer {
@@ -77,12 +77,23 @@ nav {
 
 #react-confirm-alert {
     .react-confirm-alert-overlay {
-        background-color: #2d3748;
-        .react-confirm-alert-button-group {
-            justify-content: center;
-            button {
-                background-color: #2d3748;
-                color: #fff;
+        background-color: $primary;
+        .react-confirm-alert-body{
+            text-align: center;
+            h1 {
+                font-weight: bold;
+            }
+            .react-confirm-alert-button-group {
+                justify-content: center;
+                button {
+                    background-color: $body-bg;
+                    color: $primary;
+                    border: 1px solid #ddd;
+                }
+                button:first-child{
+                    background-color: $primary;
+                    color: #fff;
+                }
             }
         }
     }

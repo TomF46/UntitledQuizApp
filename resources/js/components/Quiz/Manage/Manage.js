@@ -11,6 +11,7 @@ import LoadingMessage from "../../DisplayComponents/LoadingMessage";
 import * as QuizManagementService from "../../../tools/QuizManagementService";
 import _ from 'lodash';
 import { getPotentialCollaboratorsList } from "../../../api/friendsApi";
+import { Prompt } from "react-router-dom";
 
 const QuizManagementPage = ({ quizId, userId, history }) => {
     const [quiz, setQuiz] = useState({ ...newQuiz });
@@ -117,18 +118,21 @@ const QuizManagementPage = ({ quizId, userId, history }) => {
     return (
         <div className="quiz-management-page container mx-auto">
             {quiz && tags && collaborators ? (
-                <QuizForm
-                    quiz={quiz}
-                    tags={tags}
-                    collaborators={collaborators}
-                    errors={errors}
-                    updateQuiz={updateQuiz}
-                    updateErrors={updateErrors}
-                    onReset={handleReset}
-                    onSave={handleSave}
-                    saving={saving}
-                    editing={editing}
-                />
+                <>
+                    <Prompt when={!saving} message={`Are you sure you want to leave? All ${editing ? "changes" : "progress"} will be lost.`} />
+                    <QuizForm
+                        quiz={quiz}
+                        tags={tags}
+                        collaborators={collaborators}
+                        errors={errors}
+                        updateQuiz={updateQuiz}
+                        updateErrors={updateErrors}
+                        onReset={handleReset}
+                        onSave={handleSave}
+                        saving={saving}
+                        editing={editing}
+                    />
+                </>
             ) : (
                 <div className="shadow page">
                     <LoadingMessage message={"Loading form"} />

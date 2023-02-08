@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 import { getTag, saveTag } from "../../../api/tagsApi";
 import LoadingMessage from "../../DisplayComponents/LoadingMessage";
 import TagManagementForm from "./TagManagementForm";
+import { Prompt } from "react-router-dom";
 
 const TagManagementPage = ({ tagId, history }) => {
     const [tag, setTag] = useState({ ...newTag });
@@ -89,8 +90,11 @@ const TagManagementPage = ({ tagId, history }) => {
                     <LoadingMessage message={"Loading form"} />
                 </div>
             ) : (
-                <TagManagementForm tag={tag} errors={errors} saving={saving} onChange={handleChange}
+                <>
+                    <Prompt when={!saving} message="Are you sure you want to leave? All changes will be lost." />
+                    <TagManagementForm tag={tag} errors={errors} saving={saving} onChange={handleChange}
                     onSave={handleSave} />
+                </>
             )}
         </div>
 

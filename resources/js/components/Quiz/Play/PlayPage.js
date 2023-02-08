@@ -8,6 +8,7 @@ import ScoreDetail from "./ScoreDetail";
 import { toast } from "react-toastify";
 import { confirmAlert } from "react-confirm-alert";
 import LoadingMessage from "../../DisplayComponents/LoadingMessage";
+import { Prompt } from "react-router-dom";
 
 const QuizPlayPage = ({ quizId, challengeId, history }) => {
     const [quiz, setQuiz] = useState(null);
@@ -157,7 +158,10 @@ const QuizPlayPage = ({ quizId, challengeId, history }) => {
             </div>
         ) : (
             !score ? (
-                <QuizPlayForm quiz={quiz} submission={submission} challenge={challenge} onAnswerChange={handleAnswerChange} onSubmit={handleSubmit} onReset={handleReplay} currentQuestionNumber={currentQuestionNumber} onNext={handleNext} onPrevious={handlePrevious} errors={errors} />
+                <>
+                    <Prompt message="Are you sure you want to leave? All quiz progress will be lost." />
+                    <QuizPlayForm quiz={quiz} submission={submission} challenge={challenge} onAnswerChange={handleAnswerChange} onSubmit={handleSubmit} onReset={handleReplay} currentQuestionNumber={currentQuestionNumber} onNext={handleNext} onPrevious={handlePrevious} errors={errors} />
+                </>
             ) : (
                 <ScoreDetail quiz={quiz} score={score} onReplay={handleReplay} onLikesUpdated={handleLikesUpdated} challenge={challenge} />
             ))

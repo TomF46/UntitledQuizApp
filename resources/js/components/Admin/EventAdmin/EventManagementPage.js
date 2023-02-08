@@ -7,6 +7,7 @@ import LoadingMessage from "../../DisplayComponents/LoadingMessage";
 import EventManagementForm from "./EventManagementForm";
 import { getEventForEdit, saveEvent } from "../../../api/eventApi";
 import { getTags } from "../../../api/tagsApi";
+import { Prompt } from "react-router-dom";
 
 const EventManagementPage = ({ eventId, history }) => {
     const [event, setEvent] = useState({ ...newEvent });
@@ -123,8 +124,11 @@ const EventManagementPage = ({ eventId, history }) => {
                     <LoadingMessage message={"Loading form"} />
                 </div>
             ) : (
-                <EventManagementForm event={event} tags={tags} errors={errors} saving={saving} onChange={handleChange}
+                <>
+                    <Prompt when={!saving} message="Are you sure you want to leave? All changes will be lost." />
+                    <EventManagementForm event={event} tags={tags} errors={errors} saving={saving} onChange={handleChange}
                     onSave={handleSave} onTagsChange={handleTagsChange} />
+                </>
             )}
         </div>
 

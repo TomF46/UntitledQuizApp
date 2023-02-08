@@ -22536,15 +22536,29 @@ nav {
 }
 
 #react-confirm-alert .react-confirm-alert-overlay {
-  background-color: #2d3748;
+  background-color: #22577A;
 }
 
-#react-confirm-alert .react-confirm-alert-overlay .react-confirm-alert-button-group {
+#react-confirm-alert .react-confirm-alert-overlay .react-confirm-alert-body {
+  text-align: center;
+}
+
+#react-confirm-alert .react-confirm-alert-overlay .react-confirm-alert-body h1 {
+  font-weight: bold;
+}
+
+#react-confirm-alert .react-confirm-alert-overlay .react-confirm-alert-body .react-confirm-alert-button-group {
   justify-content: center;
 }
 
-#react-confirm-alert .react-confirm-alert-overlay .react-confirm-alert-button-group button {
-  background-color: #2d3748;
+#react-confirm-alert .react-confirm-alert-overlay .react-confirm-alert-body .react-confirm-alert-button-group button {
+  background-color: #f9f9f9;
+  color: #22577A;
+  border: 1px solid #ddd;
+}
+
+#react-confirm-alert .react-confirm-alert-overlay .react-confirm-alert-body .react-confirm-alert-button-group button:first-child {
+  background-color: #22577A;
   color: #fff;
 }
 
