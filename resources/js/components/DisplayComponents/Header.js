@@ -53,8 +53,8 @@ const Header = ({ userIsAuthenticated, isAdmin, checkUserIsAdmin, loadNotificati
     return (
         <nav className="flex items-center justify-between flex-wrap bg-primary px-4 py-2 shadow-lg">
             <div className="flex items-center flex-shrink-0 text-white mr-6">
-                <Link to="/" className="tracking-tight">
-                    <img src="https://untitled-quiz-app-images.s3-eu-west-1.amazonaws.com/QApp.png" className="w-16" />
+                <Link to="/" className="tracking-tight" aria-label="To Dashboard">
+                    <img src="https://untitled-quiz-app-images.s3-eu-west-1.amazonaws.com/QApp.png" alt="QApp logo"  className="w-16" />
                 </Link>
             </div>
             <div className="block md:hidden">

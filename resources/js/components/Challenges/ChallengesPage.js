@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { searchChallenges } from "../../api/challengesApi";
 import { toast } from "react-toastify";
-import _, { debounce } from 'lodash';
+import { debounce } from 'lodash';
 import LoadingMessage from "../DisplayComponents/LoadingMessage";
 import ChallengeListWithPagination from "../DisplayComponents/ChallengesListWithPagination";
 import { Link } from "react-router-dom";

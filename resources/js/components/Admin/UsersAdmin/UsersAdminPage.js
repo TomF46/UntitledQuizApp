@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 import LoadingMessage from "../../DisplayComponents/LoadingMessage";
 import UsersListWithPagination from "../../DisplayComponents/UsersListWithPagination";
 import UserSearchForm from "../../DisplayComponents/UserSearchForm";
-import _, { debounce } from 'lodash';
+import { debounce } from 'lodash';
 import { getPageWithPaginationUrlAndFilters } from "../../../api/paginationApi";
 
 const UsersAdminPage = ({ history }) => {

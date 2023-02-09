@@ -4,7 +4,6 @@ import { connect } from "react-redux";
 import { getQuiz, ban } from "../../../api/quizApi";
 import { toast } from "react-toastify";
 import LoadingMessage from "../../DisplayComponents/LoadingMessage";
-import _ from 'lodash';
 import QuizBanForm from "./QuizBanForm";
 
 

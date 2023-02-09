@@ -6,7 +6,6 @@ import QuizDetail from "./QuizDetail";
 import { confirmAlert } from "react-confirm-alert";
 import { toast } from "react-toastify";
 import LoadingMessage from "../../DisplayComponents/LoadingMessage";
-import _ from 'lodash';
 
 const QuizDetailPage = ({ quizId, currentUser, isAdmin, history }) => {
     const [quiz, setQuiz] = useState(null);

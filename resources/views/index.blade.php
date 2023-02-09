@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    <meta name="description" content="Untitled quiz app social quiz application">
     <title>Untitled Quiz App</title>
 
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">

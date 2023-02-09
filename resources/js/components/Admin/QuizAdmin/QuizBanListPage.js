@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { searchQuizBans } from "../../../api/banApi";
 import { toast } from "react-toastify";
-import _, { debounce } from 'lodash';
+import { debounce } from 'lodash';
 import BannedQuizListWithPagination from "../../DisplayComponents/BannedQuizListWithPagination";
 import LoadingMessage from "../../DisplayComponents/LoadingMessage";
 import BannedQuizFiltersForm from "./BannedQuizFiltersForm";
