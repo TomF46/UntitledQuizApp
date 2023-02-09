@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { connect } from "react-redux";
-import PropTypes from "prop-types";
 import LoadingMessage from "../../DisplayComponents/LoadingMessage";
 import { getChallengePointsLeaderboard } from "../../../api/challengesApi";
 import { toast } from "react-toastify";
 import ChallengePointsLeaderboardWithPagination from "../../DisplayComponents/ChallengePointsLeaderboardWithPagination";
 import { getPageWithPaginationUrl } from "../../../api/paginationApi";
 
-const ChallengesLeaderboardPage = ({ currentUser, history }) => {
+const ChallengesLeaderboardPage = () => {
     const [leaderboardPaginator, setLeaderboardPaginator] = useState(null);
 
     useEffect(() => {
@@ -74,17 +72,5 @@ const ChallengesLeaderboardPage = ({ currentUser, history }) => {
     );
 };
 
-ChallengesLeaderboardPage.propTypes = {
-    currentUser: PropTypes.any.isRequired,
-    history: PropTypes.object.isRequired
-};
-
-const mapStateToProps = (state, ownProps) => {
-    return {
-        currentUser: state.tokens.user_id
-    };
-};
-
-
-export default connect(mapStateToProps)(ChallengesLeaderboardPage);
+export default ChallengesLeaderboardPage;
 

@@ -16,11 +16,11 @@ const ChallengePointsLeaderboard = ({ rows, startingPosition }) => {
                 <tbody>
                     {rows.map((row, index) => {
                         return (
-                            <tr className="border-t border-gray-200 text-center" key={rows.id}>
+                            <tr className="border-t border-gray-200 text-center" key={row.id}>
                                 <td className="px-4 py-2">{startingPosition + index}</td>
-                                <Link to={`/profile/${row.id}`}>
-                                    <td className="px-4 py-2 font-bold text-secondary">{row.username}</td>
-                                </Link>
+                                <td className="px-4 py-2 font-bold text-secondary">
+                                    <Link to={`/profile/${row.id}`}>{row.username}</Link>
+                                </td>
                                 <td className="px-4 py-2">{row.challengePoints}</td>
                             </tr>
                         )

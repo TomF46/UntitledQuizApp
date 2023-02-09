@@ -35,7 +35,7 @@ const ChallengeScoresTable = ({ scores, onScoreSelected }) => {
             </table>
         </div>
     ) : (
-        <p className="text-center">There is currently no score data to show.</p>
+        <p className="text-center pt-4">There is currently no score data to show.</p>
     )
 };
 
