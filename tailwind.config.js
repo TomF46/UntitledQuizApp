@@ -1,6 +1,8 @@
 module.exports = {
+    content: [
+        './resources/**/*.{php,js}'
+    ],
     future: {},
-    purge: [],
     theme: {
         extend: {
             colors: {
@@ -13,6 +15,5 @@ module.exports = {
             }
         }
     },
-    variants: {},
     plugins: []
 };
