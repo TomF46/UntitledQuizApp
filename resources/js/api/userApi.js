@@ -135,3 +135,14 @@ export function friendRequest(id) {
             throw error;
         });
 }
+
+export function downloadUsersCSV() {
+    return axiosClient
+        .get('/api/users/downloads/all')
+        .then(response => {
+            return response.data;
+        })
+        .catch(error => {
+            throw error;
+        });
+}

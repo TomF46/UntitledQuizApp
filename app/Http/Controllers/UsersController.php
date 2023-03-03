@@ -6,6 +6,7 @@ use App\Filters\UserSearch;
 use App\Models\User;
 use App\Models\Role;
 use App\Enums\Roles;
+use App\Helpers\CSVHelper;
 use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
 
@@ -83,6 +84,21 @@ class UsersController extends Controller
         ]);
         $user->role()->save($role);
         response()->json(['success' => 'success'], 200);
+    }
+
+    public function downloadUsersCSV()
+    {
+        $users = User::all();
+        $fileName = 'Users.csv';
+        $headers = array(
+            "Content-type"        => "text/csv",
+            "Content-Disposition" => "attachment; filename=$fileName",
+            "Pragma"              => "no-cache",
+            "Cache-Control"       => "must-revalidate, post-check=0, pre-check=0",
+            "Expires"             => "0"
+        );
+        
+        return response()->stream(CSVHelper::mapUsersCSV($users), 200, $headers);
     }
 
     protected function validateUser(Request $request, User $user)
