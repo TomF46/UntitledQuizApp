@@ -595,9 +595,6 @@ video {
 .mt-auto{
   margin-top: auto;
 }
-.ml-auto{
-  margin-left: auto;
-}
 .block{
   display: block;
 }
@@ -739,9 +736,6 @@ video {
 }
 .flex-wrap{
   flex-wrap: wrap;
-}
-.place-items-center{
-  place-items: center;
 }
 .items-center{
   align-items: center;
