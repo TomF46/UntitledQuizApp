@@ -68,7 +68,7 @@ const NotificationsPage = ({ history, decrementNotificationCount, notificationCo
                             notificationsPaginator.total > 0 ? (
                                 <NotificationsListWithPagination paginationData={notificationsPaginator} onPageChange={handleNotificationListPageChange} onSetRead={handleReadNotificationRequest} />
                             ) : (
-                                <p className="text-center">You do not currently have any notifications.</p>
+                                <p className="text-center pb-4">You do not currently have any notifications.</p>
                             )
                         )}
                     </div>
