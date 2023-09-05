@@ -1,12 +1,15 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { friendRequest } from "../../../api/userApi";
 import { toast } from "react-toastify";
 import history from "../../../history";
+import { useSelector } from "react-redux";
 
-const ProfileSidebar = ({ user, currentUser, isAdmin, onToggleFollow, onLogout, onToggleBanned, reloadUser }) => {
+const ProfileSidebar = ({ user, onToggleFollow, onLogout, onToggleBanned, reloadUser }) => {
+    const currentUser = useSelector((state) => state.tokens.user_id);
+    const isAdmin = useSelector((state) => state.isAdmin);
+    
 
     function sendFriendRequest() {
         friendRequest(user.id).then(res => {
@@ -158,18 +161,8 @@ ProfileSidebar.propTypes = {
     onToggleFollow: PropTypes.func.isRequired,
     onToggleBanned: PropTypes.func.isRequired,
     onLogout: PropTypes.func.isRequired,
-    reloadUser: PropTypes.func.isRequired,
-    isAdmin: PropTypes.bool.isRequired,
-    currentUser: PropTypes.any.isRequired,
+    reloadUser: PropTypes.func.isRequired
 };
 
-const mapStateToProps = (state) => {
-    return {
-        currentUser: state.tokens.user_id,
-        isAdmin: state.isAdmin
-    };
-};
-
-
-export default connect(mapStateToProps)(ProfileSidebar);
+export default ProfileSidebar;
 

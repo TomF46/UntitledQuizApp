@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import { connect } from "react-redux";
 import { getQuiz, submitScore } from "../../../api/quizApi";
 import { getChallenge } from "../../../api/challengesApi";
 import QuizPlayForm from "./QuizPlayForm";
@@ -8,9 +7,11 @@ import ScoreDetail from "./ScoreDetail";
 import { toast } from "react-toastify";
 import { confirmAlert } from "react-confirm-alert";
 import LoadingMessage from "../../DisplayComponents/LoadingMessage";
-import { Prompt } from "react-router-dom";
+import { Prompt, useParams } from "react-router-dom";
 
-const QuizPlayPage = ({ quizId, challengeId, history }) => {
+const QuizPlayPage = ({history }) => {
+    const { quizId } = useParams();
+    const { challengeId } = useParams();
     const [quiz, setQuiz] = useState(null);
     const [challenge, setChallenge] = useState(null);
     const [submission, setSubmission] = useState(null);
@@ -169,18 +170,8 @@ const QuizPlayPage = ({ quizId, challengeId, history }) => {
 };
 
 QuizPlayPage.propTypes = {
-    quizId: PropTypes.any.isRequired,
-    challengeId: PropTypes.any,
     history: PropTypes.object.isRequired
 };
 
-const mapStateToProps = (state, ownProps) => {
-    return {
-        quizId: ownProps.match.params.quizId,
-        challengeId: ownProps.match.params.challengeId
-    };
-};
-
-
-export default connect(mapStateToProps)(QuizPlayPage);
+export default QuizPlayPage;
 

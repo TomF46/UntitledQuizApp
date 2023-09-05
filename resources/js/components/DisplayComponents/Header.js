@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { useLocation } from 'react-router-dom'
 import { checkUserIsAdmin } from "../../redux/actions/isAdminActions"
@@ -10,19 +9,23 @@ import { toast } from "react-toastify";
 import history from "../../history";
 import { confirmAlert } from "react-confirm-alert";
 
-const Header = ({ userIsAuthenticated, isAdmin, checkUserIsAdmin, loadNotificationCount, notificationCount, logout }) => {
+const Header = () => {
+    const dispatch = useDispatch();
+    const userIsAuthenticated = useSelector((state) => state.tokens != null);
+    const isAdmin = useSelector((state) => state.isAdmin);
+    const notificationCount = useSelector((state) => state.notificationCount);
     const [mobileIsOpen, setMobileIsOpen] = useState(null);
     const location = useLocation();
 
     useEffect(() => {
         if (location.pathname != '/banned') {
-            checkUserIsAdmin();
+            dispatch(checkUserIsAdmin());
         }
     }, [userIsAuthenticated])
 
     useEffect(() => {
         setMobileIsOpen(false);
-        loadNotificationCount();
+        dispatch(loadNotificationCount());
     }, [location]);
 
     function toggleMobileNavigation() {
@@ -37,7 +40,7 @@ const Header = ({ userIsAuthenticated, isAdmin, checkUserIsAdmin, loadNotificati
                 {
                     label: "Yes",
                     onClick: () => {
-                        logout();
+                        dispatch(logout());
                         toast.info("Logged out.");
                         history.push("/login")
                     },
@@ -176,26 +179,4 @@ const Header = ({ userIsAuthenticated, isAdmin, checkUserIsAdmin, loadNotificati
     );
 };
 
-Header.propTypes = {
-    userIsAuthenticated: PropTypes.bool.isRequired,
-    isAdmin: PropTypes.bool.isRequired,
-    checkUserIsAdmin: PropTypes.func.isRequired,
-    logout: PropTypes.func.isRequired,
-    notificationCount: PropTypes.number.isRequired
-};
-
-const mapStateToProps = (state, ownProps) => {
-    return {
-        userIsAuthenticated: state.tokens != null,
-        isAdmin: state.isAdmin,
-        notificationCount: state.notificationCount
-    };
-};
-
-const mapDispatchToProps = {
-    checkUserIsAdmin,
-    loadNotificationCount,
-    logout
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Header);
+export default Header;

@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from "react";
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
 import { toast } from "react-toastify";
 import { endEvent, getEvent, publishEvent } from "../../../api/eventApi";
 import LoadingMessage from "../../DisplayComponents/LoadingMessage";
 import { confirmAlert } from "react-confirm-alert";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import EventLeaderboard from "../../DisplayComponents/EventLeaderboard/EventLeaderboard";
 
-const EventPage = ({ eventId }) => {
+const EventPage = () => {
+    const { eventId } = useParams();
     const [event, setEvent] = useState(null);
 
     useEffect(() => {
@@ -209,14 +208,4 @@ const EventPage = ({ eventId }) => {
     );
 };
 
-EventPage.propTypes = {
-    eventId: PropTypes.any.isRequired,
-};
-
-const mapStateToProps = (state, ownProps) => {
-    return {
-        eventId: ownProps.match.params.eventId,
-    };
-};
-
-export default connect(mapStateToProps)(EventPage);
+export default EventPage;

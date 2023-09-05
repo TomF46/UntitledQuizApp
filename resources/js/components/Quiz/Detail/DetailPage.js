@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from "react";
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
+import { useSelector } from "react-redux";
 import { getQuiz, getUsersHighScoreForQuiz, unban, deleteQuiz, toggleRecommended, publishQuiz } from "../../../api/quizApi";
 import QuizDetail from "./QuizDetail";
 import { confirmAlert } from "react-confirm-alert";
 import { toast } from "react-toastify";
 import LoadingMessage from "../../DisplayComponents/LoadingMessage";
+import { useParams } from "react-router-dom";
 
-const QuizDetailPage = ({ quizId, currentUser, isAdmin, history }) => {
+const QuizDetailPage = ({ history }) => {
+    const { quizId } = useParams();
+    const isAdmin = useSelector((state) => state.isAdmin);
     const [quiz, setQuiz] = useState(null);
     const [highScore, setHighScore] = useState(null);
 
@@ -143,20 +145,5 @@ const QuizDetailPage = ({ quizId, currentUser, isAdmin, history }) => {
     )
 };
 
-QuizDetailPage.propTypes = {
-    quizId: PropTypes.any.isRequired,
-    history: PropTypes.object.isRequired,
-    isAdmin: PropTypes.bool.isRequired
-};
-
-const mapStateToProps = (state, ownProps) => {
-    return {
-        quizId: ownProps.match.params.quizId,
-        currentUser: state.tokens.user_id,
-        isAdmin: state.isAdmin
-    };
-};
-
-
-export default connect(mapStateToProps)(QuizDetailPage);
+export default QuizDetailPage;
 

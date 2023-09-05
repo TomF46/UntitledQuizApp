@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import { connect } from "react-redux";
+import { connect, useSelector } from "react-redux";
 import { getUserForEditing, editUserProfile } from "../../../api/userApi"
 import EditProfileForm from "./EditProfileForm";
 import { toast } from "react-toastify";
@@ -8,7 +8,8 @@ import LoadingMessage from "../../DisplayComponents/LoadingMessage";
 import { storeImage } from "../../../api/imagesApi";
 import { Prompt } from "react-router-dom";
 
-const EditProfilePage = ({ userId, history }) => {
+const EditProfilePage = ({history }) => {
+    const userId = useSelector((state) => state.tokens.user_id);
     const [user, setUser] = useState(null);
     const [errors, setErrors] = useState({});
     const [saving, setSaving] = useState(false);
@@ -87,14 +88,7 @@ const EditProfilePage = ({ userId, history }) => {
 };
 
 EditProfilePage.propTypes = {
-    userId: PropTypes.any.isRequired,
     history: PropTypes.object.isRequired
 };
 
-const mapStateToProps = (state) => {
-    return {
-        userId: state.tokens.user_id
-    };
-};
-
-export default connect(mapStateToProps)(EditProfilePage);
+export default EditProfilePage;

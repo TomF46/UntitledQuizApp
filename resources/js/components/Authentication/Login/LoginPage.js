@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import { connect } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import LoginForm from "./LoginForm";
 import { login } from "../../../redux/actions/authenticationActions";
 import CenterFormCard from "../../DisplayComponents/CenterFormCard";
@@ -9,7 +9,9 @@ import { toast } from "react-toastify";
 import IntroSection from "../../DisplayComponents/IntroSection";
 import IntroHeader from "../../DisplayComponents/IntroHeader";
 
-const LoginPage = ({ login, userIsAuthenticated, history }) => {
+const LoginPage = ({history }) => {
+    const dispatch = useDispatch();
+    const userIsAuthenticated = useSelector((state) => state.tokens != null);
     const [user, setUser] = useState({
         email: "",
         password: "",
@@ -40,7 +42,7 @@ const LoginPage = ({ login, userIsAuthenticated, history }) => {
         event.preventDefault();
         if (!formIsValid()) return;
         setSaving(true);
-        login(user)
+        dispatch(login(user))
             .then(() => {
                 history.push("/");
             })
@@ -94,19 +96,7 @@ const LoginPage = ({ login, userIsAuthenticated, history }) => {
 };
 
 LoginPage.propTypes = {
-    userIsAuthenticated: PropTypes.bool.isRequired,
     history: PropTypes.object.isRequired,
-    login: PropTypes.func.isRequired
 };
 
-const mapStateToProps = (state, ownProps) => {
-    return {
-        userIsAuthenticated: state.tokens != null
-    };
-};
-
-const mapDispatchToProps = {
-    login
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(LoginPage);
+export default LoginPage;

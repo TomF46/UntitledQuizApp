@@ -12,8 +12,10 @@ import * as QuizManagementService from "../../../tools/QuizManagementService";
 import _ from 'lodash';
 import { getPotentialCollaboratorsList } from "../../../api/friendsApi";
 import { Prompt } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
-const QuizManagementPage = ({ quizId, userId, history }) => {
+const QuizManagementPage = ({history }) => {
+    const { quizId } = useParams();
     const [quiz, setQuiz] = useState({ ...newQuiz });
     const [tags, setTags] = useState(null);
     const [collaborators, setCollaborators] = useState(null);
@@ -143,16 +145,7 @@ const QuizManagementPage = ({ quizId, userId, history }) => {
 };
 
 QuizManagementPage.propTypes = {
-    quizId: PropTypes.any,
-    userId: PropTypes.any,
     history: PropTypes.object.isRequired
 };
 
-const mapStateToProps = (state, ownProps) => {
-    return {
-        quizId: ownProps.match.params.quizId,
-        userId: state.tokens.user_id
-    };
-};
-
-export default connect(mapStateToProps)(QuizManagementPage);
+export default QuizManagementPage;

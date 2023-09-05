@@ -4,11 +4,11 @@ import { saveTokens, removeTokens } from "../../tools/localStorage";
 import * as authenticationApi from "../../api/authenticationApi";
 import { attatchBearerToken } from "../../tools/axiosClient";
 
-export function userLoginSuccess(tokens) {
+function userLoginSuccess(tokens) {
     return { type: types.USER_LOGIN_SUCCESS, tokens };
 }
 
-export function userLogoutSuccess() {
+function userLogoutSuccess() {
     return { type: types.USER_LOGOUT_SUCCESS };
 }
 

@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import { connect } from "react-redux";
 import { getQuiz, ban } from "../../../api/quizApi";
 import { toast } from "react-toastify";
 import LoadingMessage from "../../DisplayComponents/LoadingMessage";
 import QuizBanForm from "./QuizBanForm";
+import { useParams } from "react-router-dom";
 
 
-const QuizBanPage = ({ quizId, history }) => {
+const QuizBanPage = ({ history }) => {
+    const { quizId } = useParams();
     const [quiz, setQuiz] = useState(null);
     const [reason, setReason] = useState("");
     const [errors, setErrors] = useState({});
@@ -71,16 +72,8 @@ const QuizBanPage = ({ quizId, history }) => {
 };
 
 QuizBanPage.propTypes = {
-    quizId: PropTypes.any.isRequired,
     history: PropTypes.object.isRequired
 };
 
-const mapStateToProps = (state, ownProps) => {
-    return {
-        quizId: ownProps.match.params.quizId
-    };
-};
-
-
-export default connect(mapStateToProps)(QuizBanPage);
+export default QuizBanPage;
 

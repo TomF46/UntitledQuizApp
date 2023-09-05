@@ -1,13 +1,14 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { connect } from "react-redux";
+import { useDispatch } from "react-redux";
 import { logout } from "../redux/actions/authenticationActions";
 import { toast } from "react-toastify";
 
-const BannedPage = ({ history, logout }) => {
+const BannedPage = ({ history}) => {
+    const dispatch = useDispatch();
 
     function handleLogout() {
-        logout();
+        dispatch(logout());
         toast.info("Logged out.");
         history.push("/login")
     }
@@ -36,15 +37,5 @@ BannedPage.propTypes = {
     history: PropTypes.object.isRequired
 };
 
-const mapStateToProps = (state, ownProps) => {
-    return {
-    };
-};
-
-const mapDispatchToProps = {
-    logout
-};
-
-
-export default connect(mapStateToProps, mapDispatchToProps)(BannedPage);
+export default BannedPage;
 

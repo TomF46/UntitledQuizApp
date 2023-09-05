@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import { connect } from "react-redux";
+import { useSelector } from "react-redux";
 import { getUserById } from "../../api/userApi";
 import { toast } from "react-toastify";
 import FollowingQuizDashboard from "./Components/FollowingQuizDashboard";
@@ -17,7 +17,8 @@ import UnpublishedQuizDashboard from "./Components/UnpublishedQuizDashboard";
 import FollowedUsersList from "./Sidebar/FollowedUsersList";
 import LiveEventsList from "./Sidebar/LiveEventsList";
 
-const DashboardPage = ({ userId, history }) => {
+const DashboardPage = ({ history }) => {
+    const userId = useSelector((state) => state.tokens.user_id);
     const [user, setUser] = useState(null);
 
     useEffect(() => {
@@ -144,14 +145,7 @@ const DashboardPage = ({ userId, history }) => {
 };
 
 DashboardPage.propTypes = {
-    userId: PropTypes.any.isRequired,
     history: PropTypes.object.isRequired
 };
 
-const mapStateToProps = (state) => {
-    return {
-        userId: state.tokens.user_id
-    };
-};
-
-export default connect(mapStateToProps)(DashboardPage);
+export default DashboardPage;

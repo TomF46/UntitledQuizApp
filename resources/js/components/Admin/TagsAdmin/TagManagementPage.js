@@ -6,9 +6,10 @@ import { toast } from "react-toastify";
 import { getTag, saveTag } from "../../../api/tagsApi";
 import LoadingMessage from "../../DisplayComponents/LoadingMessage";
 import TagManagementForm from "./TagManagementForm";
-import { Prompt } from "react-router-dom";
+import { Prompt, useParams } from "react-router-dom";
 
-const TagManagementPage = ({ tagId, history }) => {
+const TagManagementPage = ({ history }) => {
+    const { tagId } = useParams();
     const [tag, setTag] = useState({ ...newTag });
     const [errors, setErrors] = useState({});
     const [saving, setSaving] = useState(false);
@@ -102,14 +103,7 @@ const TagManagementPage = ({ tagId, history }) => {
 };
 
 TagManagementPage.propTypes = {
-    tagId: PropTypes.any,
     history: PropTypes.object.isRequired
 };
 
-const mapStateToProps = (state, ownProps) => {
-    return {
-        tagId: ownProps.match.params.tagId,
-    };
-};
-
-export default connect(mapStateToProps)(TagManagementPage);
+export default TagManagementPage;

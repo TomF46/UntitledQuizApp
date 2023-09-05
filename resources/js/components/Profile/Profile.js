@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { followUser, getUserById, toggleBan } from "../../api/userApi";
 import { toast } from "react-toastify";
 import LoadingMessage from "../DisplayComponents/LoadingMessage";
@@ -9,18 +8,23 @@ import UsersQuizList from "./Sections/UsersQuizList";
 import UsersBestScoresList from "./Sections/UsersBestScoresList";
 import ProfileSidebar from "./Sections/ProfileSidebar";
 import TrophyCabinet from "./Sections/TrophyCabinet/TrophyCabinet";
+import { useParams } from "react-router-dom";
 
-const ProfilePage = ({ userId, history, logout, isAdmin, ...props }) => {
+const ProfilePage = () => {
+    const dispatch = useDispatch();
+    const { userId } = useParams();
+    const id = userId ? userId : useSelector((state) => state.tokens.user_id);
+    const isAdmin = useSelector((state) => state.isAdmin);
     const [user, setUser] = useState(null);
 
     useEffect(() => {
-        if (!user || user.id != userId) {
+        if (!user || user.id != id) {
             loadUser();
         }
-    }, [userId, user])
+    }, [id, user])
 
     function loadUser() {
-        getUserById(userId).then(userData => {
+        getUserById(id).then(userData => {
             setUser(userData);
         }).catch(error => {
             toast.error(`Error getting user ${error.message}`, {
@@ -44,7 +48,7 @@ const ProfilePage = ({ userId, history, logout, isAdmin, ...props }) => {
     }
 
     function handleLogout() {
-        logout();
+        dispatch(logout());
         toast.info("Logged out.");
     }
 
@@ -91,23 +95,4 @@ const ProfilePage = ({ userId, history, logout, isAdmin, ...props }) => {
     );
 };
 
-ProfilePage.propTypes = {
-    userId: PropTypes.any.isRequired,
-    history: PropTypes.object.isRequired,
-    isAdmin: PropTypes.bool.isRequired,
-    logout: PropTypes.func.isRequired
-};
-
-const mapStateToProps = (state, ownProps) => {
-    return {
-        userId: ownProps.match.params.userId ? ownProps.match.params.userId : state.tokens.user_id,
-        isAdmin: state.isAdmin
-    };
-};
-
-const mapDispatchToProps = {
-    logout
-};
-
-
-export default connect(mapStateToProps, mapDispatchToProps)(ProfilePage);
+export default ProfilePage;

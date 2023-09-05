@@ -7,9 +7,10 @@ import LoadingMessage from "../../DisplayComponents/LoadingMessage";
 import EventManagementForm from "./EventManagementForm";
 import { getEventForEdit, saveEvent } from "../../../api/eventApi";
 import { getTags } from "../../../api/tagsApi";
-import { Prompt } from "react-router-dom";
+import { Prompt, useParams } from "react-router-dom";
 
-const EventManagementPage = ({ eventId, history }) => {
+const EventManagementPage = ({ history }) => {
+    const { eventId } = useParams();
     const [event, setEvent] = useState({ ...newEvent });
     const [tags, setTags] = useState(null);
     const [errors, setErrors] = useState({});
@@ -136,14 +137,7 @@ const EventManagementPage = ({ eventId, history }) => {
 };
 
 EventManagementPage.propTypes = {
-    eventId: PropTypes.any,
     history: PropTypes.object.isRequired
 };
 
-const mapStateToProps = (state, ownProps) => {
-    return {
-        eventId: ownProps.match.params.eventId,
-    };
-};
-
-export default connect(mapStateToProps)(EventManagementPage);
+export default EventManagementPage;

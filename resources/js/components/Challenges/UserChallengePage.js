@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { connect } from "react-redux";
+import { useSelector } from "react-redux";
 import PropTypes from "prop-types";
 import { getScoresForUser, getUserById } from "../../api/userApi";
 import LoadingMessage from "../DisplayComponents/LoadingMessage";
@@ -8,9 +8,12 @@ import { confirmAlert } from "react-confirm-alert";
 import { toast } from "react-toastify";
 import { sendChallenge } from "../../api/challengesApi";
 import { getPageWithPaginationUrl } from "../../api/paginationApi";
+import { useParams } from "react-router-dom";
 
 
-const UserChallengesPage = ({ userId, currentUser, history }) => {
+const UserChallengesPage = ({history }) => {
+    const currentUser = useSelector((state) => state.tokens.user_id);
+    const { userId } = useParams();
     const [recipient, setRecipient] = useState(null);
     const [scoresPaginator, setScoresPaginator] = useState(null);
 
@@ -131,18 +134,8 @@ const UserChallengesPage = ({ userId, currentUser, history }) => {
 };
 
 UserChallengesPage.propTypes = {
-    userId: PropTypes.any.isRequired,
-    currentUser: PropTypes.any.isRequired,
     history: PropTypes.object.isRequired
 };
 
-const mapStateToProps = (state, ownProps) => {
-    return {
-        userId: ownProps.match.params.userId,
-        currentUser: state.tokens.user_id
-    };
-};
-
-
-export default connect(mapStateToProps)(UserChallengesPage);
+export default UserChallengesPage;
 
