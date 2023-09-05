@@ -1,12 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import Moment from 'react-moment';
-import history from "../../../history";
 import CommentForm from "./CommentForm";
 import { toast } from "react-toastify";
 import { editComment } from "../../../api/quizApi";
+import { useHistory } from "react-router-dom";
 
 const Comment = ({ comment, onDeleteComment, onReload }) => {
+    const history = useHistory();
     const [updatedComment, setUpdatedComment] = useState(comment.text);
     const [editing, setEditing] = useState(false);
     const [errors, setErrors] = useState({});

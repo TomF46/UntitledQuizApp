@@ -1,16 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { connect } from "react-redux";
-import PropTypes from "prop-types";
 import { newTag } from "../../../tools/objectShapes";
 import { toast } from "react-toastify";
 import { getTag, saveTag } from "../../../api/tagsApi";
 import LoadingMessage from "../../DisplayComponents/LoadingMessage";
 import TagManagementForm from "./TagManagementForm";
-import { Prompt, useParams } from "react-router-dom";
+import { Prompt, useParams, useHistory } from "react-router-dom";
 
-const TagManagementPage = ({ history }) => {
+const TagManagementPage = () => {
     const { tagId } = useParams();
     const [tag, setTag] = useState({ ...newTag });
+    const history = useHistory();
     const [errors, setErrors] = useState({});
     const [saving, setSaving] = useState(false);
     const [loaded, setLoaded] = useState(false);
@@ -100,10 +99,6 @@ const TagManagementPage = ({ history }) => {
         </div>
 
     );
-};
-
-TagManagementPage.propTypes = {
-    history: PropTypes.object.isRequired
 };
 
 export default TagManagementPage;

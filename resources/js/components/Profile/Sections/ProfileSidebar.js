@@ -1,14 +1,14 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { friendRequest } from "../../../api/userApi";
 import { toast } from "react-toastify";
-import history from "../../../history";
 import { useSelector } from "react-redux";
 
 const ProfileSidebar = ({ user, onToggleFollow, onLogout, onToggleBanned, reloadUser }) => {
     const currentUser = useSelector((state) => state.tokens.user_id);
     const isAdmin = useSelector((state) => state.isAdmin);
+    const history = useHistory();
     
 
     function sendFriendRequest() {

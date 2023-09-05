@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from "react";
-import PropTypes from "prop-types";
-import { deleteTag, getTags, getTagsPaginated, getTagsWithUrl } from "../../../api/tagsApi";
+import { deleteTag, getTagsPaginated, getTagsWithUrl } from "../../../api/tagsApi";
 import { toast } from "react-toastify";
 import LoadingMessage from "../../DisplayComponents/LoadingMessage";
 import TagsListWithPagination from "../../DisplayComponents/TagsListWithPagination";
 import { confirmAlert } from "react-confirm-alert";
 import { Link } from "react-router-dom";
 
-const TagsAdminPage = ({ history }) => {
+const TagsAdminPage = () => {
     const [tagsPaginator, setTagsPaginator] = useState(null);
     useEffect(() => {
         if (!tagsPaginator) {
@@ -101,10 +100,6 @@ const TagsAdminPage = ({ history }) => {
         </div>
 
     );
-};
-
-TagsAdminPage.propTypes = {
-    history: PropTypes.object.isRequired
 };
 
 export default TagsAdminPage;

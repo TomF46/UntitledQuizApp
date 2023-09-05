@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from "react";
-import PropTypes from "prop-types";
+import React from "react";
 import { Link } from "react-router-dom";
 
-const AdminPage = ({ history }) => {
+const AdminPage = () => {
     return (
         <div className="admin-page">
             <div className="grid grid-cols-12 pb-4">
@@ -41,10 +40,6 @@ const AdminPage = ({ history }) => {
             </div>
         </div>
     );
-};
-
-AdminPage.propTypes = {
-    history: PropTypes.object.isRequired
 };
 
 export default AdminPage;

@@ -1,17 +1,16 @@
 import React, { useEffect, useState } from "react";
-import { connect } from "react-redux";
-import PropTypes from "prop-types";
 import { newEvent } from "../../../tools/objectShapes";
 import { toast } from "react-toastify";
 import LoadingMessage from "../../DisplayComponents/LoadingMessage";
 import EventManagementForm from "./EventManagementForm";
 import { getEventForEdit, saveEvent } from "../../../api/eventApi";
 import { getTags } from "../../../api/tagsApi";
-import { Prompt, useParams } from "react-router-dom";
+import { Prompt, useParams, useHistory } from "react-router-dom";
 
-const EventManagementPage = ({ history }) => {
+const EventManagementPage = () => {
     const { eventId } = useParams();
     const [event, setEvent] = useState({ ...newEvent });
+    const history = useHistory();
     const [tags, setTags] = useState(null);
     const [errors, setErrors] = useState({});
     const [saving, setSaving] = useState(false);
@@ -134,10 +133,6 @@ const EventManagementPage = ({ history }) => {
         </div>
 
     );
-};
-
-EventManagementPage.propTypes = {
-    history: PropTypes.object.isRequired
 };
 
 export default EventManagementPage;

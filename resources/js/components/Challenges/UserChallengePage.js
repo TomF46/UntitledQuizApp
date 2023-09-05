@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import PropTypes from "prop-types";
 import { getScoresForUser, getUserById } from "../../api/userApi";
 import LoadingMessage from "../DisplayComponents/LoadingMessage";
 import ChallengeScoresTableWithPagination from "../DisplayComponents/ChallengeScoresTableWithPagination";
@@ -8,12 +7,13 @@ import { confirmAlert } from "react-confirm-alert";
 import { toast } from "react-toastify";
 import { sendChallenge } from "../../api/challengesApi";
 import { getPageWithPaginationUrl } from "../../api/paginationApi";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 
 
-const UserChallengesPage = ({history }) => {
+const UserChallengesPage = () => {
     const currentUser = useSelector((state) => state.tokens.user_id);
     const { userId } = useParams();
+    const history = useHistory();
     const [recipient, setRecipient] = useState(null);
     const [scoresPaginator, setScoresPaginator] = useState(null);
 
@@ -131,10 +131,6 @@ const UserChallengesPage = ({history }) => {
         </div>
 
     );
-};
-
-UserChallengesPage.propTypes = {
-    history: PropTypes.object.isRequired
 };
 
 export default UserChallengesPage;

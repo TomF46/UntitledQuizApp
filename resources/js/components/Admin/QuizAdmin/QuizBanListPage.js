@@ -9,7 +9,7 @@ import BannedQuizFiltersForm from "./BannedQuizFiltersForm";
 import { unban } from "../../../api/quizApi";
 import { getPageWithPaginationUrlAndFilters } from "../../../api/paginationApi";
 
-const QuizBanListPage = ({ history }) => {
+const QuizBanListPage = () => {
     const [quizzesPaginator, setQuizzesPaginator] = useState(null);
     const [filters, setFilters] = useState({ searchTerm: "", user: "" });
     const [currentPageUrl, setCurrentPageUrl] = useState(null);
@@ -97,10 +97,6 @@ const QuizBanListPage = ({ history }) => {
         </div>
 
     );
-};
-
-QuizBanListPage.propTypes = {
-    history: PropTypes.object.isRequired
 };
 
 export default QuizBanListPage;

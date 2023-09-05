@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { connect } from "react-redux";
-import PropTypes from "prop-types";
 import { newQuiz } from "../../../tools/objectShapes";
 import QuizForm from "./QuizForm";
 import { getQuizForEdit, saveQuiz } from "../../../api/quizApi";
@@ -12,10 +10,11 @@ import * as QuizManagementService from "../../../tools/QuizManagementService";
 import _ from 'lodash';
 import { getPotentialCollaboratorsList } from "../../../api/friendsApi";
 import { Prompt } from "react-router-dom";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 
-const QuizManagementPage = ({history }) => {
+const QuizManagementPage = () => {
     const { quizId } = useParams();
+    const history = useHistory();
     const [quiz, setQuiz] = useState({ ...newQuiz });
     const [tags, setTags] = useState(null);
     const [collaborators, setCollaborators] = useState(null);
@@ -142,10 +141,6 @@ const QuizManagementPage = ({history }) => {
             )}
         </div>
     );
-};
-
-QuizManagementPage.propTypes = {
-    history: PropTypes.object.isRequired
 };
 
 export default QuizManagementPage;

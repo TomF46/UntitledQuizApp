@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import PropTypes from "prop-types";
 import { searchChallenges } from "../../api/challengesApi";
 import { toast } from "react-toastify";
 import { debounce } from 'lodash';
@@ -9,10 +8,9 @@ import { Link } from "react-router-dom";
 import { getPageWithPaginationUrlAndFilters } from "../../api/paginationApi";
 
 
-const ChallengesPage = ({ history }) => {
+const ChallengesPage = () => {
     const [challengesPaginator, setChallengesPaginator] = useState(null);
     const [filters, setFilters] = useState({ quizName: "", user: "", });
-
 
     useEffect(() => {
         if (!challengesPaginator) {
@@ -98,10 +96,6 @@ const ChallengesPage = ({ history }) => {
         </div >
 
     );
-};
-
-ChallengesPage.propTypes = {
-    history: PropTypes.object.isRequired
 };
 
 export default ChallengesPage;

@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import PropTypes from "prop-types";
 import { searchQuizzes } from "../../api/quizApi";
 import { toast } from "react-toastify";
 import _, { debounce } from 'lodash';
@@ -9,7 +8,7 @@ import LoadingMessage from "../DisplayComponents/LoadingMessage";
 import FiltersForm from "./Filters/FiltersForm";
 import { getPageWithPaginationUrlAndFilters } from "../../api/paginationApi";
 
-const ExplorePage = ({ history }) => {
+const ExplorePage = () => {
     const [quizzesPaginator, setQuizzesPaginator] = useState(null);
     const [filters, setFilters] = useState({ searchTerm: "", user: "", tag: null, onlyShowRecommended: false, showNewestFirst: false });
     const [tags, setTags] = useState(null);
@@ -99,10 +98,6 @@ const ExplorePage = ({ history }) => {
         </div>
 
     );
-};
-
-ExplorePage.propTypes = {
-    history: PropTypes.object.isRequired
 };
 
 export default ExplorePage;

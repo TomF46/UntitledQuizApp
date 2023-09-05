@@ -8,7 +8,7 @@ import FollowingUsersDashboard from "./Components/FollowingUsersDashboard";
 import PopularQuizzesDashboard from "./Components/PopularQuizzesDashboard";
 import RecommendedQuizzesDashboard from "./Components/RecommendedQuizzesDashboard";
 import LoadingMessage from "../DisplayComponents/LoadingMessage";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import ChallengesDashboard from "./Components/ChallengesDashboard";
 import { getRandomQuiz } from "../../api/quizApi";
 import FriendRequestsDashboard from "./Components/FriendRequestsDashboard";
@@ -17,7 +17,8 @@ import UnpublishedQuizDashboard from "./Components/UnpublishedQuizDashboard";
 import FollowedUsersList from "./Sidebar/FollowedUsersList";
 import LiveEventsList from "./Sidebar/LiveEventsList";
 
-const DashboardPage = ({ history }) => {
+const DashboardPage = () => {
+    const history = useHistory()
     const userId = useSelector((state) => state.tokens.user_id);
     const [user, setUser] = useState(null);
 
@@ -142,10 +143,6 @@ const DashboardPage = ({ history }) => {
             )}
         </div>
     );
-};
-
-DashboardPage.propTypes = {
-    history: PropTypes.object.isRequired
 };
 
 export default DashboardPage;

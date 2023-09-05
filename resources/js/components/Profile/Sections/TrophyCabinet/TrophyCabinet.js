@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import PaginationControls from "../../../DisplayComponents/PaginationControls";
-import history from "../../../../history";
+import { useHistory } from "react-router-dom";
 
 const TrophyCabinet = ({ trophies }) => {
+    const history = useHistory();
     const [groups, setGroups] = useState(null);
     const [viewingIndex, setViewingIndex] = useState(0);
 

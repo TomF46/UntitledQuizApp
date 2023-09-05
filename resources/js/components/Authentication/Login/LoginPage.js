@@ -1,17 +1,17 @@
-import React, { useEffect, useState } from "react";
-import PropTypes from "prop-types";
+import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import LoginForm from "./LoginForm";
 import { login } from "../../../redux/actions/authenticationActions";
 import CenterFormCard from "../../DisplayComponents/CenterFormCard";
-import { Link, Redirect } from "react-router-dom";
+import { Link, Redirect, useHistory } from "react-router-dom";
 import { toast } from "react-toastify";
 import IntroSection from "../../DisplayComponents/IntroSection";
 import IntroHeader from "../../DisplayComponents/IntroHeader";
 
-const LoginPage = ({history }) => {
+const LoginPage = () => {
     const dispatch = useDispatch();
     const userIsAuthenticated = useSelector((state) => state.tokens != null);
+    const history = useHistory();
     const [user, setUser] = useState({
         email: "",
         password: "",
@@ -93,10 +93,6 @@ const LoginPage = ({history }) => {
             </div>
         </>
     );
-};
-
-LoginPage.propTypes = {
-    history: PropTypes.object.isRequired,
 };
 
 export default LoginPage;

@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
-const HomePage = ({ history }) => {
+const HomePage = () => {
     return (
         <div className="home-page">
             <h1 className="font-bold text-primary text-6xl text-white logo">
@@ -12,10 +12,6 @@ const HomePage = ({ history }) => {
             </h1>
         </div>
     );
-};
-
-HomePage.propTypes = {
-    history: PropTypes.object.isRequired
 };
 
 export default HomePage;

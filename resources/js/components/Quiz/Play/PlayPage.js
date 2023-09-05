@@ -7,11 +7,12 @@ import ScoreDetail from "./ScoreDetail";
 import { toast } from "react-toastify";
 import { confirmAlert } from "react-confirm-alert";
 import LoadingMessage from "../../DisplayComponents/LoadingMessage";
-import { Prompt, useParams } from "react-router-dom";
+import { Prompt, useParams, useHistory } from "react-router-dom";
 
-const QuizPlayPage = ({history }) => {
+const QuizPlayPage = () => {
     const { quizId } = useParams();
     const { challengeId } = useParams();
+    const history = useHistory();
     const [quiz, setQuiz] = useState(null);
     const [challenge, setChallenge] = useState(null);
     const [submission, setSubmission] = useState(null);
@@ -167,10 +168,6 @@ const QuizPlayPage = ({history }) => {
                 <ScoreDetail quiz={quiz} score={score} onReplay={handleReplay} onLikesUpdated={handleLikesUpdated} challenge={challenge} />
             ))
     )
-};
-
-QuizPlayPage.propTypes = {
-    history: PropTypes.object.isRequired
 };
 
 export default QuizPlayPage;

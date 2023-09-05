@@ -5,11 +5,12 @@ import QuizDetail from "./QuizDetail";
 import { confirmAlert } from "react-confirm-alert";
 import { toast } from "react-toastify";
 import LoadingMessage from "../../DisplayComponents/LoadingMessage";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 
-const QuizDetailPage = ({ history }) => {
+const QuizDetailPage = () => {
     const { quizId } = useParams();
     const isAdmin = useSelector((state) => state.isAdmin);
+    const history = useHistory();
     const [quiz, setQuiz] = useState(null);
     const [highScore, setHighScore] = useState(null);
 

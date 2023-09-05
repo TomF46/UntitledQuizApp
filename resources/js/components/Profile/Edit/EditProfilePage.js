@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
-import PropTypes from "prop-types";
-import { connect, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { getUserForEditing, editUserProfile } from "../../../api/userApi"
 import EditProfileForm from "./EditProfileForm";
 import { toast } from "react-toastify";
 import LoadingMessage from "../../DisplayComponents/LoadingMessage";
 import { storeImage } from "../../../api/imagesApi";
-import { Prompt } from "react-router-dom";
+import { Prompt, useHistory } from "react-router-dom";
 
-const EditProfilePage = ({history }) => {
+const EditProfilePage = () => {
     const userId = useSelector((state) => state.tokens.user_id);
+    const history = useHistory();
     const [user, setUser] = useState(null);
     const [errors, setErrors] = useState({});
     const [saving, setSaving] = useState(false);
@@ -85,10 +85,6 @@ const EditProfilePage = ({history }) => {
             )}
         </div>
     );
-};
-
-EditProfilePage.propTypes = {
-    history: PropTypes.object.isRequired
 };
 
 export default EditProfilePage;

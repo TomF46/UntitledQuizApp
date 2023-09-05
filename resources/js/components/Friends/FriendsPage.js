@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import PropTypes from "prop-types";
 import { toast } from "react-toastify";
 import LoadingMessage from "../DisplayComponents/LoadingMessage";
 import { confirmAlert } from "react-confirm-alert";
@@ -8,7 +7,7 @@ import FriendsListWithPagination from "./FriendsList/FriendsListWithPagination";
 import { getPageWithPaginationUrl } from "../../api/paginationApi";
 import FriendRequestsListWithPagination from "./FriendRequestsList/FriendRequestsListWithPagination";
 
-const FriendsPage = ({ history }) => {
+const FriendsPage = () => {
     const [friendsPaginator, setFriendsPaginator] = useState(null);
     const [friendRequestsPaginator, setFriendRequestsPaginator] = useState(null);
 
@@ -136,10 +135,6 @@ const FriendsPage = ({ history }) => {
             </div>
         </div >
     );
-};
-
-FriendsPage.propTypes = {
-    history: PropTypes.object.isRequired
 };
 
 export default FriendsPage;

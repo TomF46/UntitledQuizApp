@@ -1,11 +1,12 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { useDispatch } from "react-redux";
 import { logout } from "../redux/actions/authenticationActions";
 import { toast } from "react-toastify";
+import { useHistory } from "react-router-dom";
 
-const BannedPage = ({ history}) => {
+const BannedPage = () => {
     const dispatch = useDispatch();
+    const history = useHistory();
 
     function handleLogout() {
         dispatch(logout());
@@ -31,10 +32,6 @@ const BannedPage = ({ history}) => {
             </div>
         </div >
     );
-};
-
-BannedPage.propTypes = {
-    history: PropTypes.object.isRequired
 };
 
 export default BannedPage;

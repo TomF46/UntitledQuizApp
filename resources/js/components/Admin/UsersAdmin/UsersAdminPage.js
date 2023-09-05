@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import PropTypes from "prop-types";
 import { downloadUsersCSV, searchUsers } from "../../../api/userApi"
 import { toast } from "react-toastify";
 import LoadingMessage from "../../DisplayComponents/LoadingMessage";
@@ -9,7 +8,7 @@ import { debounce } from 'lodash';
 import { getPageWithPaginationUrlAndFilters } from "../../../api/paginationApi";
 import { downloadCSVStream } from "../../../tools/HelperFunctions";
 
-const UsersAdminPage = ({ history }) => {
+const UsersAdminPage = () => {
     const [usersPaginator, setUsersPaginator] = useState(null);
     const [searchTerm, setSearchTerm] = useState("");
 
@@ -106,10 +105,6 @@ const UsersAdminPage = ({ history }) => {
         </div>
 
     );
-};
-
-UsersAdminPage.propTypes = {
-    history: PropTypes.object.isRequired
 };
 
 export default UsersAdminPage;

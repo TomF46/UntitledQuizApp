@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { useLocation } from 'react-router-dom'
 import { checkUserIsAdmin } from "../../redux/actions/isAdminActions"
 import { loadNotificationCount } from "../../redux/actions/notificationCountActions";
 import { logout } from "../../redux/actions/authenticationActions";
 import { toast } from "react-toastify";
-import history from "../../history";
 import { confirmAlert } from "react-confirm-alert";
 
 const Header = () => {
@@ -15,6 +14,7 @@ const Header = () => {
     const isAdmin = useSelector((state) => state.isAdmin);
     const notificationCount = useSelector((state) => state.notificationCount);
     const [mobileIsOpen, setMobileIsOpen] = useState(null);
+    const history = useHistory();
     const location = useLocation();
 
     useEffect(() => {

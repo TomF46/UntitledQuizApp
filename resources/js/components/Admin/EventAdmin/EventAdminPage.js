@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import { getPageWithPaginationUrl } from "../../../api/paginationApi";
 import { getEvents } from "../../../api/eventApi";
 
-const EventsAdminPage = ({ history }) => {
+const EventsAdminPage = () => {
     const [eventsPaginator, setEventsPaginator] = useState(null);
     useEffect(() => {
         if (!eventsPaginator) {
@@ -70,10 +70,6 @@ const EventsAdminPage = ({ history }) => {
         </div>
 
     );
-};
-
-EventsAdminPage.propTypes = {
-    history: PropTypes.object.isRequired
 };
 
 export default EventsAdminPage;

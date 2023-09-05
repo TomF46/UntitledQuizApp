@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
-import PropTypes from "prop-types";
 import { getQuiz, ban } from "../../../api/quizApi";
 import { toast } from "react-toastify";
 import LoadingMessage from "../../DisplayComponents/LoadingMessage";
 import QuizBanForm from "./QuizBanForm";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 
 
-const QuizBanPage = ({ history }) => {
+const QuizBanPage = () => {
     const { quizId } = useParams();
+    const history = useHistory();
     const [quiz, setQuiz] = useState(null);
     const [reason, setReason] = useState("");
     const [errors, setErrors] = useState({});
@@ -69,10 +69,6 @@ const QuizBanPage = ({ history }) => {
             )}
         </div>
     )
-};
-
-QuizBanPage.propTypes = {
-    history: PropTypes.object.isRequired
 };
 
 export default QuizBanPage;

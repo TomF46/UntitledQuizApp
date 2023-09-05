@@ -1,16 +1,16 @@
 import React, { useState } from "react";
-import PropTypes from "prop-types";
 import RegisterForm from "./RegisterForm";
 import { register } from "../../../api/authenticationApi";
 import CenterFormCard from "../../DisplayComponents/CenterFormCard";
 import { useSelector } from "react-redux";
-import { Link, Redirect } from "react-router-dom";
+import { Link, Redirect, useHistory } from "react-router-dom";
 import { toast } from "react-toastify";
 import IntroSection from "../../DisplayComponents/IntroSection";
 import IntroHeader from "../../DisplayComponents/IntroHeader";
 
-const RegisterPage = ({ history }) => {
+const RegisterPage = () => {
     const userIsAuthenticated = useSelector((state) => state.tokens != null);
+    const history = useHistory();
     const [user, setUser] = useState({
         username: "",
         email: "",
@@ -110,10 +110,6 @@ const RegisterPage = ({ history }) => {
             </div>
         </>
     );
-};
-
-RegisterPage.propTypes = {
-    history: PropTypes.object.isRequired
 };
 
 export default RegisterPage;
