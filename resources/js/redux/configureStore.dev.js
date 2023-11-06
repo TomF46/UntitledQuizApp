@@ -1,5 +1,5 @@
-import devStore from "./devStore";
+import devStore from './devStore';
 
 export default function configureStore() {
-    return devStore;
+  return devStore;
 }

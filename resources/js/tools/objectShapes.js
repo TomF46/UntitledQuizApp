@@ -1,72 +1,72 @@
 const newQuiz = {
-    id: null,
-    title: "",
-    description: "",
-    tags: [],
-    collaborators: [],
-    questions: [
+  id: null,
+  title: '',
+  description: '',
+  tags: [],
+  collaborators: [],
+  questions: [
+    {
+      text: '',
+      helpText: '',
+      answers: [
         {
-            text: "",
-            helpText: "",
-            answers: [
-                {
-                    text: "",
-                    is_correct: false
-                },
-                {
-                    text: "",
-                    is_correct: false
-                }
-            ],
-            image_url: null,
-            video_url: null
-        }
-    ]
+          text: '',
+          is_correct: false,
+        },
+        {
+          text: '',
+          is_correct: false,
+        },
+      ],
+      image_url: null,
+      video_url: null,
+    },
+  ],
 };
 
 const newQuestion = {
-    text: "",
-    helpText: "",
-    answers: [
-        {
-            text: "",
-            is_correct: false
-        },
-        {
-            text: "",
-            is_correct: false
-        }
-    ],
-    image_url: null,
-    video_url: null
-}
+  text: '',
+  helpText: '',
+  answers: [
+    {
+      text: '',
+      is_correct: false,
+    },
+    {
+      text: '',
+      is_correct: false,
+    },
+  ],
+  image_url: null,
+  video_url: null,
+};
 
 const newAnswer = {
-    text: "",
-    is_correct: false
-}
+  text: '',
+  is_correct: false,
+};
 
 const newTag = {
-    id: null,
-    name: ""
-}
+  id: null,
+  name: '',
+};
 
 const newEvent = {
-   name: "",
-   description: "",
-   universal: false,
-   tags: [],
-   score_group_1: 0,
-   score_group_2: 0,
-   score_group_3: 0,
-   score_group_4: 0,
-   score_max: 0,
-}
+  name: '',
+  description: '',
+  universal: false,
+  tags: [],
+  score_group_1: 0,
+  score_group_2: 0,
+  score_group_3: 0,
+  score_group_4: 0,
+  score_max: 0,
+};
 
 module.exports = {
-    newQuiz,
-    newQuestion,
-    newAnswer,
-    newTag,
-    newEvent
+  newQuiz,
+  newQuestion,
+  newAnswer,
+  newTag,
+  newEvent,
 };

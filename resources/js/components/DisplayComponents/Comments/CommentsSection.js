@@ -1,141 +1,166 @@
-import React, { useState, useEffect } from "react";
-import PropTypes from "prop-types";
-import CommentForm from "./CommentForm";
-import { addComment, removeComment } from "../../../api/quizApi";
-import { toast } from "react-toastify";
-import Comment from "./Comment";
-import PaginationControls from "../PaginationControls";
-import { confirmAlert } from "react-confirm-alert";
+import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
+import CommentForm from './CommentForm';
+import { addComment, removeComment } from '../../../api/quizApi';
+import { toast } from 'react-toastify';
+import Comment from './Comment';
+import PaginationControls from '../PaginationControls';
+import { confirmAlert } from 'react-confirm-alert';
 
 const CommentsSection = ({ quizId, comments, onReloadQuiz }) => {
-    const pageLength = 10;
-    const [comment, setComment] = useState("");
-    const [errors, setErrors] = useState({});
-    const [submitting, setSubmitting] = useState(false);
-    const [commentsPagination, setComments] = useState([]);
-    const [paginationIndex, setPaginationIndex] = useState(1);
-    const [from, setFrom] = useState(1);
-    const [to, setTo] = useState(pageLength);
+  const pageLength = 10;
+  const [comment, setComment] = useState('');
+  const [errors, setErrors] = useState({});
+  const [submitting, setSubmitting] = useState(false);
+  const [commentsPagination, setComments] = useState([]);
+  const [paginationIndex, setPaginationIndex] = useState(1);
+  const [from, setFrom] = useState(1);
+  const [to, setTo] = useState(pageLength);
 
-    useEffect(() => {
-        let chunkedComments = chunkArray(comments, pageLength);
-        setComments(chunkedComments);
-    }, [comments]);
+  useEffect(() => {
+    let chunkedComments = chunkArray(comments, pageLength);
+    setComments(chunkedComments);
+  }, [comments]);
 
-    function handleCommentChange(event) {
-        const { name, value } = event.target;
-        setComment(value);
-    }
+  function handleCommentChange(event) {
+    const { name, value } = event.target;
+    setComment(value);
+  }
 
-    function commentIsValid() {
-        const errors = {};
-        if (!comment) errors.comment = "Comment text is required.";
-        setErrors(errors);
-        return Object.keys(errors).length === 0;
-    }
+  function commentIsValid() {
+    const errors = {};
+    if (!comment) errors.comment = 'Comment text is required.';
+    setErrors(errors);
+    return Object.keys(errors).length === 0;
+  }
 
-    function handleCommentSubmit(event) {
-        event.preventDefault();
-        if (!commentIsValid()) return;
-        setSubmitting(true);
+  function handleCommentSubmit(event) {
+    event.preventDefault();
+    if (!commentIsValid()) return;
+    setSubmitting(true);
 
-        addComment(quizId, comment)
-            .then(response => {
-                toast.success("Comment added");
-                onReloadQuiz();
-                setSubmitting(false);
-                setComment("");
-            })
-            .catch(err => {
-                setSubmitting(false);
-                toast.error("Error adding comment", {
-                    autoClose: false
-                });
-                let tempErrors = { ...errors };
-                tempErrors.onSave = err.message;
-                setErrors({ ...tempErrors });
-            });
-    }
-
-    function handleCommentDelete(commentId) {
-        confirmAlert({
-            title: "Confirm action",
-            message: `Are you sure you want to remove this comment?`,
-            buttons: [
-                {
-                    label: "Yes",
-                    onClick: () => {
-                        deleteComment(commentId);
-                    },
-                },
-                {
-                    label: "No",
-                    onClick: () => { },
-                },
-            ],
+    addComment(quizId, comment)
+      .then((response) => {
+        toast.success('Comment added');
+        onReloadQuiz();
+        setSubmitting(false);
+        setComment('');
+      })
+      .catch((err) => {
+        setSubmitting(false);
+        toast.error('Error adding comment', {
+          autoClose: false,
         });
-    }
+        let tempErrors = { ...errors };
+        tempErrors.onSave = err.message;
+        setErrors({ ...tempErrors });
+      });
+  }
 
-    function deleteComment(commentId) {
-        removeComment(commentId).then(response => {
-            toast.success("Comment removed");
-            onReloadQuiz();
-        }).catch(err => {
-            toast.error("Error removing comment", {
-                autoClose: false
-            });
-        })
-    }
+  function handleCommentDelete(commentId) {
+    confirmAlert({
+      title: 'Confirm action',
+      message: `Are you sure you want to remove this comment?`,
+      buttons: [
+        {
+          label: 'Yes',
+          onClick: () => {
+            deleteComment(commentId);
+          },
+        },
+        {
+          label: 'No',
+          onClick: () => {},
+        },
+      ],
+    });
+  }
 
-    function chunkArray(array, size) {
-        let result = []
-        let arrayCopy = [...array]
-        while (arrayCopy.length > 0) {
-            result.push(arrayCopy.splice(0, size))
-        }
-        return result
-    }
+  function deleteComment(commentId) {
+    removeComment(commentId)
+      .then((response) => {
+        toast.success('Comment removed');
+        onReloadQuiz();
+      })
+      .catch((err) => {
+        toast.error('Error removing comment', {
+          autoClose: false,
+        });
+      });
+  }
 
-    function handleNext() {
-        setFrom(from + pageLength);
-        setTo(to + pageLength);
-        setPaginationIndex(paginationIndex + 1);
+  function chunkArray(array, size) {
+    let result = [];
+    let arrayCopy = [...array];
+    while (arrayCopy.length > 0) {
+      result.push(arrayCopy.splice(0, size));
     }
+    return result;
+  }
 
-    function handlePrevious() {
-        setFrom(from - pageLength);
-        setTo(to - pageLength);
-        setPaginationIndex(paginationIndex - 1);
-    }
+  function handleNext() {
+    setFrom(from + pageLength);
+    setTo(to + pageLength);
+    setPaginationIndex(paginationIndex + 1);
+  }
 
-    return (
-        <div className="overflow-hidden shadow card mt-4 pb-2">
-            <div className="col-span-12 pt-4">
-                <h2 className="font-bold text-primary text-2xl mb-4 text-center">Comments</h2>
-            </div>
-            {comments.length <= 0 ? (
-                <p className="px-4 text-center">This quiz currently has no comment, why not add one</p>
-            ) : (
-                commentsPagination.length > 0 && (
-                    <div className="p-4">
-                        {commentsPagination[paginationIndex - 1].map((comment) => {
-                            return (
-                                <Comment key={comment.id} comment={comment} onDeleteComment={handleCommentDelete} onReload={onReloadQuiz} />
-                            )
-                        })}
-                        <PaginationControls from={from} to={to} of={comments.length} currentPage={paginationIndex} lastPage={commentsPagination.length} onNext={handleNext} onPrevious={handlePrevious} />
-                    </div>
-                )
-            )}
-            <CommentForm comment={comment} onChange={handleCommentChange} errors={errors} submitting={submitting} onSubmit={handleCommentSubmit} />
-        </div>
-    );
+  function handlePrevious() {
+    setFrom(from - pageLength);
+    setTo(to - pageLength);
+    setPaginationIndex(paginationIndex - 1);
+  }
+
+  return (
+    <div className='overflow-hidden shadow card mt-4 pb-2'>
+      <div className='col-span-12 pt-4'>
+        <h2 className='font-bold text-primary text-2xl mb-4 text-center'>
+          Comments
+        </h2>
+      </div>
+      {comments.length <= 0 ? (
+        <p className='px-4 text-center'>
+          This quiz currently has no comment, why not add one
+        </p>
+      ) : (
+        commentsPagination.length > 0 && (
+          <div className='p-4'>
+            {commentsPagination[paginationIndex - 1].map((comment) => {
+              return (
+                <Comment
+                  key={comment.id}
+                  comment={comment}
+                  onDeleteComment={handleCommentDelete}
+                  onReload={onReloadQuiz}
+                />
+              );
+            })}
+            <PaginationControls
+              from={from}
+              to={to}
+              of={comments.length}
+              currentPage={paginationIndex}
+              lastPage={commentsPagination.length}
+              onNext={handleNext}
+              onPrevious={handlePrevious}
+            />
+          </div>
+        )
+      )}
+      <CommentForm
+        comment={comment}
+        onChange={handleCommentChange}
+        errors={errors}
+        submitting={submitting}
+        onSubmit={handleCommentSubmit}
+      />
+    </div>
+  );
 };
 
 CommentsSection.propTypes = {
-    quizId: PropTypes.any.isRequired,
-    comments: PropTypes.array.isRequired,
-    onReloadQuiz: PropTypes.func.isRequired
+  quizId: PropTypes.any.isRequired,
+  comments: PropTypes.array.isRequired,
+  onReloadQuiz: PropTypes.func.isRequired,
 };
 
 export default CommentsSection;
