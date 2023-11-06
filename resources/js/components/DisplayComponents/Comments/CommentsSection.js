@@ -23,7 +23,7 @@ const CommentsSection = ({ quizId, comments, onReloadQuiz }) => {
   }, [comments]);
 
   function handleCommentChange(event) {
-    const { name, value } = event.target;
+    const { value } = event.target;
     setComment(value);
   }
 
@@ -40,7 +40,7 @@ const CommentsSection = ({ quizId, comments, onReloadQuiz }) => {
     setSubmitting(true);
 
     addComment(quizId, comment)
-      .then((response) => {
+      .then(() => {
         toast.success('Comment added');
         onReloadQuiz();
         setSubmitting(false);
@@ -78,11 +78,11 @@ const CommentsSection = ({ quizId, comments, onReloadQuiz }) => {
 
   function deleteComment(commentId) {
     removeComment(commentId)
-      .then((response) => {
+      .then(() => {
         toast.success('Comment removed');
         onReloadQuiz();
       })
-      .catch((err) => {
+      .catch(() => {
         toast.error('Error removing comment', {
           autoClose: false,
         });

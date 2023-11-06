@@ -102,13 +102,13 @@ const EventManagementPage = () => {
     eventToPost.tags = event.tags.map((tag) => tag.value);
 
     saveEvent(eventToPost)
-      .then((response) => {
+      .then(() => {
         toast.success('Event saved');
         history.push(`/admin/events`);
       })
       .catch((err) => {
         setSaving(false);
-        toast.error('Error saving event', {
+        toast.error(formatErrorText(err), {
           autoClose: false,
         });
         let tempErrors = { ...errors };
@@ -120,7 +120,7 @@ const EventManagementPage = () => {
   function formatErrorText(error) {
     let errorText = '';
 
-    for (const [key, value] of Object.entries(error.data.errors)) {
+    for (const [value] of Object.entries(error.data.errors)) {
       errorText = `${errorText} ${value}`;
     }
 

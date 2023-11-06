@@ -50,7 +50,7 @@ const QuizBanPage = () => {
     setSaving(true);
 
     ban(quiz.id, reason)
-      .then((res) => {
+      .then(() => {
         toast.success('Quiz banned');
         history.push(`/quiz/${quiz.id}`);
       })

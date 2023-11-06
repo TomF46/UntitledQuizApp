@@ -77,11 +77,11 @@ const UserChallengesPage = () => {
 
   function sendChallengeToApi(score) {
     sendChallenge(recipient.id, score.id)
-      .then((response) => {
+      .then(() => {
         toast.success('Challenge sent');
         history.push(`/challenges`);
       })
-      .catch((err) => {
+      .catch(() => {
         toast.error('Error sending challenge, please try again', {
           autoClose: false,
         });

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import TextInput from '../../FormComponents/TextInput';
 import CheckboxInput from '../../FormComponents/CheckboxInput';
@@ -113,7 +113,7 @@ const QuestionManagement = ({
           ),
         );
       })
-      .catch((error) => {
+      .catch(() => {
         setIsUpploadingImage(false);
         toast.error('Unable to uploaded image');
       });
@@ -309,7 +309,7 @@ const QuestionManagement = ({
                         <iframe
                           className='video col-span-12 lg:col-start-4 lg:col-span-6'
                           src={question.video_url}
-                          frameborder='0'
+                          frameBorder='0'
                           allow='accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
                           allowFullScreen
                         ></iframe>
@@ -376,7 +376,7 @@ const QuestionManagement = ({
                 <iframe
                   className='video col-span-12 lg:col-start-4 lg:col-span-6'
                   src={question.video_url}
-                  frameborder='0'
+                  frameBorder='0'
                   allow='accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
                   allowFullScreen
                 ></iframe>

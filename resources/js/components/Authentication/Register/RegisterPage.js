@@ -49,7 +49,7 @@ const RegisterPage = () => {
     if (!formIsValid()) return;
     setSaving(true);
     register(user)
-      .then((response) => {
+      .then(() => {
         toast.success('Successfully registered');
         history.push('/login');
       })
@@ -64,7 +64,7 @@ const RegisterPage = () => {
   function formatErrorText(error) {
     let errorText = '';
 
-    for (const [key, value] of Object.entries(error.data.errors)) {
+    for (const [value] of Object.entries(error.data.errors)) {
       errorText = `${errorText} ${value}`;
     }
 

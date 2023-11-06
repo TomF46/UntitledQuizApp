@@ -51,7 +51,7 @@ const UsersAdminPage = () => {
   }
 
   function handleSearchTermChange(event) {
-    const { name, value } = event.target;
+    const { value } = event.target;
     setSearchTerm(value);
   }
 

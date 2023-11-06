@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const CheckboxInput = ({ name, label, onChange, value, checked, error }) => {
+const CheckboxInput = ({ name, label, onChange, value, error }) => {
   return (
     <div className='field'>
       <div className='control'>
@@ -27,7 +27,6 @@ CheckboxInput.propTypes = {
   label: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
   value: PropTypes.any,
-  checked: PropTypes.any,
   error: PropTypes.string,
 };
 

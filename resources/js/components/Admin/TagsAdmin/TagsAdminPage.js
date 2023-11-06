@@ -57,7 +57,7 @@ const TagsAdminPage = () => {
 
   function removeTag(tag) {
     deleteTag(tag.id)
-      .then((response) => {
+      .then(() => {
         toast.success('Tag deleted.');
         getTagsPage(`${tagsPaginator.path}?page=${tagsPaginator.current_page}`);
       })

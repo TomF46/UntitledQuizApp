@@ -48,13 +48,13 @@ const EditProfilePage = () => {
           profile_image: res.path,
         }));
       })
-      .catch((error) => {
+      .catch(() => {
         toast.error('Unable to uploaded image');
       });
   }
 
   function formIsValid() {
-    const { username, bio } = user;
+    const { username } = user;
     const errors = {};
     if (!username) errors.username = 'Username is required.';
     setErrors(errors);
@@ -67,7 +67,7 @@ const EditProfilePage = () => {
     setSaving(true);
 
     editUserProfile(userId, user)
-      .then((response) => {
+      .then(() => {
         toast.success('Profile updated!');
         history.push('/profile');
       })

@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
 import { getQuiz, submitScore } from '../../../api/quizApi';
 import { getChallenge } from '../../../api/challengesApi';
 import QuizPlayForm from './QuizPlayForm';
@@ -74,7 +73,7 @@ const QuizPlayPage = () => {
     setSubmission({ ...submission });
   }
 
-  function handleAnswerChange(questionId, answerId, e) {
+  function handleAnswerChange(questionId, answerId) {
     let answer = submission.answers.find(
       (answer) => answer.question_id == questionId,
     );

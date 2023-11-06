@@ -4,6 +4,7 @@ import LoadingMessage from './LoadingMessage';
 import { getScoresForQuiz } from '../../api/quizApi';
 import { getPageWithPaginationUrl } from '../../api/paginationApi';
 import ScoresTableWithPagination from './ScoresTableWithPagination';
+import { toast } from 'react-toastify';
 
 const QuizScoresSection = ({ quiz }) => {
   const [scoresPaginator, setScores] = useState(null);

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 import { Redirect, Route, withRouter } from 'react-router-dom';
 import { getUserIsAdmin } from './api/userApi';
 
@@ -12,7 +13,7 @@ const AdminRoute = ({ component: Component, path, ...rest }) => {
         setIsAdmin(res.isAdmin);
         setIsChecked(true);
       })
-      .catch((err) => {
+      .catch(() => {
         //If call fails then assume they are not admin
         setIsChecked(true);
       });
@@ -43,6 +44,11 @@ const AdminRoute = ({ component: Component, path, ...rest }) => {
       )}
     </>
   );
+};
+
+AdminRoute.propTypes = {
+  component: PropTypes.func.isRequired,
+  path: PropTypes.string.isRequired,
 };
 
 const adminRouteWithRouter = withRouter(AdminRoute);

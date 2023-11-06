@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
-import { endEvent, getEvent, publishEvent } from '../../api/eventApi';
+import { getEvent } from '../../api/eventApi';
 import LoadingMessage from '../DisplayComponents/LoadingMessage';
-import { confirmAlert } from 'react-confirm-alert';
 import EventLeaderboard from '../DisplayComponents/EventLeaderboard/EventLeaderboard';
 import { Link, useParams } from 'react-router-dom';
 
@@ -23,70 +22,6 @@ const EventPage = () => {
       })
       .catch((error) => {
         toast.error(`Error getting event ${error.message}`, {
-          autoClose: false,
-        });
-      });
-  }
-
-  function onPublish() {
-    confirmAlert({
-      title: 'Confirm action',
-      message: `Are you sure you want to publish this event?`,
-      buttons: [
-        {
-          label: 'Yes',
-          onClick: () => {
-            handlePublish();
-          },
-        },
-        {
-          label: 'No',
-          onClick: () => {},
-        },
-      ],
-    });
-  }
-
-  function handlePublish() {
-    publishEvent(event.id)
-      .then((res) => {
-        toast.success('Event is now live');
-        loadEvent();
-      })
-      .catch((error) => {
-        toast.error(`Error publishing event ${error.message}`, {
-          autoClose: false,
-        });
-      });
-  }
-
-  function onEnd() {
-    confirmAlert({
-      title: 'Confirm action',
-      message: `Are you sure you want to end this event?`,
-      buttons: [
-        {
-          label: 'Yes',
-          onClick: () => {
-            handleEnd();
-          },
-        },
-        {
-          label: 'No',
-          onClick: () => {},
-        },
-      ],
-    });
-  }
-
-  function handleEnd() {
-    endEvent(event.id)
-      .then((res) => {
-        toast.success('Event is now closed');
-        loadEvent();
-      })
-      .catch((error) => {
-        toast.error(`Error ending event ${error.message}`, {
           autoClose: false,
         });
       });
@@ -204,7 +139,7 @@ const EventPage = () => {
                   <div className='grid grid-cols-12'>
                     {event.top3.map((score, index) => {
                       return (
-                        <div className='col-span-4'>
+                        <div key={index} className='col-span-4'>
                           <h2 className='font-bold text-secondary text-xl py-4 text-center'>
                             {index + 1}
                           </h2>

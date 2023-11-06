@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import TextAreaInput from '../../FormComponents/TextAreaInput';
 import TextInput from '../../FormComponents/TextInput';
-import FileInput from '../../FormComponents/FileInput';
 
 const EditProfileForm = ({
   user,

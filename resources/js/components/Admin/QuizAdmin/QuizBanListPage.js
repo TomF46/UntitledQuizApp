@@ -63,7 +63,7 @@ const QuizBanListPage = () => {
 
   function handleQuizUnban(id) {
     unban(id)
-      .then((res) => {
+      .then(() => {
         toast.success('Quiz unbanned');
         currentPageUrl ? getQuizPage(currentPageUrl) : search();
       })

@@ -61,7 +61,7 @@ const QuizPlayForm = ({
                             <iframe
                               className='video col-span-12 lg:col-start-4 lg:col-span-6'
                               src={question.video_url}
-                              frameborder='0'
+                              frameBorder='0'
                               allow='accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
                               allowFullScreen
                             ></iframe>

@@ -6,7 +6,6 @@ const MultiSelectInput = ({
   name,
   label,
   onChange,
-  placeholder,
   value,
   options,
   error,

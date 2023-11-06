@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import TextInput from '../../FormComponents/TextInput';
 import EmailInput from '../../FormComponents/EmailInput';
 import PasswordInput from '../../FormComponents/PasswordInput';
-import { Link } from 'react-router-dom';
 
 const RegisterForm = ({
   user,

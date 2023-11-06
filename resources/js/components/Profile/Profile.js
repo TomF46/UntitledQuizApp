@@ -39,7 +39,7 @@ const ProfilePage = () => {
     let action = user.following ? 'Unfollow' : 'Follow';
 
     followUser(user.id)
-      .then((res) => {
+      .then(() => {
         toast.success(`User ${action}ed`);
         let tempUser = { ...user };
         tempUser.following = !tempUser.following;
@@ -57,7 +57,7 @@ const ProfilePage = () => {
 
   function toggleBanned() {
     toggleBan(user.id, user.isBanned)
-      .then((res) => {
+      .then(() => {
         let tempUser = { ...user };
         tempUser.isBanned = !user.isBanned;
         setUser({ ...tempUser });

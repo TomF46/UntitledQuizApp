@@ -18,7 +18,7 @@ const ProfileSidebar = ({
 
   function sendFriendRequest() {
     friendRequest(user.id)
-      .then((res) => {
+      .then(() => {
         reloadUser();
         toast.success('Request sent');
       })

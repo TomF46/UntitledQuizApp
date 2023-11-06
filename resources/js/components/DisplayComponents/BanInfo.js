@@ -37,8 +37,8 @@ const BanInfo = ({ banId }) => {
           ) : (
             <div>
               <p className='text-center'>
-                The quiz '{ban.quizTitle}' has been banned for the following
-                reason: {ban.reason}{' '}
+                The quiz &apos;{ban.quizTitle}&apos; has been banned for the
+                following reason: {ban.reason}{' '}
               </p>
             </div>
           )}

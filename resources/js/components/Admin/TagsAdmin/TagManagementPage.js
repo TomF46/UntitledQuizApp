@@ -55,13 +55,13 @@ const TagManagementPage = () => {
     setSaving(true);
 
     saveTag(tag)
-      .then((response) => {
+      .then(() => {
         toast.success('Tag saved');
         history.push(`/admin/tags`);
       })
       .catch((err) => {
         setSaving(false);
-        toast.error('Error saving tag', {
+        toast.error(formatErrorText(err), {
           autoClose: false,
         });
         let tempErrors = { ...errors };
@@ -73,7 +73,7 @@ const TagManagementPage = () => {
   function formatErrorText(error) {
     let errorText = '';
 
-    for (const [key, value] of Object.entries(error.data.errors)) {
+    for (const [value] of Object.entries(error.data.errors)) {
       errorText = `${errorText} ${value}`;
     }
 

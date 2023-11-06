@@ -49,7 +49,7 @@ const EventPage = () => {
 
   function handlePublish() {
     publishEvent(event.id)
-      .then((res) => {
+      .then(() => {
         toast.success('Event is now live');
         loadEvent();
       })
@@ -85,7 +85,7 @@ const EventPage = () => {
 
   function handleEnd() {
     endEvent(event.id)
-      .then((res) => {
+      .then(() => {
         toast.success('Event is now closed');
         loadEvent();
       })

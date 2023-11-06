@@ -18,7 +18,7 @@ const Comment = ({ comment, onDeleteComment, onReload }) => {
   }
 
   function handleCommentChange(event) {
-    const { name, value } = event.target;
+    const { value } = event.target;
     setUpdatedComment(value);
   }
 
@@ -40,7 +40,7 @@ const Comment = ({ comment, onDeleteComment, onReload }) => {
     };
 
     editComment(payload)
-      .then((response) => {
+      .then(() => {
         toast.success('Comment updated');
         onReload();
         setSubmitting(false);

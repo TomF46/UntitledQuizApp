@@ -73,7 +73,7 @@ const QuizDetailPage = () => {
 
   function handleDelete() {
     deleteQuiz(quiz.id)
-      .then((response) => {
+      .then(() => {
         toast.success('Quiz deleted.');
         history.push('/explore');
       })
@@ -99,7 +99,7 @@ const QuizDetailPage = () => {
 
   function unbanQuiz() {
     unban(quiz.id)
-      .then((res) => {
+      .then(() => {
         toast.success('Quiz unbanned');
         handleQuizReload();
       })
@@ -112,7 +112,7 @@ const QuizDetailPage = () => {
 
   function handleToggleRecommended() {
     toggleRecommended(quiz.id)
-      .then((res) => {
+      .then(() => {
         toast.success(
           `${
             quiz.recommended ? 'Recommendation removed' : 'Recommendation added'
@@ -151,7 +151,7 @@ const QuizDetailPage = () => {
 
   function handlePublish() {
     publishQuiz(quiz.id)
-      .then((res) => {
+      .then(() => {
         toast.success('Quiz published');
         handleQuizReload();
       })

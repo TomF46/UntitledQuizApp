@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import PaginationControls from '../../../DisplayComponents/PaginationControls';
 import { useHistory } from 'react-router-dom';
 
 const TrophyCabinet = ({ trophies }) => {

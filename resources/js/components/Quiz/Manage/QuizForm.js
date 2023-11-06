@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import TextInput from '../../FormComponents/TextInput';
 import MultiSelectInput from '../../FormComponents/MultiSelectInput';
@@ -14,7 +14,6 @@ const QuizForm = ({
   onSave,
   onReset,
   saving = false,
-  editing,
   errors = {},
 }) => {
   const [uploadingImage, setUploadingImage] = useState(false);
@@ -253,7 +252,6 @@ QuizForm.propTypes = {
   updateQuiz: PropTypes.func.isRequired,
   updateErrors: PropTypes.func.isRequired,
   saving: PropTypes.bool.isRequired,
-  editing: PropTypes.bool.isRequired,
 };
 
 export default QuizForm;
