@@ -1,7 +1,19 @@
-/**
- * We will create a fresh React component instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
+import React from "react";
+import { Router } from "react-router-dom";
+import Main from "./components/App";
+import configureStore from "./redux/configureStore";
+import { Provider as ReduxProvider } from "react-redux";
+import { render } from "react-dom";
+import history from "./history";
+import "react-confirm-alert/src/react-confirm-alert.css";
 
-require("./index");
+const store = configureStore();
+
+render(
+    <ReduxProvider store={store}>
+        <Router history={history}>
+            <Main component={Main} />
+        </Router>
+    </ReduxProvider>,
+    document.getElementById("index")
+);
