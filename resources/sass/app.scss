@@ -1,178 +1,175 @@
 // Fonts
-@import url("https://fonts.googleapis.com/css?family=Nunito");
+@import url('https://fonts.googleapis.com/css?family=Nunito');
 
 // Variables
-@import "variables";
+@import 'variables';
 
-@import "tailwindcss/base";
+@import 'tailwindcss/base';
 
-@import "tailwindcss/components";
+@import 'tailwindcss/components';
 
-@import "tailwindcss/utilities";
+@import 'tailwindcss/utilities';
 
 body {
-    background-color: $body-bg;
+  background-color: $body-bg;
 }
 
 .pointer {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .pageHeader {
-    border-bottom: 1px solid #dedede;
+  border-bottom: 1px solid #dedede;
 }
 nav {
-    z-index: 999;
+  z-index: 999;
 }
 
-.app-container{
-    max-width: 1440px;
+.app-container {
+  max-width: 1440px;
 }
 
 .centerFormCardContainer {
-    width: 100%;
-    .centerFormCard {
-        margin: 0 auto;
-    }
+  width: 100%;
+  .centerFormCard {
+    margin: 0 auto;
+  }
 }
 
 .card,
 .page {
-    background-color: #fff;
+  background-color: #fff;
 }
 
 .page {
-    padding-bottom: 1.4rem;
+  padding-bottom: 1.4rem;
 }
 
 .overflow-visible {
-    overflow: visible;
+  overflow: visible;
 }
 
 #multiselectContainerReact {
-    min-width: 40%;
-    max-height: 100%;
-    .chip {
-        background: #2d3748;
+  min-width: 40%;
+  max-height: 100%;
+  .chip {
+    background: #2d3748;
+  }
+  .optionListContainer {
+    .optionContainer {
+      overflow-y: visible;
+      .option {
+        padding: 2px;
+      }
     }
-    .optionListContainer {
-        .optionContainer {
-            overflow-y: visible;
-            .option {
-                padding: 2px;
-            }
-        }
-    }
+  }
 }
 
 .tagList {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    li {
-        display: inline-block;
-    }
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  li {
+    display: inline-block;
+  }
 }
 
 #react-confirm-alert {
-    .react-confirm-alert-overlay {
-        background-color: $primary;
-        .react-confirm-alert-body{
-            text-align: center;
-            h1 {
-                font-weight: bold;
-            }
-            .react-confirm-alert-button-group {
-                justify-content: center;
-                button {
-                    background-color: $body-bg;
-                    color: $primary;
-                    border: 1px solid #ddd;
-                }
-                button:first-child{
-                    background-color: $primary;
-                    color: #fff;
-                }
-            }
+  .react-confirm-alert-overlay {
+    background-color: $primary;
+    .react-confirm-alert-body {
+      text-align: center;
+      h1 {
+        font-weight: bold;
+      }
+      .react-confirm-alert-button-group {
+        justify-content: center;
+        button {
+          background-color: $body-bg;
+          color: $primary;
+          border: 1px solid #ddd;
         }
+        button:first-child {
+          background-color: $primary;
+          color: #fff;
+        }
+      }
     }
+  }
 }
 
 .profile-photo {
-    object-fit: cover;
-    width: 200px;
-    height: 200px;
-    margin: 0 auto;
+  aspect-ratio: 1/1;
+  object-fit: cover;
+  margin: 0 auto;
 }
 
 .profile-photo.profile-photo-preview {
-    object-fit: cover;
-    width: 160px;
-    height: 160px;
+  aspect-ratio: 1/1;
+  object-fit: cover;
 }
 
 .question-image {
-    margin: 0 auto;
+  margin: 0 auto;
 }
 
 .question-image-preview {
-    max-width: 40%;
+  max-width: 40%;
 }
 
 .centered {
-    margin: 0 auto;
+  margin: 0 auto;
 }
 
 .vertical-centered {
-    margin: auto 0;
+  margin: auto 0;
 }
 
 .fade-enter {
-    opacity: 0.01;
+  opacity: 0.01;
 }
 
 .fade-enter.fade-enter-active {
-    opacity: 1;
-    transition: opacity 150ms ease-in;
+  opacity: 1;
+  transition: opacity 150ms ease-in;
 }
 
 .fade-exit {
-    opacity: 1;
+  opacity: 1;
 }
 
 .fade-exit.fade-exit-active {
-    opacity: 0.01;
-    transition: opacity 150ms ease-in;
+  opacity: 0.01;
+  transition: opacity 150ms ease-in;
 }
 
 div.transition-group {
-    position: relative;
+  position: relative;
 }
 section.route-section {
-    position: absolute;
+  position: absolute;
+  width: 100%;
+  top: 0;
+  left: 0;
+}
+
+.vertical-centered-text {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-direction: column;
+}
+
+.video-container {
+  .video {
+    aspect-ratio: 16 / 9;
     width: 100%;
-    top: 0;
-    left: 0;
-}
-
-.vertical-centered-text{
-    display: flex;
-    justify-content: center;
-    align-content: center;
-    flex-direction: column;
-}
-
-.video-container{
-    .video{
-      aspect-ratio: 16 / 9;
-      width: 100%;
-    }
-    padding: 8px;
   }
-  
-.center-svg{
-    display: block;
-    margin: auto;
+  padding: 8px;
 }
-  
+
+.center-svg {
+  display: block;
+  margin: auto;
+}

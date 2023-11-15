@@ -523,11 +523,17 @@ video {
 .col-span-8{
   grid-column: span 8 / span 8;
 }
+.col-span-9{
+  grid-column: span 9 / span 9;
+}
 .m-4{
   margin: 1rem;
 }
 .m-auto{
   margin: auto;
+}
+.m-8{
+  margin: 2rem;
 }
 .mx-4{
   margin-left: 1rem;
@@ -842,6 +848,9 @@ video {
 .p-6{
   padding: 1.5rem;
 }
+.p-8{
+  padding: 2rem;
+}
 .px-2{
   padding-left: 0.5rem;
   padding-right: 0.5rem;
@@ -885,6 +894,10 @@ video {
 .py-8{
   padding-top: 2rem;
   padding-bottom: 2rem;
+}
+.px-1{
+  padding-left: 0.25rem;
+  padding-right: 0.25rem;
 }
 .pb-2{
   padding-bottom: 0.5rem;
@@ -1124,18 +1137,16 @@ nav {
 }
 
 .profile-photo {
+  aspect-ratio: 1/1;
   -o-object-fit: cover;
      object-fit: cover;
-  width: 200px;
-  height: 200px;
   margin: 0 auto;
 }
 
 .profile-photo.profile-photo-preview {
+  aspect-ratio: 1/1;
   -o-object-fit: cover;
      object-fit: cover;
-  width: 160px;
-  height: 160px;
 }
 
 .question-image {
@@ -1428,6 +1439,9 @@ section.route-section {
   }
   .lg\:col-span-9{
     grid-column: span 9 / span 9;
+  }
+  .lg\:col-span-7{
+    grid-column: span 7 / span 7;
   }
   .lg\:col-start-4{
     grid-column-start: 4;

@@ -59,23 +59,25 @@ const Comment = ({ comment, onDeleteComment, onReload }) => {
 
   return (
     <div className='grid grid-cols-12 mb border-b py-4'>
-      <div className='col-span-12 lg:col-span-2'>
-        <div className='flex flex-row'>
-          <div className='flex'>
+      <div className='col-span-12 lg:col-span-3'>
+        <div className='grid grid-cols-12'>
+          <div className='col-span-3'>
             <img
               src={comment.user_img}
               onClick={viewUser}
               alt='profile-picture'
-              className={`rounded-full h-12 w-12 ${
+              className={`rounded-full profile-photo profile-photo-preview ${
                 comment.user_id ? 'pointer' : ''
               }`}
             />
           </div>
-          <div className='flex ml-2'>
+          <div className='col-span-9 px-1'>
             <div className='flex flex-col'>
               <div
                 className={`flex ${
-                  comment.user_id ? 'pointer text-secondary font-bold' : ''
+                  comment.user_id
+                    ? 'pointer text-secondary font-bold break-word'
+                    : ''
                 }`}
                 onClick={viewUser}
               >
@@ -90,7 +92,7 @@ const Comment = ({ comment, onDeleteComment, onReload }) => {
           </div>
         </div>
       </div>
-      <div className='col-span-12 lg:col-span-8 px-4 border-l border-r'>
+      <div className='col-span-12 lg:col-span-7 px-4 border-l border-r'>
         {editing ? (
           <CommentForm
             comment={updatedComment}

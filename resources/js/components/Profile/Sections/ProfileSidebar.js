@@ -41,7 +41,7 @@ const ProfileSidebar = ({
           <img
             src={user.profile_image}
             alt='profile-picture'
-            className='rounded-full profile-photo'
+            className='rounded-full profile-photo p-4'
           />
         </div>
 

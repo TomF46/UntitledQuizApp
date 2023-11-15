@@ -61,7 +61,7 @@ const DashboardPage = () => {
                 <img
                   src={user.profile_image}
                   alt='profile-picture'
-                  className='rounded-full profile-photo shadow'
+                  className='rounded-full profile-photo p-4'
                 />
               </div>
               <div className='flex flex-col justify-center'>
