@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { newQuiz } from '../../../tools/objectShapes';
 import QuizForm from './QuizForm';
 import { getQuizForEdit, saveQuiz } from '../../../api/quizApi';
@@ -22,6 +22,11 @@ const QuizManagementPage = () => {
   const [saving, setSaving] = useState(false);
   const [editing, setEditing] = useState(false);
 
+  const formatBlankErrorObjects = useCallback(() => {
+    if (errors.questions.length > 0)
+      updateErrors(QuizManagementService.addBlankErrorsForQuestion(errors));
+  }, [errors]);
+
   useEffect(() => {
     if (quizId) {
       getQuizForEdit(quizId)
@@ -36,9 +41,9 @@ const QuizManagementPage = () => {
         });
     } else {
       setQuiz(_.cloneDeep(newQuiz));
-      updateErrors(QuizManagementService.addBlankErrorsForQuestion(errors));
+      formatBlankErrorObjects();
     }
-  }, [quizId]);
+  }, [quizId, formatBlankErrorObjects]);
 
   useEffect(() => {
     if (!tags) {

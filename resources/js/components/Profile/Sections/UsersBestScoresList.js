@@ -10,10 +10,6 @@ const UsersBestScoresList = ({ user }) => {
   const [scoresPaginator, setScoresPaginator] = useState(null);
 
   useEffect(() => {
-    getUserScores();
-  }, [user]);
-
-  function getUserScores() {
     getScoresForUser(user.id)
       .then((scoreData) => {
         setScoresPaginator(scoreData);
@@ -23,7 +19,7 @@ const UsersBestScoresList = ({ user }) => {
           autoClose: false,
         });
       });
-  }
+  }, [user]);
 
   function getScoresPage(url) {
     getPageWithPaginationUrl(url)

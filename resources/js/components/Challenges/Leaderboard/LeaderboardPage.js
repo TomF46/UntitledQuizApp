@@ -9,12 +9,6 @@ const ChallengesLeaderboardPage = () => {
   const [leaderboardPaginator, setLeaderboardPaginator] = useState(null);
 
   useEffect(() => {
-    if (!leaderboardPaginator) {
-      getChallengesLeaderboard();
-    }
-  }, leaderboardPaginator);
-
-  function getChallengesLeaderboard() {
     getChallengePointsLeaderboard()
       .then((leaderboardData) => {
         setLeaderboardPaginator(leaderboardData);
@@ -27,7 +21,7 @@ const ChallengesLeaderboardPage = () => {
           },
         );
       });
-  }
+  }, []);
 
   function getChallengesLeaderboardPage(url) {
     getPageWithPaginationUrl(url)

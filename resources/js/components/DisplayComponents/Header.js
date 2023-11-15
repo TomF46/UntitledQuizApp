@@ -18,15 +18,12 @@ const Header = () => {
   const location = useLocation();
 
   useEffect(() => {
+    setMobileIsOpen(false);
+    if (userIsAuthenticated) dispatch(loadNotificationCount());
     if (location.pathname != '/banned') {
       dispatch(checkUserIsAdmin());
     }
-  }, [userIsAuthenticated]);
-
-  useEffect(() => {
-    setMobileIsOpen(false);
-    dispatch(loadNotificationCount());
-  }, [location]);
+  }, [location, userIsAuthenticated, dispatch]);
 
   function toggleMobileNavigation() {
     setMobileIsOpen(!mobileIsOpen);

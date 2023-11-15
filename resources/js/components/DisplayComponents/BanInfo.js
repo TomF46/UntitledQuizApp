@@ -8,12 +8,6 @@ const BanInfo = ({ banId }) => {
   const [ban, setBan] = useState(null);
 
   useEffect(() => {
-    if (!ban) {
-      getBanData();
-    }
-  }, [banId, ban]);
-
-  function getBanData() {
     getBan(banId)
       .then((banData) => {
         setBan(banData);
@@ -23,7 +17,7 @@ const BanInfo = ({ banId }) => {
           autoClose: false,
         });
       });
-  }
+  }, [banId]);
 
   return (
     <div>

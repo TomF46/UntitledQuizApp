@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { followUser, getUserById, toggleBan } from '../../api/userApi';
 import { toast } from 'react-toastify';
@@ -13,17 +13,12 @@ import { useParams } from 'react-router-dom';
 const ProfilePage = () => {
   const dispatch = useDispatch();
   const { userId } = useParams();
-  const id = userId ? userId : useSelector((state) => state.tokens.user_id);
+  const loggedInUser = useSelector((state) => state.tokens.user_id);
+  const id = userId ? userId : loggedInUser;
   const isAdmin = useSelector((state) => state.isAdmin);
   const [user, setUser] = useState(null);
 
-  useEffect(() => {
-    if (!user || user.id != id) {
-      loadUser();
-    }
-  }, [id, user]);
-
-  function loadUser() {
+  const loadUser = useCallback(() => {
     getUserById(id)
       .then((userData) => {
         setUser(userData);
@@ -33,7 +28,11 @@ const ProfilePage = () => {
           autoClose: false,
         });
       });
-  }
+  }, [id]);
+
+  useEffect(() => {
+    loadUser();
+  }, [id, loadUser]);
 
   function toggleFollow() {
     let action = user.following ? 'Unfollow' : 'Follow';

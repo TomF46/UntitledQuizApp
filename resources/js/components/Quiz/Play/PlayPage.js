@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { getQuiz, submitScore } from '../../../api/quizApi';
 import { getChallenge } from '../../../api/challengesApi';
 import QuizPlayForm from './QuizPlayForm';
@@ -19,23 +19,33 @@ const QuizPlayPage = () => {
   const [errors, setErrors] = useState({});
   const [currentQuestionNumber, setcurrentQuestionNumber] = useState(1);
 
-  useEffect(() => {
-    if (!quiz) {
-      getQuiz(quizId)
-        .then((quizData) => {
-          setQuiz(quizData);
-          createBlankSubmission(quizData);
-        })
-        .catch((error) => {
-          toast.error(`Error getting quiz ${error.message}`, {
-            autoClose: false,
-          });
+  const checkUserCanAccess = useCallback(
+    (challengeData) => {
+      if (!challengeData.userCanAttempt) {
+        toast.error('User does not have permission to attempt this challenge', {
+          autoClose: false,
         });
-    }
-  }, [quizId, quiz]);
+        history.push('/challenges');
+      }
+    },
+    [history],
+  );
 
   useEffect(() => {
-    if (!challenge && challengeId) {
+    getQuiz(quizId)
+      .then((quizData) => {
+        setQuiz(quizData);
+        createBlankSubmission(quizData);
+      })
+      .catch((error) => {
+        toast.error(`Error getting quiz ${error.message}`, {
+          autoClose: false,
+        });
+      });
+  }, [quizId]);
+
+  useEffect(() => {
+    if (challengeId) {
       getChallenge(challengeId)
         .then((challengeData) => {
           setChallenge(challengeData);
@@ -47,16 +57,7 @@ const QuizPlayPage = () => {
           });
         });
     }
-  }, [challengeId]);
-
-  function checkUserCanAccess(challengeData) {
-    if (!challengeData.userCanAttempt) {
-      toast.error('User does not have permission to attempt this challenge', {
-        autoClose: false,
-      });
-      history.push('/challenges');
-    }
-  }
+  }, [challengeId, checkUserCanAccess]);
 
   function createBlankSubmission(quizData) {
     let submission = {

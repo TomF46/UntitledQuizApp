@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { searchQuizzes } from '../../api/quizApi';
 import { toast } from 'react-toastify';
 import debounce from 'lodash/debounce';
@@ -19,11 +19,17 @@ const ExplorePage = () => {
   });
   const [tags, setTags] = useState(null);
 
-  useEffect(() => {
-    if (!quizzesPaginator) {
-      search();
-    }
-  }, [quizzesPaginator]);
+  const search = useCallback(() => {
+    searchQuizzes(filters)
+      .then((quizzesData) => {
+        setQuizzesPaginator(quizzesData);
+      })
+      .catch((error) => {
+        toast.error(`Error getting quizzes ${error.message}`, {
+          autoClose: false,
+        });
+      });
+  }, [filters]);
 
   useEffect(() => {
     if (!tags) {
@@ -39,19 +45,7 @@ const ExplorePage = () => {
     }, 50);
 
     debounced();
-  }, [filters]);
-
-  function search() {
-    searchQuizzes(filters)
-      .then((quizzesData) => {
-        setQuizzesPaginator(quizzesData);
-      })
-      .catch((error) => {
-        toast.error(`Error getting quizzes ${error.message}`, {
-          autoClose: false,
-        });
-      });
-  }
+  }, [filters, search]);
 
   function getQuizPage(pageUrl) {
     getPageWithPaginationUrlAndFilters(pageUrl, filters)

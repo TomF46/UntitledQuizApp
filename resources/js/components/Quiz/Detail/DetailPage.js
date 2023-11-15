@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import {
   getQuiz,
@@ -21,13 +21,7 @@ const QuizDetailPage = () => {
   const [quiz, setQuiz] = useState(null);
   const [highScore, setHighScore] = useState(null);
 
-  useEffect(() => {
-    if (!quiz) {
-      getQuizData();
-    }
-  }, [quizId, quiz]);
-
-  function getQuizData() {
+  const getQuizData = useCallback(() => {
     getQuiz(quizId)
       .then((quizData) => {
         setQuiz(quizData);
@@ -40,7 +34,11 @@ const QuizDetailPage = () => {
           autoClose: false,
         });
       });
-  }
+  }, [quizId]);
+
+  useEffect(() => {
+    getQuizData();
+  }, [quizId, getQuizData]);
 
   function getHighScores(id) {
     getUsersHighScoreForQuiz(id)

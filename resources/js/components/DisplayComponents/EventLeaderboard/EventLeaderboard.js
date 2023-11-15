@@ -10,10 +10,6 @@ const EventLeaderboard = ({ event }) => {
   const [scoresPaginator, setScores] = useState(null);
 
   useEffect(() => {
-    getScores();
-  }, [event]);
-
-  function getScores() {
     getEventLeaderboard(event.id)
       .then((scores) => {
         setScores(scores);
@@ -23,7 +19,7 @@ const EventLeaderboard = ({ event }) => {
           autoClose: false,
         });
       });
-  }
+  }, [event]);
 
   function getScoresPage(url) {
     getPageWithPaginationUrl(url)

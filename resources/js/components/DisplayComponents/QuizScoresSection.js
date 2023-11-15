@@ -10,10 +10,6 @@ const QuizScoresSection = ({ quiz }) => {
   const [scoresPaginator, setScores] = useState(null);
 
   useEffect(() => {
-    getScores();
-  }, [quiz]);
-
-  function getScores() {
     getScoresForQuiz(quiz.id)
       .then((scores) => {
         setScores(scores);
@@ -23,7 +19,7 @@ const QuizScoresSection = ({ quiz }) => {
           autoClose: false,
         });
       });
-  }
+  }, [quiz]);
 
   function getScoresPage(url) {
     getPageWithPaginationUrl(url)

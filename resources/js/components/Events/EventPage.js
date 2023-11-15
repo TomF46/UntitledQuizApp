@@ -10,12 +10,6 @@ const EventPage = () => {
   const [event, setEvent] = useState(null);
 
   useEffect(() => {
-    if (!event || event.id != eventId) {
-      loadEvent();
-    }
-  }, [eventId, event]);
-
-  function loadEvent() {
     getEvent(eventId)
       .then((eventData) => {
         setEvent(eventData);
@@ -25,7 +19,7 @@ const EventPage = () => {
           autoClose: false,
         });
       });
-  }
+  }, [eventId]);
 
   return (
     <div className='event-page'>

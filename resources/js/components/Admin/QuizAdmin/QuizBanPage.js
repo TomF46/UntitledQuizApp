@@ -14,12 +14,6 @@ const QuizBanPage = () => {
   const [saving, setSaving] = useState(false);
 
   useEffect(() => {
-    if (!quiz) {
-      getQuizData();
-    }
-  }, [quizId, quiz]);
-
-  function getQuizData() {
     getQuiz(quizId)
       .then((quizData) => {
         setQuiz(quizData);
@@ -29,7 +23,7 @@ const QuizBanPage = () => {
           autoClose: false,
         });
       });
-  }
+  }, [quizId]);
 
   function handleChange(event) {
     const { value } = event.target;

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { searchChallenges } from '../../api/challengesApi';
 import { toast } from 'react-toastify';
-import debounce from 'lodash/debounce';
+// import debounce from 'lodash/debounce';
 import LoadingMessage from '../DisplayComponents/LoadingMessage';
 import ChallengeListWithPagination from '../DisplayComponents/ChallengesListWithPagination';
 import { Link } from 'react-router-dom';
@@ -9,7 +9,7 @@ import { getPageWithPaginationUrlAndFilters } from '../../api/paginationApi';
 
 const ChallengesPage = () => {
   const [challengesPaginator, setChallengesPaginator] = useState(null);
-  const [filters, setFilters] = useState({ quizName: '', user: '' });
+  //const [filters, setFilters] = useState({ quizName: '', user: '' });
 
   useEffect(() => {
     if (!challengesPaginator) {
@@ -17,16 +17,16 @@ const ChallengesPage = () => {
     }
   }, [challengesPaginator]);
 
-  useEffect(() => {
-    let debounced = debounce(() => {
-      search();
-    }, 50);
+  // useEffect(() => {
+  //   let debounced = debounce(() => {
+  //     search();
+  //   }, 50);
 
-    debounced();
-  }, [filters]);
+  //   debounced();
+  // }, [filters]);
 
   function search() {
-    searchChallenges(filters)
+    searchChallenges({})
       .then((challengesData) => {
         setChallengesPaginator(challengesData);
       })
@@ -37,17 +37,17 @@ const ChallengesPage = () => {
       });
   }
 
-  function handleFilterChange(event) {
-    const { name, value } = event.target;
+  // function handleFilterChange(event) {
+  //   const { name, value } = event.target;
 
-    setFilters((prevFilters) => ({
-      ...prevFilters,
-      [name]: value,
-    }));
-  }
+  //   setFilters((prevFilters) => ({
+  //     ...prevFilters,
+  //     [name]: value,
+  //   }));
+  // }
 
   function getChallengesPage(pageUrl) {
-    getPageWithPaginationUrlAndFilters(pageUrl, filters)
+    getPageWithPaginationUrlAndFilters(pageUrl, {})
       .then((challengesData) => {
         setChallengesPaginator(challengesData);
       })

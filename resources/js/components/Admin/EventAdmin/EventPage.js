@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import { endEvent, getEvent, publishEvent } from '../../../api/eventApi';
 import LoadingMessage from '../../DisplayComponents/LoadingMessage';
@@ -10,13 +10,7 @@ const EventPage = () => {
   const { eventId } = useParams();
   const [event, setEvent] = useState(null);
 
-  useEffect(() => {
-    if (!event || event.id != eventId) {
-      loadEvent();
-    }
-  }, [eventId, event]);
-
-  function loadEvent() {
+  const loadEvent = useCallback(() => {
     getEvent(eventId)
       .then((eventData) => {
         setEvent(eventData);
@@ -26,7 +20,11 @@ const EventPage = () => {
           autoClose: false,
         });
       });
-  }
+  }, [eventId]);
+
+  useEffect(() => {
+    loadEvent();
+  }, [eventId, loadEvent]);
 
   function onPublish() {
     confirmAlert({

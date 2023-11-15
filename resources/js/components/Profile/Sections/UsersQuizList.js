@@ -10,10 +10,6 @@ const UsersQuizList = ({ user }) => {
   const [quizzesPaginator, setQuizzesPaginator] = useState(null);
 
   useEffect(() => {
-    getUserQuizzes();
-  }, [user]);
-
-  function getUserQuizzes() {
     getQuizzesByUser(user.id)
       .then((quizzesData) => {
         setQuizzesPaginator(quizzesData);
@@ -23,7 +19,7 @@ const UsersQuizList = ({ user }) => {
           autoClose: false,
         });
       });
-  }
+  }, [user]);
 
   function getQuizzesPage(url) {
     getPageWithPaginationUrl(url)

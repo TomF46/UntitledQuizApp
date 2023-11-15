@@ -31,10 +31,6 @@ const UserChallengesPage = () => {
   }, [userId, recipient]);
 
   useEffect(() => {
-    getCurrentUserScores();
-  }, currentUser);
-
-  function getCurrentUserScores() {
     getScoresForUser(currentUser)
       .then((scoreData) => {
         setScoresPaginator(scoreData);
@@ -44,7 +40,7 @@ const UserChallengesPage = () => {
           autoClose: false,
         });
       });
-  }
+  }, [currentUser]);
 
   function getScoresPage(url) {
     getPageWithPaginationUrl(url)

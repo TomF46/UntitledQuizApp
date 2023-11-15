@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { searchQuizBans } from '../../../api/banApi';
 import { toast } from 'react-toastify';
 import debounce from 'lodash/debounce';
@@ -13,21 +13,7 @@ const QuizBanListPage = () => {
   const [filters, setFilters] = useState({ searchTerm: '', user: '' });
   const [currentPageUrl, setCurrentPageUrl] = useState(null);
 
-  useEffect(() => {
-    if (!quizzesPaginator) {
-      search();
-    }
-  }, [quizzesPaginator]);
-
-  useEffect(() => {
-    let debounced = debounce(() => {
-      search();
-    }, 50);
-
-    debounced();
-  }, [filters]);
-
-  function search() {
+  const search = useCallback(() => {
     searchQuizBans(filters)
       .then((quizzesData) => {
         setQuizzesPaginator(quizzesData);
@@ -37,7 +23,15 @@ const QuizBanListPage = () => {
           autoClose: false,
         });
       });
-  }
+  }, [filters]);
+
+  useEffect(() => {
+    let debounced = debounce(() => {
+      search();
+    }, 50);
+
+    debounced();
+  }, [filters, search]);
 
   function getQuizPage(pageUrl) {
     getPageWithPaginationUrlAndFilters(pageUrl, filters)

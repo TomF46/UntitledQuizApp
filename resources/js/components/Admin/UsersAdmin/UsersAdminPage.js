@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { downloadUsersCSV, searchUsers } from '../../../api/userApi';
 import { toast } from 'react-toastify';
 import LoadingMessage from '../../DisplayComponents/LoadingMessage';
@@ -12,21 +12,7 @@ const UsersAdminPage = () => {
   const [usersPaginator, setUsersPaginator] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
 
-  useEffect(() => {
-    if (!usersPaginator) {
-      search();
-    }
-  }, [usersPaginator]);
-
-  useEffect(() => {
-    let debounced = debounce(() => {
-      search();
-    }, 50);
-
-    debounced();
-  }, [searchTerm]);
-
-  function search() {
+  const search = useCallback(() => {
     searchUsers(searchTerm)
       .then((usersData) => {
         setUsersPaginator(usersData);
@@ -36,7 +22,15 @@ const UsersAdminPage = () => {
           autoClose: false,
         });
       });
-  }
+  }, [searchTerm]);
+
+  useEffect(() => {
+    let debounced = debounce(() => {
+      search();
+    }, 50);
+
+    debounced();
+  }, [searchTerm, search]);
 
   function getUsersWithUrl(url) {
     getPageWithPaginationUrlAndFilters(url, { searchTerm: searchTerm })
